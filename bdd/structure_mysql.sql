@@ -12,7 +12,7 @@ DROP TABLE IF EXISTS prof;
 CREATE TABLE prof (
 	nom_prof			varchar(8) PRIMARY KEY,
 	resourceID_prof		int(11) unsigned NOT NULL UNIQUE,
-	bureau 				tinyint(1) unsigned NOT NULL DEF	AULT 0,
-	email 				tinyint(2) unsigned NOT NULL DEFAULT 0,
+	bureau 				varchar(8) DEFAULT NULL,
+	email 				varchar(30) DEFAULT NULL
 );
 
