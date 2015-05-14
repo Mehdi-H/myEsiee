@@ -38,6 +38,8 @@
 
 		function httpGet($url)
 		{
+			echo("Requête : " . $url);
+
 			// Création de la requête :
 			$ch = curl_init();
 
@@ -45,10 +47,9 @@
 				CURLOPT_RETURNTRANSFER => 1,
 				CURLOPT_URL => $url,
 				CURLOPT_USERAGENT => 'E-Room pour ESIEE Paris (projet E3E 2015)',
-				CURLOPT_PROXY => 'https://dupontl:mvx2dupontl@mvproxy.esiee.fr:3128'
+				CURLOPT_PROXY => 'https://dupontl:mvx2dupontl@mvproxy.esiee.fr:3128',
 				CURLOPT_FOLLOWLOCATION => 1,
 				CURLOPT_SSL_VERIFYPEER => false,
-				CURLOPT_SSL_VERIFYHOST => false
 			));
 
 			$out = curl_exec($ch); // Exécution
