@@ -3,7 +3,7 @@
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no"/>
-  <title>MyESIEE - Recherche de salle</title>
+  <title>MyESIEE - Salle</title>
 
   <!-- CSS  -->
   <link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
@@ -15,15 +15,23 @@
   <nav class="grey darken-3" role="navigation">
     <div class="nav-wrapper container"><a id="logo-container" href="#" class="brand-logo">Logo</a>
       <ul class="right hide-on-med-and-down">
-        <li><a href="#">Recherche de professeur</a></li>
+        <li class="active"><a href="#" >Salles</a></li>
+        <li><a href="#">Profs</a></li>
         <li><a href="#">Notes</a></li>
         <li><a href="#">Absences</a></li>
+        <li><a href="#">Appréciations</a></li>
+        <li><a href="#">Paramêtres</a></li>
+        <li><a href="#">Déconnexion</a></li>
       </ul>
 
       <ul id="nav-mobile" class="side-nav">
-        <li><a href="#">Recherche de professeur</a></li>
+        <li><a href="#">Salles</a></li>
+        <li><a href="#">Profs</a></li>
         <li><a href="#">Notes</a></li>
         <li><a href="#">Absences</a></li>
+        <li><a href="#">Appréciations</a></li>
+        <li><a href="#">Paramêtres</a></li>
+        <li><a href="#">Déconnexion</a></li>
       </ul>
       <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="mdi-navigation-menu"></i></a>
     </div>
@@ -38,39 +46,15 @@
     </a>
   </nav>
   </div>
-<!-- Recherche d'une salle-->  
-    <div class="row">
-      <div class="input-field col s12">
-    <select>
-      <option value="" disabled selected>Choose your option</option>
-      <option value="1">Option 1</option>
-      <option value="2">Option 2</option>
-      <option value="3">Option 3</option>
-    </select>
-    <label>Materialize Select</label>
+<!-- Recherche d'une salle--> 
+<div class="row">
+   <div class="input-field col s12">
+       <input id="input_text" type="text">
+       <label for="input_text">Numéro de salle</label>
     </div>
-  </div>
-  
-  <br><br>
-      <form class="col s12 m6">
-            <div class="row">
-              <div class="input-field col s12">
-                <div class="select-wrapper"><i class="mdi-navigation-arrow-drop-down active"></i><input type="text" class="select-dropdown" readonly data-activates="Roomlist" value="Choose your option"><ul id="Roomlist" class="dropdown-content select-dropdown" style="width: 361px; position: absolute; top: 0px; left: 0px; opacity: 1; display: none;"><li class="disabled active"><span>Choose your option</span></li><li class=""><span>Option 1</span></li><li class=""><span>Option 2</span></li><li class=""><span>Option 3</span></li></ul><select class="initialized">
-                  <option value="" disabled="" selected="">Choose your option</option>
-                  <option value="1">Option 1</option>
-                  <option value="2">Option 2</option>
-                  <option value="3">Option 3</option>
-                </select></div>
-                <label>Materialize Select</label>
-              </div>
-              </div>
-          </form>
-	</div>
-    
+</div>
 
-    
-  
-  
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
  <!-- Footer --> 
 <footer class="page-footer grey darken-3">
 	<div class="footer-copyright">
@@ -86,6 +70,6 @@
   <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
   <script src="js/materialize.js"></script>
   <script src="js/init.js"></script>
-
+  
   </body>
 </html>
