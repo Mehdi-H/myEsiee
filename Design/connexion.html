@@ -3,7 +3,7 @@
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no"/>
-  <title>MyESIEE - Salle</title>
+  <title>MyESIEE - Login</title>
 
   <!-- CSS  -->
   <link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
@@ -17,19 +17,19 @@
       <ul class="right hide-on-med-and-down">
         <li><a href="index.html" >Salles</a></li>
         <li class="active"><a href="#">Profs</a></li>
-        <li><a href="notes.html">Notes</a></li>
-        <li><a href="absence.html">Absences</a></li>
-        <li><a href="appreciation.html">Appréciations</a></li>
+        <li><a href="#">Notes</a></li>
+        <li><a href="#">Absences</a></li>
+        <li><a href="#">Appréciations</a></li>
         <li><a href="#">Paramêtres</a></li>
         <li><a href="#">Déconnexion</a></li>
       </ul>
 
       <ul id="nav-mobile" class="side-nav">
-        <li><a href="index.html" >Salles</a></li>
+        <li><a href="index.html">Salles</a></li>
         <li class="active"><a href="#">Profs</a></li>
-        <li><a href="notes.html">Notes</a></li>
-        <li><a href="absence.html">Absences</a></li>
-        <li><a href="appreciation.html">Appréciations</a></li>
+        <li><a href="#">Notes</a></li>
+        <li><a href="#">Absences</a></li>
+        <li><a href="#">Appréciations</a></li>
         <li><a href="#">Paramêtres</a></li>
         <li><a href="#">Déconnexion</a></li>
       </ul>
@@ -37,16 +37,24 @@
     </div>
   </nav>
   
-<!-- Recherche d'un professeur--> 
-<div class="row">
-   <div class="input-field col s4 offset-s4 searchbar">
-       <input id="input_text" type="text">
-       <label for="input_text">Nom du professeur</label>
-    </div>
+  
+<div class="row teal lighten-3 z-depth-3 searchbar login">
+	<form class="col s12 ">
+		<div class="input-field col s4 offset-s4">
+          	<input placeholder="Login ESIEE" id="first_name" type="text" class="validate">
+          	<label for="first_name">Nom d'utilisateur</label>
+        </div>
+        <div class="input-field col s4 offset-s4">
+          	<input id="password" type="password" class="validate">
+          	<label for="Mot de passe">Mot de passe</label>
+        </div>
 </div>
-
-<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-
+  
+  
+  
+  
+  
+  
  <!-- Footer --> 
 <footer class="page-footer grey darken-3">
 	<div class="footer-copyright">
