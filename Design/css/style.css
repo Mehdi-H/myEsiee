@@ -9,3 +9,28 @@
 .icon-block {
   padding: 0 15px;
 }
+
+#carac_salles
+{
+	display : inline-block;	
+    vertical-align: top;
+}
+
+#carac_salles
+{
+    width:70%;
+}
+
+#carac_salles ul
+{
+    display: inline-block;
+    vertical-align: top;
+    margin-top: 0;
+    width: 48%;
+    padding-left: 20px;
+}
+
+.carac
+{
+	margin-left : 10px;
+}

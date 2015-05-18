@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no"/>
+  <title>MyESIEE - Salle</title>
+
+  <!-- CSS  -->
+  <link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+  <link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+</head>
+
+<body>
+      <div class="row">
+        <div class="col s12 m6">
+          <div class="card grey lighten-2">
+            <div class="card-content black-text"><span class="card-title black-text" dw_span_id="true">5201</span><br>
+            
+            
+     	<div id="carac_salles">        
+		<ul>            
+           <li class="valign-wrapper">
+           		<a class="btn-floating btn-large waves-effect waves-light blue-grey">
+                	<i class="mdi-action-print"></i>
+                </a>
+                <div class="carac">Imprimante</div>
+           </li>
+            <li class="valign-wrapper">
+            	<a class="btn-floating btn-large waves-effect waves-light blue-grey">
+                	<i class="mdi-hardware-desktop-windows"></i>
+                </a>
+              	<div class="carac">Salle Informatique</div>
+            </li>
+     	</ul>
+        
+        <ul>  
+            <li class="valign-wrapper">
+            	<a class="btn-floating btn-large waves-effect waves-light blue-grey">
+                	<i class="mdi-av-videocam"></i>
+                </a>                
+                    <div class="carac">Rétro-projecteur</div>
+            </li>
+            <li class="valign-wrapper">
+            	<a class="btn-floating btn-large waves-effect waves-light blue-grey">
+                	<i class="mdi-maps-navigation"></i>
+                </a>                
+                    <div class="carac">Carte</div>
+            </li>
+       	</ul>
+
+        </div>   
+              
+
+ 
+
+              <br><br>
+              <label for="date_Salle">Date de Disponibilité</label>
+              <input id="date_salle" type="date" class="datepicker">
+            </div>
+            <div class="card-action center">
+              Disponiblité ici !!
+            </div>
+          </div>
+        </div>
+      </div>
+      
+  <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+  <script src="js/materialize.js"></script>
+  <script src="js/init.js"></script>
+  <script> $('.datepicker').pickadate({
+    selectMonths: true, // Creates a dropdown to control month
+    selectYears: 15 // Creates a dropdown of 15 years to control year
+  });</script>      
+</body>
+</html>
