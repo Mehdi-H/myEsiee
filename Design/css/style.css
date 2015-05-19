@@ -34,3 +34,39 @@
 {
 	margin-left : 10px;
 }
+
+.searchbar
+{
+	margin-top : 80px;
+}
+
+.login
+{
+	width : 15%%;
+    height: 200px;
+}
+
+.boutton_notes
+{
+    margin-top : 80px;
+}
+
+.co_input
+{
+    margin-top : 22px;
+}
+
+body {
+   display: flex;
+   min-height: 100vh;
+   flex-direction: column;
+ }
+
+ main {
+   flex: 1 0 auto;
+ }
+
+.grade
+{
+    font-size : 35px !important;
+}

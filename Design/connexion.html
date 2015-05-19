@@ -3,7 +3,7 @@
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no"/>
-  <title>MyESIEE - Salle</title>
+  <title>MyESIEE - Login</title>
 
   <!-- CSS  -->
   <link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
@@ -13,53 +13,50 @@
 
 <body>
   <main>
-<div class="navbar-fixed">
   <nav class="grey darken-3" role="navigation">
     <div class="nav-wrapper container"><a id="logo-container" href="#" class="brand-logo">Logo</a>
       <ul class="right hide-on-med-and-down">
-        <li class="active"><a href="#" >Salles</a></li>
-        <li><a href="Recherche_Professeur.html">Profs</a></li>
-        <li><a href="notes.html">Notes</a></li>
-        <li><a href="absence.html">Absences</a></li>
-        <li><a href="appreciation.html">Appréciations</a></li>
+        <li><a href="index.html" >Salles</a></li>
+        <li class="active"><a href="#">Profs</a></li>
+        <li><a href="#">Notes</a></li>
+        <li><a href="#">Absences</a></li>
+        <li><a href="#">Appréciations</a></li>
         <li><a href="#">Paramêtres</a></li>
         <li><a href="#">Déconnexion</a></li>
       </ul>
 
       <ul id="nav-mobile" class="side-nav">
-        <li class="active"><a href="#" >Salles</a></li>
-        <li><a href="Recherche_Professeur.html">Profs</a></li>
-        <li><a href="notes.html">Notes</a></li>
-        <li><a href="absence.html">Absences</a></li>
-        <li><a href="appreciation.html">Appréciations</a></li>
+        <li><a href="index.html">Salles</a></li>
+        <li class="active"><a href="#">Profs</a></li>
+        <li><a href="#">Notes</a></li>
+        <li><a href="#">Absences</a></li>
+        <li><a href="#">Appréciations</a></li>
         <li><a href="#">Paramêtres</a></li>
         <li><a href="#">Déconnexion</a></li>
       </ul>
       <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="mdi-navigation-menu"></i></a>
     </div>
   </nav>
-</div>
-     <div class="row"> 
-  <nav class="center grey darken-2" role="navigation">
-  	<a class="btn-floating btn-large waves-effect waves-light blue-grey"><i class="mdi-hardware-desktop-windows"></i>
-    </a>
-     <a class="btn-floating btn-large waves-effect waves-light blue-grey">TP
-    </a>
-    <a class="btn-floating btn-large waves-effect waves-light blue-grey">Labo
-    </a>
-  </nav>
-  </div>
   
-<!-- Recherche d'une salle--> 
-<div class="row">
-   <div class="input-field col s4 offset-s4 searchbar">
-       <input id="input_text" type="text">
-       <label for="input_text">Numéro de salle</label>
-    </div>
+  
+<div class="row blue-grey z-depth-3 searchbar login">
+	<form class="col s12 co_input">
+		<div class="input-field col s6 offset-s3">
+          	<input id="first_name" type="text" class="validate">
+          	<label for="first_name">Login ESIEE</label>
+        </div>
+        <div class="input-field col s6 offset-s3">
+          	<input id="password" type="password" class="validate">
+          	<label for="Mot de passe">Mot de passe</label>
+        </div>
+  </form>
 </div>
-
-
-</main>
+  
+  
+  
+  
+  
+  </main>
  <!-- Footer --> 
 <footer class="page-footer grey darken-3">
 	<div class="footer-copyright">
@@ -69,13 +66,11 @@
 	</div>
 </footer>
 
-
   <!--  Scripts-->
   
   <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
   <script src="js/materialize.js"></script>
   <script src="js/init.js"></script>
-  <script>$(".button-collapse").sideNav();</script>
   
-  </body>
+</body>
 </html>
