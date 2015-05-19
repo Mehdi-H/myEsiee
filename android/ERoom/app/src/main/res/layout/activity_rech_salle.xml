@@ -6,10 +6,73 @@
 
     <!-- As the main content view, the view below consumes the entire
          space available using match_parent in both dimensions. -->
-    <FrameLayout android:id="@+id/container" android:layout_width="match_parent"
+    <RelativeLayout android:id="@+id/container" android:layout_width="match_parent"
         android:layout_height="match_parent" >
 
-    </FrameLayout>
+        <ImageButton
+            android:layout_width="@dimen/button_size"
+            android:layout_height="@dimen/button_size"
+            android:id="@+id/imageButton_computer1"
+            android:layout_toLeftOf="@+id/imageButton_computer2"
+            android:src="@drawable/ic_action_computer" />
+
+        <ImageButton
+            android:layout_width="@dimen/button_size"
+            android:layout_height="@dimen/button_size"
+            android:id="@+id/imageButton_computer2"
+            android:layout_toLeftOf="@+id/imageButton_computer3"
+            android:src="@drawable/ic_action_computer" />
+
+        <ImageButton
+            android:layout_width="@dimen/button_size"
+            android:layout_height="@dimen/button_size"
+            android:id="@+id/imageButton_computer3"
+            android:layout_centerHorizontal="true"
+            android:src="@drawable/ic_action_computer" />
+
+        <ImageButton
+            android:layout_width="@dimen/button_size"
+            android:layout_height="@dimen/button_size"
+            android:id="@+id/imageButton_computer4"
+            android:layout_toRightOf="@id/imageButton_computer3"
+            android:src="@drawable/ic_action_computer" />
+
+        <Button
+            android:layout_width="@dimen/button_size"
+            android:layout_height="@dimen/button_size"
+            android:id="@+id/imageButton_computer5"
+            android:layout_toRightOf="@id/imageButton_computer4"
+            android:text="..." />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Salle info"
+            android:gravity="center"
+            android:id="@+id/textView"
+            android:layout_below="@+id/imageButton_computer1"
+            android:layout_alignLeft="@+id/imageButton_computer1"
+            android:layout_toLeftOf="@+id/imageButton_computer5"
+            android:layout_alignBottom="@+id/imageButton_search"/>
+
+        <ImageButton
+            android:layout_width="@dimen/button_size"
+            android:layout_height="@dimen/button_size"
+            android:id="@+id/imageButton_search"
+            android:layout_below="@+id/imageButton_computer4"
+            android:layout_toRightOf="@+id/textView"
+            android:layout_alignRight="@+id/imageButton_computer5"
+            android:src="@drawable/ic_action_search" />
+
+        <ListView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/listView"
+            android:layout_below="@+id/textView"
+            android:layout_alignLeft="@+id/textView"
+            android:layout_alignRight="@+id/imageButton_search"/>
+
+    </RelativeLayout>
 
     <!-- android:layout_gravity="start" tells DrawerLayout to treat
          this as a sliding drawer on the left side for left-to-right
