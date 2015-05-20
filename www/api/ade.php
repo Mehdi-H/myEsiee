@@ -27,8 +27,6 @@
 			$out = curl_exec($ch); // Exécution
 			curl_close($ch); // Fermeture
 
-			//echo('url : '.$url.'<pre>'.htmlspecialchars($out).'</pre>');
-
 			return new SimpleXMLElement($out);
 		}
 
@@ -70,16 +68,29 @@
 
 			// "misc" = "PTIS" (Projecteur [0,1], Tableau [0,1,2,3], Imprimante [0,1], Size [entier])
 			// Tableau : [0:aucun, 1:blanc, 2:noir, 3:deux]
-			if (isset($_GET['misc'])) {
+			// Critère non spécifié = 'x'
+			if (isset($_GET['misc']))
+			{
+				$taille = substr($_GET['misc'], 3);
 				$projecteur = substr($_GET['misc'], 0, 1);
 				$tableau = substr($_GET['misc'], 1, 1);
 				$imprimante = substr($_GET['misc'], 2, 1);
-				$taille = substr($_GET['misc'], 3);
 
-				$sql_misc = " AND taille=".$taille
-					." AND projecteur=".$projecteur
-					." AND tableau=".$tableau
-					." AND imprimante=".$imprimante;
+				// Si un critère est à 'x' (pour "non spécifié") :
+				$sql_misc_taille = strcmp($taille, 'x') == 0 ? ""
+					: " AND taille=".$taille;
+				$sql_misc_projecteur = strcmp($projecteur, 'x') == 0 ? ""
+					: " AND projecteur=".$projecteur;
+				$sql_misc_tableau = strcmp($tableau, 'x') == 0 ? ""
+					: " AND tableau=".$tableau;
+				$sql_misc_imprimante = strcmp($imprimante, 'x') == 0 ? ""
+					: " AND imprimante=".$imprimante;
+
+				// Construction de la partie "misc" de la requête SQL :
+				$sql_misc = $sql_misc_taille
+					.$sql_misc_projecteur
+					.$sql_misc_tableau
+					.$sql_misc_imprimante;
 			} else {
 				$sql_misc = "";
 			}
@@ -94,8 +105,6 @@
 			$sql = "SELECT * FROM salle "
 				."WHERE type_salle LIKE '".$type."'".$sql_misc;
 
-			echo($sql.'<br/>');
-
 			// Exécution :
 			$req = mysql_query($sql) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_errno());
 
@@ -104,25 +113,21 @@
 			while ($data = mysql_fetch_assoc($req))
 			{
 				$salles[$data[nom_salle]] = array(
-					"id" => $data[resourceID_salle],
-					"type" => $data[type_salle],
-					"taille" => $data[taille],
-					"projecteur" => $data[projecteur],
-					"tableau" => $data[tableau],
-					"imprimante" => $data[imprimante],
-					"dispo" => -1
+					$data[resourceID_salle], 	// 0
+					$data[type_salle], 			// 1
+					$data[taille], 				// 2
+					$data[projecteur],			// 3
+					$data[tableau], 			// 4
+					$data[imprimante], 			// 5
+					-1 							// 6 (disponibilité)
 				);
 			}
 
 			mysql_close();
 
-			// === Date et heure actuelles ===
+			// === Ajourd'hui ===
 
-			$now_date = date("d/m/Y"); // format "20/05/2015"
 			$now_date_ADE = date("m/d/Y"); // format "05/20/2015" pour les requêtes ADE
-			$now_time = date("H:i"); // format "15:07"
-
-			echo($now_date.' - '.$now_time.'<br/>');
 
 			// === Récupérer la disponibilité de chaque salle ===
 
@@ -134,7 +139,7 @@
 					."?sessionId=".$sessionId
 					."&function=getEvents"
 					."&detail=0"
-					."&resources=".$salle[id]
+					."&resources=".$salle[0] // resourceID
 					."&date=".$now_date_ADE
 				);
 
@@ -149,7 +154,6 @@
 					// Ajouter les horaires de l'event à cette date :
 					$horaires[] = array($start, $end);
 				}
-				// echo('<pre>'); print_r($horaires); echo('</pre>');
 
 				// --- Calcul du temps libre restant ---
 				// Pas libre, libre jusqu'à telle heure, libre toute la journée
@@ -180,20 +184,23 @@
 				}
 
 				if ($libre && $pendant > 0) {
-					echo("La salle ".$nom_salle." est libre jusqu'a ".$cours[1].", cad pendant ".$pendant." minutes.<br>");
-					$salles[$nom_salle][dispo] = $pendant;
+					$salles[$nom_salle][6] = $pendant;
 				} elseif ($libre) {
-					echo("La salle ".$nom_salle." est libre jusqu'a ce soir.<br>");
-					$salles[$nom_salle][dispo] = "full";
+					$salles[$nom_salle][6] = 0;
 				} else {
-					echo("La salle ".$nom_salle." n'est pas libre.<br>");
-					$salles[$nom_salle][dispo] = 0;
+					$salles[$nom_salle][6] = -1;
 				}
 
 			}
-			echo('<pre>'); print_r($salles); echo('</pre>');
 
-			echo('<pre>'.json_encode($salles).'</pre>');
+			// === Résultat de la requête ===
+			// Format :
+			// 	{numeroSalle:[resourceID, type, taille, projecteur, tableau, imprimante, dispo], ...}
+			// 	projecteur et imprimante : [0=oui, 1=non]
+			// 	tableau : [0=aucun, 1=noir, 2=blanc, 3=les deux]
+			// 	dispo : [-1=occupée, 0=libre, autre=durée pendant laquelle la salle est encore libre]
+
+			echo(json_encode($salles));
 
 		}
 
