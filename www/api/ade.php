@@ -27,8 +27,6 @@
 			$out = curl_exec($ch); // Exécution
 			curl_close($ch); // Fermeture
 
-			//echo('url : '.$url.'<pre>'.htmlspecialchars($out).'</pre>');
-
 			return new SimpleXMLElement($out);
 		}
 
@@ -89,7 +87,6 @@
 					: " AND imprimante=".$imprimante;
 
 				// Construction de la partie "misc" de la requête SQL :
-				// $sql_misc = "lol";
 				$sql_misc = $sql_misc_taille
 					.$sql_misc_projecteur
 					.$sql_misc_tableau
@@ -108,8 +105,6 @@
 			$sql = "SELECT * FROM salle "
 				."WHERE type_salle LIKE '".$type."'".$sql_misc;
 
-			echo($sql.'<br/>');
-
 			// Exécution :
 			$req = mysql_query($sql) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_errno());
 
@@ -118,16 +113,6 @@
 			while ($data = mysql_fetch_assoc($req))
 			{
 				$salles[$data[nom_salle]] = array(
-					"id" => $data[resourceID_salle],
-					"type" => $data[type_salle],
-					"taille" => $data[taille],
-					"projecteur" => $data[projecteur],
-					"tableau" => $data[tableau],
-					"imprimante" => $data[imprimante],
-					"dispo" => -1
-				);
-
-				$salles_light[$data[nom_salle]] = array(
 					$data[resourceID_salle], 	// 0
 					$data[type_salle], 			// 1
 					$data[taille], 				// 2
@@ -140,17 +125,13 @@
 
 			mysql_close();
 
-			// === Date et heure actuelles ===
+			// === Ajourd'hui ===
 
 			$now_date_ADE = date("m/d/Y"); // format "05/20/2015" pour les requêtes ADE
-			// $now_date = date("d/m/Y"); // format "20/05/2015"
-			// $now_time = date("H:i"); // format "15:07"
-
-			// echo($now_date.' - '.$now_time.'<br/>');
 
 			// === Récupérer la disponibilité de chaque salle ===
 
-			foreach ($salles_light as $nom_salle => $salle)
+			foreach ($salles as $nom_salle => $salle)
 			{
 				// --- Requête ADE ---
 
@@ -173,7 +154,6 @@
 					// Ajouter les horaires de l'event à cette date :
 					$horaires[] = array($start, $end);
 				}
-				// echo('<pre>'); print_r($horaires); echo('</pre>');
 
 				// --- Calcul du temps libre restant ---
 				// Pas libre, libre jusqu'à telle heure, libre toute la journée
@@ -204,22 +184,23 @@
 				}
 
 				if ($libre && $pendant > 0) {
-					echo("La salle ".$nom_salle." est libre jusqu'a ".$cours[1].", cad pendant ".$pendant." minutes.<br>");
-					$salles_light[$nom_salle][6] = $pendant;
+					$salles[$nom_salle][6] = $pendant;
 				} elseif ($libre) {
-					echo("La salle ".$nom_salle." est libre jusqu'a ce soir.<br>");
-					$salles_light[$nom_salle][6] = "full";
+					$salles[$nom_salle][6] = 0;
 				} else {
-					echo("La salle ".$nom_salle." n'est pas libre.<br>");
-					$salles_light[$nom_salle][6] = 0;
+					$salles[$nom_salle][6] = -1;
 				}
 
 			}
-			echo('<pre>'); print_r($salles); echo('</pre><br/>');
-			echo('<pre>'); print_r($salles_light); echo('</pre><br/>');
 
-			echo('<pre>'.json_encode($salles).'</pre><br/>');
-			echo('<pre>'.json_encode($salles_light).'</pre><br/>');
+			// === Résultat de la requête ===
+			// Format :
+			// 	{numeroSalle:[resourceID, type, taille, projecteur, tableau, imprimante, dispo], ...}
+			// 	projecteur et imprimante : [0=oui, 1=non]
+			// 	tableau : [0=aucun, 1=noir, 2=blanc, 3=les deux]
+			// 	dispo : [-1=occupée, 0=libre, autre=durée pendant laquelle la salle est encore libre]
+
+			echo(json_encode($salles));
 
 		}
 
