@@ -1,176 +1,119 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no"/>
-  <title>MyESIEE - Salle</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no"/>
+	<title>MyESIEE - Salle</title>
 
-  <!-- CSS  -->
-  <link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
-  <link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+	<!-- CSS  -->
+	<link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+	<link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+	<link href="css/palette.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+
 </head>
 
 
 <body>
-  <main>
-<div class="navbar-fixed">
-  <nav class="grey darken-3" role="navigation">
-    <div class="nav-wrapper container"><a id="logo-container" href="#" class="brand-logo">Logo</a>
-      <ul class="right hide-on-med-and-down">
-        <li class="active"><a href="#" >Salles</a></li>
-        <li><a href="Recherche_Professeur.html">Profs</a></li>
-        <li><a href="notes.html">Notes</a></li>
-        <li><a href="absence.html">Absences</a></li>
-        <li><a href="appreciation.html">Appréciations</a></li>
-        <li><a href="#">Paramêtres</a></li>
-        <li><a href="#">Déconnexion</a></li>
-      </ul>
+	<main>
+		<div class="navbar-fixed">
+			<nav class="dark-primary-color" role="navigation">
+				<div class="nav-wrapper container"><a id="logo-container" href="#" class="brand-logo">Logo</a>
+					<ul class="right hide-on-med-and-down">
+						<li class="active"><a href="#" >Salles</a></li>
+						<li><a href="Recherche_Professeur.html">Profs</a></li>
+						<li><a href="notes.html">Notes</a></li>
+						<li><a href="absence.html">Absences</a></li>
+						<li><a href="appreciation.html">Appréciations</a></li>
+						<li><a href="#">Paramêtres</a></li>
+						<li><a href="#">Déconnexion</a></li>
+					</ul>
 
-      <ul id="nav-mobile" class="side-nav">
-        <li class="active"><a href="#" >Salles</a></li>
-        <li><a href="Recherche_Professeur.html">Profs</a></li>
-        <li><a href="notes.html">Notes</a></li>
-        <li><a href="absence.html">Absences</a></li>
-        <li><a href="appreciation.html">Appréciations</a></li>
-        <li><a href="#">Paramêtres</a></li>
-        <li><a href="#">Déconnexion</a></li>
-      </ul>
-      <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="mdi-navigation-menu"></i></a>
-    </div>
-  </nav>
-</div>
-<div class="row center background_recherche">
-  <!-- Bouton activé : bouton_active-->
-  	<a class="btn-floating btn-large waves-effect waves-light blue-grey margin_top_bouton filtre-type " id="info" title="Salle informatique">
-      <i class="mdi-hardware-desktop-windows">
-      </i>
-    </a>
-    <a class="btn-floating btn-large waves-effect waves-light blue-grey margin_top_bouton filtre-type" id="TP" title="Salle de travaux pratiques">
-      TP
-    </a>
-    <a class="btn-floating btn-large waves-effect waves-light blue-grey margin_top_bouton filtre-type" id="Laboratoire" title="Laboratoire">
-      Labo
-    </a>
-    <a class="btn-floating btn-large waves-effect waves-light blue-grey margin_top_bouton filtre-type modal-trigger" id="avancee" title="Recherche avancée" href="#modal1">
-        <i class="mdi-hardware-keyboard-control">
-        </i>
-    </a>
+					<ul id="nav-mobile" class="side-nav">
+						<li class="active"><a href="#" >Salles</a></li>
+						<li><a href="Recherche_Professeur.html">Profs</a></li>
+						<li><a href="notes.html">Notes</a></li>
+						<li><a href="absence.html">Absences</a></li>
+						<li><a href="appreciation.html">Appréciations</a></li>
+						<li><a href="#">Paramêtres</a></li>
+						<li><a href="#">Déconnexion</a></li>
+					</ul>
+					<a href="#" data-activates="nav-mobile" class="button-collapse"><i class="mdi-navigation-menu"></i></a>
+				</div>
+			</nav>
+		</div>
+
+		<div class="row center default-primary-color">
+			<!-- Bouton activé : bouton_active-->
+			<a class="btn-flat waves-effect waves-light  margin_top_bouton filtre-type " id="info" title="Salle informatique">
+				<i class="medium mdi-hardware-desktop-windows primary-text-color">
+				</i>
+			</a>
+			<a class="btn-flat  waves-effect waves-light  margin_top_bouton filtre-type primary-text-color" id="TP" title="Salle de travaux pratiques">
+				<i class="medium mdi-social-school primary-text-color">
+				</i>
+			</a>
+			<a class="btn-flat waves-effect waves-light  margin_top_bouton filtre-type primary-text-color" id="Laboratoire" title="Laboratoire">
+				<i class="medium mdi-notification-sd-card primary-text-color">
+				</i>
+			</a>
+			<a class="btn-flat waves-effect waves-light  margin_top_bouton filtre-type" id="avancee" title="Recherche avancée">
+				<i class="medium mdi-hardware-keyboard-control primary-text-color">
+				</i>
+			</a>
 
 
-<p class="center categorie"><span class=" white-text" id="nom_categorie">
-    Salle info</span>
-  <button class="btn-floating waves-effect waves-light" type="submit" name="action">
-  <i class="mdi-action-search"></i>
-  </button>
-  </p>
+			<p class="center categorie"><span class=" white-text" id="nom_categorie">
+				Salle info</span>
+			</p>
 
-</div>
-
-<!-- Fenêtre modale-->
-<div id="modal1" class="modal" style="display: none; opacity: 1; top: 0px;">
-    <div class="modal-content">
-       <form class="col s12 ">
-        <div class="row">
-                 <div class="input-field col s6 offset-s3 taille_nsalle">
-                    <input id="numero_salle" type="text" class="validate">
-                    <label for="numero_salle">
-                        Numéro de salle
-                    </label>
-                </div>
-        </div>
-        <div class="row">
-                <div class="input-field col s3 offset-s3">
-                    <select>
-                          <option value="épi1">Épi 1</option>
-                          <option value="épi2">Épi 2</option>
-                          <option value="épi3">Épi 3</option>
-                          <option value="épi4">Épi 4</option>
-                          <option value="épi5">Épi 5</option>
-                          <option value="épi6">Épi 6</option>
-                  </select>
-                  <label>Numéro de l'épi</label>
-                </div>
-                <div class="input-field col s3">
-                        <select>
-                          <option value="niveau0">Niveau 0</option>
-                          <option value="niveau1">Niveau 1</option>
-                          <option value="niveau2">Niveau 2</option>
-                          <option value="niveau3">Niveau 3</option>
-                          <option value="niveau4">Niveau 4</option>
-                      </select>
-                      <label>Niveau</label>
-                </div>
-            </div>
-            <div class="row">
-                <p class="center">
-                    <input name="group1" type="checkbox" id="test1" />
-                    <label class="taille_checkbox" for="test1">Tableau à craie</label>
-                    <input name="group1" type="checkbox" id="test2" />
-                    <label class="taille_checkbox" for="test2">Tableau véléda</label>
-                    <input name="group1" type="checkbox" id="test3"  />
-                    <label class="taille_checkbox" for="test3">Rétroprojecteur</label>
-                    <input name="group1" type="checkbox" id="test4"  />
-                    <label class="taille_checkbox" for="test3">Imprimante</label>
-                </p>
-            </div>
-        </div>
-        <div class="row center">
-            <button class="btn waves-effect waves-light" type="submit" name="action">Rechercher
-                <i class="mdi-content-send right"></i>
-            </button>
-        <div>
-    </form>
-  </div>
+			<button class="btn-floating waves-effect waves-light accent-color btn-large" type="submit" name="action">
+				<i class="large mdi-action-search"></i>
+			</button>
+		</div>
+		
+	</div>
 </div>
 
 
 </main>
- <!-- Footer -->
-<footer class="page-footer grey darken-3" id="footer">
-	<div class="footer-copyright">
-  		<div class="container">
-  			Made by <a class=" blue-grey-text" href="http://materializecss.com">The Meute</a>
-  		</div>
-	</div>
-</footer>
 
 
-  <!--  Scripts-->
 
-  <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-  <script src="js/materialize.js"></script>
-  <script src="js/init.js"></script>
-  <script>$(".button-collapse").sideNav();</script>
+<!--  Scripts-->
 
-  <script>  
-      // === Dropdown ===  
-      $(document).ready(function() {
-          $('select').material_select();
-          });
-  </script>
-  <script>$('select').material_select('destroy');</script>
+<script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+<script src="js/materialize.js"></script>
+<script src="js/init.js"></script>
+<script>$(".button-collapse").sideNav();</script>
+
+<script>  
+	  // === Dropdown ===  
+	  $(document).ready(function() {
+	  	$('select').material_select();
+	  });
+	  </script>
+	  <script>$('select').material_select('destroy');</script>
+
+	  <script>
+	  $(document).ready(function(){
+	  	$('.collapsible').collapsible({
+	  accordion : false // A setting that changes the collapsible behavior to expandable instead of the default accordion style
+	});
+	  });
+	  </script>
+
+	  <script type="text/javascript">
+
+	// === Afficher le nom de la catégorie sélectionnée ===
+
+	$(".filtre-type").each(function() {
+		$(this).click(function() {
+			$("#nom_categorie")[0].innerHTML = $(this)[0].title;
+		});
+	});
 
 
-  <script>
-      // === Fenêtre modale ===
-      $(document).ready(function(){
-    $('.modal-trigger').leanModal();
-  });
-      
-  </script>
+	</script>
 
-  <script type="text/javascript">
-
-    // === Afficher le nom de la catégorie sélectionnée ===
-
-    $(".filtre-type").each(function() {
-      $(this).click(function() {
-        $("#nom_categorie")[0].innerHTML = $(this)[0].title;
-      });
-    });
-
-
-  </script>
-
-  </body>
+</body>
 </html>
