@@ -24,7 +24,7 @@
 						<li><a href="notes.html">Notes</a></li>
 						<li><a href="absence.html">Absences</a></li>
 						<li><a href="appreciation.html">Appréciations</a></li>
-						<li><a href="#">Paramêtres</a></li>
+						<li><a href="#">Paramètres</a></li>
 						<li><a href="#">Déconnexion</a></li>
 					</ul>
 
@@ -34,7 +34,7 @@
 						<li><a href="notes.html">Notes</a></li>
 						<li><a href="absence.html">Absences</a></li>
 						<li><a href="appreciation.html">Appréciations</a></li>
-						<li><a href="#">Paramêtres</a></li>
+						<li><a href="#">Paramètres</a></li>
 						<li><a href="#">Déconnexion</a></li>
 					</ul>
 					<a href="#" data-activates="nav-mobile" class="button-collapse"><i class="mdi-navigation-menu"></i></a>
@@ -66,27 +66,35 @@
 				Salle info</span>
 			</p>
 
+			<div class="row">
+				<div class="input-field col s2 offset-s5">
+					<input id="numero_salle" type="text" class="validate white-text">
+					<label class="white-text" for="numero_salle">
+						Numéro de salle
+					</label>
 			<button class="btn-floating waves-effect waves-light accent-color btn-large" type="submit" name="action">
 				<i class="large mdi-action-search"></i>
 			</button>
+				</div>
+			</div>
 		</div>
+
 		
-	</div>
-</div>
-
-
-</main>
 
 
 
-<!--  Scripts-->
+	</main>
 
-<script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-<script src="js/materialize.js"></script>
-<script src="js/init.js"></script>
-<script>$(".button-collapse").sideNav();</script>
 
-<script>  
+
+	<!--  Scripts-->
+
+	<script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+	<script src="js/materialize.js"></script>
+	<script src="js/init.js"></script>
+	<script>$(".button-collapse").sideNav();</script>
+
+	<script>  
 	  // === Dropdown ===  
 	  $(document).ready(function() {
 	  	$('select').material_select();
