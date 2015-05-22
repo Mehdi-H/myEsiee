@@ -1,5 +1,5 @@
 INSERT INTO salle
-	(nom_salle, resourceID_salle, type_salle, taille, projecteur, tableau, imprimante)
+	(nom, resourceID, type, taille, projecteur, tableau, imprimante)
 VALUES
 	("5004", 789, "it", 24, 0, 2, 0),
 	("5006", 790, "it", 24, 0, 2, 0),

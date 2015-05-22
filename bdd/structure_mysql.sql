@@ -1,9 +1,9 @@
 DROP TABLE IF EXISTS salle;
 CREATE TABLE salle (
-	nom_salle			varchar(8) PRIMARY KEY,
-	resourceID_salle	int(11) unsigned NOT NULL UNIQUE,
-	type_salle			varchar(30),
-	taille 				int(11) unsigned NOT NULL DEFAULT 0,
+	nom					varchar(8) PRIMARY KEY,
+	resourceID 			int(11) unsigned NOT NULL UNIQUE,
+	type 				varchar(30),
+	taille 		 		int(11) unsigned NOT NULL DEFAULT 0,
 	projecteur 			tinyint(1) unsigned NOT NULL DEFAULT 0 COMMENT '0:non, 1:oui',
 	tableau 			tinyint(2) unsigned NOT NULL DEFAULT 0 COMMENT '0:aucun, 1:blanc, 2:noir, 3:deux',
 	imprimante			tinyint(1) unsigned NOT NULL DEFAULT 0 COMMENT '0:non, 1:oui'
