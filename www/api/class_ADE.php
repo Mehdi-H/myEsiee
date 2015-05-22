@@ -8,6 +8,7 @@
 
 		private $_projetADE = 4;
 		private $_sessionID;
+		private $_prefixe_api = "https://planif.esiee.fr/jsp/webapi"; // ancien port : 8443
 
 
 		/////////////////////////////////////////////////////////////////////////////////////////
@@ -55,14 +56,14 @@
 		private function _ade_connect()
 		{
 			// Se connecter à une session :
-			$req = $this->_httpGet("https://planif.esiee.fr:8443/jsp/webapi"
+			$req = $this->_httpGet($this->_prefixe_api
 				."?function=connect"
 				."&login=lecteur1&password=");
 
 			$this->sessionId = $req['id'];
 
 			// Se placer sur le projet 4 (EDT 2014-2015) :
-			$this->_httpGet("https://planif.esiee.fr:8443/jsp/webapi"
+			$this->_httpGet($this->_prefixe_api
 				."?sessionId=".$this->_sessionId
 				."&function=setProject"
 				."&projectId=".$this->_projetADE);
@@ -70,7 +71,7 @@
 
 		private function _ade_disconnect()
 		{
-			$this->_httpGet("https://planif.esiee.fr:8443/jsp/webapi"
+			$this->_httpGet($this->_prefixe_api
 				."?sessionId=".$this->_sessionId
 				."&function=disconnect");
 		}
@@ -174,7 +175,7 @@
 			{
 				// --- Requête ADE ---
 
-				$req = $this->_httpGet("https://planif.esiee.fr:8443/jsp/webapi"
+				$req = $this->_httpGet($this->_prefixe_api
 					."?sessionId=".$this->_sessionId
 					."&function=getEvents"
 					."&detail=0"
