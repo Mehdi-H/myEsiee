@@ -1,0 +1,17 @@
+Voilà ce qu'il faudrait checker dans la semaine avant de tout bazarder dans la bdd
+{125: 'salle de réunion?',
+1001: 'labo?',
+3205: 'QCM?', 3301: 'labo ou cours?',
+4000: 'des labos?', 4300: 'labos et salles de cours?', 4400 : 'ajouter type examen',
+5001: 'salle machine?', 5150:'accès labo du fond', 5258: 'toujours vide?',
+6000: 'à voir tout est flou entre les salle blanche, les salles de cours, le niveau 0..'}
+
+la 1001 je crois que j'y suis allé une fois mais je suis pas sûr,
+la 3205 elle est référencée comme salle réservée aux QCM, faudrait aller check si on peut y entrer,
+askip y a des labos en 4000 mais j'ysuis jamais allé donc faudrait voir ce que c'est,
+pareil en 4300 mais dans lexcel c'est mélangé bizarrement entre bureaux et salles donc faudrait vérifier si c pas des conneries,
+en 4400 faut voir quelles salles sont pour examen et quelles salles on peut prendre,
+j'ai la 5001 en salle, mais jcrois pas que ce soit bon,
+j'ai la 5151 et une autre aussi comme salle info mais est-ce qu'on la met sachant que y a un digicode pour entrer?
+la 5258 est référencée comme vide, faudrait voir sica a cangé depuis l'année dernière,
+la 6X00 faut aller checker parce que j'y suis jamais allé à part au 4e étage 
