@@ -9,16 +9,24 @@
 		private $_projetADE = 4;
 		private $_sessionID;
 		private $_prefixe_api = "https://planif.esiee.fr/jsp/webapi"; // ancien port : 8443
-
+		private $_proxy_url = "https://dupontl:mvx2dupontl@mvproxy.esiee.fr:3128";
+		private $_use_proxy = true;
 
 		/////////////////////////////////////////////////////////////////////////////////////////
-		/// CONSTRUCTEUR
+		/// CONSTRUCTEUR - DESTRUCTEUR
 		/////////////////////////////////////////////////////////////////////////////////////////
 
 		public function __construct($projetADE)
 		{
+			echo("Construction de la classe");
 			$this->_projetADE = $projetADE;
 			$this->_ade_connect();
+		}
+
+		public function __destruct()
+		{
+			echo("Destruction de la classe");
+			$this->_ade_disconnect();
 		}
 
 		/////////////////////////////////////////////////////////////////////////////////////////
@@ -39,7 +47,7 @@
 				CURLOPT_RETURNTRANSFER => 1,
 				CURLOPT_URL => $url,
 				CURLOPT_USERAGENT => 'E-Room pour ESIEE Paris (projet E3E 2015)',
-				CURLOPT_PROXY => 'https://dupontl:mvx2dupontl@mvproxy.esiee.fr:3128',
+				CURLOPT_PROXY => $this->_use_proxy ? $this->_proxy_url : NULL,
 				CURLOPT_FOLLOWLOCATION => 1,
 				CURLOPT_SSL_VERIFYPEER => false,
 			));
