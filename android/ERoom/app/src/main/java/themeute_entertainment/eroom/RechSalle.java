@@ -1,6 +1,7 @@
 package themeute_entertainment.eroom;
 
 import android.app.Activity;
+import android.app.DownloadManager;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBar;
 import android.support.v4.app.Fragment;
@@ -17,7 +18,18 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.support.v4.widget.DrawerLayout;
 import android.widget.ArrayAdapter;
+import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
+
+import org.json.JSONObject;
 
 
 public class RechSalle extends ActionBarActivity
@@ -47,9 +59,44 @@ public class RechSalle extends ActionBarActivity
                 R.id.navigation_drawer,
                 (DrawerLayout) findViewById(R.id.drawer_layout));
 
+        final Context context = getApplicationContext();
+
         // ====================================================================================
-        // ==
+        // == VIEWS
         // ====================================================================================
+
+        final ImageButton searchBtn = (ImageButton) findViewById(R.id.imageButton_search);
+        final TextView textView_debug = (TextView) findViewById(R.id.textView_debug);
+
+        // === Test requête HTTP Get ===
+
+        textView_debug.setText("Blablabla");
+
+        // Instantiate the RequestQueue.
+        final RequestQueue queue = Volley.newRequestQueue(this);
+
+        searchBtn.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Toast.makeText(context, "Requête...", Toast.LENGTH_SHORT).show();
+
+                String url = "http://seevendev.alwaysdata.net/eroom_/get_json.php";
+
+                JsonObjectRequest jsObjRequest = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        textView_debug.setText("Response : " + response.toString());
+                    }
+                }, new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        textView_debug.setText("Marche pas");
+                    }
+                });
+
+                // Access the RequestQueue through your singleton class.
+                queue.add(jsObjRequest);
+            }
+        });
 
 
     }

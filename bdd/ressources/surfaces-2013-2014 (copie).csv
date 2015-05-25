@@ -1,0 +1,654 @@
+Lieu,piéce,surface,fonction,utilisation,service,nom,prénom
+Parking,2,20.3,Locaux,réserve,DPI,Aucun,Aucun
+Parking,2,33.7,Locaux,réserve,DOCTECH,Aucun,Aucun
+Parking,2,28.8,Locaux,stockage,SG-locaux,Aucun,Aucun
+Parking,2,54.5,Locaux,Club élèves,BDE,Aucun,Aucun
+Parking,2,29,Locaux,local jardin,DPI,Aucun,Aucun
+Parking,3,30,Locaux,Local TGBT,DPI,Aucun,Aucun
+Parking,4,13.54,Locaux,Club élèves,BDE,Aucun,Aucun
+Parking,5,8,Locaux,sanitaires pc,DPI,Aucun,Aucun
+Parking,6,7.99,Locaux,cuisine pc,DPI,Aucun,Aucun
+Parking,7,34.84,Locaux,bureau pc,DPI,Aucun,Aucun
+Parking,8,100,Locaux,extraction nord,DPI,Aucun,Aucun
+Parking,9,10.4,Locaux,distributeur de billets,DPI,Aucun,Aucun
+Parking,10,4,Locaux,s/repartiteur epi1,DPI,Aucun,Aucun
+Long pan,11,192.5,autres,douve nord,DPI,Aucun,Aucun
+Parking,12,16.2,Locaux,local pompe bassin nord,DPI,Aucun,Aucun
+Long pan,13,119.5,autres,douve centre,DPI,Aucun,Aucun
+Parking,14,16.2,Locaux,local pompe bassin sud,DPI,Aucun,Aucun
+Long pan,15,353.5,autres,douve sud,DPI,Aucun,Aucun
+Long pan,16,36.5,Locaux,local shape,DPI,Aucun,Aucun
+Parking,20,50,Locaux,service généraux,DPI,Aucun,Aucun
+Parking,21,55,Locaux,soufflage nord,DPI,Aucun,Aucun
+Parking,22,50,Locaux,local ménage,DPI,Aucun,Aucun
+Parking,30,50,Locaux,local élèctricien,DPI,Aucun,Aucun
+Parking,31,55,Locaux,soufflage sud,DPI,Aucun,Aucun
+Parking,32,50,Locaux,autocom.,SMIG-locaux,Aucun,Aucun
+Parking,70,66,Locaux,extraction sud,DPI,Aucun,Aucun
+Parking,78,63.5,Locaux,extraction cuisine,DPI,Aucun,Aucun
+Parking,79,20.7,Locaux,local poubelle,DPI,Aucun,Aucun
+Parking,80,13.5,Locaux,réserve boisson kfet,COMPASS,Aucun,Aucun
+Parking,81,112,Locaux,Chaufferie,DPI,Aucun,Aucun
+Parking,82,50,Locaux,contrôle,DPI,Aucun,Aucun
+Parking,83,80,Locaux,local technique,DPI,Aucun,Aucun
+Parking,84,72,Locaux,soufflage restaurant,DPI,Aucun,Aucun
+Parking,85,85,Locaux,traitement eau,DPI,Aucun,Aucun
+Parking,86,140,Locaux,groupe froid,DPI,Aucun,Aucun
+Parking,87,45,Locaux,menuiserie,DPI,Aucun,Aucun
+Parking,88,70,Locaux,poste transfo. sud,DPI,Aucun,Aucun
+Parking,90,44,Locaux,chambres froides,DPI,Aucun,Aucun
+Parking,91,9,Locaux,stock,COMPASS,Aucun,Aucun
+Parking,92,6.5,Locaux,Club élèves,BDE,Aucun,Aucun
+Parking,93,13.5,Locaux,réserve kfet,COMPASS,Aucun,Aucun
+Parking,94,24,Locaux,réserve cuisine,DPI,Aucun,Aucun
+Parking,98,22.75,Locaux,sanitaires femme,DPI,Aucun,Aucun
+Parking,99,22.75,Locaux,sanitaires homme,DPI,Aucun,Aucun
+Rue,100A,184,autres,accueil,COM,BRUNET,Isabelle
+Rue,100B,x,autres,accueil,COM,DUMONTEIL,Annie
+Long pan,102,695,Locaux,archives doctech,DOCTECH,Aucun,Aucun
+Long pan,104A,17.65,bureaux,bureau,DOCTECH,DETANG,Philippe
+Long pan,104B,x,bureaux,bureau,DOCTECH,NGUYEN,Anne
+Long pan,105,17.2,bureaux,bureau,DOCTECH,MOREAU,Rose-Marie
+Long pan,106,5.36,Locaux,sanitaires ,DPI,Aucun,Aucun
+Long pan,107,7,Locaux,entretien,DPI,Aucun,Aucun
+Long pan,110,156.38,Amphithéatres,amphi,APS-locaux,Aucun,Aucun
+Long pan,111,36.96,Locaux,zone de stockage,DPI,Aucun,Aucun
+Long pan,112,56.86,Salles,salle de cours,APS-locaux,Aucun,Aucun
+Long pan,113,57.59,Salles,salle de cours,APS-locaux,Aucun,Aucun
+Long pan,114,57.59,Salles,salle de cours,APS-locaux,Aucun,Aucun
+Long pan,115,57.59,Salles,salle de cours,APS-locaux,Aucun,Aucun
+Long pan,116,37.95,Locaux,zone de stockage,DPI,Aucun,Aucun
+Long pan,117,6.43,Locaux,sanitaires femme,DPI,Aucun,Aucun
+Long pan,118,15.75,Locaux,sanitaires homme,DPI,Aucun,Aucun
+Long pan,119,223,Locaux,archives,DPI,Aucun,Aucun
+Gellules,121,14.29,bureaux,bureau,APS,LAMRANI,Maryvonne
+Gellules,122A,19.14,bureaux,bureau,APS,CARO,Isabelle
+Gellules,122B,18.7,bureaux,bureau,APS,BRUN,Laurence
+Gellules,124,7.4,Locaux,sanitaires,DPI,Aucun,Aucun
+Gellules,125,57.89,Salles,salle réunion,DIR. GENE-locaux,Aucun,Aucun
+Long pan,131,20.01,bureaux,bureau,DIR. DEV.,BONNET,Laurence
+Long pan,132,20.01,bureaux,bureau,DIR. DEV.,ELMASSIAN,Isabelle
+Long pan,133,19.12,bureaux,bureau,INTER,DELLA ZUANA,Fabiana
+Long pan,134,19.12,bureaux,bureau,INTER,CLEMENT,Sabrina
+Long pan,135,20.01,bureaux,bureau,INTER,VIROLLEAU-BENKARA                       ,Férial
+Long pan,136,20.01,bureaux,bureau,DIR. DEV.,BEAUVALLET,Roselyne
+Long pan,138A,19.75,bureaux,bureau,DIR. DEV.,GIRAULT,Julie
+Long pan,138B,19.75,bureaux,bureau,DIR. DEV.,JUNKER-MONGIN,Frederique
+Long pan,139,15.22,bureaux,bureau,DIR. DEV.,LANGLOIS,Sophie
+Long pan,141,20.01,bureaux,bureau,DOYEN,AKIL                                    ,Mohamed
+Long pan,142,20.01,bureaux,bureau,DOYEN,FAVENNEC,Sylvie
+Long pan,143,19.12,bureaux,bureau,DIR. GENE.,DEGNY                                   ,Didier
+Long pan,144,19.12,bureaux,bureau,DIR. GENE.,SOREL,Fabienne
+Long pan,145,20.01,bureaux,bureau,DIR. ETUDES,CARRIERE                                ,Alain
+Long pan,146,20.01,bureaux,bureau,DIR. ETUDES,CARRY,Ghislaine
+Long pan,148,19.75,bureaux,bureau,DIR. GENE.,ZADI,Leila
+Long pan,149A,30.44,bureaux,bureau,MTEL,MARKOWSKI                               ,Krys
+Long pan,149B,x,bureaux,bureau,MTEL,Vacataires,
+Long pan,159,38.5,autres,comble (terrasse sud rest.),DPI,Aucun,Aucun
+Long pan,160,156.38,Amphithéatres,amphi,APS-locaux,Aucun,Aucun
+Gellules,151,13,bureaux,bureau,COM,PROKOPCZYK,Valèrie
+Gellules,152B,x,bureaux,bureau,COM,BON,Kevin
+Gellules,153,7.4,Locaux,sanitaires,DPI,Aucun,Aucun
+Gellules,154A,48,bureaux,bureau,COM,CEVAER,Christine
+Gellules,154B,x,bureaux,bureau,COM,LEGUYADER,Carine
+Gellules,155A,67,bureaux,bureau,COM,HOCHART,Caroline
+Gellules,155B,x,bureaux,bureau,COM,SPILMANN,Claire
+Long pan,161,37.95,Locaux,zone de stockage,BDE,Aucun,Aucun
+Long pan,162,57.59,Salles,salle de cours,APS-locaux,Aucun,Aucun
+Long pan,163,56.86,Salles,salle de cours,APS-locaux,Aucun,Aucun
+Long pan,164,56.86,Salles,salle de cours,APS-locaux,Aucun,Aucun
+Long pan,165,56.86,Salles,salle informatique,SMIG-locaux,Aucun,Aucun
+Long pan,166,55.44,Locaux,zone de stockage,,,
+Long pan,167,6.43,Locaux,sanitaires femme,DPI,Aucun,Aucun
+Long pan,168,15.75,Locaux,sanitaires homme,DPI,Aucun,Aucun
+Long pan,169,261.5,Locaux,archives,,,
+Long pan,170,363.72,Amphithéatres M.D.,amphi,APS-locaux,Aucun,Aucun
+Long pan,171,13.76,sous-pente,vide,DPI,?,?
+Long pan,172,13.76,sous-pente,vide,DPI,?,?
+Long pan,173,15.76,sous-pente,vide,DPI,?,?
+Long pan,174,13.01,sous-pente,vide,DPI,?,?
+Long pan,175,7.98,sous-pente,vide,DPI,?,?
+Long pan,176,7.24,sous-pente,vide,DPI,?,?
+Long pan,177,1.69,Locaux,sanitaires,DPI,Aucun,Aucun
+Long pan,178,38,Locaux,sanitaires hommes,DPI,Aucun,Aucun
+Long pan,179,28.5,Locaux,sanitaires femme,DPI,Aucun,Aucun
+Long pan,190,780.5,Locaux,restaurant étudiant,DPI,Aucun,Aucun
+Long pan,191,213.05,Locaux,cuisine dist.,DPI,Aucun,Aucun
+Rue,180,270,autres,cafétéria,DPI,Aucun,Aucun
+Rue,181,25,Locaux,Services généraux,SERVGEN,Aucun,Aucun
+Rue,182,20.5,Locaux,Club élèves,BDE,Aucun,Aucun
+Rue,183,19.5,Locaux,Club élèves,SPORTS,Cellule sportive,
+Rue,184,7.5,Locaux,Club élèves,BDE,Aucun,Aucun
+Rue,185,9,Locaux,Club élèves,BDE,Club stratégie,
+Rue,186,7.5,Locaux,Club élèves,BDE,Club stratégie,
+Rue,187,7.5,Locaux,Club élèves,BDE,arts rue,
+Rue,188,20.5,bureaux,Club élèves,BDE,Club soirée et ESF,
+Rue,189,32,Locaux,Club élèves,BDE,Junior,
+Long pan,192,92,Locaux,cuisine plonge,DPI,Aucun,Aucun
+Long pan,193,18.55,Locaux,cuisine office,DPI,Aucun,Aucun
+Long pan,194,48.65,Locaux,cuisine cuisson,DPI,Aucun,Aucun
+Long pan,195,43.71,Locaux,cuisine prep. Froid,DPI,Aucun,Aucun
+Long pan,196,11.8,Locaux,cuisine finition,DPI,Aucun,Aucun
+Long pan,197,13.35,Locaux,cuisine res. Boissons,DPI,Aucun,Aucun
+Long pan,198,7.75,Locaux,cuisine bureau,DPI,Aucun,Aucun
+Long pan,199,11.96,Locaux,sanitaires,DPI,Aucun,Aucun
+Long pan,200,4.35,Locaux,s/repartiteur epi2,DPI,Aucun,Aucun
+Long pan,201A,236,Locaux,centre de langues,DOCTECH,FLECHE,Bruno
+Long pan,201B,x,Locaux,centre de langues,DOCTECH,CAMUS,Sylvie
+Long pan,210,178.09,Amphithéatres,amphi,APS-locaux,Aucun,Aucun
+Long pan,211,17,Locaux,Club élèves,BDE,Club NIX,
+Long pan,212,17,Locaux,Club élèves,BDE,Club NIX,
+Long pan,213,18.5,Locaux,Club élèves,BDE,Club PC,
+Long pan,214,18.5,Locaux,Club élèves,BDE,Club PC,
+Long pan,231,20.26,bureaux,salle réunion,DIR. GENE.,Aucun,Aucun
+Long pan,232,16.59,bureaux,bureau,DIR. GENE.,FARMOUZA,Caroline
+Gellules,221,14.12,bureaux,bureau,ADVANCITY,DU JEU,Ghislain
+Gellules,222A,49.84,bureaux,bureau,ADVANCITY,QUERAUD,Sophie
+Gellules,222B,x,bureaux,bureau,ADVANCITY,MILLY,Julien
+Gellules,223,7.4,Locaux,sanitaires,DPI,Aucun,Aucun
+Gellules,224,14.57,bureaux,bureau,DIR. DEV.,RAHAINGOMANANA,Eric
+Gellules,225,19.36,bureaux,bureau,DIR. DEV.,CAULE,Jean Baptiste
+Gellules,226A,47.06,bureaux,bureau,DIR. DEV.,AL SMADI,Sadek
+Gellules,226B,x,bureaux,bureau,DIR. DEV.,GUEYNE,Carine
+Long pan,233,16.59,bureaux,bureau,DIR. GENE.,OSMOND,Patricia
+Long pan,234,60.02,bureaux,bureau,DIR. GENE.,PERRIN,Dominique
+Long pan,236,20,Locaux,archives,DIR. GENE-locaux,Aucun,Aucun
+Long pan,237,20,Locaux,archives,DIR. GENE-locaux,Aucun,Aucun
+Long pan,238,20,Locaux,archives,DIR. GENE-locaux,Aucun,Aucun
+Long pan,238,2.5,Locaux,sanitaires,DPI,Aucun,Aucun
+Long pan,241,20.26,bureaux,bureau,SG,DAIN,Henry-Frédéric
+Long pan,242A,33.18,bureaux,bureau,SG,DELHOMENEDE,Huguette
+Long pan,242B,x,bureaux,bureau,SG,Apprentie,Apprentie
+Long pan,243,16.59,bureaux,bureau,SG,PALADE,Huguette
+Long pan,244,20.12,bureaux,salle réunion,SG-locaux,Aucun,Aucun
+Long pan,245,20.12,bureaux,salle réunion,SG-locaux,Aucun,Aucun
+Long pan,246,14,Locaux,archives,SG-locaux,Aucun,Aucun
+Long pan,247,14,Locaux,archives,SG-locaux,Aucun,Aucun
+Long pan,248,14,Locaux,archives,SG-locaux,Aucun,Aucun
+Long pan,260,178.09,Amphithéatres,amphi,APS-locaux,Aucun,Aucun
+Long pan,301,142,,,,,
+Gellules,251,14.12,bureaux,bureau,SG,DEMET,Corinne
+Gellules,252,24.92,bureaux,bureau,SG,GONCALVES,Aude
+Gellules,253,7.4,Locaux,sanitaires,DPI,Aucun,Aucun
+Gellules,254,14.63,bureaux,bureau,SG,AMSTERDAMER,Stéphanie
+Gellules,255A,38.72,bureaux,bureau,SG,ANDREUX,Charline
+Gellules,255B,x,bureaux,bureau,SG,CDD,
+Gellules,256,23.53,bureaux,bureau,SG-locaux,vide,
+Long pan,137A,40.02,bureaux,bureau,DIR. DEV.,MOREUX,Laurence
+Rue,261,35.7,Locaux,Club élèves,BDE,ESIEE Space,
+Rue,262,73,Locaux,Club élèves,BDE,ESIEE Space,
+Rue,263,11.1,Locaux,Club élèves,BDE,Foyer + Club Manga,
+Rue,272,22.7,Locaux,régie audio,DPI,Aucun,Aucun
+Rue,273,11.4,Locaux,régie vidéo,DPI,Aucun,Aucun
+restaurant,281,67.99,Locaux,salle à manger,DPI,Aucun,Aucun
+restaurant,282,11.44,Locaux,sanitaires,DPI,Aucun,Aucun
+restaurant,283,8.6,Locaux,Club élèves,BDE,Club DJ,
+restaurant,284,8.6,Locaux,Club élèves,BDE,Archives G3e,
+restaurant,285,8.6,Locaux,Club élèves,BDE,ESF,
+restaurant,286,8.6,Locaux,Club élèves,BDE,Aucun,Aucun
+restaurant,287,8.6,Locaux,Club élèves,BDE,GEMINIS AT,
+restaurant,290,273.91,Locaux,restaurant personnel,DPI,Aucun,Aucun
+restaurant,291,26.78,Locaux,cuisine,DPI,Aucun,Aucun
+Long pan,137B,x,bureaux,bureau,DIR. DEV.,Stagiaire,
+Gellules,321,14,bureaux,bureau,VMD,PEREZ,M.
+Gellules,322,19.18,bureaux,bureau,VMD,SILVA,J.
+Gellules,323,5,Locaux,sanitaires,DPI,Aucun,Aucun
+Gellules,324A,38.36,bureaux,bureau,VMD,GUERRE,JN 
+Gellules,324B,x,bureaux,bureau,VMD,REPPEL,F.
+Gellules,325A,31,bureaux,bureau,VMD,DALICIER,P.
+Gellules,325B,x,bureaux,bureau,VMD,SEGUR,T.
+Gellules,326A,29,bureaux,bureau,VMD,VINCENT,T.
+Gellules,326B,x,bureaux,bureau,VMD,GUEGUEN,B.
+Gellules,351,14.5,bureaux,salle réunion,SG-locaux,Aucun,Aucun
+Gellules,352,19.4,bureaux,salle réunion,SG-locaux,Aucun,Aucun
+Gellules,353,5,Locaux,sanitaires,DPI,Aucun,Aucun
+Gellules,354,11.54,bureaux,bureau,CCIR-DPI,Société AXIMA,
+Gellules,355A,30.56,bureaux,bureau,CCIR-DPI,GAUNON,Yannick
+Gellules,355B,x,bureaux,bureau,CCIR-DPI,BAPAUME,Anne
+Gellules,356A,67.8,bureaux,bureau,CCIR-DPI,DJAFER,Ali
+Gellules,356B,x,bureaux,bureau,CCIR-DPI,VINATIER,Joël
+Gellules,356C,X,bureaux,bureau,CCIR-DPI,DALLEE,Christophe
+restaurant,391,23.3,Locaux,salle à manger direction,DPI,Aucun,Aucun
+restaurant,392,9,Locaux,sanitaires,DPI,Aucun,Aucun
+restaurant,393,22.6,Locaux,salle à manger direction,DPI,Aucun,Aucun
+restaurant,394,37.53,Locaux,salle à manger direction,DPI,Aucun,Aucun
+restaurant,395,7.38,Locaux,réserve,DPI,Aucun,Aucun
+restaurant,396,45.58,Locaux,cuisine direction,DPI,Aucun,Aucun
+restaurant,397,35.5,bureaux,bureau resp. cuisine,DPI,Aucun,Aucun
+Gellules,400,4.35,Locaux,s/repartiteur epi4,DPI,Aucun,Aucun
+Gellules,500,4.35,Locaux,s/repartiteur epi5,DPI,Aucun,Aucun
+épi 6,600,4.35,Locaux,s/repartiteur epi6,DPI,Aucun,Aucun
+Gellules,600,4.35,Locaux,s/repartiteur epi6,DPI,Aucun,Aucun
+épi 1,1000,13,Locaux,sanitaires,DPI,Aucun,Aucun
+épi 1,1001,X,Labo,labo,ISYS-locaux,Aucun,Aucun
+épi 1,1005,407,Salles,salle de cours,APS-locaux,Aucun,Aucun
+épi 1,1007,X,Salles,salle audiovisuelle,APS-locaux,Aucun,Aucun
+épi 1,1051,X,Salles,salle audiovisuelle,APS-locaux,Aucun,Aucun
+épi 1,1052,X,Salles,salle audiovisuelle,APS-locaux,Aucun,Aucun
+épi 1,1053,X,Salles,salle audiovisuelle,APS-locaux,Aucun,Aucun
+épi 1,1054,X,Labo,labo,ISYS-locaux,Aucun,Aucun
+épi 1,1055,X,Labo,labo,MTEL ou IT????,Aucun,Aucun
+épi 1,1100,13,Locaux,sanitaires,DPI,Aucun,Aucun
+épi 1,1101,25,bureaux,accueil,MTEL-locaux,Aucun,Aucun
+épi 1,1102,25,bureaux,bureau,MTEL,Thésards,
+épi 1,1103,50,Salles,salle audiovisuelle,APS-locaux,Aucun,Aucun
+épi 1,1105,50,Salles,salle audiovisuelle,APS-locaux,Aucun,Aucun
+épi 1,1107,50,Salles,salle informatique,SMIG-locaux,Aucun,Aucun
+épi 1,1109,50,Salles,salle informatique,SMIG-locaux,Aucun,Aucun
+épi 1,1151,18,bureaux,bureau,MTEL,SOREL,Fabienne
+épi 1,1152,18,bureaux,bureau,MTEL,Thésards,
+épi 1,1153,18,bureaux,bureau,MTEL,A.LAGNEAU + D.ROBINSON,
+épi 1,1154,18,bureaux,bureau,MTEL,MIMOUN                                  ,Hassane
+épi 1,1155,18,bureaux,bureau,MTEL,Thésards,
+épi 1,1156,18,bureaux,bureau,MTEL,MAINWARING                              ,Derek
+épi 1,1157,18,bureaux,bureau,MTEL,CLEMENS                                 ,Luciana
+épi 1,1158,15,bureaux,bureau,MTEL,DELEMARLE + P.LAREDE                  ,Aurélie
+épi 1,1200,13,Locaux,sanitaires,DPI,Aucun,Aucun
+épi 1,1201,100,Salles,salle audiovisuelle,APS-locaux,Aucun,Aucun
+épi 1,1205,50,Salles,salle informatique,SMIG-locaux,Aucun,Aucun
+épi 1,1207,50,Salles,salle informatique,SMIG-locaux,Aucun,Aucun
+épi 1,1209,50,Salles,salle informatique,SMIG-locaux,Aucun,Aucun
+épi 1,1251,18,bureaux,bureau,MTEL,MARKOWSKI                               ,Krzysztof
+épi 1,1252,18,bureaux,bureau,MTEL,VILLARD                                 ,Lionel
+épi 1,1253,18,bureaux,bureau,MTEL,SCHOEN,Antoine
+épi 1,1254,18,bureaux,bureau,MTEL,M.REVOLLO,
+épi 1,1255,18,bureaux,bureau,APS,P.LAURENS,
+épi 1,1256,18,bureaux,bureau,MTEL,REDIS                                   ,Jean
+épi 1,1257,18,bureaux,bureau,MTEL,POINTET                                 ,Jean-Marc
+épi 1,1258,15,bureaux,bureau,MTEL,Vacataires,
+épi 1,1300,13,Locaux,sanitaires,DPI,Aucun,Aucun
+épi 1,1301,50,Salles,salle audiovisuelle,APS-locaux,Aucun,Aucun
+épi 1,1303,50,Salles,salle audiovisuelle,APS-locaux,Aucun,Aucun
+épi 1,1305,50,Salles,salle audiovisuelle,APS-locaux,Aucun,Aucun
+épi 1,1307,50,Salles,salle audiovisuelle,APS-locaux,Aucun,Aucun
+épi 1,1309,50,Salles,salle audiovisuelle,APS-locaux,Aucun,Aucun
+épi 1,1351,18,bureaux,bureau,MTEL,MOREUX,Laurence
+épi 1,1352,18,bureaux,bureau,MTEL,WIRTH,Eric
+épi 1,1353,18,bureaux,bureau,MTEL,LAHILLE                                 ,Eric
+épi 1,1354,18,bureaux,bureau,MTEL,DEBBASCH                                ,Agnès
+épi 1,1355,18,bureaux,bureau,MTEL,GERVAIS DE LAFOND                       ,Sophie
+épi 1,1356,18,bureaux,bureau,MTEL,LATORRE                                 ,Souad
+épi 1,1357,18,bureaux,bureau,MTEL,DALIPAGIC,Michel
+épi 1,1358,15,bureaux,bureau,MTEL,Thésards,
+épi 1,1400,13,Locaux,sanitaires,DPI,Aucun,Aucun
+épi 1,1401,50,Salles,salle audiovisuelle,APS-locaux,Aucun,Aucun
+épi 1,1403,50,Salles,salle audiovisuelle,APS-locaux,Aucun,Aucun
+épi 1,1405,50,Salles,salle audiovisuelle,APS-locaux,Aucun,Aucun
+épi 1,1407,48.5,Salles,salle de cours,APS-locaux,Aucun,Aucun
+épi 1,1409,50,Salles,salle de cours,APS-locaux,Aucun,Aucun
+épi 1,1451,18,bureaux,cellule,APS-locaux,Aucun,Aucun
+épi 1,1452,18,bureaux,cellule,APS-locaux,Aucun,Aucun
+épi 1,1453,18,bureaux,cellule,APS-locaux,Aucun,Aucun
+épi 1,1454,18,bureaux,cellule,APS-locaux,Aucun,Aucun
+épi 1,1455,18,bureaux,cellule,APS-locaux,Aucun,Aucun
+épi 1,1456,18,bureaux,cellule,APS-locaux,Aucun,Aucun
+épi 1,1457,18,bureaux,cellule,APS-locaux,Aucun,Aucun
+épi 1,1458,15,bureaux,cellule,APS-locaux,Aucun,Aucun
+épi 2,2000,14,Locaux,sanitaires h + douche,DPI,Aucun,Aucun
+épi 2,2001,37.16,bureau + magasin,magasin composants,SG,PEREIRA,José
+épi 2,2004,21.72,bureaux,local ouvrier,CCIR-DPI,Ouvrier,
+épi 2,2005,21.72,bureaux,bureau,COM,PAO,
+épi 2,2006A,228,bureaux,bureau,SMIG,CLOUET,Elisabeth
+épi 2,2006B,x,Locaux,imprimerie,SMIG-locaux,Aucun,Aucun
+épi 2,2007,13,bureaux,bureau,SMIG,LE PEUTREC,Michel
+épi 2,2009,43.1,Locaux,imprimerie magasin,SMIG-locaux,Aucun,Aucun
+épi 2,2051,16.33,Locaux,magasin fournitures,SG-locaux,Aucun,au
+épi 2,2052,32.66,bureaux,bureau + magasin,SG,LEBEC,Michel
+épi 2,2054,16.1,Locaux,Club élèves,BDE,Aucun,Aucun
+épi 2,2055,16.1,Locaux,imprimerie plastification,COM,Aucun,Aucun
+épi 2,2056,10.5,bureaux,imprimerie,SMIG-locaux,Aucun,Aucun
+épi 2,2100,13,Locaux,sanitaires,DPI,Aucun,Aucun
+épi 2,2101,25,Salles,salle de cours,MTEL-locaux,Aucun,Aucun
+épi 2,2102,25,Salles,salle de cours,MTEL-locaux,Aucun,Aucun
+épi 2,2103,25,Salles,salle de cours,MTEL-locaux,Aucun,Aucun
+épi 2,2104,25,Labo,labo REVOX,MTEL-locaux,Aucun,Aucun
+épi 2,2105,48.35,Labo,labo MEDIA,MTEL-locaux,Aucun,Aucun
+épi 2,2107,25,Labo,labo REVOX,MTEL-locaux,Aucun,Aucun
+épi 2,2108,23.5,Salles,salle de cours,MTEL-locaux,Aucun,Aucun
+épi 2,2109,49.54,Salles,salle réunion+vacataires,MTEL-locaux,Aucun,Aucun
+épi 2,2151,18.18,bureaux,bureau,MTEL,HEIM,Mireille
+épi 2,2152,17.87,bureaux,bureau (stagiaire),MTEL,Stagiaire,
+épi 2,2153,17.87,bureaux,bureau,MTEL,ATIF,Alexandra
+épi 2,2154,17.87,bureaux,bureau,MTEL,ANDERSON,Elyse
+épi 2,2155,17.87,bureaux,bureau,MTEL,,
+épi 2,2156A,35.74,bureaux,bureau,MTEL,CORCORAN,Damian
+épi 2,2156B,x,bureaux,bureau,MTEL,RANDELL,Sophie
+épi 2,2157,17.87,bureaux,bureau,MTEL,SERRANO                                 ,Dolorès
+épi 2,2158,15.39,bureaux,bureau,MTEL,TODMAN                                  ,Andrew
+épi 2,2200,13,Locaux,sanitaires,DPI,Aucun,Aucun
+épi 2,2201,48.7,Salles,salle audiovisuelle,APS-locaux,Aucun,Aucun
+épi 2,2205,48.35,Salles,salle audiovisuelle,APS-locaux,Aucun,Aucun
+épi 2,2207,47.9,Salles,salle audiovisuelle,APS-locaux,Aucun,Aucun
+épi 2,2209,49.54,Salles,salle audiovisuelle,APS-locaux,Aucun,Aucun
+épi 2,2251,18.18,bureaux,bureau,APS-locaux,Aucun,Aucun
+épi 2,2252,17.87,bureaux,bureau,APS-locaux,Aucun,Aucun
+épi 2,2253,17.87,bureaux,bureau,RECHERCHE,ELICHABE,Martine
+épi 2,2254,17.87,bureaux,bureau,RECHERCHE,BOEHM,Catherine
+épi 2,2255,17.87,bureaux,bureau,APS-locaux,Aucun,Aucun
+épi 2,2256,17.87,bureaux,bureau,RECHERCHE,DURAND,Josette
+épi 2,2257,17.87,bureaux,bureau,RECHERCHE,Recherche (DIRECTEUR),
+épi 2,2258,15.39,bureaux,bureau,APS-locaux,Aucun,Aucun
+épi 2,2300,13,Locaux,sanitaires,DPI,Aucun,Aucun
+épi 2,2301,24.35,bureaux,bureau thèse,ISYS,Thésards,
+épi 2,2302,24.35,Salles,salle réunion,ISYS-locaux,Aucun,Aucun
+épi 2,2303,24.1,bureaux,bureau,ISYS,POLLEUX,Jean-Luc
+épi 2,2304,24.1,bureaux,bureau thèse,ISYS,Thésards,
+épi 2,2305,48.35,Labo,labo CAO,ISYS-locaux,Aucun,Aucun
+épi 2,2307,47.9,bureaux,bureau thèse,ISYS,Thésards,
+épi 2,2308,24,Labo,labo projet radio,ISYS-locaux,S.VACHET,Aucun
+épi 2,2309,49.54,Labo,labo projet radio,ISYS-locaux,Aucun,Aucun
+épi 2,2351,18.18,bureaux,bureau,ISYS,ABI HUSSEIN,Mazen
+épi 2,2352,17.87,bureaux,bureau,ISYS,BERRAF,Sana
+épi 2,2353,17.87,bureaux,bureau,ISYS,VILLEGAS                                ,Martine
+épi 2,2354,17.87,bureaux,bureau thésards/chercheurs associés,ISYS,Thésards,DIET Antoine
+épi 2,2355,17.87,bureaux,bureau thèse,ISYS,Thésards,
+épi 2,2356,17.87,bureaux,bureau thèse,ISYS,Thésards,
+épi 2,2357,17.87,bureaux,bureau thèse,ISYS,Thésards,
+épi 2,2358,15.39,bureaux,bureau,ISYS,AUCUN,
+épi 2,2400,13,Locaux,sanitaires,DPI,Aucun,Aucun
+épi 2,2401,98.96,Labo,labo,ISYS-locaux,Aucun,Aucun
+épi 2,2405,23.8,bureaux,bureau thèse/Post-doc,ISYS,Thésards, SZLACHETKO Boguslaw.   BOHARA Vivek 
+épi 2,2409,49.54,Labo,labo,ISYS-locaux,Aucun,Aucun
+épi 2,2451,18.18,bureaux,bureau,ISYS,POULICHET,Patrick
+épi 2,2452,17.87,bureaux,bureau,ISYS,RIPOLL                                  ,Christian
+épi 2,2453,17.87,bureaux,bureau,ISYS,VENARD                                  ,Olivier
+épi 2,2454,17.87,bureaux,bureau,ISYS,FAKRI,Abdellatif
+épi 2,2455,17.87,bureaux,bureau,ISYS,MADAOUI                                 ,Nadia
+épi 2,2456,17.87,bureaux,bureau,ISYS,BOUGRIOT,Lionel
+épi 3,3000,13,Locaux,sanitaires h + douche,DPI,Aucun,Aucun
+épi 3,3000,4.35,Locaux,s/répartiteur épi 3,DPI,Aucun,Aucun
+épi 3,3001,407,Salles,salle de cours,APS-locaux,Aucun,Aucun
+épi 3,3005,x,Salles,salle de cours,APS-locaux,Aucun,Aucun
+épi 3,3007,x,Salles,salle de cours,APS-locaux,Aucun,Aucun
+épi 3,3051,x,Salles,salle de cours,APS-locaux,Aucun,Aucun
+épi 3,3052,16.5,Locaux,atelier,DPI,Aucun,Aucun
+épi 3,3053,x,Salles,salle de cours,APS-locaux,Aucun,Aucun
+épi 3,3054,16.45,Salles,salle de cours,APS-locaux,Aucun,Aucun
+épi 3,3055,x,Salles,salle de cours,APS-locaux,Aucun,Aucun
+épi 3,3100,13,Locaux,sanitaires,DPI,Aucun,Aucun
+épi 3,3101A,48.7,bureaux,bureau + courrier,SERVGEN,RIOUX,Gilles
+épi 3,3101B,48.7,bureaux,bureau + courrier,SERVGEN,DART,Jerome
+épi 3,3103,48.17,Salles,salle audiovisuelle,APS-locaux,Aucun,Aucun
+épi 3,3105,46.15,Salles,salle audiovisuelle,APS-locaux,Aucun,Aucun
+épi 3,3107,49,Salles,salle audiovisuelle,APS-locaux,Aucun,Aucun
+épi 3,3109,49.54,Salles,salle audiovisuelle,APS-locaux,Aucun,Aucun
+épi 3,3151,18.18,bureaux,bureau,SPORT/MANIF,vacataire,
+épi 3,3101C,x,bureaux,bureau + courrier,SERVGEN,DUTERTRE,Gilles
+épi 3,3152,17.87,bureaux,bureau,SERVGEN,DELAUNAY,Alain
+épi 3,3153,17.87,bureaux,bureau,SERVGEN,HUBERT,Véronique
+épi 3,3154,17.87,bureaux,bureau,SPORT/MANIF,BASTIEN,Elysabeth
+épi 3,3155,17.87,bureaux,bureau,SPORT/MANIF,TRANSBERGER,Patrick
+épi 3,3156,17.87,Locaux,logistique matériel,SG-locaux,Aucun,Aucun
+épi 3,3157,35,Locaux,stock audio,SMIG-locaux,Aucun,Aucun
+épi 3,3158,35,bureaux,bureau,SMIG,MOUTIERS,Jean-Aurèle
+épi 3,3200,13,Locaux,sanitaires,DPI,Aucun,Aucun
+épi 3,3201,50,Salles,salle audiovisuelle,APS-locaux,Aucun,Aucun
+épi 3,3203,50,Salles,salle audiovisuelle,APS-locaux,Aucun,Aucun
+épi 3,3205,24.17,Locaux,QCM,,Aucun,Aucun
+épi 3,3206,24.17,bureaux,bureau,INNOV. PEDAGO,Aucun,Vide
+épi 3,3207,99.1,Salles,salle audiovisuelle,APS-locaux,Aucun,Aucun
+épi 3,3251,18.81,bureaux,bureau,INNOV. PEDAGO,Aucun,Vide
+épi 3,3252,18.55,bureaux,bureau,INNOV. PEDAGO,Aucun,Vide
+épi 3,3253,18.55,bureaux,bureau,INNOV. PEDAGO,Aucun,Vide
+épi 3,3254,18.55,bureaux,bureau,ISYS,REILLE DE NEVERLEE                      ,Leïla
+épi 3,3255,18.55,bureaux,bureau,ISYS,HABIB                                   ,Eliah
+épi 3,3256,18.55,bureaux,bureau,ISYS,Vacataire,
+épi 3,3257,18.55,bureaux,bureau,Syndicats,Syndicats,
+épi 3,3258A,30.78,bureaux,bureau,ISYS,CALLOT,Jean
+épi 3,3258B,X,bureaux,bureau,ISYS,PIEDFORT,Liliane
+épi 3,3300,13,Locaux,sanitaires,DPI,Aucun,Aucun
+épi 3,3301,92.3,Salles,LABO ELEC,ISYS,Aucun,Aucun
+épi 3,3305,48.35,Salles,Salle de cours,APS-locaux,Aucun,Aucun
+épi 3,3307,99.1,Salles,salle audiovisuelle,APS-locaux,Aucun,Aucun
+épi 3,3351,18.81,bureaux,bureau,ISYS,FEVRE,Véronique
+épi 3,3352,18.55,bureaux,bureau,ISYS,BAUDOIN,Geneviève
+épi 3,3353,18.55,bureaux,bureau,ISYS,LATORRE                                 ,Bernard
+épi 3,3354,18.55,bureaux,bureau,ISYS,BABADJIAN,Lionel
+épi 3,3355,18.55,bureaux,bureau,ISYS,NADAL                                   ,Florence
+épi 3,3356,18.55,bureaux,bureau thèse,ISYS,Thésards,Salle réunion + vacataires
+épi 3,3357,18.55,bureaux,bureau,ISYS,R.DJENADI + A.MBAYE,
+épi 3,3358,15.39,bureaux,bureau,ISYS,M.GOMEZ °+ T.GOTTHANS,
+épi 3,3400,13,Locaux,sanitaires,DPI,Aucun,Aucun
+épi 3,3401,98.93,Labo,labo,ISYS-locaux,Aucun,Aucun
+épi 3,3406,24.17,bureaux,atelier stock,ISYS-locaux,Magasin,Magasin
+épi 3,3407,95.6,Labo,labo optique,ISYS-locaux,Aucun,Aucun
+épi 3,3451,18.81,bureaux,bureau thèse,ISYS,Thésards,VIDE
+épi 3,3452,18.55,bureaux,bureau,ISYS,AMENDOLA,Gilles
+épi 3,3453,18.55,bureaux,bureau,ISYS,NOURY ,Ludovic
+épi 3,3454,18.55,bureaux,bureau,ISYS,D'HERMIES,Antoine
+épi 3,3455,18.55,bureaux,bureau ,ISYS,EXERTIER,Anne
+épi 3,3456,18.55,bureaux,bureau,ISYS,BUES,Laurent
+épi 3,3457,18.55,bureaux,bureau,ISYS,BERLAND,Corinne
+épi 3,3458,15.39,bureaux,bureau,ISYS,DELABIE,Christophe
+épi 4,4000,13,Locaux,sanitaires,DPI,Aucun,Aucun
+épi 4,4001,45.08,Locaux,stock,SMIG-locaux,Aucun,Aucun
+épi 4,4003,43.92,Labo,Automatique 1,ISYS-locaux,Aucun,Aucun
+épi 4,4005,44,Labo,Automatique 2,ISYS-locaux,Aucun,Aucun
+épi 4,4007,172,Labo,labo projet,ISYS-locaux,Aucun,Aucun
+épi 4,4010,22,Locaux,stock,ISYS-locaux,Aucun,Aucun
+épi 4,4051,16.33,Locaux,electrique,DPI,Aucun,Aucun
+épi 4,4052,15.48,bureaux,bureau,ISYS,LEDRAP,Eric
+épi 4,4053,15.48,bureaux,bureau thèse,ISYS,Thésards,
+épi 4,4054,15.44,bureaux,bureau,ISYS,BELREPAYRE,Michael
+épi 4,4100,13,Locaux,sanitaires,DPI,Aucun,Aucun
+épi 4,4104,24.17,bureaux,Photo badges,APS-locaux,Aucun,Aucun
+épi 4,4105,164,Labo,labo,ISYS-locaux,Aucun,Aucun
+épi 4,4109,49.54,Labo,labo,ISYS-locaux,Aucun,Aucun
+épi 4,4153,17.87,bureaux,bureau,APS,,
+épi 4,4154,17.87,bureaux,Boites aux lettres,APS-locaux,Aucun,Aucun
+épi 4,4155,17.87,bureaux,bureau,APS,MEYNARD,Catherine
+épi 4,4156,17.87,bureaux,bureau,ISYS,OREN-FINKELSTEIN,Arié
+épi 4,4200,13,Locaux,sanitaires,DPI,Aucun,Aucun
+épi 4,4201,98.96,Salles,salle audiovisuelle,APS-locaux,Aucun,Aucun
+épi 4,4205,24.17,bureaux,bureau R&D,SEN,Thésards,4 personnes
+épi 4,4207,23.94,Salles,salle réunion,ISYS-locaux,Aucun,Aucun
+épi 4,4208,21.51,bureaux,bureau thèse,ISYS,Thésards,
+épi 4,4209,24.75,Labo,labo,ISYS-locaux,Aucun,Aucun
+épi 4,4210,24.75,Labo,labo,ISYS-locaux,Aucun,Aucun
+épi 4,4251,18.18,bureaux,bureau,ISYS,TENTI,Dominique
+épi 4,4252,17.87,bureaux,bureau,ISYS,REAMA                                   ,Abdellatif
+épi 4,4253,17.87,bureaux,bureau thèse,ISYS,Thésards,
+épi 4,4254,17.87,bureaux,bureau,ISYS,ABDEDDAIM                               ,Yasmina                  
+épi 4,4255,17.87,bureaux,bureau,ISYS,BUSSIGNIES                              ,Georges
+épi 4,4256,17.87,bureaux,bureau,ISYS,KOCIK                                   ,Rémy
+épi 4,4257,17.87,bureaux,bureau,ISYS,HAMOUCHE                                ,Rédha
+épi 4,4258,15.39,bureaux,bureau,ISYS,KONE,Mohamed
+épi 4,4300,13,Locaux,sanitaires,DPI,Aucun,Aucun
+épi 4,4301,24.57,bureaux,Bureau R&D,IT,Thésards/stagiaires,
+épi 4,4302,24.17,bureaux,Bureau R&D,IT,PROJET,
+épi 4,4303,23.94,bureaux,Bureau R&D,IT,Thésards/stagiaires,
+épi 4,4304,24.17,bureaux,Bureau R&D,IT,Thésards/stagiaires,
+épi 4,4305,48.35,salle de cours,Labo RV1,IT-locaux,Aucun,Aucun
+épi 4,4307,99.06,Salles,salle audiovisuelle,APS-locaux,Aucun,Aucun
+épi 4,4351,36.05,Labo,Labo RV2,IT-locaux,PROJET,Aucun
+épi 4,4352,,LABO,,,,
+épi 4,4353,17.87,bureaux,bureau,IT,SUEUR,Jérôme
+épi 4,4354,17.87,bureaux,bureau,IT,NAJMAN                                  ,Laurent
+épi 4,4355,17.87,bureaux,bureau,IT,TALBOT                                  ,Hugues
+épi 4,4356,17.87,bureaux,bureau,IT,ROCARIES+INVITE,François
+épi 4,4357,17.87,bureaux,bureau,IT,J.SERRA,
+épi 4,4358,15.39,bureaux,bureau,IT,TSANG,Laurent
+épi 4,4400,13,Locaux,sanitaires,DPI,Aucun,Aucun
+épi 4,4401,470,Salles,salle audiovisuelle,APS-locaux,Aucun,Aucun
+épi 4,4403,29.94,Salles,salle audiovisuelle,APS-locaux,Aucun,Aucun
+épi 4,4405,200,Salles,salle de cours,APS-locaux,Aucun,Aucun
+épi 4,4451,66,Salles,salle de cours,APS-locaux,Aucun,Aucun
+épi 5,5000,13,Locaux,sanitaires,DPI,Aucun,Aucun
+épi 5,5001,30,Salles,salle machine,SMIG-locaux,Aucun,Aucun
+épi 5,5002,15.5,Locaux,magasin,SMIG-locaux,Aucun,Aucun
+épi 5,5003,22.5,Locaux,imprimantes,SMIG-locaux,Aucun,Aucun
+épi 5,5004,45.5,Salles,salle stations,SMIG-locaux,Aucun,Aucun
+épi 5,5006,45.5,Salles,salle stations,SMIG-locaux,Aucun,Aucun
+épi 5,5008,68.5,Salles,salle stations linux,SMIG-locaux,Aucun,Aucun
+épi 5,5051,16.33,bureaux,hotline,SMIG-locaux,Aucun,Aucun
+épi 5,5052,16.1,bureaux,bureau,SMIG,NGO,Christophe
+épi 5,5053A,32.2,bureaux,bureau,SMIG,BONNET,Franck
+épi 5,5053B,X,bureaux,bureau,SMIG,MARGALLE,Agnès
+épi 5,5054A,32.2,bureaux,bureau,SMIG,MARTY,Jeannine
+épi 5,5054B,X,bureaux,bureau,SMIG,LEFAUCHEUX,Martine
+épi 5,5055A,32.2,bureaux,bureau,SMIG,CARRY,Cyrille
+épi 5,5055B,X,bureaux,bureau,SMIG,FAUCILLON,Pierre
+épi 5,5056,16.1,bureaux,bureau,SMIG,COCHET,Jean-Pierre
+épi 5,5057,16.1,bureaux,bureau,SMIG,GOISLARD,Françoise
+épi 5,5058A,32.66,bureaux,bureau,SMIG,ROUGIER,Bruno
+épi 5,5058B,X,bureaux,bureau,SMIG,LOTHSAVAN,D.
+épi 5,5100,13,Locaux,sanitaires,DPI,Aucun,Aucun
+épi 5,5101,49.48,Labo,labo PC,SMIG-locaux,Aucun,Aucun
+épi 5,5103,49.48,Labo,labo PC,SMIG-locaux,Aucun,Aucun
+épi 5,5105,48.34,Labo,labo FI,IT-locaux,Aucun,Aucun
+épi 5,5107,99.1,Labo,labo FR,IT-locaux,Aucun,Aucun
+épi 5,5151,18.81,Labo,labo R&D,IT-locaux,Aucun,Aucun
+épi 5,5152,18.55,bureaux,bureau,IT,SIMONNET,Thierry
+épi 5,5153,18.55,bureaux,bureau,IT,DIETRICH,Christophe
+épi 5,5154,18.55,Locaux,Local serveur réseaux,IT-locaux,Aucun,Aucun
+épi 5,5155,71.04,Labo,labo FR,IT-locaux,Aucun,Aucun
+épi 5,5200,14,Locaux,sanitaires,DPI,Aucun,Aucun
+épi 5,5201,98.96,Labo,Salle TP dédiés,IT-locaux,Aucun,Aucun
+épi 5,5205,24.17,bureaux,bureau,IT,LLORENS,Eric
+épi 5,5206,24.17,bureaux,bureau R&D,IT,Thésards/stagiaires,
+épi 5,5207,45.45,Labo,Labo,IT-locaux,Aucun,Aucun
+épi 5,5209,49.54,Labo,Labo,IT-locaux,Aucun,Aucun
+épi 5,5251,18.18,bureaux,bureau,IT,AUGER ,Christine
+épi 5,5252,17.87,bureaux,bureau,IT,DOKLADALOVA                             ,Eva
+épi 5,5253,17.87,bureaux,bureau,IT,AKIL                                    ,Mohamed
+épi 5,5254,17.87,bureaux,bureau,IT,PERROTON                                ,Laurent
+épi 5,5255,17.87,bureaux,bureau,IT,R.KACHOURI,
+épi 5,5256,17.87,bureaux,bureau,IT,GRANDPIERRE,Thierry
+épi 5,5257,33.26,bureaux,salle de réunion,IT-locaux,Aucun,Aucun
+épi 5,5258,,VIDE,,,,
+épi 5,5300,13,Locaux,sanitaires,DPI,Aucun,Aucun
+épi 5,5301,98.96,Labo,Salle TP dédiés,IT-locaux,Aucun,Aucun
+épi 5,5304,18.55,Labo,Salle TP dédiés,IT-locaux,Aucun,Aucun
+épi 5,5305,24.17,bureaux,Bureau R&D,IT,Thésards/stagiaires,
+épi 5,5307A,48.34,bureaux,bureau,IT,COUSTY,Jean
+épi 5,5307B,X,bureaux,bureau,IT,PERRET,Benjamin
+épi 5,5308,21.51,bureaux,Bureau R&D,IT,Thésards/stagiaires,
+épi 5,5309,49.54,Labo,labo imagerie,IT-locaux,Aucun,Aucun
+épi 5,5351,18.81,bureaux,Bureau R&D,IT,Y.KENMOCHI,
+épi 5,5352,18.55,bureaux,bureau,IT,HILAIRE                                 ,Xavier                   
+épi 5,5353,18.55,bureaux,bureau,IT,BERTRAND                                ,Gilles
+épi 5,5354A,37.1,bureaux,bureau,IT,LEFEVRE,Pierre
+épi 5,5354B,X,bureaux,bureau,IT,GEORGES,Jean-Claude
+épi 5,5355,18.55,bureaux,bureau,IT,COUPRIE                                 ,Michel
+épi 5,5356,18.55,bureaux,bureau,IT,BUREAU                                  ,Denis
+épi 5,5357,18.55,bureaux,Bureau R&D,IT,V.BIRI + V.NOZICK,
+épi 5,5358,15.39,bureaux,bureau,IT,AL ANI                                  ,Tarik
+épi 5,5400,13,Locaux,sanitaires,DPI,Aucun,Aucun
+épi 5,5401,96.81,Labo,Salle de TP dédiés,IT-locaux,Aucun,Aucun
+épi 5,5405,48.34,bureaux,bureau,IT,Thésards,
+épi 5,5406,25,bureaux,bureau,IT,Thésards,
+épi 5,5407,94.99,Labo,Labo projets,ISYS-locaux,Aucun,
+épi 5,5451,18.81,bureaux,bureau,IT,BAZIRE,Jean-Louis
+épi 5,5452,18.55,bureaux,bureau,IT,NATOWICZ,René
+épi 5,5453,18.55,bureaux,bureau,IT,CELA,Arben
+épi 5,5454,18.55,bureaux,bureau,IT,COURIVAUD,Daniel
+épi 5,5455A,37.1,bureaux,bureau,IT,GOLDMAN,Janusz
+épi 5,5455B,X,bureaux,bureau,IT,AUCUN,
+épi 5,5456A,18.55,bureaux,bureau,IT,BERCHER,Jean-François
+épi 5,5457,18.55,bureaux,bureau,IT,AUCUN,
+épi 5,5458,15.39,bureaux,bureau,IT,JARDIN,Pascale
+épi 6,6000,7,Locaux,sanitaires,DPI,Aucun,Aucun
+épi 6,6000,6.16,Locaux,magasin,SMM-locaux,Aucun,Aucun
+épi 6,6001,22.72,Labo,photo,SMM-locaux,Aucun,Aucun
+épi 6,6002,16.55,Labo,Développement,SMM-locaux,Aucun,Aucun
+épi 6,6003,21.49,Labo,Gravure,SMM-locaux,Aucun,Aucun
+épi 6,6004,15,Locaux,prise air neuf S.B,SMM-locaux,Aucun,Aucun
+épi 6,6005,146,Locaux,soufflage extraction S.B,SMM-locaux,Aucun,Aucun
+épi 6,6051,16.33,Locaux,atelier,SMM-locaux,Aucun,Aucun
+épi 6,6052,16.1,Locaux,montage,SMM-locaux,Aucun,Aucun
+épi 6,6053,16.1,Locaux,atelier perçage,SMM-locaux,Aucun,Aucun
+épi 6,6054,11,Locaux,local boucle refroidissement,SMM-locaux,Aucun,Aucun
+épi 6,6055,49.5,Locaux,local traitement d'eau,SMM-locaux,Aucun,Aucun
+épi 6,6056,11,Locaux,local stackage gaz,SMM-locaux,Aucun,Aucun
+épi 6,6057,8,Locaux,local stockage produit chim.,SMM-locaux,Aucun,Aucun
+épi 6,6100,6.16,Locaux,?,SMM-locaux,Aucun,Aucun
+épi 6,6100,7,Locaux,sanitaires,DPI,Aucun,Aucun
+épi 6,6101,19.25,Salle Blanche,?,SMM-locaux,Aucun,Aucun
+épi 6,6102,18.35,Salle Blanche,S.B sas,SMM-locaux,Aucun,Aucun
+épi 6,6103,13.56,Salle Blanche,S.B photogravure 1,SMM-locaux,Aucun,Aucun
+épi 6,6104,13.8,Salle Blanche,S.B photogravure 2,SMM-locaux,Aucun,Aucun
+épi 6,6105,12.93,Salle Blanche,S.B photogravure 3,SMM-locaux,Aucun,Aucun
+épi 6,6106,24,Salle Blanche,S.B four avant,SMM-locaux,Aucun,Aucun
+épi 6,6107,24,Salle Blanche,S.B four arriere,SMM-locaux,Aucun,Aucun
+épi 6,6108,13.8,Salle Blanche,S.B chimie 4,SMM-locaux,Aucun,Aucun
+épi 6,6109,28.9,Salle Blanche,S.B implanteur,SMM-locaux,Aucun,Aucun
+épi 6,6110,16.22,Salle Blanche,S.B microscope electronique,SMM-locaux,Aucun,Aucun
+épi 6,6151,37.38,Salle Blanche,S.B lab montage,SMM-locaux,Aucun,Aucun
+épi 6,6152,10.81,Salle Blanche,S.B chimie 1,SMM-locaux,Aucun,Aucun
+épi 6,6153,10.81,Salle Blanche,S.B photogravure 4,SMM-locaux,Aucun,Aucun
+épi 6,6154,10.81,Salle Blanche,S.B chimie 2,SMM-locaux,Aucun,Aucun
+épi 6,6155,10.81,Salle Blanche,S.B chimie 3,SMM-locaux,Aucun,Aucun
+épi 6,6156,22.09,Salle Blanche,S.B dépots,SMM-locaux,Aucun,Aucun
+épi 6,6157,30.05,Salle Blanche,S.B dépôts alu,SMM-locaux,Aucun,Aucun
+épi 6,6200,13,Locaux,local verrerie,SMM-locaux,Aucun,Aucun
+épi 6,6201,470,Locaux,local technique Apprentie,SMM-locaux,Aucun,Aucun
+épi 6,6300,14,Locaux,sanitaires,DPI,Aucun,Aucun
+épi 6,6301,26,Labo,labo caract,SEN-locaux,Aucun,Aucun
+épi 6,6302,70,Labo,labo caract CI,SEN-locaux,Aucun,Aucun
+épi 6,6305,24.17,bureaux,bureau,SEN,BOUROUINA                               ,Tarik
+épi 6,6306A,24,bureaux,bureau,SEN,VIROLLEAU-BENKARA                       ,Ferial
+épi 6,6306B,X,bureaux,bureau,SEN,X.GUO,
+épi 6,6306C,x,bureaux,bureau,SEN,Thésards,
+épi 6,6307,24.17,bureaux,bureau,SEN,Thésards,
+épi 6,6308,21.51,bureaux,bureau,SMM,MERCIER,Bruno
+épi 6,6309,24.5,Salle de réunion,Salle de réunion,SMM-locaux,Aucun,Aucun
+épi 6,6310,24.5,bureaux,bureau,SMM,PARADOWSKI,Sylvie
+épi 6,6351,18.18,bureaux,bureau,SMM,DANAIE,Kamran
+épi 6,6352,17.87,bureaux,bureau,SEN,ANGELESCU                               ,Dan
+épi 6,6353,17.87,bureaux,bureau,SEN,CLAUSSE,Marc
+épi 6,6354,17.87,bureaux,bureau,SEN,BASSET                                  ,Philippe                 
+épi 6,6355,17.87,bureaux,bureau,SMM,MARTY ,Frédéric
+épi 6,6356B,X,,,SMM,CAPELLAZZI + I.ROUSSEAU,Bruno
+épi 6,6357A,35.74,bureaux,bureau,SMM,DIDELON,Serge
+épi 6,6357B,X,,,SMM,JOUANNARD,Pascal
+épi 6,6358A,30.78,bureaux,bureau,SMM,PAVY,Nicolas
+épi 6,6358B,X,bureaux,bureau,SMM,COTTANCE,Mylène
+épi 6,6400,14,Locaux,sanitaires,DPI,Aucun,Aucun
+épi 6,6401,98.96,Labo,labo électronique,SEN-locaux,Aucun,Aucun
+épi 6,6405,24.17,bureaux,bureau,SEN,MASINA,Eric
+épi 6,6406,24.17,bureaux,bureau,SEN,LISSORGUES,Gaëlle
+épi 6,6407,23.94,bureaux,Stockage,SEN-locaux,Aucun,Aucun
+épi 6,6408,21.51,bureaux,bureau,SEN,GHASSEMI + M.ABREU,Farbod
+épi 6,6409,49.54,Labo,labo conception,SEN-locaux,Aucun,Aucun
+épi 6,6451,18.18,bureaux,bureau,SEN,ROUDIER,Bertrand
+épi 6,6452,18.55,bureaux,bureau,SEN,DOUAY,Valérie
+épi 6,6453,18.55,bureaux,bureau,SEN,ALGRE,Emmanuelle
+épi 6,6454,18.55,bureaux,bureau,SEN,DE CAMBRY,Olivier
+épi 6,6455,18.55,bureaux,bureau,SEN,LACOMBE                                 ,Alain
+épi 6,6456,18.55,bureaux,bureau,SEN,LEQUEUX,Marie-Laure
+épi 6,6457,33.94,bureaux,salle de réunion,SEN-locaux,Aucun,Aucun
+épi 6,6458,,salle STATIONS ,,,,
+gymnase,8001,1788.5,Salles,salle de sports,SPORTS,Aucun,Aucun
+gymnase,8003,200,Salles,salle de musculation,SPORTS,Aucun,Aucun
+gymnase,8004,323,Salles,salle de judo,SPORTS,Aucun,Aucun
+gymnase,8006,45.8,Locaux,sanitaires douches,DPI,Aucun,Aucun
+gymnase,8008,45.8,Locaux,sanitaires douches,DPI,Aucun,Aucun
+gymnase,8012,29.4,Locaux,rangement,SPORTS,Aucun,Aucun
+gymnase,8013,29.4,Locaux,rangement,SPORTS,Aucun,Aucun
+gymnase,8105,11.45,bureaux,bureau,SPORTS,Aucun,Aucun
+gymnase,8106,7.5,Locaux,sanitaires douches,DPI,Aucun,Aucun
+gymnase,8108,45.8,Locaux,sanitaires douches,DPI,Aucun,Aucun
+Long pan,147A,20.01,bureaux,bureau,APS,HANRION,Peymaneh
+Long pan,147B,X,bureaux,bureau,APS,RICLET,Cathy
+épi 3,3405A,24.17,bureaux,bureau,ISYS,VALBIN,Laurie
+épi 3,3405B,X,bureaux,bureau,ISYS,SEVELY,Laure
+épi 4,4101A,98,bureaux,bureau,APS,BERTIN,Christine
+épi 4,4101B,X,bureaux,bureau,APS,DUARTE,Teresa
+épi 4,4101C,x,bureaux,bureau,APS,ANTUNES,Anne-Sophie
+épi 4,4103A,47.88,bureaux,bureau,APS,LAFOSSE ,Brigitte
+épi 4,4103B,X,bureaux,bureau,APS,PERCOT,Martine
+épi 4,4151A,36.36,bureaux,bureau,APS,LECLERCQ,Christine
+épi 4,4151B,X,bureaux,bureau,APS,MAILLET ,Patricia
+épi 4,4152A,35.74,bureaux,bureau,APS,MARGOTTON,Nadine
+épi 4,4152B,X,bureaux,bureau,APS,LEGRAND,Isabelle
+épi 4,4206A,24.16,bureaux,bureau,ISYS,MASSON                                  ,Damien
+épi 4,4206B,X,bureaux,bureau,ISYS,ZITOUNE,Lynda
+épi 5,5306A,24.16,bureaux,bureau,IT,BUZER,Lilian
+épi 5,5306B,X,bureaux,bureau,IT,NABIL ,Mustafa
+épi 5,5456B,X,bureaux,bureau,IT,Chercheur invité,
+épi 6,6306A,24.16,bureaux,bureau,SEN,Prof invités,
+épi 6,6306B,X,bureaux,bureau,SEN,Nouveau Prof ENE,
+épi 6,6307A,23.94,bureaux,bureau,SEN,Thésards,4 personnes
+épi 6,6307B,X,,,,,
+épi 6,6356A,35.74,bureaux,bureau,SMM,ROUSSEAU,Lionel
+épi 6,6356B,X,bureaux,bureau,SMM,CAPELAZZI,Bruno
