@@ -4,9 +4,9 @@
 	 * Retourne toute la BDD MySQL au format JSON.
 	 */
 
-	include_once './db_functions.php';
+	include_once './MySQL_Sync.php';
 
-    $db = new DB_Functions();
+    $db = new MySQL_Sync;
 
     // Tables à synchroniser depuis la BDD MySQL du serveur vers les BDD SQLite Android :
     $tables_to_sync = array(
