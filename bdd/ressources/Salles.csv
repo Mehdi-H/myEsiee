@@ -1,0 +1,87 @@
+Salle,Type (ADE),Taille (ADE),Taille,Tableaux,Projecteur ?,Imprimante ?,Commentaires
+1051,,,Moyenne,craies,non,non,
+1053,,,,,,,?
+1055,,,,,,,?
+1001,,,,,,,labo
+1103,,,Moyenne,feutres,oui,non,
+1105,,,Moyenne,feutres,oui,non,
+1107,,,Moyenne,feutres,oui,à vérifier,salle info
+1109,,,Moyenne,feutres,oui,oui,
+1201,,,Grande,feutres,oui,non,salle info
+1205,,,Moyenne,feutres,oui,oui,salle info
+1207,,,Moyenne,feutres,oui,oui,salle info
+1209,,,Moyenne,feutres,oui,oui,salle info
+1301(1303?),,,Grande,feutres,oui,non,
+1305,,,Moyenne,craies,oui,non,
+1307,,,Moyenne,feutres,oui,non,
+1309,,,Moyenne,craies,oui,non,
+1401,,,Moyenne,craies,oui,non,
+1403,,,Moyenne,craies,oui,non,
+1405,,,Moyenne,craies,oui,non,
+1407,,,Moyenne,craies,oui,non,
+1409,,,Moyenne,feutres,oui,non,
+2401,,,Moyenne,feutres,oui,non,
+2409,,,,,,,labo
+2305,,,Moyenne,feutres,,,salle info
+2309,,,,,,,labo
+2201,,,Grande,feutres,oui,non,
+2205,,,Moyenne,craies,oui,non,
+2207,,,Moyenne,craies,oui,non,
+2209,,,Moyenne,craies,oui,non,
+2101,,,Petite,feutres,oui,non,salle langues
+2102,,,Petite,feutres,oui,non,salle langues
+2103,,,Petite,feutres,oui,non,
+2104,,,Petite,feutres,oui,non,
+2105,,,Petite,feutres,oui,non,labo multi (info)
+2107,,,Petite,feutres,oui,non,
+3103,,,Moyenne,craies,oui,non,
+3105,,,Moyenne,feutres,oui,non,
+3107,,,Moyenne,feutres,oui,non,
+3109,,,Moyenne,feutres,oui,non,
+3051,,,Moyenne,craies,oui,non,
+3053,,,Grande,craies,oui,non,
+3001,,,Grande,craies,oui,non,
+3005,,,Grande,craies,oui,non,
+3007,,,Grande,craies,oui,non,
+3201,,,Moyenne,craies,oui,non,
+3203,,,Moyenne,craies,oui,non,
+3205,,,,,,,??
+3207,,,Grande,craies,oui,non,
+3301,,,Moyenne,craies,non,peut être,labo élec
+3305,,,Moyenne,craies,non,non,
+3307,,,Grande,craies,oui,non,
+3401,,,,feutres,oui,peut être,labo élec
+3407,,,grande,craies,non,peut être,labo élec
+4401,,,Moyenne,craies,oui,non,
+4403,,,Moyenne,craies,oui,non,
+4405,,,,,,,salle exam
+4451,,,Moyenne,craies,peut être,non,
+4305,,,,,,,??
+4307,,,Grande,craies,peut être,non,
+4201,,,Grande,craies,oui,non,
+4105,,,,,,,salle syst. emb
+5004,,,Moyenne,feutres,non,non,salle info
+5006,,,Moyenne,feutres,non,non,salle info
+5006,,,Moyenne,feutres,non,non,salle info
+5008,,,Moyenne,feutres,oui,non,salle info
+5101,,,Moyenne,feutres,non,non,salle info
+5103,,,Moyenne,feutres,non,non,salle info
+5105,,,Moyenne,feutres,oui,non,salle info
+5107,,,Grande,feutres,oui,non,verrouillée + salle info
+5155,,,Grande,feutres,oui,non,verrouillée + salle info
+5201,,,Moyenne,feutres,oui,non,salle info
+5207,,,Moyenne,?,non,non,salle info
+5209,,,Moyenne,?,non,non,salle info
+5301,,,Moyenne,feutres,non,non,salle info
+5304,,,Petite,,?,?,salle info (avec robot)
+5309,,,Moyenne,feutres,oui,oui,imp dehors
+5407,,,,,,,??
+6401,,,,,,,labo fistik
+162,,,,,,,salle master
+163,,,,,,,salle master
+164,,,,,,,salle master
+165,,,,,,,salle master
+115,,,Moyenne,feutres,oui,non,
+114,,,Moyenne,feutres,oui,non,
+113,,,Moyenne,feutres,oui,non,
+112,,,Moyenne,feutres,oui,non,
