@@ -8,7 +8,7 @@ Mai-juin 2015.
 * HOUACINE Mehdi
 * KUHN Johann
 
-# Rôle du dossier `mysql_sqlite_sync`
+# Rôle du dossier `mysql_sync`
 
 Ce dossier contient les classes PHP permettant de synchroniser la base de données MySQL du serveur avec la base de données SQLite d'un utilisateur Android.
 
