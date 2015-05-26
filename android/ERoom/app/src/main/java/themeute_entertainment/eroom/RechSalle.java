@@ -1,26 +1,30 @@
 package themeute_entertainment.eroom;
 
 import android.app.Activity;
-import android.app.DownloadManager;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
+import android.graphics.drawable.Drawable;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.content.Context;
-import android.os.Build;
 import android.os.Bundle;
-import android.util.DisplayMetrics;
-import android.view.Gravity;
+import android.text.SpannableString;
+import android.text.Spanned;
+import android.text.style.ImageSpan;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.support.v4.widget.DrawerLayout;
-import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.ToggleButton;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -68,7 +72,37 @@ public class RechSalle extends ActionBarActivity
         final ImageButton searchBtn = (ImageButton) findViewById(R.id.imageButton_search);
         final TextView textView_debug = (TextView) findViewById(R.id.textView_debug);
 
-        // === Test requête HTTP Get ===
+        // ToggleButtons :
+        final ToggleButton btn_categ[] = new ToggleButton[4];
+        btn_categ[0] = (ToggleButton) findViewById(R.id.imageButton_computer1);
+        btn_categ[1] = (ToggleButton) findViewById(R.id.imageButton_computer2);
+        btn_categ[2] = (ToggleButton) findViewById(R.id.imageButton_computer3);
+        btn_categ[3] = (ToggleButton) findViewById(R.id.imageButton_computer4);
+
+        // ====================================================================================
+        // == Remplissage des ToggleButton par des images
+        // ====================================================================================
+
+        for (int i = 0 ; i < btn_categ.length ; i++)
+        {
+            // Récupérer les icônes :
+            ImageSpan imageSpan = new ImageSpan(this, R.drawable.ic_action_computer);
+            ImageSpan imageSpan2 = new ImageSpan(this, R.drawable.ic_action_computer_accent);
+
+            SpannableString content = new SpannableString("X");
+            content.setSpan(imageSpan, 0, 1, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+
+            SpannableString content2 = new SpannableString("X");
+            content2.setSpan(imageSpan2, 0, 1, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+
+            btn_categ[i].setText(content);
+            btn_categ[i].setTextOn(content2);
+            btn_categ[i].setTextOff(content);
+        }
+
+        // ====================================================================================
+        // == Test requête HTTP Get
+        // ====================================================================================
 
         textView_debug.setText("Blablabla");
 
