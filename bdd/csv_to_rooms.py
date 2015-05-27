@@ -3,7 +3,7 @@
 # @Author: mehdi
 # @Date:   2015-05-24 12:48:56
 # @Last Modified by:   mehdi
-# @Last Modified time: 2015-05-25 14:40:16
+# @Last Modified time: 2015-05-25 15:31:19
 
 import csv
 import pickle
@@ -51,13 +51,13 @@ def salles_de_travail_planif(source='ressources/surfaces-2013-2014 (copie).csv')
 			if row[3] in types:
 				salles_etudiant[row[1]] = Salle(
 					nom = row[1],
-					resourceID = 0,
 					fonction = row[3],
 					taille = row[2],
 					projecteur = 0,
 					tableau = 1,
 					imprimante = 2
 				)
+				salles_etudiant[row[1]].resourceID = id(row[1])                
 	return salles_etudiant
 
 # /**

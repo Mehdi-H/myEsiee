@@ -1,0 +1,68 @@
+<?php
+
+	/**
+	 * Classe servant à se connecter à la BDD et à effectuer des requêtes.
+	 */
+
+	class MySQL_Sync
+	{
+		/////////////////////////////////////////////////////////////////////////////////////////
+		/// ATTRIBUTS
+		/////////////////////////////////////////////////////////////////////////////////////////
+
+		private $_db;
+
+		/////////////////////////////////////////////////////////////////////////////////////////
+		/// CONSTRUCTEUR - DESTRUCTEUR
+		/////////////////////////////////////////////////////////////////////////////////////////
+
+		function __construct() {
+			$this->_connect();
+		}
+
+		function __destruct() {
+			$this->_close();
+		}
+
+		/////////////////////////////////////////////////////////////////////////////////////////
+		/// METHODES PRIVEES
+		/////////////////////////////////////////////////////////////////////////////////////////
+
+		/**
+		 * Initie une connexion à la BDD MySQL.
+		 */
+		private function _connect()
+		{
+			require_once 'config.php';
+
+			// connecting to mysql
+			$this->_db = mysql_connect(DB_HOST, DB_USER, DB_PASSWORD);
+			mysql_select_db(DB_DATABASE, $this->_db);
+		}
+
+		/**
+		 * Ferme une connexion à la BDD.
+		 */
+		private function _close() {
+			mysql_close($this->_db);
+		}
+
+		/////////////////////////////////////////////////////////////////////////////////////////
+		/// METHODES PUBLIQUES
+		/////////////////////////////////////////////////////////////////////////////////////////
+
+		/**
+		 * Récupérer tout le contenu d'une table.
+		 * @return Le résultat de la requête SQL.
+		 */
+		public function getTable($table_name)
+		{
+			$sql = "SELECT * FROM ".$table_name;
+			$result = mysql_query($sql) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_errno());
+
+			return $result;
+		}
+
+	}
+
+?>

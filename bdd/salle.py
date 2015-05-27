@@ -3,7 +3,7 @@
 # @Author: mehdi
 # @Date:   2015-05-25 12:53:52
 # @Last Modified by:   mehdi
-# @Last Modified time: 2015-05-25 14:34:48
+# @Last Modified time: 2015-05-25 14:52:23
 
 import pprint as pp
 
@@ -12,9 +12,9 @@ import pprint as pp
 #  */
 class Salle:
     
-    def __init__(self, nom, resourceID, fonction, taille, projecteur, tableau, imprimante):
+    def __init__(self, nom, fonction, taille, projecteur, tableau, imprimante):
         self.nom = nom  # string
-        self.resourceID = resourceID
+        self.resourceID = id(self)
         self.fonction = fonction  # string
         self.taille = taille  # int
         self.projecteur = projecteur  # int '0:non, 1:oui'
