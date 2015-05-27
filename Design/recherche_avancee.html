@@ -66,22 +66,10 @@
 				<span id="nom_categorie">
 					Salle info
 				</span>
-				<button class="btn-floating waves-effect waves-light accent-color" type="submit" name="action">
-					<i class="large mdi-action-search">
-					</i>
-				</button>
 			</p>
 		</div>
 
 		<form class="col s12 ">
-			<div class="row">
-				<div class="input-field col s6 offset-s3 taille_nsalle">
-					<input id="numero_salle" type="text" class="validate">
-					<label for="numero_salle">
-						Numéro de salle
-					</label>
-				</div>
-			</div>
 			<div class="row">
 				<div class="input-field col s3 offset-s3">
 					<select>
@@ -106,16 +94,30 @@
 				</div>
 			</div>
 			<div class="row">
-				<p class="center ">
-					<input name="group1" type="checkbox" id="test1" />
-					<label class="taille_checkbox" for="test1">Tableau à craie</label>
-					<input name="group1" type="checkbox" id="test2" />
-					<label class="taille_checkbox" for="test2">Tableau véléda</label>
-					<input name="group1" type="checkbox" id="test3"  />
-					<label class="taille_checkbox" for="test3">Rétroprojecteur</label>
-					<input name="group1" type="checkbox" id="test4"  />
-					<label class="taille_checkbox" for="test3">Imprimante</label>
-				</p>
+					<table>
+						<tr>
+							<td class="right">
+								<input name="group1" type="checkbox" id="test1" />
+								<label class="taille_checkbox" for="test1">Tableau à craie</label>
+							</td>
+
+							<td>
+								<input name="group1" type="checkbox" id="test2" />
+								<label class="taille_checkbox" for="test2">Tableau véléda</label>
+							</td>
+						</tr>
+						<tr>
+							<td class="right">
+								<input name="group1" type="checkbox" id="test3" />
+								<label class="taille_checkbox" for="test3">Retroprojecteur</label>
+							</td>
+
+							<td>
+								<input name="group1" type="checkbox" id="test4" />
+								<label class="taille_checkbox" for="test4">Imprimante</label>
+							</td>						
+						</tr>
+					</table>
 			</div>
 		</div>
 		<div class="row center">
