@@ -118,6 +118,11 @@ main {
     margin : auto;
 }
 
+.reduc_liste_salle{
+    width : 50%;
+    height : auto;
+}
+
 
 
 @media screen and (max-width: 700px)
@@ -153,6 +158,12 @@ main {
     border-radius: 10px;
 }
 
+.reduc_liste_salle{
+    width : 100%;
+}
+.stop_offset{
+    margin-left : 0% !important;
+}
 
 
 
