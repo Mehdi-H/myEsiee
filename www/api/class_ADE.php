@@ -18,14 +18,12 @@
 
 		public function __construct($projetADE)
 		{
-			echo("Construction de la classe");
 			$this->_projetADE = $projetADE;
 			$this->_ade_connect();
 		}
 
 		public function __destruct()
 		{
-			echo("Destruction de la classe");
 			$this->_ade_disconnect();
 		}
 
@@ -163,12 +161,7 @@
 			{
 				$salles[$data[nom]] = array(
 					$data[resourceID], 	// 0
-					$data[type], 		// 1
-					$data[taille], 		// 2
-					$data[projecteur],	// 3
-					$data[tableau], 	// 4
-					$data[imprimante], 	// 5
-					-1 					// 6 (disponibilité)
+					-1 					// 1 (disponibilité)
 				);
 			}
 
@@ -232,11 +225,11 @@
 				}
 
 				if ($libre && $pendant > 0) {
-					$salles[$nom_salle][6] = $pendant;
+					$salles[$nom_salle][1] = $pendant;
 				} elseif ($libre) {
-					$salles[$nom_salle][6] = 0;
+					$salles[$nom_salle][1] = 0;
 				} else {
-					$salles[$nom_salle][6] = -1;
+					$salles[$nom_salle][1] = -1;
 				}
 			}
 
@@ -245,7 +238,16 @@
 
 			// === 4. Résultats en JSON ===
 
-			return json_encode($salles);
+			// Sélection de la dispo uniquement (sans resourceID) :
+			$resultats = array();
+			foreach ($salles as $nom => $vals)
+			{
+				$resultats[] = array(
+					$nom => $vals[1]
+				);
+			}
+
+			return json_encode($resultats);
 		}
 	}
 
