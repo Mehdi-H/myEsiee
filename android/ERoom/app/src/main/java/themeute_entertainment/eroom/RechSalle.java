@@ -1,6 +1,8 @@
 package themeute_entertainment.eroom;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
@@ -21,23 +23,46 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.support.v4.widget.DrawerLayout;
+import android.widget.CompoundButton;
 import android.widget.ImageButton;
+import android.widget.ListAdapter;
+import android.widget.ListView;
+import android.widget.RadioGroup;
+import android.widget.SimpleAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ToggleButton;
 
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.Volley;
+import com.loopj.android.http.AsyncHttpClient;
+import com.loopj.android.http.AsyncHttpResponseHandler;
+import com.loopj.android.http.MySSLSocketFactory;
+import com.loopj.android.http.RequestParams;
 
+import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
+
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.security.KeyStore;
+import java.util.ArrayList;
+import java.util.HashMap;
+
+import javax.net.ssl.HttpsURLConnection;
+import javax.net.ssl.SSLContext;
+import javax.net.ssl.TrustManager;
+import javax.net.ssl.X509TrustManager;
 
 
 public class RechSalle extends ActionBarActivity
-        implements NavigationDrawerFragment.NavigationDrawerCallbacks {
+        implements NavigationDrawerFragment.NavigationDrawerCallbacks
+{
+    // ====================================================================================
+    // == ATTRIBUTS
+    // ====================================================================================
 
     /**
      * Fragment managing the behaviors, interactions and presentation of the navigation drawer.
@@ -48,6 +73,22 @@ public class RechSalle extends ActionBarActivity
      * Used to store the last screen title. For use in {@link #restoreActionBar()}.
      */
     private CharSequence mTitle;
+
+    // Liste des ToggleButtons de catégories :
+    private final ToggleButton btn_categ[] = new ToggleButton[4];
+
+    private final TextView[] textView_debug = new TextView[1];
+
+    // BDD SQLite :
+    DBController controller = new DBController(this);
+
+    // Progress Dialog Object
+    ProgressDialog prgDialog;
+    HashMap<String,String> queryValues;
+
+    // ====================================================================================
+    // == onCreate()
+    // ====================================================================================
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,74 +106,150 @@ public class RechSalle extends ActionBarActivity
 
         final Context context = getApplicationContext();
 
-        // ====================================================================================
-        // == VIEWS
-        // ====================================================================================
+        // ------------------------------------------------------------------------------------
+        // -- VIEWS
+        // ------------------------------------------------------------------------------------
+
+        textView_debug[0] = (TextView) findViewById(R.id.textView_debug);
 
         final ImageButton searchBtn = (ImageButton) findViewById(R.id.imageButton_search);
-        final TextView textView_debug = (TextView) findViewById(R.id.textView_debug);
 
         // ToggleButtons :
-        final ToggleButton btn_categ[] = new ToggleButton[4];
         btn_categ[0] = (ToggleButton) findViewById(R.id.imageButton_computer1);
         btn_categ[1] = (ToggleButton) findViewById(R.id.imageButton_computer2);
         btn_categ[2] = (ToggleButton) findViewById(R.id.imageButton_computer3);
         btn_categ[3] = (ToggleButton) findViewById(R.id.imageButton_computer4);
 
-        // ====================================================================================
-        // == Remplissage des ToggleButton par des images
-        // ====================================================================================
+        // ListView des salles :
+        final ListView listView_salles = (ListView) findViewById(R.id.listView_salles);
 
-        for (int i = 0 ; i < btn_categ.length ; i++)
+        // ------------------------------------------------------------------------------------
+        // -- Comportement des ToggleButton
+        // ------------------------------------------------------------------------------------
+
+        /**
+         * Lorsqu'un bouton de catégorie est coché, décoche tous les autres.
+         * Source : http://stackoverflow.com/questions/6282702/how-to-allow-only-1-android-toggle-button-out-of-3-to-be-on-at-once
+         */
+        CompoundButton.OnCheckedChangeListener changeChecker = new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked)
+            {
+                if (isChecked) {
+                    for (ToggleButton btn : btn_categ) {
+                        if (buttonView != btn) {
+                            btn.setChecked(false);
+                        }
+                    }
+                }
+            }
+        };
+
+        for (ToggleButton btn : btn_categ)
         {
-            // Récupérer les icônes :
-            ImageSpan imageSpan = new ImageSpan(this, R.drawable.ic_action_computer);
-            ImageSpan imageSpan2 = new ImageSpan(this, R.drawable.ic_action_computer_accent);
+            // === Utiliser des icônes ===
 
+            // --- Etat Off ---
+            ImageSpan imageSpan = new ImageSpan(this, R.drawable.ic_action_computer);
             SpannableString content = new SpannableString("X");
             content.setSpan(imageSpan, 0, 1, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+            btn.setTextOff(content);
 
+            // --- Etat On ---
+            ImageSpan imageSpan2 = new ImageSpan(this, R.drawable.ic_action_computer_accent);
             SpannableString content2 = new SpannableString("X");
             content2.setSpan(imageSpan2, 0, 1, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+            btn.setTextOn(content2);
 
-            btn_categ[i].setText(content);
-            btn_categ[i].setTextOn(content2);
-            btn_categ[i].setTextOff(content);
+            // --- Initialisation ---
+            btn.setText(content);
+
+            // === Ne permettre l'état On qu'à un seul bouton ===
+
+            btn.setOnCheckedChangeListener(changeChecker);
         }
 
-        // ====================================================================================
-        // == Test requête HTTP Get
-        // ====================================================================================
+        // ------------------------------------------------------------------------------------
+        // -- Requête HTTP Get
+        // ------------------------------------------------------------------------------------
 
-        textView_debug.setText("Blablabla");
+        textView_debug[0].setText("Blablabla");
 
-        // Instantiate the RequestQueue.
-        final RequestQueue queue = Volley.newRequestQueue(this);
+        // === Effectuer la requête ===
 
+        // Au clic sur le bouton recherche :
         searchBtn.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
+            public void onClick(View v)
+            {
                 Toast.makeText(context, "Requête...", Toast.LENGTH_SHORT).show();
+                String url = "https://mvx2.esiee.fr/api/ade.php?func=rechSalle";
 
-                String url = "http://seevendev.alwaysdata.net/eroom_/get_json.php";
+                // Create AsyncHttpClient object :
+                AsyncHttpClient client = new AsyncHttpClient();
+                // Http Request Params Object
+                RequestParams params = new RequestParams();
 
-                JsonObjectRequest jsObjRequest = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
+                // Pour accepter les requêtes HTTPS sans certificat :
+                // -- Source : http://stackoverflow.com/a/28222107/2372933
+                try {
+                    KeyStore trustStore = KeyStore.getInstance(KeyStore.getDefaultType());
+                    trustStore.load(null, null);
+                    MySSLSocketFactory sf = new MySSLSocketFactory(trustStore);
+                    sf.setHostnameVerifier(MySSLSocketFactory.ALLOW_ALL_HOSTNAME_VERIFIER);
+                    client.setSSLSocketFactory(sf);
+                }
+                catch (Exception e) {}
+
+                // Make Http call :
+                client.post("https://mvx2.esiee.fr/api/ade.php?func=rechSalle", params, new AsyncHttpResponseHandler() {
                     @Override
-                    public void onResponse(JSONObject response) {
-                        textView_debug.setText("Response : " + response.toString());
+                    public void onSuccess(String response) {
+                        textView_debug[0].setText("Response : " + response);
+
+                        // Récupérer les salles dans la BDD :
+                        ArrayList<HashMap<String,String>> liste_salles = new ArrayList<HashMap<String,String>>();
+                        liste_salles = jsonToArrayList(response);
+
+                        // Si la table n'est pas vide, afficher les salles :
+                        if (liste_salles.size() != 0)
+                        {
+                            // Set the User Array list in ListView
+                            ListAdapter adapter = new SimpleAdapter(
+                                    RechSalle.this,
+                                    liste_salles,
+                                    R.layout.view_salle_entry,
+                                    new String[] {"nom", "dispo"}, // /!\
+                                    new int[] {R.id.nomSalle, R.id.dispo}
+                            );
+                            listView_salles.setAdapter(adapter);
+                        }
                     }
-                }, new Response.ErrorListener() {
+
+                    // When error occurred
                     @Override
-                    public void onErrorResponse(VolleyError error) {
-                        textView_debug.setText("Marche pas");
+                    public void onFailure(int statusCode, Throwable error, String content) {
+                        if (statusCode == 404) {
+                            textView_debug[0].setText(statusCode + " - Requested resource not found : " + content + "\n" + error.toString());
+                        } else if (statusCode == 500) {
+                            textView_debug[0].setText(statusCode + " - Something went wrong at server end : " + content + "\n" + error.toString());
+                        } else {
+                            textView_debug[0].setText(statusCode + " - Unexpected Error occurred ! : " + content + "\n" + error.toString());
+                        }
                     }
                 });
-
-                // Access the RequestQueue through your singleton class.
-                queue.add(jsObjRequest);
             }
         });
 
+        // ------------------------------------------------------------------------------------
+        // -- Récupérer les salles dans la BDD SQLite et les afficher dans la ListView
+        // ------------------------------------------------------------------------------------
 
+
+
+        // Initialize Progress Dialog properties
+        prgDialog = new ProgressDialog(this);
+        prgDialog.setMessage("Transferring Data from Remote MySQL DB and Syncing SQLite. Please wait...");
+        prgDialog.setCancelable(false);
     }
 
     @Override
@@ -201,6 +318,9 @@ public class RechSalle extends ActionBarActivity
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             return true;
+        } else if (id == R.id.action_update_db) {
+            syncSQLiteMySQLDB();
+            return true;
         }
 
         return super.onOptionsItemSelected(item);
@@ -244,6 +364,193 @@ public class RechSalle extends ActionBarActivity
             ((RechSalle) activity).onSectionAttached(
                     getArguments().getInt(ARG_SECTION_NUMBER));
         }
+    }
+
+    // ====================================================================================
+    // == CUSTOM METHODS
+    // ====================================================================================
+
+    /**
+     *
+     * @param json
+     */
+    public ArrayList<HashMap<String,String>> jsonToArrayList(String json)
+    {
+        ArrayList<HashMap<String,String>> arraylist = new ArrayList<HashMap<String, String>>();
+
+        // Create GSON object
+        Gson gson = new GsonBuilder().create();
+
+        try {
+            // Extract JSON array from the response
+            JSONArray arr = new JSONArray(json);
+
+            // If no of array elements is not zero
+            if(arr.length() != 0)
+            {
+                // Loop through each array element, get JSON object which has userid and username
+                for (int i = 0 ; i < arr.length() ; i++)
+                {
+                    HashMap<String,String> map = new HashMap<String,String>();
+                    // Get JSON object
+                    JSONObject obj = (JSONObject) arr.get(i);
+
+                    String key = obj.keys().next(); // 1 seul élément
+                    map.put("nom", key);
+                    map.put("dispo", obj.get(key).toString() + " min");
+
+                    arraylist.add(map);
+                }
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        return arraylist;
+    }
+
+    // ------------------------------------------------------------------------------------
+    // -- Synchronisation MySQL serveur -> SQLite Android
+    // ------------------------------------------------------------------------------------
+
+    /**
+     * Method to Sync MySQL to SQLite DB
+     */
+    public void syncSQLiteMySQLDB()
+    {
+        // Create AsyncHttpClient object
+        AsyncHttpClient client = new AsyncHttpClient();
+        // Http Request Params Object
+        RequestParams params = new RequestParams();
+
+        // Pour accepter les requêtes HTTPS sans certificat :
+        // -- Source : http://stackoverflow.com/a/28222107/2372933
+        try {
+            KeyStore trustStore = KeyStore.getInstance(KeyStore.getDefaultType());
+            trustStore.load(null, null);
+            MySSLSocketFactory sf = new MySSLSocketFactory(trustStore);
+            sf.setHostnameVerifier(MySSLSocketFactory.ALLOW_ALL_HOSTNAME_VERIFIER);
+            client.setSSLSocketFactory(sf);
+        }
+        catch (Exception e) {}
+
+        // Show ProgressBar
+        prgDialog.show();
+
+        // On supprime toute la BDD locale et on la reconstruit :
+        controller.onUpgrade(controller.getWritableDatabase(), 0, 1);
+
+        requestData(client, params, "salle");
+        requestData(client, params, "prof");
+    }
+
+    public void requestData(AsyncHttpClient client, RequestParams params, final String table)
+    {
+        client.post("https://mvx2.esiee.fr/mysql_sync/getdata.php?table=" + table, params, new AsyncHttpResponseHandler() {
+            @Override
+            public void onSuccess(String response) {
+                // Hide ProgressBar
+                prgDialog.hide();
+                textView_debug[0].append("\nResponse : " + response);
+                updateSQLite(response, table);
+            }
+            // When error occurred
+            @Override
+            public void onFailure(int statusCode, Throwable error, String content) {
+                // TODO Auto-generated method stub
+                // Hide ProgressBar
+                prgDialog.hide();
+                if (statusCode == 404) {
+                    Toast.makeText(getApplicationContext(), "Requested resource not found", Toast.LENGTH_LONG).show();
+                } else if (statusCode == 500) {
+                    Toast.makeText(getApplicationContext(), "Something went wrong at server end", Toast.LENGTH_LONG).show();
+                } else {
+                    Toast.makeText(getApplicationContext(), "Unexpected Error occurred! [Most common Error: Device might not be connected to Internet] : " + statusCode ,
+                            Toast.LENGTH_LONG).show();
+                }
+            }
+        });
+    }
+
+    /**
+     * Met à jour la BDD SQLite Android
+     * @param response
+     */
+    public void updateSQLite(String response, String table)
+    {
+        ArrayList<HashMap<String,String>> usersynclist = new ArrayList<HashMap<String, String>>();
+
+        // Create GSON object
+        Gson gson = new GsonBuilder().create();
+
+        try {
+            // Extract JSON array from the response
+            JSONArray arr = new JSONArray(response);
+            System.out.println(arr.length());
+            // If no of array elements is not zero
+            if(arr.length() != 0)
+            {
+                // Loop through each array element, get JSON object which has userid and username
+                for (int i = 0 ; i < arr.length() ; i++)
+                {
+                    // Get JSON object
+                    JSONObject obj = (JSONObject) arr.get(i);
+
+                    if (table.equals("salle")) {
+                        System.out.println(obj.get("nom"));
+                        System.out.println(obj.get("resourceID"));
+                        System.out.println(obj.get("type"));
+                        System.out.println(obj.get("taille"));
+                        System.out.println(obj.get("projecteur"));
+                        System.out.println(obj.get("tableau"));
+                        System.out.println(obj.get("imprimante"));
+                    } else if (table.equals("prof")) {
+                        System.out.println(obj.get("nom"));
+                        System.out.println(obj.get("resourceID"));
+                        System.out.println(obj.get("bureau"));
+                        System.out.println(obj.get("email"));
+                    }
+
+
+                    // DB QueryValues Object to insert into SQLite
+                    queryValues = new HashMap<String, String>();
+
+                    if (table.equals("salle")) {
+                        queryValues.put("nom", obj.get("nom").toString());
+                        queryValues.put("resourceID", obj.get("resourceID").toString());
+                        queryValues.put("type", obj.get("type").toString());
+                        queryValues.put("taille", obj.get("taille").toString());
+                        queryValues.put("projecteur", obj.get("projecteur").toString());
+                        queryValues.put("tableau", obj.get("tableau").toString());
+                        queryValues.put("imprimante", obj.get("imprimante").toString());
+
+                        controller.insertSalle(queryValues);
+                    } else if (table.equals("prof")) {
+                        queryValues.put("nom", obj.get("nom").toString());
+                        queryValues.put("resourceID", obj.get("resourceID").toString());
+                        queryValues.put("bureau", obj.get("bureau").toString());
+                        queryValues.put("email", obj.get("email").toString());
+
+                        controller.insertProf(queryValues);
+                    }
+
+                    HashMap<String,String> map = new HashMap<String,String>();
+                }
+                // Reload the Main Activity
+                reloadActivity();
+            }
+        } catch (JSONException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     *
+     */
+    public void reloadActivity() {
+        Intent objIntent = new Intent(getApplicationContext(), RechSalle.class);
+        // startActivity(objIntent);
     }
 
 }

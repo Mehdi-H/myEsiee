@@ -251,8 +251,8 @@ public class NavigationDrawerFragment extends Fragment {
             return true;
         }
 
-        if (item.getItemId() == R.id.action_example) {
-            Toast.makeText(getActivity(), "Example action.", Toast.LENGTH_SHORT).show();
+        if (item.getItemId() == R.id.action_update_db) {
+            Toast.makeText(getActivity(), "Mise à jour de la base de données des salles et des profs...", Toast.LENGTH_SHORT).show();
             return true;
         }
 
