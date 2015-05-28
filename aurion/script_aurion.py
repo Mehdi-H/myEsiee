@@ -3,7 +3,7 @@
 # @Author: mehdi
 # @Date:   2015-05-20 09:16:35
 # @Last Modified by:   Mehdi-H
-# @Last Modified time: 2015-05-22 16:36:43
+# @Last Modified time: 2015-05-28 15:40:09
 
 
 import sys
@@ -39,6 +39,6 @@ if __name__ == '__main__':
 	id = fetch_login()
 	logging.info("=== fetch_login() OK ===")
 	# On stocke les notes au format html
-	config_selenium.fetch_grades_html(id["login"],id["password"])
+	config_selenium.fetch_absences_html(id["login"],id["password"])
 	logging.info("=== config_selenium.aurion_connection() OK ===")
 	logging.info("=== FINISH ===")

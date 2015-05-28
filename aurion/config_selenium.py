@@ -2,8 +2,8 @@
 # -*- coding: utf-8 -*-
 # @Author: mehdi
 # @Date:   2015-05-20 09:16:35
-# @Last Modified by:   Mehdi
-# @Last Modified time: 2015-05-28 13:30:56
+# @Last Modified by:   Mehdi-H
+# @Last Modified time: 2015-05-28 15:39:54
 
 from selenium import webdriver
 from bs4 import BeautifulSoup
@@ -88,6 +88,28 @@ def fetch_grades_html(l,pwd):
 
 	# Stockage des notes dans un fichier notes.html
 	f = open('notes.html', 'w')
+	f.write(source_code)
+	f.close()
+
+# /**
+#  * Fonction qui accède à la page des absences de l'année courante d'un étudiant et les stocke dans un fichier au format html
+#  */
+def fetch_absences_html(l,pwd):
+	logging.info("script_aurion::config_selenium::fetch_absences_html()")
+	driver = aurion_connection(l,pwd)
+
+	# Identification du bouton vers les notes, et click
+	assert "Mes Absences" in driver.page_source, "Le bouton vers \"Mes Absences\" n'existe peut-être plus sur Aurion."
+	absences = driver.find_element_by_link_text('Mes Absences')
+	absences.click()
+
+	# Focus sur le tableau des notes
+	elem = driver.find_element_by_id("form:scrollTable")
+	# On récupère ensuite un code source purgé de tous les attributs html qui alourdissent le code et ralentiront son parsing.
+	source_code = str(parsing_bs4.clean_html(BeautifulSoup(elem.get_attribute('innerHTML'))).prettify())
+
+	# Stockage des notes dans un fichier notes.html
+	f = open('absences.html', 'w')
 	f.write(source_code)
 	f.close()
 
