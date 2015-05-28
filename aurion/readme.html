@@ -1017,8 +1017,8 @@ body .markdown-body
 </style><title>readme</title></head><body><article class="markdown-body"><h1 id="script-de-recuperation-des-donnees-aurion"><a name="user-content-script-de-recuperation-des-donnees-aurion" href="#script-de-recuperation-des-donnees-aurion" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>Script de récupération des données Aurion</h1>
 <p>@Author: mehdi<br />
 @Date:   2015-05-20 09:16:35<br />
-@Last Modified by:   Mehdi-H<br />
-@Last Modified time: 2015-05-23 11:47:29</p>
+@Last Modified by:  Mehdi-H<br />
+@Last Modified time: 2015-05-28 13:43:14 </p>
 <blockquote>
 <p><strong>Ce qui marche pour le moment:</strong></p>
 <ul>
@@ -1026,9 +1026,12 @@ body .markdown-body
 <li>Accéder à Aurion en paramètrant PhantomJs</li>
 <li>Se connecter à Aurion </li>
 <li>Aller sur la page des notes de l&rsquo;année en cours</li>
-<li>Extraire les notes de l&rsquo;année en cours</li>
+<li>Extraire les notes de l&rsquo;année en cours, données d&rsquo;aurion vides comprises (ex: compensation)</li>
 <li>Parser les notes de l&rsquo;année en cours</li>
+<li>Produire les notes au format json</li>
 <li>Aller sur la page des notes archivées mais l&rsquo;extraction ne marche pas toujours à cause du javascript</li>
+<li>Aller sur la page des absences de l&rsquo;année en cours (non commit)</li>
+<li>Extraire les absences de l&rsquo;année en cours (non commit)</li>
 </ul>
 </blockquote>
 <h2 id="fichier-script_aurionpy"><a name="user-content-fichier-script_aurionpy" href="#fichier-script_aurionpy" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>Fichier script_aurion.py</h2>
@@ -1036,19 +1039,20 @@ body .markdown-body
 <h2 id="fichier-config_seleniumpy"><a name="user-content-fichier-config_seleniumpy" href="#fichier-config_seleniumpy" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>Fichier config_selenium.py</h2>
 <p>C&rsquo;est une <strong>bibliothèque</strong> avec les scripts élémentaires de <strong>Selenium</strong> pour Aurion (initialiser le navigateur, aller sur aurion, se connecter, récupérer les notes) .</p>
 <h2 id="fichier-parsing_bs4py"><a name="user-content-fichier-parsing_bs4py" href="#fichier-parsing_bs4py" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>Fichier parsing_bs4.py</h2>
-<p>C&rsquo;est une <strong>bibliothèque</strong> avec les scripts de <strong>BeautilfulSoup</strong> pour parser le contenu html extrait d&rsquo;Aurion (récupérer dans un format de données Python les notes par exemple). On peut le lancer avec <strong>python3 parsing_bs4.py</strong> pour effectuer le parsing et afficher les données d&rsquo;en-têtes et les notes.</p>
+<p>C&rsquo;est une <strong>bibliothèque</strong> avec les scripts de <strong>BeautilfulSoup</strong> pour parser le contenu html extrait d&rsquo;Aurion (récupérer dans un format de données Python les notes par exemple). On peut le lancer avec <strong>python3 parsing_bs4.py</strong> pour effectuer le parsing et afficher les données d&rsquo;en-têtes et les notes. Il continent aussi le script pour convertir les notes au format json.</p>
 <h2 id="les-fichiers-generes-lors-de-lexecution"><a name="user-content-les-fichiers-generes-lors-de-lexecution" href="#les-fichiers-generes-lors-de-lexecution" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>Les fichiers <strong>générés lors de l&rsquo;exécution</strong></h2>
 <blockquote>
 <ul>
 <li>Un log.txt</li>
 <li>Des fichiers de notes au format .html à parser</li>
 <li>Le fichier current_grades.pickle contenant des données en Python sur les notes de l&rsquo;année en cours (un premier load permet de récupérer une liste de données d&rsquo;en-tête (année, code unité, libellé), un second load permet de récupérer une liste de listes de notes)</li>
+<li>Un fichier de notes au format json</li>
 </ul>
 </blockquote>
 <h2 id="les-fichiers-pour-les-tests"><a name="user-content-les-fichiers-pour-les-tests" href="#les-fichiers-pour-les-tests" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>Les fichiers <strong>pour les tests</strong></h2>
 <blockquote>
 <ul>
-<li>Le fichier notes0.html contient mes notes extrait au format html sur Aurion en mai 2015 pour tester le script de parsing</li>
+<li>Le fichier notes0.html contient mes notes extrait au format html sur Aurion en mai 2015 pour tester le script de parsingen cas de maintenance.</li>
 </ul>
 </blockquote>
 <h2 id="coming-soon"><strong>Coming soon</strong></h2>

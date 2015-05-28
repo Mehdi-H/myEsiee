@@ -2,10 +2,12 @@
 # -*- coding: utf-8 -*-
 # @Author: mehdi
 # @Date:   2015-05-20 09:16:35
-# @Last Modified by:   Mehdi-H
-# @Last Modified time: 2015-05-22 16:35:56
+# @Last Modified by:   Mehdi
+# @Last Modified time: 2015-05-28 13:30:56
 
 from selenium import webdriver
+from bs4 import BeautifulSoup
+import parsing_bs4
 
 import logging
 logging.basicConfig(filename='log.txt',
@@ -81,7 +83,8 @@ def fetch_grades_html(l,pwd):
 
 	# Focus sur le tableau des notes
 	elem = driver.find_element_by_id("form:scrollTable")
-	source_code = elem.get_attribute('innerHTML')
+	# On récupère ensuite un code source purgé de tous les attributs html qui alourdissent le code et ralentiront son parsing.
+	source_code = str(parsing_bs4.clean_html(BeautifulSoup(elem.get_attribute('innerHTML'))).prettify())
 
 	# Stockage des notes dans un fichier notes.html
 	f = open('notes.html', 'w')
