@@ -1,0 +1,114 @@
+[
+     {
+          "Année": "2014 - 2015",
+          "Libellé": "Contrôle des systèmes bouclés",
+          "Nombre de crédits": "3",
+          "Note compensée": null,
+          "Notes": "A",
+          "Unités": "IGE_3003"
+     },
+     {
+          "Année": "2014 - 2015",
+          "Libellé": "Conception VHDL de systèmes numériques",
+          "Nombre de crédits": "3",
+          "Note compensée": null,
+          "Notes": "B",
+          "Unités": "IGE_3004"
+     },
+     {
+          "Année": "2014 - 2015",
+          "Libellé": "Eléments de traitements du signal",
+          "Nombre de crédits": "3",
+          "Note compensée": null,
+          "Notes": "B",
+          "Unités": "IGE_3005"
+     },
+     {
+          "Année": "2014 - 2015",
+          "Libellé": "Systèmes d'exploitation",
+          "Nombre de crédits": "3",
+          "Note compensée": null,
+          "Notes": "D",
+          "Unités": "IGI_3004"
+     },
+     {
+          "Année": "2014 - 2015",
+          "Libellé": "Systèmes de télécommunications",
+          "Nombre de crédits": "3",
+          "Note compensée": null,
+          "Notes": "C",
+          "Unités": "IT_3003"
+     },
+     {
+          "Année": "2014 - 2015",
+          "Libellé": "Analyse de données Internet",
+          "Nombre de crédits": null,
+          "Note compensée": null,
+          "Notes": "A",
+          "Unités": "IT_3007"
+     },
+     {
+          "Année": "2014 - 2015",
+          "Libellé": "Presentation skills",
+          "Nombre de crédits": "2",
+          "Note compensée": null,
+          "Notes": "C",
+          "Unités": "LV1_3002"
+     },
+     {
+          "Année": "2014 - 2015",
+          "Libellé": "Management des entreprises",
+          "Nombre de crédits": "4",
+          "Note compensée": null,
+          "Notes": "D",
+          "Unités": "MSH_3001"
+     },
+     {
+          "Année": "2014 - 2015",
+          "Libellé": "Management de projet - théories et mise en pratique",
+          "Nombre de crédits": "3",
+          "Note compensée": null,
+          "Notes": "B",
+          "Unités": "MSH_3002"
+     },
+     {
+          "Année": "2014 - 2015",
+          "Libellé": "Préparation progressive du projet personnel professionnel",
+          "Nombre de crédits": "2",
+          "Note compensée": null,
+          "Notes": "B",
+          "Unités": "P5_3001"
+     },
+     {
+          "Année": "2014 - 2015",
+          "Libellé": "Projet Modélisation",
+          "Nombre de crédits": "3",
+          "Note compensée": null,
+          "Notes": "B",
+          "Unités": "PR_3001_M"
+     },
+     {
+          "Année": "2014 - 2015",
+          "Libellé": "Probabilités - statistiques",
+          "Nombre de crédits": "3",
+          "Note compensée": null,
+          "Notes": "B",
+          "Unités": "SFM_3003"
+     },
+     {
+          "Année": "2014 - 2015",
+          "Libellé": "Espagnol",
+          "Nombre de crédits": "2",
+          "Note compensée": null,
+          "Notes": "C",
+          "Unités": "SP_3201"
+     },
+     {
+          "Année": "2014 - 2015",
+          "Libellé": "Stage",
+          "Nombre de crédits": "8",
+          "Note compensée": null,
+          "Notes": "B",
+          "Unités": "STA_TECH_E3E"
+     }
+]

@@ -3,11 +3,13 @@
 # @Author: mehdi
 # @Date:   2015-05-20 09:16:35
 # @Last Modified by:   Mehdi-H
-# @Last Modified time: 2015-05-28 15:39:54
+# @Last Modified time: 2015-05-28 18:16:23
 
 from selenium import webdriver
 from bs4 import BeautifulSoup
 import parsing_bs4
+
+import mypkg
 
 import logging
 logging.basicConfig(filename='log.txt',
@@ -16,6 +18,7 @@ logging.basicConfig(filename='log.txt',
 						datefmt='%H:%M:%S',
 						level=logging.INFO)
 
+driver = None
 
 # /**
 #  * Fonction qui initialise le webdriver selenium avec PhantomJS, avec les bons arguments, 
@@ -26,7 +29,7 @@ def init_selenium_browser(urlAurion = "https://aurionprd.esiee.fr"):
 	# Config webbrowser
 	logging.info("Configuration de selenium avec PhantomJS")
 	# driver = webdriver.PhantomJS(service_args=['--ignore-ssl-errors=true', '--ssl-protocol=tlsv1'])
-	driver = webdriver.Firefox()	#  Phase de test : utilisation de Firefox pour voir ce qu'il se passe
+	driver = mypkg.getOrCreateWebdriver()	#  Phase de test : utilisation de Firefox pour voir ce qu'il se passe
 	logging.info("Navigateur configuré")
 
 	# Tentative accès aurionprd.esiee.fr
@@ -37,9 +40,10 @@ def init_selenium_browser(urlAurion = "https://aurionprd.esiee.fr"):
 	return driver
 
 # /**
-#  * A finir (récup du driver courant..)
+#  * Pour quitter le navigateur
 #  */
 def quit_selenium_browser():
+	driver = mypkg.getOrCreateWebdriver()
 	driver.quit()
 
 # /**
@@ -48,7 +52,7 @@ def quit_selenium_browser():
 def aurion_connection(l, pwd):
 	logging.info("script_aurion::config_selenium::aurion_connection()")
 	# Initialisation selenium
-	driver = init_selenium_browser()
+	driver = mypkg.getOrCreateWebdriver()
 
 	# Identification des éléments de la page à remplir
 	form = driver.find_element_by_class_name('form')
@@ -72,9 +76,9 @@ def aurion_connection(l, pwd):
 # /**
 #  * Fonction qui accède à la page des notes de l'année courante d'un étudiant et les stocke dans un fichier au format html
 #  */
-def fetch_grades_html(l,pwd):
+def fetch_grades_html():
 	logging.info("script_aurion::config_selenium::fetch_grades_html()")
-	driver = aurion_connection(l,pwd)
+	driver = mypkg.getOrCreateWebdriver()
 
 	# Identification du bouton vers les notes, et click
 	assert "Mes Notes" in driver.page_source, "Le bouton vers \"Mes Notes\" n'existe peut-être plus sur Aurion."
@@ -91,12 +95,14 @@ def fetch_grades_html(l,pwd):
 	f.write(source_code)
 	f.close()
 
+	return driver
+
 # /**
 #  * Fonction qui accède à la page des absences de l'année courante d'un étudiant et les stocke dans un fichier au format html
 #  */
 def fetch_absences_html(l,pwd):
 	logging.info("script_aurion::config_selenium::fetch_absences_html()")
-	driver = aurion_connection(l,pwd)
+	driver = mypkg.getOrCreateWebdriver()
 
 	# Identification du bouton vers les notes, et click
 	assert "Mes Absences" in driver.page_source, "Le bouton vers \"Mes Absences\" n'existe peut-être plus sur Aurion."
@@ -113,6 +119,7 @@ def fetch_absences_html(l,pwd):
 	f.write(source_code)
 	f.close()
 
+	return driver
 
 # if __name__ == '__main__':
 #     if(init_selenium_browser()):

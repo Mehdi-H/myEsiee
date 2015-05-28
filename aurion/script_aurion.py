@@ -3,7 +3,7 @@
 # @Author: mehdi
 # @Date:   2015-05-20 09:16:35
 # @Last Modified by:   Mehdi-H
-# @Last Modified time: 2015-05-28 15:40:09
+# @Last Modified time: 2015-05-28 18:17:35
 
 
 import sys
@@ -38,7 +38,10 @@ if __name__ == '__main__':
 	# On récupère les identifiants passé en paramètre
 	id = fetch_login()
 	logging.info("=== fetch_login() OK ===")
+	config_selenium.init_selenium_browser(urlAurion = "https://aurionprd.esiee.fr")
 	# On stocke les notes au format html
-	config_selenium.fetch_absences_html(id["login"],id["password"])
+	config_selenium.aurion_connection(id["login"],id["password"])
+	config_selenium.fetch_grades_html()
 	logging.info("=== config_selenium.aurion_connection() OK ===")
+	config_selenium.quit_selenium_browser()
 	logging.info("=== FINISH ===")
