@@ -3,20 +3,16 @@
 # @Author: mehdi
 # @Date:   2015-05-23 11:10:28
 # @Last Modified by:   Mehdi-H
-# @Last Modified time: 2015-05-28 18:39:40
+# @Last Modified time: 2015-05-29 17:17:13
 
 from bs4 import BeautifulSoup
 
 import pickle
 import sys
 import json
+import codecs
 
-import logging
-logging.basicConfig(filename='log.txt',
-						filemode='a',
-						format='%(asctime)s,%(msecs)d %(name)s %(levelname)s %(filename)s:%(lineno)-4d: %(message)s',
-						datefmt='%H:%M:%S',
-						level=logging.INFO)
+import config_selenium
 
 
 # /**
@@ -32,29 +28,22 @@ def clean_html(soup):
 # /**
 #  * Analyse du code source extrait d'aurion afin d'en extraire les notes.
 #  */
-def current_grades_parsing(file='notes.html'):
+def current_grades_parsing():
 
-	logging.info("script_aurion::parsing_bs4::current_grades_parsing()")
 	html = []  # code source récupéré d'aurion
 	heading = []  # données d'en-tête : Année, nom d'unité, libellé, etc...
 	grades = []  # ensemble des notes
 	grade = []  # une note qui sera ajoutée à l'ensemble des notes
 
-	with open(file,'r') as f:
-		for line in f:
-			html.append(line.strip())
-		html = ''.join(html)
-	logging.info("récupération des notes au format html")
+	html = config_selenium.fetch_grades_html()
 
 	soup = BeautifulSoup(html)  # conversion du html en objet à parser
-	logging.info("conversion html->soup réussie")
 
 	table_grades = soup.find('table')  # On identifie dans la soupe le table tag #d'id form:dataTableFavori avec toutes les notes et l'en-tête
 	
 	for th in table_grades.find_all('th'):  # pour chaque balise th de l'en-tête,
 		heading.append(th.text.rstrip())  # on récupère le contenu textuel débarassé d'espaces possibles à sa droite (ex: "Année      " au lieu de "Année")
 	#heading = [info.lower().replace('é','e').replace(' ','_') for info in heading]  # on réarrange l'en-tête si besoin
-	logging.info("en-tête récupérée")
 
 	for tbody in table_grades.find_all('tbody'):  # dans la balise tbody contenue dans la balise table,
 		for tr in tbody.find_all('tr'):  # pour chaque ligne du tableau de notes
@@ -67,36 +56,36 @@ def current_grades_parsing(file='notes.html'):
 						grade.append(span.text)  # on récupère une donnée de la note
 			grades.append(grade)  # une fois la note complétée, on l'insère dans la liste de toutes les notes
 	grades.pop()  # la balise contient une dernière ligne vide, on l'enlève
-	logging.info("notes récupérées")
 
 	with open('current_grades.pickle', 'wb') as grades_pkl:
-		pickle.dump(heading,grades_pkl)
+		# pickle.dump(heading,grades_pkl)
 		pickle.dump(grades,grades_pkl)
-	logging.info("en-tête puis notes stockées dans current_grades.pickle")
 
 	return True
 
 def grades_to_json(file='current_grades.pickle'):
 
-	heading = []
+	heading = ['Année', 'Unités', 'Libellé', 'Notes', 'Note compensée', 'Nombre de crédits']
 	grades = []
 	json_list = []
 	grade = {}
 
 	with open(file, 'rb') as grades_pkl:
-		heading = pickle.load(grades_pkl)
+		# heading = pickle.load(grades_pkl)
 		grades = pickle.load(grades_pkl)
-	logging.info("en-tête puis notes extraits depuis current_grades.pickle")
 
 	for j in range(len(grades)):
 		for k in range(len(grades[j])):
-			grade[heading[k%len(heading)]] = grades[j][k]
+			grade[heading[k%len(heading)]] = grades[j][k].lstrip('\n').rstrip('\n').strip()
 		json_list.append(grade)
 		grade = {}
 
 	del grade
 	
-	with open('grades.json','w') as f:
+	# with open('grades.json','w') as f:
+	# 	f.write(json.dumps(json_list, sort_keys=True, indent=5, separators=(',', ': '), ensure_ascii=False))
+	
+	with codecs.open('grades.json', 'w', 'utf-8') as f:
 		f.write(json.dumps(json_list, sort_keys=True, indent=5, separators=(',', ': '), ensure_ascii=False))
 
 	return True
@@ -106,7 +95,6 @@ def grades_to_json(file='current_grades.pickle'):
 #  */
 def current_absences_parsing(file='absences.html'):
 
-	logging.info("script_aurion::parsing_bs4::current_absences_parsing()")
 	html = []  # code source récupéré d'aurion
 	heading = []  # données d'en-tête : Année, nom d'unité, libellé, etc...
 	absences = []  # ensemble des notes
@@ -116,17 +104,14 @@ def current_absences_parsing(file='absences.html'):
 		for line in f:
 			html.append(line.strip())
 		html = ''.join(html)
-	logging.info("récupération des absences au format html")
 
 	soup = BeautifulSoup(html)  # conversion du html en objet à parser
-	logging.info("conversion html->soup réussie")
 
 	table_absences = soup.find('table')  # On identifie dans la soupe le table tag #d'id form:dataTableFavori avec toutes les notes et l'en-tête
 	
 	for th in table_absences.find_all('th'):  # pour chaque balise th de l'en-tête,
 		heading.append(th.text.rstrip())  # on récupère le contenu textuel débarassé d'espaces possibles à sa droite (ex: "Année      " au lieu de "Année")
 	#heading = [info.lower().replace('é','e').replace(' ','_') for info in heading]  # on réarrange l'en-tête si besoin
-	logging.info("en-tête récupérée")
 
 	for tbody in table_absences.find_all('tbody'):  # dans la balise tbody contenue dans la balise table,
 		for tr in tbody.find_all('tr'):  # pour chaque ligne du tableau de notes
@@ -139,12 +124,10 @@ def current_absences_parsing(file='absences.html'):
 						absence.append(span.text)  # on récupère une donnée de la note
 			absences.append(absence)  # une fois la note complétée, on l'insère dans la liste de toutes les notes
 	absences.pop()  # la balise contient une dernière ligne vide, on l'enlève
-	logging.info("notes récupérées")
 
 	with open('current_absences.pickle', 'wb') as absences_pkl:
 		pickle.dump(heading,absences_pkl)
 		pickle.dump(absences,absences_pkl)
-	logging.info("en-tête puis absences stockées dans current_absences.pickle")
 
 	return True
 
@@ -158,7 +141,6 @@ def absences_to_json(file='current_absences.pickle'):
 	with open(file, 'rb') as absences_pkl:
 		heading = pickle.load(absences_pkl)
 		absences = pickle.load(absences_pkl)
-	logging.info("en-tête puis notes extraits depuis current_absences.pickle")
 
 	for j in range(len(absences)):
 		for k in range(len(absences[j])):

@@ -3,7 +3,7 @@
 # @Author: mehdi
 # @Date:   2015-05-20 09:16:35
 # @Last Modified by:   Mehdi-H
-# @Last Modified time: 2015-05-28 18:16:23
+# @Last Modified time: 2015-05-28 18:27:35
 
 from selenium import webdriver
 from bs4 import BeautifulSoup
@@ -37,15 +37,27 @@ def init_selenium_browser(urlAurion = "https://aurionprd.esiee.fr"):
 	logging.info("Tentative d'accès à Aurion")
 	assert "Page de connexion" in driver.title, "'Page de connexion' devrait apparaître dans le <title> tag de la page HTML, le site a peut-etre changé."
 	logging.info("Accès à Aurion")
-	return driver
+	return True
 
 # /**
-#  * Pour quitter le navigateur
+#  * Pour quitter le navigateur.
 #  */
 def quit_selenium_browser():
 	driver = mypkg.getOrCreateWebdriver()
 	driver.quit()
 
+def back_to_home_page():
+	driver = mypkg.getOrCreateWebdriver()
+
+	assert 'Accueil' in driver.page_source, 'Le bouton \'Accueil\' ne semble pas visible par le navigateur'
+
+	homeBtn = driver.find_element_by_link_text('Accueil')
+	logging.info("Bouton pour le retour à la page d'accueil identifié")
+
+	homeBtn.click()
+	logging.info("Bouton pour le retour à la page d'accueil cliqué")
+
+	return True 
 # /**
 #  * Fonction qui accède au formulaire de connexion de la page, le remplit, et l'envoie.
 #  */
@@ -71,7 +83,7 @@ def aurion_connection(l, pwd):
 	logging.info("Formulaire de connexion envoyé")
 
 	assert "Login ou mot de passe invalide" not in driver.page_source, "Connexion échouée, mauvais mot de passe ou mauvais identifiant"
-	return driver
+	return True
 
 # /**
 #  * Fonction qui accède à la page des notes de l'année courante d'un étudiant et les stocke dans un fichier au format html
@@ -95,12 +107,12 @@ def fetch_grades_html():
 	f.write(source_code)
 	f.close()
 
-	return driver
+	return True
 
 # /**
 #  * Fonction qui accède à la page des absences de l'année courante d'un étudiant et les stocke dans un fichier au format html
 #  */
-def fetch_absences_html(l,pwd):
+def fetch_absences_html():
 	logging.info("script_aurion::config_selenium::fetch_absences_html()")
 	driver = mypkg.getOrCreateWebdriver()
 
@@ -119,7 +131,7 @@ def fetch_absences_html(l,pwd):
 	f.write(source_code)
 	f.close()
 
-	return driver
+	return True
 
 # if __name__ == '__main__':
 #     if(init_selenium_browser()):
