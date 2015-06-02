@@ -1,4 +1,8 @@
 <?php
+
+	error_reporting(E_ALL);
+	ini_set('display_errors', 1);
+
 	// === Vérifications ===
 
 	if (isset($_GET['func'])) {
@@ -16,7 +20,7 @@
 
 	// === Fonction à appeler ===
 
-	$ade = new ADE;
+	$ade = new ADE(4);
 
 	if (strcmp($function, "rechSalle") == 0)
 	{

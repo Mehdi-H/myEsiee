@@ -66,11 +66,11 @@
 				."?function=connect"
 				."&login=lecteur1&password=");
 
-			$this->sessionId = $req['id'];
+			$this->_sessionID = $req['id'];
 
 			// Se placer sur le projet 4 (EDT 2014-2015) :
 			$this->_httpGet($this->_prefixe_api
-				."?sessionId=".$this->_sessionId
+				."?sessionId=".$this->_sessionID
 				."&function=setProject"
 				."&projectId=".$this->_projetADE);
 		}
@@ -78,7 +78,7 @@
 		private function _ade_disconnect()
 		{
 			$this->_httpGet($this->_prefixe_api
-				."?sessionId=".$this->_sessionId
+				."?sessionId=".$this->_sessionID
 				."&function=disconnect");
 		}
 
@@ -98,10 +98,8 @@
 		 *  - "imprimante" : [0 = non, 1 = oui]
 		 *
 		 *  Résultat en JSON : format :
-		 *  - {numeroSalle:[resourceID, type, taille, projecteur, tableau, imprimante, dispo], ...}
-		 *	-- projecteur et imprimante : [0=oui, 1=non]
-		 *	-- tableau : [0=aucun, 1=blanc, 2=noir, 3=les deux]
-		 *	-- dispo : [-1=occupée, 0=libre, autre=durée pendant laquelle la salle est encore libre]
+		 *  - [{numeroSalle:dispo}, ...]
+		 *	-- dispo : [-1=occupée, 0=libre jusqu'à ce soir, autre=durée pendant laquelle la salle est encore libre]
 		 *
 		 * @return string Le résultat de la recherche au format JSON.
 		 */
@@ -159,8 +157,8 @@
 			$salles = array();
 			while ($data = mysql_fetch_assoc($req))
 			{
-				$salles[$data[nom]] = array(
-					$data[resourceID], 	// 0
+				$salles[$data['nom']] = array(
+					$data['resourceID'], 	// 0
 					-1 					// 1 (disponibilité)
 				);
 			}
@@ -177,7 +175,7 @@
 				// --- Requête ADE ---
 
 				$req = $this->_httpGet($this->_prefixe_api
-					."?sessionId=".$this->_sessionId
+					."?sessionId=".$this->_sessionID
 					."&function=getEvents"
 					."&detail=0"
 					."&resources=".$salle[0] // resourceID
@@ -197,7 +195,7 @@
 				}
 
 				// --- Calcul du temps libre restant ---
-				// Pas libre, libre jusqu'à telle heure, libre toute la journée
+				// Pas libre (-1), libre jusqu'à telle heure (entier), libre toute la journée (0)
 
 				$libre = true;
 				$pendant = -1;
@@ -215,7 +213,7 @@
 					elseif (time() < $debut && $libre)
 					{
 						// Si on est avant l'heure de début : combien de temps on est libre ?
-						$pendant = $debut - time();
+						$pendant = round( ($debut-time())/60 );
 					}
 					elseif ($debut <= time())
 					{
