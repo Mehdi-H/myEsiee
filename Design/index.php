@@ -3,12 +3,13 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no"/>
-	<title>MyESIEE - Recherche avancée de salle</title>
+	<title>MyESIEE - Recherche de salle</title>
 
 	<!-- CSS  -->
 	<link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
 	<link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
 	<link href="css/palette.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+
 </head>
 
 
@@ -41,8 +42,8 @@
 			</nav>
 		</div>
 
-		<div class="row center">
-			<!-- Classe pour activation des boutons : ".bouton_active"-->
+		<div class="row center default-primary-color">
+			<!-- Bouton activé : bouton_active-->
 			<a class="btn-flat waves-effect waves-light  margin_top_bouton filtre-type " id="info" title="Salle informatique">
 				<i class="medium mdi-hardware-desktop-windows primary-text-color">
 				</i>
@@ -60,100 +61,102 @@
 				</i>
 			</a>
 
-		</div>
-		<div class="row">
-			<p class="center categorie">
-				<span id="nom_categorie">
-					Salle informatique
-				</span>
+
+			<p class="center categorie"><span class="white-text" id="nom_categorie">
+				Salle informatique</span>
 			</p>
-		</div>
 
-		<form class="col s12 ">
 			<div class="row">
-				<div class="input-field col s4 offset-s2">
-					<select>
-						<option value="épi1">Épi 1</option>
-						<option value="épi2">Épi 2</option>
-						<option value="épi3">Épi 3</option>
-						<option value="épi4">Épi 4</option>
-						<option value="épi5">Épi 5</option>
-						<option value="épi6">Épi 6</option>
-					</select>
-					<label>Numéro de l'épi</label>
-				</div>
-				<div class="input-field col s4">
-					<select>
-						<option value="niveau0">Niveau 0</option>
-						<option value="niveau1">Niveau 1</option>
-						<option value="niveau2">Niveau 2</option>
-						<option value="niveau3">Niveau 3</option>
-						<option value="niveau4">Niveau 4</option>
-					</select>
-					<label>Niveau</label>
+				<div class="input-field col s6 offset-s3">
+					<input id="numero_salle" type="text" class="validate white-text">
+					<label class="white-text" for="numero_salle">
+						Numéro de salle
+					</label>
+					<button class="btn-floating waves-effect waves-light accent-color btn-large " type="submit" name="action">
+						<i class="large mdi-action-search"></i>
+					</button>
 				</div>
 			</div>
-			<div class="row">
-					<table>
-						<tr>
-							<td class="right">
-								<input name="group1" type="checkbox" id="test1" />
-								<label class="taille_checkbox" for="test1">Tableau à craie</label>
-							</td>
-
-							<td>
-								<input name="group1" type="checkbox" id="test2" />
-								<label class="taille_checkbox" for="test2">Tableau véléda</label>
-							</td>
-						</tr>
-						<tr>
-							<td class="right">
-								<input name="group1" type="checkbox" id="test3" />
-								<label class="taille_checkbox" for="test3">Retroprojecteur</label>
-							</td>
-
-							<td>
-								<input name="group1" type="checkbox" id="test4" />
-								<label class="taille_checkbox" for="test4">Imprimante</label>
-							</td>						
-						</tr>
-					</table>
-			</div>
 		</div>
+
 		<div class="row center">
-			<button class="btn waves-effect waves-light accent-color " id ="z_index_bouton" type="submit" name="action">Rechercher
-				<i class="mdi-content-send right"></i>
-			</button>
-			<div>
-			</form>
-		</main>
+			<div class="col s12 offset-s3 stop_offset">
+			<?php 
+				$salles = json_decode(file_get_contents('https://mvx2.esiee.fr/api/ade.php?func=rechSalle'),TRUE);
 
-		<!--  Scripts-->
+				foreach ($salles as $indexInArray => $room) {
+					foreach ($room as $roomNumber => $roomState) {
+					echo('<a class="validate collection-item" href="#!">
+								<ul class="collection valign-wrapper reduc_liste_salle">
+									<li class="tab col s1 offset-s2">
+										<span class="valign right">
+											'. strval($roomNumber) .'
+										</span>
+									</li>
+									<li class="tab col s4">
+										<i class="small mdi-hardware-desktop-windows primary-text-color">
+										</i>
+										<i class="small mdi-social-school primary-text-color">
+										</i>
+										<i class="small mdi-notification-sd-card primary-text-color">
+										</i>
+										<i class="small mdi-notification-sd-card primary-text-color">
+										</i>
+									</li>
+									<li class="tab col s1 offset-s1">
+										<span class="valign right">30min
+										</span>
+									</li>
+								</ul>
+							</a>');
+					}
+				}
+			 ?>
+			</div>
+		</div>
 
-		<script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-		<script src="js/materialize.js"></script>
-		<script src="js/init.js"></script>
-		<script>$(".button-collapse").sideNav();</script>
-		<script>    
-		$(document).ready(function() {
-			$('select').material_select();
-		});
-		</script>
-		<script>$('select').material_select('destroy');</script>
 
 
-		<script type="text/javascript">
 
-// === Afficher le nom de la catégorie sélectionnée ===
+	</main>
 
-$(".filtre-type").each(function() {
-	$(this).click(function() {
-		$("#nom_categorie")[0].innerHTML = $(this)[0].title;
+
+
+	<!--  Scripts-->
+
+	<script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+	<script src="js/materialize.js"></script>
+	<script src="js/init.js"></script>
+	<script>$(".button-collapse").sideNav();</script>
+
+	<script>  
+	  // === Dropdown ===  
+	  $(document).ready(function() {
+	  	$('select').material_select();
+	  });
+	  </script>
+	  <script>$('select').material_select('destroy');</script>
+
+	  <script>
+	  $(document).ready(function(){
+	  	$('.collapsible').collapsible({
+	  accordion : false // A setting that changes the collapsible behavior to expandable instead of the default accordion style
 	});
-});
+	  });
+	  </script>
+
+	  <script type="text/javascript">
+
+	// === Afficher le nom de la catégorie sélectionnée ===
+
+	$(".filtre-type").each(function() {
+		$(this).click(function() {
+			$("#nom_categorie")[0].innerHTML = $(this)[0].title;
+		});
+	});
 
 
-</script>
+	</script>
 
 </body>
 </html>
