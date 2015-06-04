@@ -137,11 +137,16 @@ public class DBController extends SQLiteOpenHelper
      * Obtenir la liste des salles de la BDD SQLite dans un ArrayList.
      * @return
      */
-    public ArrayList<HashMap<String, String>> getSalles()
+    public ArrayList<HashMap<String, String>> getSalles(String nom)
     {
         ArrayList<HashMap<String,String>> liste_salles = new ArrayList<HashMap<String,String>>();
 
-        String selectQuery = "SELECT  * FROM salle";
+        String selectQuery;
+        if (nom.equals("all")) {
+            selectQuery = "SELECT * FROM salle";
+        } else {
+            selectQuery = "SELECT * FROM salle WHERE nom='"+nom+"'";
+        }
 
         // Exécuter la requête :
         SQLiteDatabase database = this.getWritableDatabase();

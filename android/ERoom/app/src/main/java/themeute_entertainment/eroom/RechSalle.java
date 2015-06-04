@@ -50,6 +50,7 @@ import java.net.URL;
 import java.security.KeyStore;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 
 import javax.net.ssl.HttpsURLConnection;
 import javax.net.ssl.SSLContext;
@@ -175,8 +176,6 @@ public class RechSalle extends ActionBarActivity
 
         textView_debug[0].setText("Blablabla");
 
-        // === Effectuer la requête ===
-
         // Au clic sur le bouton recherche :
         searchBtn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v)
@@ -184,12 +183,11 @@ public class RechSalle extends ActionBarActivity
                 Toast.makeText(context, "Requête...", Toast.LENGTH_SHORT).show();
                 String url = "https://mvx2.esiee.fr/api/ade.php?func=rechSalle";
 
-                // Create AsyncHttpClient object :
+                // Init :
                 AsyncHttpClient client = new AsyncHttpClient();
-                // Http Request Params Object
                 RequestParams params = new RequestParams();
 
-                // Pour accepter les requêtes HTTPS sans certificat :
+                /* // Pour accepter les requêtes HTTPS sans certificat :
                 // -- Source : http://stackoverflow.com/a/28222107/2372933
                 try {
                     KeyStore trustStore = KeyStore.getInstance(KeyStore.getDefaultType());
@@ -198,28 +196,53 @@ public class RechSalle extends ActionBarActivity
                     sf.setHostnameVerifier(MySSLSocketFactory.ALLOW_ALL_HOSTNAME_VERIFIER);
                     client.setSSLSocketFactory(sf);
                 }
-                catch (Exception e) {}
+                catch (Exception e) {} */
 
-                // Make Http call :
-                client.post("https://mvx2.esiee.fr/api/ade.php?func=rechSalle", params, new AsyncHttpResponseHandler() {
+                // Lancer la requête :
+                client.post(url, params, new AsyncHttpResponseHandler() {
                     @Override
-                    public void onSuccess(String response) {
+                    public void onSuccess(String response)
+                    {
                         textView_debug[0].setText("Response : " + response);
 
-                        // Récupérer les salles dans la BDD :
-                        ArrayList<HashMap<String,String>> liste_salles = new ArrayList<HashMap<String,String>>();
-                        liste_salles = jsonToArrayList(response);
+                        // === Construire un ArrayList d'HashMaps qui contient toutes les infos des salles (nom, dispo et caractéristiques) ===
 
-                        // Si la table n'est pas vide, afficher les salles :
-                        if (liste_salles.size() != 0)
+                        // --- Récupérer les infos du JSON (nom et dispo des salles correspondantes aux critères de recherche) ---
+
+                        ArrayList<HashMap<String,String>> liste_salles_json = jsonToArrayList(response);
+                        if (liste_salles_json.size() != 0)
                         {
-                            // Set the User Array list in ListView
+                            // --- Fusionner les infos des salles de la BDD avec la réponse JSON ---
+
+                            ArrayList<HashMap<String,String>> liste_salles_fusionee = new ArrayList<HashMap<String,String>>();
+
+                            for (HashMap<String,String> map : liste_salles_json)
+                            {
+                                // Retrouver la salle en question dans la BDD :
+                                ArrayList<HashMap<String,String>> liste_salle_bdd = controller.getSalles(map.get("nom"));
+                                HashMap<String,String> salle_bdd = liste_salle_bdd.get(0);
+
+                                // Rajouter les caractéristiques de la BDD dans la HashMap issue du JSON :
+                                map.put("type", salle_bdd.get("type"));
+                                map.put("projecteur", salle_bdd.get("projecteur"));
+                                map.put("imprimante", salle_bdd.get("imprimante"));
+
+                                int tab = Integer.parseInt(salle_bdd.get("tableau"));
+                                map.put("tableau_blanc", (tab == 0 || tab == 2) ? "0" : "1");
+                                map.put("tableau_noir", (tab == 0 || tab == 1) ? "0" : "1");
+
+                                // Fusionner JSON + BDD :
+                                liste_salles_fusionee.add(map);
+                            }
+
+                            // --- Peupler la ListView avec la liste des salles obtenue ---
+
                             ListAdapter adapter = new SimpleAdapter(
                                     RechSalle.this,
-                                    liste_salles,
+                                    liste_salles_fusionee,
                                     R.layout.view_salle_entry,
-                                    new String[] {"nom", "dispo"}, // /!\
-                                    new int[] {R.id.nomSalle, R.id.dispo}
+                                    new String[] {"nom", "type", "projecteur", "tableau_blanc", "tableau_noir", "imprimante", "dispo"},
+                                    new int[] {R.id.nomSalle, R.id.icone_type_debug, R.id.icone_projecteur, R.id.icone_tableau_blanc, R.id.icone_tableau_noir, R.id.icone_imprimante, R.id.dispo}
                             );
                             listView_salles.setAdapter(adapter);
                         }
@@ -388,16 +411,25 @@ public class RechSalle extends ActionBarActivity
             // If no of array elements is not zero
             if(arr.length() != 0)
             {
-                // Loop through each array element, get JSON object which has userid and username
+                // Loop through each array element, get JSON object
                 for (int i = 0 ; i < arr.length() ; i++)
                 {
                     HashMap<String,String> map = new HashMap<String,String>();
                     // Get JSON object
                     JSONObject obj = (JSONObject) arr.get(i);
 
-                    String key = obj.keys().next(); // 1 seul élément
+                    String key = obj.keys().next(); // 1 seul élément par objet JSON
                     map.put("nom", key);
-                    map.put("dispo", obj.get(key).toString() + " min");
+
+                    // Vérification de la disponibilité :
+                    if (obj.getInt(key) == 0) {
+                        map.put("dispo", "Libre");
+                    } else if (obj.getInt(key) > 0) {
+                        map.put("dispo", obj.get(key).toString() + " min");
+                    } else {
+                        // "-1" : ne pas afficher (mais laisser activé ici pour debug) :
+                        map.put("dispo", "Occupé");
+                    }
 
                     arraylist.add(map);
                 }

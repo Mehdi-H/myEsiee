@@ -5,6 +5,8 @@
     android:layout_height="match_parent"
     android:orientation="horizontal" >
 
+    <!-- Nom salle -->
+
     <TextView
         android:id="@+id/nomSalle"
         android:layout_width="wrap_content"
@@ -17,6 +19,78 @@
         android:textColor="@color/primary_text"
         android:textSize="20dp"
         android:textStyle="bold" />
+
+    <!-- Icônes -->
+
+    <ImageView
+        android:id="@+id/icone_type"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="9dp"
+        android:layout_marginBottom="9dp"
+        android:src="@drawable/ic_action_computer_accent"/>
+
+    <TextView
+        android:id="@+id/icone_type_debug"
+        android:layout_width="wrap_content"
+        android:layout_height="fill_parent"
+        android:layout_marginBottom="7dp"
+        android:layout_marginTop="7dp"
+        android:paddingLeft="7dp"
+        android:paddingTop="7dp"
+        android:textColor="@color/secondary_text"
+        android:textSize="20dp"
+        android:text="IT" />
+
+    <TextView
+        android:id="@+id/icone_projecteur"
+        android:layout_width="wrap_content"
+        android:layout_height="fill_parent"
+        android:layout_marginBottom="7dp"
+        android:layout_marginTop="7dp"
+        android:paddingLeft="7dp"
+        android:paddingTop="7dp"
+        android:textColor="@color/secondary_text"
+        android:textSize="20dp"
+        android:text="1" />
+
+    <TextView
+        android:id="@+id/icone_tableau_blanc"
+        android:layout_width="wrap_content"
+        android:layout_height="fill_parent"
+        android:layout_marginBottom="7dp"
+        android:layout_marginTop="7dp"
+        android:paddingLeft="7dp"
+        android:paddingTop="7dp"
+        android:textColor="@color/secondary_text"
+        android:textSize="20dp"
+        android:text="2" />
+
+    <TextView
+        android:id="@+id/icone_tableau_noir"
+        android:layout_width="wrap_content"
+        android:layout_height="fill_parent"
+        android:layout_marginBottom="7dp"
+        android:layout_marginTop="7dp"
+        android:paddingLeft="7dp"
+        android:paddingTop="7dp"
+        android:textColor="@color/secondary_text"
+        android:textSize="20dp"
+        android:text="2" />
+
+    <TextView
+        android:id="@+id/icone_imprimante"
+        android:layout_width="wrap_content"
+        android:layout_height="fill_parent"
+        android:layout_marginBottom="7dp"
+        android:layout_marginTop="7dp"
+        android:paddingLeft="7dp"
+        android:paddingTop="7dp"
+        android:textColor="@color/secondary_text"
+        android:textSize="20dp"
+        android:text="0" />
+
+    <!-- Disponibilité -->
 
     <TextView
         android:id="@+id/dispo"
