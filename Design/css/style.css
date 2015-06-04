@@ -111,7 +111,7 @@ main {
 }
 
 .medium{
-   font-size : 2.5rem !important;
+   font-size : 1.5rem !important;
 }
 
 .option_recherche{
@@ -121,6 +121,14 @@ main {
 .reduc_liste_salle{
     width : 50%;
     height : auto;
+}
+
+#z_index_bouton{
+    z-index: 0;
+}
+
+.taille_bouton{
+    width : 170px;
 }
 
 
@@ -163,6 +171,10 @@ main {
 }
 .stop_offset{
     margin-left : 0% !important;
+}
+
+.taille_bouton{
+    width : 155px;
 }
 
 

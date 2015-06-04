@@ -1,3 +1,35 @@
+<?php
+/**
+ * @Author: Mehdi-H
+ * @Date:   2015-06-04 19:13:37
+ * @Last Modified by:   Mehdi-H
+ * @Last Modified time: 2015-06-04 19:29:10
+ */
+
+require_once('cookies.php');
+
+$ch = curl_init();
+
+curl_setopt_array($ch, array(
+	CURLOPT_RETURNTRANSFER => 1,
+	CURLOPT_URL => 'https://mvx2.esiee.fr/api/aurion.php',
+	CURLOPT_USERAGENT => 'E-Room pour ESIEE Paris (projet E3E 2015)',
+	CURLOPT_FOLLOWLOCATION => 1,
+	CURLOPT_SSL_VERIFYPEER => false,
+	CURLOPT_POSTFIELDS => array(
+	    'func' => 'absences',
+	    'login' => $login,
+	    'pwd' => $pwd
+    	)
+	)
+);
+
+$out = curl_exec($ch); // Exécution
+curl_close($ch); // Fermeture
+
+$data = json_decode($out);
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -43,57 +75,47 @@
 
 
 		<div class="row center bouton_notes">
-			<a class="waves-effect waves-light btn accent-color taille_bouton">Cette année</a>
-			<a class="waves-effect waves-light btn accent-color taille_bouton">Archives</a>
+			<a href="https://mvx2.esiee.fr/wip/absence.php" class="waves-effect waves-light btn accent-color taille_bouton" onclick="load()">Cette année</a>
+			<a href="https://mvx2.esiee.fr/wip/absence_archivees.php" class="waves-effect waves-light btn accent-color taille_bouton" onclick="load()">Archives</a>
 		</div>
 
 		<ul class="collection">
+			<?php 
+				foreach ($data as $indexInArray => $absenceArray) {
+			?>
 			<li class="collection-item avatar taille_ligne">
-				<i class="circle mdi-notification-event-available green"></i>
-				<span class="title">Préparation progressive du projet personnel professionnel - P5</span>
-				<p>10/06/2013 de 10:00 à 12:00 - MASINA Eric<br>
-					Excusé
+				<?php 
+					if ($absenceArray->{'motif'} == 'Retard excusé') {
+						echo('<i class="circle mdi-notification-event-available green"></i>');
+					}else{
+						echo('<i class="circle mdi-notification-event-busy red darken-3"></i>');
+					}
+				?>				
+				<span class="title">
+					<?php echo($absenceArray->{'activite'}
+								.' - '.
+								$absenceArray->{'unite'}
+								.' - '.
+								$absenceArray->{'code'}
+							); 
+					?>
+				</span>
+				<p>
+					<?php echo($absenceArray->{'date'}
+								. ' de '.
+								$absenceArray->{'creneau'}
+								.' - '.
+								$absenceArray->{'intervenant'}
+								.'<br>'.
+								$absenceArray->{'motif'}
+							); 
+					?>
 				</p>
 			</li>
-			<li class="collection-item avatar taille_ligne">
-				<i class="circle mdi-notification-event-available green"></i>
-				<span class="title">Préparation progressive du projet personnel professionnel - P5</span>
-				<p>10/06/2013 de 10:00 à 12:00 - MASINA Eric<br>
-					Excusé
-				</p>
-			</li>
-			<li class="collection-item avatar taille_ligne">
-				<i class="circle mdi-notification-event-available green"></i>
-				<span class="title">Préparation progressive du projet personnel professionnel - P5</span>
-				<p>10/06/2013 de 10:00 à 12:00 - MASINA Eric<br>
-					Excusé
-				</p>
-			</li>
-			<li class="collection-item avatar taille_ligne">
-				<i class="circle mdi-notification-event-busy red darken-3"></i>
-				<span class="title">Préparation progressive du projet personnel professionnel - P5</span>
-				<p>10/06/2013 de 10:00 à 12:00 - MASINA Eric<br>
-					Non excusé
-				</p>
-			</li>
-			<li class="collection-item avatar taille_ligne">
-				<i class="circle mdi-notification-event-busy red darken-3"></i>
-				<span class="title">Préparation progressive du projet personnel professionnel - P5</span>
-				<p>10/06/2013 de 10:00 à 12:00 - MASINA Eric<br>
-					Non excusé
-				</p>
-			</li>
-			<li class="collection-item avatar taille_ligne">
-				<i class="circle mdi-notification-event-busy red darken-3"></i>
-				<span class="title">Préparation progressive du projet personnel professionnel - P5</span>
-				<p>10/06/2013 de 10:00 à 12:00 - MASINA Eric<br>
-					Non excusé
-				</p>
-			</li>
+			<?php
+			}
+			?>
 		</ul>
-
-
-
 
 	</main>
 	<!--  Scripts-->
@@ -101,6 +123,12 @@
 	<script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
 	<script src="js/materialize.js"></script>
 	<script src="js/init.js"></script>
+
+	<script type="text/javascript">
+		function load(){
+			$('.bouton_notes').append('<div class="progress"><div class="indeterminate"></div></div>');
+		}
+	</script>
 
 </body>
 </html>

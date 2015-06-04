@@ -1,3 +1,35 @@
+<?php
+/**
+ * @Author: Mehdi-H
+ * @Date:   2015-06-03 16:11:32
+ * @Last Modified by:   Mehdi-H
+ * @Last Modified time: 2015-06-04 21:22:44
+ */
+require_once('cookies.php');
+
+$ch = curl_init();
+
+curl_setopt_array($ch, array(
+	CURLOPT_RETURNTRANSFER => 1,
+	CURLOPT_URL => 'https://mvx2.esiee.fr/api/aurion.php',
+	CURLOPT_USERAGENT => 'E-Room pour ESIEE Paris (projet E3E 2015)',
+	CURLOPT_FOLLOWLOCATION => 1,
+	CURLOPT_SSL_VERIFYPEER => false,
+	CURLOPT_POSTFIELDS => array(
+	    'func' => 'grades',
+	    'login' => $login,
+	    'pwd' => $pwd
+    	)
+	)
+);
+
+$out = curl_exec($ch); // Exécution
+curl_close($ch); // Fermeture
+
+$data = json_decode($out);
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -43,60 +75,32 @@
 		
 		
 		<div class="row center bouton_notes">
-			<a class="waves-effect waves-light btn accent-color taille_bouton" id="header">Cette année</a>
-			<a class="waves-effect waves-light btn accent-color taille_bouton">Archives</a>
+			<a href="https://mvx2.esiee.fr/wip/notes.php"class="waves-effect waves-light btn accent-color taille_bouton" id="header" onclick="load()">Cette année</a>
+			<a href="https://mvx2.esiee.fr/wip/notes_archivees.php"class="waves-effect waves-light btn accent-color taille_bouton" onclick="load()">Archives</a>
 		</div>
 
 		<ul class="collection">
+			<?php 
+				foreach ($data as $indexInArray => $gradeArray) {
+					// echo($gradeArray->{'annee'});
+			?>
 			<li class="collection-item avatar taille_ligne">
-				<i class=" white circle green-text grade ">A</i>
-				<span class="title ">Préparation progressive du projet personnel professionnel</span>
-				<p>P5<br>
-					Crédits : 2
+				<?php 
+					if(trim($gradeArray->{'note'}) == 'F' || trim($gradeArray->{'note'}) == 'FX'){
+						echo('<i class=" white circle red-text text-darken-1 grade">');
+					}else{
+						echo('<i class=" white circle green-text grade ">');
+					}
+				?>
+				<?php echo(str_replace('X','x',$gradeArray->{'note'})); ?></i>
+				<span class="title "><?php echo($gradeArray->{'libelle'}); ?></span>
+				<p><?php echo($gradeArray->{'unite'}); ?><br>
+					Crédits : <?php echo($gradeArray->{'credit'}); ?>
 				</p>
 			</li>
-			<li class="collection-item avatar taille_ligne">
-				<i class=" white circle green-text grade ">B</i>
-				<span class="title">Préparation progressive du projet personnel professionnel</span>
-				<p>P5<br>
-					Crédits : 2
-				</p>
-			</li>
-			<li class="collection-item avatar taille_ligne">
-				<i class=" white circle green-text grade">C</i>
-				<span class="title">Math</span>
-				<p>P5<br>
-					Crédits : 2
-				</p>
-			</li>
-			<li class="collection-item avatar taille_ligne">
-				<i class=" white circle green-text grade">D</i>
-				<span class="title">Préparation progressive du projet personnel professionnel</span>
-				<p>P5<br>
-					Crédits : 2
-				</p>
-			</li>
-			<li class="collection-item avatar taille_ligne">
-				<i class=" white circle green-text grade">E</i>
-				<span class="title">Préparation progressive du projet personnel professionnel</span>
-				<p>P5<br>
-					Crédits : 2
-				</p>
-			</li>
-			<li class="collection-item avatar taille_ligne">
-				<i class=" white circle red-text text-darken-1 grade">Fx</i>
-				<span class="title">Préparation progressive du projet personnel professionnel</span>
-				<p>P5<br>
-					Crédits : 2
-				</p>
-			</li>
-			<li class="collection-item avatar taille_ligne">
-				<i class=" white circle red-text text-darken-0 grade">F</i>
-				<span class="title">Préparation progressive du projet personnel professionnel</span>
-				<p>P5<br>
-					Crédits : 2
-				</p>
-			</li>
+			<?php
+				}
+			 ?>
 		</ul>
 	</main>
 
@@ -105,6 +109,12 @@
 	<script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
 	<script src="js/materialize.js"></script>
 	<script src="js/init.js"></script>
+
+	<script type="text/javascript">
+		function load(){
+			$('.bouton_notes').append('<div class="progress"><div class="indeterminate"></div></div>');
+		}
+	</script>
 	
 </body>
 </html>
