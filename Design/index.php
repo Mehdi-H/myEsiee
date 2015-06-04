@@ -14,6 +14,7 @@
 
 
 <body>
+
 	<main>
 		<div class="navbar-fixed">
 			<nav class="dark-primary-color" role="navigation">
@@ -66,49 +67,57 @@
 				Salle informatique</span>
 			</p>
 
-			<div class="row">
+			<div id="searchRow" class="row">
 				<div class="input-field col s6 offset-s3">
 					<input id="numero_salle" type="text" class="validate white-text">
 					<label class="white-text" for="numero_salle">
 						Numéro de salle
 					</label>
-					<button class="btn-floating waves-effect waves-light accent-color btn-large " type="submit" name="action">
+					<button id="searchBtn" class="btn-floating waves-effect waves-light accent-color btn-large " type="submit" name="action">
 						<i class="large mdi-action-search"></i>
 					</button>
 				</div>
 			</div>
 		</div>
 
-		<div class="row center">
+		<div id="searchResults" class="row center">
 			<div class="col s12 offset-s3 stop_offset">
 			<?php 
 				$salles = json_decode(file_get_contents('https://mvx2.esiee.fr/api/ade.php?func=rechSalle'),TRUE);
 
 				foreach ($salles as $indexInArray => $room) {
 					foreach ($room as $roomNumber => $roomState) {
-					echo('<a class="validate collection-item" href="#!">
-								<ul class="collection valign-wrapper reduc_liste_salle">
-									<li class="tab col s1 offset-s2">
-										<span class="valign right">
-											'. strval($roomNumber) .'
-										</span>
-									</li>
-									<li class="tab col s4">
-										<i class="small mdi-hardware-desktop-windows primary-text-color">
-										</i>
-										<i class="small mdi-social-school primary-text-color">
-										</i>
-										<i class="small mdi-notification-sd-card primary-text-color">
-										</i>
-										<i class="small mdi-notification-sd-card primary-text-color">
-										</i>
-									</li>
-									<li class="tab col s1 offset-s1">
-										<span class="valign right">30min
-										</span>
-									</li>
-								</ul>
-							</a>');
+
+						if ($roomState >= 0) {
+							echo('<a class="validate collection-item" href="#">
+										<ul class="collection valign-wrapper reduc_liste_salle">
+											<li class="tab col s2 offset-s2>
+												<span class="valign right">
+													'. strval($roomNumber) .'
+												</span>
+											</li>
+											<li class="tab col s7">
+												<i class="small mdi-hardware-desktop-windows primary-text-color">
+												</i>
+												<i class="small mdi-social-school primary-text-color">
+												</i>
+												<i class="small mdi-notification-sd-card primary-text-color">
+												</i>
+												<i class="small mdi-notification-sd-card primary-text-color">
+												</i>
+												<i class="small mdi-notification-sd-card primary-text-color">
+												</i>
+											</li>');
+												if($roomState > 0){
+													echo('<li class="time tab col s2"><span class="valign right">'. $roomState ." min");
+												}else{
+													echo('<li class="tab col s2"><span class="valign right">Libre');
+												}
+												echo('</span>
+											</li>
+										</ul>
+									</a>');
+						}
 					}
 				}
 			 ?>
@@ -127,11 +136,13 @@
 	<script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
 	<script src="js/materialize.js"></script>
 	<script src="js/init.js"></script>
-	<script>$(".button-collapse").sideNav();</script>
 
 	<script>  
 	  // === Dropdown ===  
 	  $(document).ready(function() {
+	  	 $(".button-collapse").sideNav({
+	        closeOnClick: true
+	    });
 	  	$('select').material_select();
 	  });
 	  </script>

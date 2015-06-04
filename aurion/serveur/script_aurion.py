@@ -3,7 +3,7 @@
 # @Author: mehdi
 # @Date:   2015-05-20 09:16:35
 # @Last Modified by:   Mehdi-H
-# @Last Modified time: 2015-05-31 17:32:00
+# @Last Modified time: 2015-06-04 09:12:44
 
 
 import os,sys
@@ -31,7 +31,23 @@ def aurion_grades():
 	config_selenium.aurion_connection(id["login"],id["password"])
 
 	# On extrait les notes
-	parsing_bs4.grades_to_json()
+	parsing_bs4.grades_to_json(parsing_bs4.current_grades_parsing())
+
+	# Fin du script
+	config_selenium.quit_selenium_browser()
+
+def old_aurion_grades():
+
+	id = fetch_login()
+
+	# On initialise la connexion du navigateur pour Aurion
+	config_selenium.init_selenium_browser(urlAurion = "https://aurionprd.esiee.fr")
+
+	# On se connecte avec id et mdp
+	config_selenium.aurion_connection(id["login"],id["password"])
+
+	# On extrait les notes
+	parsing_bs4.grades_to_json(parsing_bs4.old_grades_parsing())
 
 	# Fin du script
 	config_selenium.quit_selenium_browser()
@@ -47,7 +63,23 @@ def aurion_absences():
 	config_selenium.aurion_connection(id["login"],id["password"])
 
 	# On extrait les absences
-	parsing_bs4.absences_to_json()
+	parsing_bs4.absences_to_json(parsing_bs4.current_absences_parsing())
+
+	# Fin du script
+	config_selenium.quit_selenium_browser()
+
+def old_aurion_absences():
+
+	id = fetch_login()
+
+	# On initialise la connexion du navigateur pour Aurion
+	config_selenium.init_selenium_browser(urlAurion = "https://aurionprd.esiee.fr")
+
+	# On se connecte avec id et mdp
+	config_selenium.aurion_connection(id["login"],id["password"])
+
+	# On extrait les notes
+	parsing_bs4.absences_to_json(parsing_bs4.old_absences_parsing())
 
 	# Fin du script
 	config_selenium.quit_selenium_browser()
@@ -61,5 +93,9 @@ if __name__ == '__main__':
 			aurion_grades()
 		elif sys.argv[3] == 'absences':
 			aurion_absences()
+		elif sys.argv[3] == 'old_grades':
+			old_aurion_grades()
+		elif sys.argv[3] == 'old_absences':
+			old_aurion_absences()
 		else:
 			print(sys.argv[3] + ' : erreur de fonction non reconnue.')
