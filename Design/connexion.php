@@ -3,7 +3,7 @@
  * @Author: Mehdi-H
  * @Date:   2015-06-03 16:20:43
  * @Last Modified by:   Mehdi-H
- * @Last Modified time: 2015-06-04 15:18:37
+ * @Last Modified time: 2015-06-04 21:04:23
  */
 
 if(isset($_POST['login'], $_POST['pwd'])){
@@ -21,7 +21,16 @@ if(isset($_POST['login'], $_POST['pwd'])){
 	if(trim($response) != 'ok'){
 		$j["retour"] = "Vous n'avez pas renseigné le bon login.";
 	}else{
-		$j["retour"] = "Vous êtes bien connecté.";
+		$j["retour"] = "Vous êtes bien connecté. Vous allez être redirigé.";
+
+		$cookie_aurion = array(
+			'login' => $login,
+			'pwd' => $pwd
+		);
+
+		$cookie_aurion = json_encode($cookie_aurion);
+
+		setcookie("eroom", $cookie_aurion, time() + (86400 * 30), '');
 	}
 
 	// header("Content-Type: application/json; charset=utf-8", true);
@@ -143,6 +152,9 @@ if(isset($_POST['login'], $_POST['pwd'])){
 					success : function( data ) {
 						$("#modal1").find("h4").html(data.titre);
 						$("#modal1").find("p").html(data.retour);
+						if(data.retour == "Vous êtes bien connecté. Vous allez être redirigé."){
+							window.location = "notes.php";
+						}
 					},
 					error : function(xhr, textStatus, error){
 						console.log(xhr.statusText);
@@ -157,9 +169,6 @@ if(isset($_POST['login'], $_POST['pwd'])){
 				return false;
 			});			
 		});
-	</script>
-
-
-	
+	</script>	
 </body>
 </html>
