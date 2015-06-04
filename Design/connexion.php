@@ -3,21 +3,25 @@
  * @Author: Mehdi-H
  * @Date:   2015-06-03 16:20:43
  * @Last Modified by:   Mehdi-H
- * @Last Modified time: 2015-06-04 13:46:52
+ * @Last Modified time: 2015-06-04 15:18:37
  */
 
 if(isset($_POST['login'], $_POST['pwd'])){
 
-	$login = "login";
-	$pwd = "pwd";
-	$j = array();
-	$j["titre"] = "Formulaire incorrect";
+	$login = $_POST['login'];
+	$pwd = $_POST['pwd'];
 
-	if($_POST["login"] != "login"){
+	$command = "python3 ". dirname(__FILE__) ."/scripts/python/connection.py " . $login . " " . $pwd . " 2>&1";
+	$response = shell_exec($command);
+	// $r = json_decode($r);
+
+	$j = array();
+	$j["titre"] = "Connexion en cours...";
+
+	if(trim($response) != 'ok'){
 		$j["retour"] = "Vous n'avez pas renseigné le bon login.";
 	}else{
-		$j["titre"] = "Connexion en cours";
-		$j["retour"] = "Vous etes bien connecte.";
+		$j["retour"] = "Vous êtes bien connecté.";
 	}
 
 	// header("Content-Type: application/json; charset=utf-8", true);
@@ -93,13 +97,13 @@ if(isset($_POST['login'], $_POST['pwd'])){
 			<!-- <a class="waves-effect waves-light btn modal-trigger" href="#modal1">Modal</a> -->
 
 		<!-- Modal Structure -->
-		<div id="modal1" class="modal">
+		<div id="modal1" class="modal default-primary-color z-depth-3">
 			<div class="modal-content">
-				<h4>Erreur de connexion</h4>
+				<h4>Connexion en cours...</h4>
 				<p></p>
 			</div>
-			<div class="modal-footer">
-				<a href="#" class=" modal-action modal-close waves-effect waves-green btn-flat">Continuer</a>
+			<div class="modal-footer default-primary-color z-depth-3">
+				<a href="#" class=" modal-action modal-close waves-effect waves-green btn-flat accent-color">Fermer</a>
 			</div>
 		</div>
 		
@@ -146,6 +150,9 @@ if(isset($_POST['login'], $_POST['pwd'])){
 						console.log(error);
 					}
 				})
+				.done(function(){
+					// $("#modal1").find('.modal-footer').css('visibility':'visible');
+				});
 
 				return false;
 			});			
