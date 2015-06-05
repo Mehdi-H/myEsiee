@@ -1,22 +1,18 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-# @Author: mehdi
-# @Date:   2015-05-23 11:10:28
+# @Author: Mehdi-H
+# @Date:   2015-06-05 14:12:28
 # @Last Modified by:   Mehdi-H
-# @Last Modified time: 2015-05-28 18:39:40
+# @Last Modified time: 2015-06-05 15:16:17
 
 from bs4 import BeautifulSoup
 
 import pickle
 import sys
 import json
+import codecs
 
-import logging
-logging.basicConfig(filename='log.txt',
-						filemode='a',
-						format='%(asctime)s,%(msecs)d %(name)s %(levelname)s %(filename)s:%(lineno)-4d: %(message)s',
-						datefmt='%H:%M:%S',
-						level=logging.INFO)
+import config_selenium
 
 
 # /**
@@ -30,159 +26,76 @@ def clean_html(soup):
 
 
 # /**
-#  * Analyse du code source extrait d'aurion afin d'en extraire les notes.
+#  * Fonction pour analyser le code source des données extraites.
 #  */
-def current_grades_parsing(file='notes.html'):
+def data_parsing(data_html):
+	""" parsing_bs4.data_parsing(data_html):
+		Analyse du code source HTML des données extraites.
+		@data_html: code source html extrait d'Aurion.
+	"""
 
-	logging.info("script_aurion::parsing_bs4::current_grades_parsing()")
-	html = []  # code source récupéré d'aurion
-	heading = []  # données d'en-tête : Année, nom d'unité, libellé, etc...
-	grades = []  # ensemble des notes
-	grade = []  # une note qui sera ajoutée à l'ensemble des notes
+	html     = []  # code source récupéré d'aurion
+	ensemble = []  # ensemble des données
+	piece    = []  # une partie des données qui sera ajoutée à l'ensemble des données
 
-	with open(file,'r') as f:
-		for line in f:
-			html.append(line.strip())
-		html = ''.join(html)
-	logging.info("récupération des notes au format html")
+	html = data_html
 
 	soup = BeautifulSoup(html)  # conversion du html en objet à parser
-	logging.info("conversion html->soup réussie")
 
-	table_grades = soup.find('table')  # On identifie dans la soupe le table tag #d'id form:dataTableFavori avec toutes les notes et l'en-tête
-	
-	for th in table_grades.find_all('th'):  # pour chaque balise th de l'en-tête,
-		heading.append(th.text.rstrip())  # on récupère le contenu textuel débarassé d'espaces possibles à sa droite (ex: "Année      " au lieu de "Année")
-	#heading = [info.lower().replace('é','e').replace(' ','_') for info in heading]  # on réarrange l'en-tête si besoin
-	logging.info("en-tête récupérée")
+	for table_ensemble in soup.find_all('table'):  # Dans la liste de toutes les <table>
+		for tbody in table_ensemble.find_all('tbody'):  # dans la balise tbody contenue dans la balise table,
+			for tr in tbody.find_all('tr'):  # pour chaque ligne du tableau de données
+				piece = []	# réinitialisation du tableau de données unitaire
+				for td in tr.find_all('td'):  # pour chaque cellule
+					if not td.span:  # si la cellule est vide
+						piece.append('non renseignée')
+					else:
+						for span in td.find_all('span'):  # pour chaque balise span qui va contenir une donnée
+							piece.append(td.text)  # on récupère une donnée
+				ensemble.append(piece)  # une fois la donnée complétée, on l'insère dans la liste de toutes les données
+		ensemble.pop()  # la balise contient une dernière ligne vide, on l'enlève
 
-	for tbody in table_grades.find_all('tbody'):  # dans la balise tbody contenue dans la balise table,
-		for tr in tbody.find_all('tr'):  # pour chaque ligne du tableau de notes
-			grade = []	# réinitialisation du tableau de note unitaire
-			for td in tr.find_all('td'):  # pour chaque cellule
-				if not td.text:  # on détecte ainsi les cellules vides sur aurion si elles n'ont pas été remplies par oubli ou qu'elles n'ont pas lieu d'être remplies (ex: compensation)
-					grade.append(None)
-				else:
-					for span in td.find_all('span'):  # pour chaque balise span qui va contenir une donnée qui compose la note courante
-						grade.append(span.text)  # on récupère une donnée de la note
-			grades.append(grade)  # une fois la note complétée, on l'insère dans la liste de toutes les notes
-	grades.pop()  # la balise contient une dernière ligne vide, on l'enlève
-	logging.info("notes récupérées")
-
-	with open('current_grades.pickle', 'wb') as grades_pkl:
-		pickle.dump(heading,grades_pkl)
-		pickle.dump(grades,grades_pkl)
-	logging.info("en-tête puis notes stockées dans current_grades.pickle")
-
-	return True
-
-def grades_to_json(file='current_grades.pickle'):
-
-	heading = []
-	grades = []
-	json_list = []
-	grade = {}
-
-	with open(file, 'rb') as grades_pkl:
-		heading = pickle.load(grades_pkl)
-		grades = pickle.load(grades_pkl)
-	logging.info("en-tête puis notes extraits depuis current_grades.pickle")
-
-	for j in range(len(grades)):
-		for k in range(len(grades[j])):
-			grade[heading[k%len(heading)]] = grades[j][k]
-		json_list.append(grade)
-		grade = {}
-
-	del grade
-	
-	with open('grades.json','w') as f:
-		f.write(json.dumps(json_list, sort_keys=True, indent=5, separators=(',', ': '), ensure_ascii=False))
-
-	return True
+	return ensemble
 
 # /**
-#  * Analyse du code source extrait d'aurion afin d'en extraire les notes.
+#  * Transformation d'une liste de listes de données extraites HTML en liste JSON d'objets.
 #  */
-def current_absences_parsing(file='absences.html'):
+def data_to_json(parsed_data, func):
+	""" parsing_bs4.data_to_json(parsed_data, func):
+		A partir de données parsées sous forme de liste de listes de données,
+		produit un fichier parsed_data.json.
+		Les données d'en-têtes dépendent du paramètre func: (old_)grades, (old_)absences.
+		@parsed_data: liste de listes au retour de la fonction parsing_bs4.data_parsing().
+		@func: paramètre de séléction des données d'en-têtes et de nommage du fichier json.
+	"""
 
-	logging.info("script_aurion::parsing_bs4::current_absences_parsing()")
-	html = []  # code source récupéré d'aurion
-	heading = []  # données d'en-tête : Année, nom d'unité, libellé, etc...
-	absences = []  # ensemble des notes
-	absence = []  # une note qui sera ajoutée à l'ensemble des notes
+	headings = {
+		'grades'       : ['annee', 'unite', 'libelle', 'note','compensation','credit'],
+		'old_grades'   : ['annee', 'unite', 'libelle', 'note','compensation','credit'],
+		'absences'     : ['date','creneau','code','unite','intervenant','activite','nb_heures','motif'],
+		'old_absences' : ['date','creneau','code','unite','intervenant','activite','nb_heures','motif']
+	}
 
-	with open(file,'r') as f:
-		for line in f:
-			html.append(line.strip())
-		html = ''.join(html)
-	logging.info("récupération des absences au format html")
+	heading    = headings[func]
+	json_list  = []  # future liste JSON
+	json_piece = {}  # futur objet JSON
 
-	soup = BeautifulSoup(html)  # conversion du html en objet à parser
-	logging.info("conversion html->soup réussie")
+	#grades = current_grades_parsing()  # On récupère la liste de listes de notes
 
-	table_absences = soup.find('table')  # On identifie dans la soupe le table tag #d'id form:dataTableFavori avec toutes les notes et l'en-tête
+	# Boucle de parcours des notes pour obtenir une liste d'objets JSON
+	for j in range(len(parsed_data)):
+		for k in range(len(parsed_data[j])):
+			if parsed_data[j][k]:  # les méthodes strip() ne s'appliquent pas aux objets nuls si None est choisi pour définir les cellules vides au moment du parsing
+				json_piece[heading[k]] = parsed_data[j][k].lstrip('\n').rstrip('\n').strip()
+			else:
+				json_piece[heading[k]] = parsed_data[j][k]
+		json_list.append(json_piece)
+		json_piece = {}
+
+	del json_piece
 	
-	for th in table_absences.find_all('th'):  # pour chaque balise th de l'en-tête,
-		heading.append(th.text.rstrip())  # on récupère le contenu textuel débarassé d'espaces possibles à sa droite (ex: "Année      " au lieu de "Année")
-	#heading = [info.lower().replace('é','e').replace(' ','_') for info in heading]  # on réarrange l'en-tête si besoin
-	logging.info("en-tête récupérée")
-
-	for tbody in table_absences.find_all('tbody'):  # dans la balise tbody contenue dans la balise table,
-		for tr in tbody.find_all('tr'):  # pour chaque ligne du tableau de notes
-			absence = []	# réinitialisation du tableau de note unitaire
-			for td in tr.find_all('td'):  # pour chaque cellule
-				if not td.text:  # on détecte ainsi les cellules vides sur aurion si elles n'ont pas été remplies par oubli ou qu'elles n'ont pas lieu d'être remplies (ex: compensation)
-					absence.append(None)
-				else:
-					for span in td.find_all('span'):  # pour chaque balise span qui va contenir une donnée qui compose la note courante
-						absence.append(span.text)  # on récupère une donnée de la note
-			absences.append(absence)  # une fois la note complétée, on l'insère dans la liste de toutes les notes
-	absences.pop()  # la balise contient une dernière ligne vide, on l'enlève
-	logging.info("notes récupérées")
-
-	with open('current_absences.pickle', 'wb') as absences_pkl:
-		pickle.dump(heading,absences_pkl)
-		pickle.dump(absences,absences_pkl)
-	logging.info("en-tête puis absences stockées dans current_absences.pickle")
-
-	return True
-
-def absences_to_json(file='current_absences.pickle'):
-
-	heading = []
-	absences = []
-	json_list = []
-	absence = {}
-
-	with open(file, 'rb') as absences_pkl:
-		heading = pickle.load(absences_pkl)
-		absences = pickle.load(absences_pkl)
-	logging.info("en-tête puis notes extraits depuis current_absences.pickle")
-
-	for j in range(len(absences)):
-		for k in range(len(absences[j])):
-			absence[heading[k%len(heading)]] = absences[j][k]
-		json_list.append(absence)
-		absence = {}
-
-	del absence
-	
-	with open('absences.json','w') as f:
+	# Ecriture avec le module codecs pour assurer l'encodage UTF-8 de l'objet JSON pour PHP.
+	with codecs.open(func+'.json', 'w', 'utf-8') as f:
 		f.write(json.dumps(json_list, sort_keys=True, indent=5, separators=(',', ': '), ensure_ascii=False))
 
 	return True
-
-if __name__ == '__main__':
-	if current_grades_parsing('notes.html') == True:
-		# with open('current_grades.pickle', 'rb') as g:
-		# 	heading = pickle.load(g)
-		# 	grades = pickle.load(g)
-		# print("Liste d'en-tête:", heading)
-		# print('\n')
-		# print("Liste des notes:")
-		# for grade in grades:
-		# 	print(grade)
-		grades_to_json('current_grades.pickle')
-	if current_absences_parsing('absences.html') == True:
-		absences_to_json('current_absences.pickle')

@@ -1,43 +1,38 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-# @Author: mehdi
-# @Date:   2015-05-20 09:16:35
+# @Author: Mehdi-H
+# @Date:   2015-06-05 14:38:13
 # @Last Modified by:   Mehdi-H
-# @Last Modified time: 2015-05-28 18:27:35
+# @Last Modified time: 2015-06-05 15:40:07
+
 
 from selenium import webdriver
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.common.action_chains import ActionChains
+
 from bs4 import BeautifulSoup
 import parsing_bs4
 
 import mypkg
 
-import logging
-logging.basicConfig(filename='log.txt',
-						filemode='a',
-						format='%(asctime)s,%(msecs)d %(name)s %(levelname)s %(filename)s:%(lineno)-4d: %(message)s',
-						datefmt='%H:%M:%S',
-						level=logging.INFO)
-
 driver = None
 
 # /**
 #  * Fonction qui initialise le webdriver selenium avec PhantomJS, avec les bons arguments, 
-#  * et qui vérifie qu'Aurion est accessible à "https://aurionprd.esiee.fr".
+#  * et qui verifie qu'Aurion est accessible à "https://aurionprd.esiee.fr".
 #  */
 def init_selenium_browser(urlAurion = "https://aurionprd.esiee.fr"):
-	logging.info("script_aurion::config_selenium::init_selenium_browser()")
+
 	# Config webbrowser
-	logging.info("Configuration de selenium avec PhantomJS")
-	# driver = webdriver.PhantomJS(service_args=['--ignore-ssl-errors=true', '--ssl-protocol=tlsv1'])
-	driver = mypkg.getOrCreateWebdriver()	#  Phase de test : utilisation de Firefox pour voir ce qu'il se passe
-	logging.info("Navigateur configuré")
+	driver = mypkg.getOrCreateWebdriver()
 
 	# Tentative accès aurionprd.esiee.fr
 	driver.get(urlAurion)
-	logging.info("Tentative d'accès à Aurion")
-	assert "Page de connexion" in driver.title, "'Page de connexion' devrait apparaître dans le <title> tag de la page HTML, le site a peut-etre changé."
-	logging.info("Accès à Aurion")
+	assert "Page de connexion" in driver.title, "'Page de connexion' devrait apparaitre dans le <title> tag de la page HTML, le site a peut-etre change."
 	return True
+
 
 # /**
 #  * Pour quitter le navigateur.
@@ -46,93 +41,141 @@ def quit_selenium_browser():
 	driver = mypkg.getOrCreateWebdriver()
 	driver.quit()
 
+# /**
+#  * Pour retourner à la page d'accueil entre deux extractions
+#  */
 def back_to_home_page():
 	driver = mypkg.getOrCreateWebdriver()
 
 	assert 'Accueil' in driver.page_source, 'Le bouton \'Accueil\' ne semble pas visible par le navigateur'
 
 	homeBtn = driver.find_element_by_link_text('Accueil')
-	logging.info("Bouton pour le retour à la page d'accueil identifié")
 
 	homeBtn.click()
-	logging.info("Bouton pour le retour à la page d'accueil cliqué")
 
 	return True 
+
 # /**
 #  * Fonction qui accède au formulaire de connexion de la page, le remplit, et l'envoie.
 #  */
 def aurion_connection(l, pwd):
-	logging.info("script_aurion::config_selenium::aurion_connection()")
 	# Initialisation selenium
 	driver = mypkg.getOrCreateWebdriver()
 
-	# Identification des éléments de la page à remplir
+	# Identification des elements de la page à remplir
 	form = driver.find_element_by_class_name('form')
-	logging.info("Formulaire de connexion accédé")
 	loginBar = driver.find_element_by_id('j_username')
-	logging.info("Barre d'identifiant accédé")
 	passwordBar = driver.find_element_by_id('j_password')
-	logging.info("Barre de mot de passe accédé")
 
 	# Remplissage du formulaire et submit
 	loginBar.send_keys(l)
-	logging.info("Identifiant rentré")
 	passwordBar.send_keys(pwd)
-	logging.info("Mot de passe rentré")
 	form.submit()
-	logging.info("Formulaire de connexion envoyé")
 
-	assert "Login ou mot de passe invalide" not in driver.page_source, "Connexion échouée, mauvais mot de passe ou mauvais identifiant"
-	return True
+	if "Mon compte" in driver.page_source:
+		return True
+	else:
+		return False
 
-# /**
-#  * Fonction qui accède à la page des notes de l'année courante d'un étudiant et les stocke dans un fichier au format html
-#  */
-def fetch_grades_html():
-	logging.info("script_aurion::config_selenium::fetch_grades_html()")
-	driver = mypkg.getOrCreateWebdriver()
+	assert "Login ou mot de passe invalide" not in driver.page_source, "Connexion echouee, mauvais mot de passe ou mauvais identifiant"
 
-	# Identification du bouton vers les notes, et click
-	assert "Mes Notes" in driver.page_source, "Le bouton vers \"Mes Notes\" n'existe peut-être plus sur Aurion."
-	notes = driver.find_element_by_link_text('Mes Notes')
-	notes.click()
-
-	# Focus sur le tableau des notes
-	elem = driver.find_element_by_id("form:scrollTable")
-	# On récupère ensuite un code source purgé de tous les attributs html qui alourdissent le code et ralentiront son parsing.
-	source_code = str(parsing_bs4.clean_html(BeautifulSoup(elem.get_attribute('innerHTML'))).prettify())
-
-	# Stockage des notes dans un fichier notes.html
-	f = open('notes.html', 'w')
-	f.write(source_code)
-	f.close()
-
-	return True
+	return False
 
 # /**
-#  * Fonction qui accède à la page des absences de l'année courante d'un étudiant et les stocke dans un fichier au format html
+#  * Fonction qui retourne le nombre de page de résultats pour les données d'archives.
 #  */
-def fetch_absences_html():
-	logging.info("script_aurion::config_selenium::fetch_absences_html()")
+def nb_page_results(s):
+	cpt_pages = 0
+
+	# On convertit le tout en objet _soup pour pouvoir appliquer nos traitements
+	soup = BeautifulSoup(''.join(s))
+
+	table_notes = soup.find_all(id="form:haut")
+	for t in table_notes[0]:
+		cpt_pages+=1
+
+	# Il y a 4 boutons de navigation en plus des boutons de numéro
+	if (cpt_pages - 4) > 0:
+		return cpt_pages - 4
+	else:
+		return 0
+
+def go_to_data(func):
 	driver = mypkg.getOrCreateWebdriver()
 
-	# Identification du bouton vers les notes, et click
-	assert "Mes Absences" in driver.page_source, "Le bouton vers \"Mes Absences\" n'existe peut-être plus sur Aurion."
-	absences = driver.find_element_by_link_text('Mes Absences')
-	absences.click()
+	assertions = {
+		'grades' : 'Mes Notes',
+		'absences' : 'Mes Absences',
+		'old_grades' : 'Archives',
+		'old_absences' : 'Archives'
+	}
 
-	# Focus sur le tableau des notes
-	elem = driver.find_element_by_id("form:scrollTable")
-	# On récupère ensuite un code source purgé de tous les attributs html qui alourdissent le code et ralentiront son parsing.
-	source_code = str(parsing_bs4.clean_html(BeautifulSoup(elem.get_attribute('innerHTML'))).prettify())
+	assert assertions[func] in driver.page_source, "Le bouton vers " + assertions[func] + "est introuvable."
 
-	# Stockage des notes dans un fichier notes.html
-	f = open('absences.html', 'w')
-	f.write(source_code)
-	f.close()
+	if func == 'old_absences':
+		position = str(3)
+	elif func == 'old_grades':
+		position = str(1)
 
-	return True
+	if 'old' in func:
+		archives = driver.find_element_by_xpath("(html/body[@class='templatePrincipal']/form[@id='form']/div[@class='cadreMiseEnPage']/div[@class='sidebar']/div[@class='box']/div[@class='body']/div)[2]")
+		hover = ActionChains(driver).move_to_element(archives)
+		hover.perform()
 
-# if __name__ == '__main__':
-#     if(init_selenium_browser()):
-#     	aurion_connection()
+		driver.save_screenshot('out.png')
+
+		archivesBtn = driver.find_element_by_xpath("(html/body[@class='templatePrincipal']/form[@id='form']/div[@class='cadreMiseEnPage']/div[@class='sidebar']/div[@class='box']/div[@class='body']/div/div[@class='rf-ddm-pos']/div[@class='rf-ddm-lst'])[2]/div[@class='rf-ddm-lst-bg']/div[" + position + "]/span")
+		archivesBtn.click()
+
+		# Bouton de recherche générale pour afficher toutes les notes des années précédentes
+		searchAll = driver.find_element_by_id('form:idSearch')
+		searchAll.click()
+
+		assert "recherche" in driver.page_source, "L acces aux données d'archives a peut-etre échoué."
+
+		driver.save_screenshot('out.png')
+
+		return True
+
+	else:
+		dataBtn = driver.find_element_by_link_text(assertions[func])
+		dataBtn.click()
+		return True
+
+def data_to_html():
+
+	driver = mypkg.getOrCreateWebdriver()
+
+	# Stockage du code source pour analyser le nombre de pages de résultats
+	elem = driver.page_source
+	source_code = elem
+	nb_page_archives = nb_page_results(source_code)
+
+	# Ayant le nombre de pages, on peut commencer l'extraction des données
+	
+	# Extraction du tableau de données de la page #1
+	elem = driver.find_element_by_id('form:scrollTable')
+	source_code = elem.get_attribute('innerHTML')
+
+	# Variable html pour y ranger tous les tableaux de données
+	html = source_code
+
+	# Parcours de la pagination de la page 2 à n
+	for page in range(2,nb_page_archives+1):
+		# Click sur la page suivante
+		btn_page = driver.find_element_by_id('form:haut_ds_next')
+		btn_page.click()
+		# Extraction du tableau de données
+		elem = driver.find_element_by_id('form:scrollTable')
+		source_code1 = elem.get_attribute('innerHTML')
+		# /!\ Le tableau se met à jour en Ajax, ce qui peut etre tres long a charger donc on reste dans une boucle d attente pour ne pas recuperer des doublons de tableau
+		while source_code1 == source_code:
+			elem = driver.find_element_by_id('form:scrollTable')
+			source_code1 = elem.get_attribute('innerHTML')
+
+		#Tableau de donnees definitif => ajout a la variable html
+		source_code = source_code1
+		source_code = elem.get_attribute('innerHTML')
+		html += source_code
+
+	return parsing_bs4.clean_html(BeautifulSoup(html)).prettify().encode('utf-8')
