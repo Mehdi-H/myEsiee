@@ -205,7 +205,7 @@ public class RechSalle extends ActionBarActivity
                     {
                         textView_debug[0].setText("Response : " + response);
 
-                        // === Construire un ArrayList d'HashMaps qui contient toutes les infos des salles (nom, dispo et caractéristiques) ===
+                        // === Construire un tableau de Strings qui contient toutes les infos des salles (nom, dispo et caractéristiques) ===
 
                         // --- Récupérer les infos du JSON (nom et dispo des salles correspondantes aux critères de recherche) ---
 
@@ -214,35 +214,39 @@ public class RechSalle extends ActionBarActivity
                         {
                             // --- Fusionner les infos des salles de la BDD avec la réponse JSON ---
 
-                            ArrayList<HashMap<String,String>> liste_salles_fusionee = new ArrayList<HashMap<String,String>>();
+                            // ArrayList<HashMap<String,String>> liste_salles_fusionee = new ArrayList<HashMap<String,String>>();
+                            String[] liste_salles_fusionee = new String[liste_salles_json.size()];
 
-                            for (HashMap<String,String> map : liste_salles_json)
+                            for (int i = 0 ; i < liste_salles_json.size() ; i++)
                             {
                                 // Retrouver la salle en question dans la BDD :
-                                ArrayList<HashMap<String,String>> liste_salle_bdd = controller.getSalles(map.get("nom"));
+                                ArrayList<HashMap<String,String>> liste_salle_bdd = controller.getSalles(liste_salles_json.get(i).get("nom"));
                                 HashMap<String,String> salle_bdd = liste_salle_bdd.get(0);
 
-                                // Rajouter les caractéristiques de la BDD dans la HashMap issue du JSON :
-                                map.put("type", salle_bdd.get("type"));
-                                map.put("projecteur", salle_bdd.get("projecteur"));
-                                map.put("imprimante", salle_bdd.get("imprimante"));
+                                // Récupérer le nom de la salle :
+                                liste_salles_fusionee[i] = liste_salles_json.get(i).get("nom") + ";";
+
+                                // Rajouter les caractéristiques de la BDD dans la String :
+                                liste_salles_fusionee[i] += salle_bdd.get("type") + ";";
+                                liste_salles_fusionee[i] += salle_bdd.get("projecteur") + ";";
 
                                 int tab = Integer.parseInt(salle_bdd.get("tableau"));
-                                map.put("tableau_blanc", (tab == 0 || tab == 2) ? "0" : "1");
-                                map.put("tableau_noir", (tab == 0 || tab == 1) ? "0" : "1");
+                                liste_salles_fusionee[i] += (tab == 0 || tab == 2) ? "0;" : "1;"; // tableauBlanc
+                                liste_salles_fusionee[i] += (tab == 0 || tab == 1) ? "0;" : "1;"; // tableauNoir
 
-                                // Fusionner JSON + BDD :
-                                liste_salles_fusionee.add(map);
+                                liste_salles_fusionee[i] += salle_bdd.get("imprimante") + ";";
+
+                                // Et enfin, la disponibilité (depuis le JSON) :
+                                liste_salles_fusionee[i] += liste_salles_json.get(i).get("dispo");
+
+                                System.out.println(liste_salles_fusionee[i]);
                             }
 
                             // --- Peupler la ListView avec la liste des salles obtenue ---
 
-                            ListAdapter adapter = new SimpleAdapter(
+                            RoomArrayAdapter adapter = new RoomArrayAdapter(
                                     RechSalle.this,
-                                    liste_salles_fusionee,
-                                    R.layout.view_salle_entry,
-                                    new String[] {"nom", "type", "projecteur", "tableau_blanc", "tableau_noir", "imprimante", "dispo"},
-                                    new int[] {R.id.nomSalle, R.id.icone_type_debug, R.id.icone_projecteur, R.id.icone_tableau_blanc, R.id.icone_tableau_noir, R.id.icone_imprimante, R.id.dispo}
+                                    liste_salles_fusionee
                             );
                             listView_salles.setAdapter(adapter);
                         }
