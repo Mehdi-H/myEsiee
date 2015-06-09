@@ -26,6 +26,12 @@
 	{
 		echo($ade->rechSalle());
 	}
-
+	elseif (strcmp($function, "dispoSalle") == 0)
+	{
+		$ade->dispo("salle");
+	}
+	elseif (strcmp($function, "dispoProf") == 0) {
+		$ade->dispo("prof");
+	}
 
  ?>

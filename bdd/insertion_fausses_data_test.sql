@@ -15,3 +15,21 @@ VALUES
 	("REILLE L.", 129, "9101", "leila.reille@esiee.fr"),
 	("BERCHER JF.", 75, "5254", "jf.bercher@esiee.fr"),
 	("HILAIRE X.", 103, "5256", "xavier.hilaire@esiee.fr");
+
+# Modifier les salles déjà présentes :
+
+UPDATE salle
+	SET resourceID="789"
+	WHERE nom="5004";
+UPDATE salle
+	SET resourceID="790"
+	WHERE nom="5006";
+UPDATE salle
+	SET resourceID="786"
+	WHERE nom="5008V+";
+UPDATE salle
+	SET resourceID="659"
+	WHERE nom="5201V";
+UPDATE salle
+	SET resourceID="183"
+	WHERE nom="2101";

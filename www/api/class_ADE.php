@@ -2,9 +2,9 @@
 
 	class ADE
 	{
-		/////////////////////////////////////////////////////////////////////////////////////////
+		/////////////////////////////////////////////////////////////////////////////////
 		/// ATTRIBUTS
-		/////////////////////////////////////////////////////////////////////////////////////////
+		/////////////////////////////////////////////////////////////////////////////////
 
 		private $_projetADE = 4;
 		private $_sessionID;
@@ -12,12 +12,14 @@
 		private $_proxy_url = "https://dupontl:mvx2dupontl@mvproxy.esiee.fr:3128";
 		private $_use_proxy = true;
 
-		/////////////////////////////////////////////////////////////////////////////////////////
+		/////////////////////////////////////////////////////////////////////////////////
 		/// CONSTRUCTEUR - DESTRUCTEUR
-		/////////////////////////////////////////////////////////////////////////////////////////
+		/////////////////////////////////////////////////////////////////////////////////
 
 		public function __construct($projetADE)
 		{
+			require_once '../mysql_sync/config.php';
+
 			$this->_projetADE = $projetADE;
 			$this->_ade_connect();
 		}
@@ -27,16 +29,16 @@
 			$this->_ade_disconnect();
 		}
 
-		/////////////////////////////////////////////////////////////////////////////////////////
+		/////////////////////////////////////////////////////////////////////////////////
 		/// METHODES PRIVEES
-		/////////////////////////////////////////////////////////////////////////////////////////
+		/////////////////////////////////////////////////////////////////////////////////
 
 		/**
 		 * Lance une requête HTTP de type GET.
 		 * @param  string $url L'URL à contacter pour effectuer la requête HTTP.
 		 * @return SimpleXMLElement      Le résultat de la requête sous forme XML.
 		 */
-		private function _httpGet($url)
+		private function _httpGet($url, $xml = true)
 		{
 			// Création de la requête :
 			$ch = curl_init();
@@ -53,7 +55,51 @@
 			$out = curl_exec($ch); // Exécution
 			curl_close($ch); // Fermeture
 
-			return new SimpleXMLElement($out);
+			return $xml ? new SimpleXMLElement($out) : $out;
+		}
+
+		/**
+		 * Lance une requête pour afficher une image de l'emploi du temps pour une ressource et une date donnée.
+		 */
+		private function _imageET($resourceID, $date, $width = 500, $height = 700)
+		{
+			// === Mise en forme des paramètres weeks et days à partir de la date ===
+
+			$weeks = date("W", $date) + 18; // offset d'origine inconnue à utiliser dans l'API fournie par ADE...
+			$days = date("N", $date) - 1; // pour avoir lundi = 0, ...
+
+
+			// === Format de l'URL ===
+
+			$url = $this->_prefixe_api
+				."?sessionId=".$this->_sessionID
+				."&function=imageET"
+				."&resources=".$resourceID
+				."&width=".$width
+				."&height=".$height
+				."&weeks=".$weeks
+				."&days=".$days;
+
+
+			// === Récupération de l'image sur ADE et sauvegarde du fichier ===
+
+			$image_name = "/var/www/tmp/imageET_".time().".gif";
+			$fp = fopen($image_name, 'wb');
+
+			$ch = curl_init($url);
+			curl_setopt_array($ch, array(
+				CURLOPT_USERAGENT => 'E-Room pour ESIEE Paris (projet E3E 2015)',
+				CURLOPT_PROXY => $this->_use_proxy ? $this->_proxy_url : NULL,
+				CURLOPT_SSL_VERIFYPEER => false,
+				CURLOPT_FILE => $fp,
+				CURLOPT_HEADER => false
+
+			));
+			$out = curl_exec($ch);
+			curl_close($ch);
+			fclose($fp);
+
+			return $image_name;
 		}
 
 		/**
@@ -75,6 +121,9 @@
 				."&projectId=".$this->_projetADE);
 		}
 
+		/**
+		 * Déconnexion d'ADE, ferme la session utilisée.
+		 */
 		private function _ade_disconnect()
 		{
 			$this->_httpGet($this->_prefixe_api
@@ -82,9 +131,23 @@
 				."&function=disconnect");
 		}
 
-		/////////////////////////////////////////////////////////////////////////////////////////
+		private function _mysql_request($request)
+		{
+			// Connexion à la BDD :
+			$db = mysql_connect(DB_HOST, DB_USER, DB_PASSWORD);
+			mysql_select_db(DB_DATABASE, $db);
+
+			// Exécution :
+			$req = mysql_query($request)
+				or die('Erreur SQL !<br>'.$request.'<br>'.mysql_errno());
+
+			mysql_close($db);
+			return $req;
+		}
+
+		/////////////////////////////////////////////////////////////////////////////////
 		/// METHODES PUBLIQUES (fonctions de l'API)
-		/////////////////////////////////////////////////////////////////////////////////////////
+		/////////////////////////////////////////////////////////////////////////////////
 
 		/**
 		 * FONCTION : Recherche d'une salle. Appelée si "func=rechSalle" dans l'URL.
@@ -143,15 +206,7 @@
 
 			// === 2. Lister les salles correspondant aux critères dans la BDD ===
 
-			// Connexion à la BDD :
-			$db = mysql_connect('localhost', 'root', 'MyMVX2');
-			mysql_select_db('eroom', $db);
-
-			// Requête SQL :
-			$sql = "SELECT * FROM salle".$sql_where;
-
-			// Exécution :
-			$req = mysql_query($sql) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_errno());
+			$req = $this->_mysql_request("SELECT * FROM salle".$sql_where);
 
 			// Stockage :
 			$salles = array();
@@ -162,8 +217,6 @@
 					-1 					// 1 (disponibilité)
 				);
 			}
-
-			mysql_close();
 
 
 			// === 3. Déterminer la disponibilité de chaque salle ===
@@ -246,6 +299,52 @@
 			}
 
 			return json_encode($resultats);
+		}
+
+		/**
+		 * FONCTION : Disponibilité d'une salle. Affiche une image de l'emploi du temps d'une salle pour une journée donnée. Appelée si "func=dispoSalle" dans l'URL.
+		 *
+		 * Paramètres possibles de la requête :
+		 *  - "nom" : le nom de la salle.
+		 *  - "date" : le jour à afficher (au format américain "mm/jj/aaaa"). Optionnel : par défaut, l'emploi du temps du jour-même sera affiché.
+		 *
+		 * @return image L'image de l'emploi du temps pour la salle et le jour sélectionnés
+		 */
+		public function dispo($type = "salle")
+		{
+			// === 1. Récupération des paramètres (nom et date) ===
+
+			// Nom de la salle :
+			$nom;
+			if (isset($_GET['nom'])) {
+				$nom = $_GET['nom'];
+			} else {
+				return "Erreur : nom ".$type." non spécifié.";
+			}
+
+			// Date :
+			// (Format : "mm/jj/aaa". Si non spécifiée : la date du jour)
+			$date = isset($_GET['date']) ? strtotime($_GET['date']) : time();
+
+
+			// 2. === Récupération du Resource ID de la salle dans la BDD ===
+
+			$req = $this->_mysql_request("SELECT resourceID FROM ".$type." WHERE nom='".$nom."'");
+			$resourceID = mysql_fetch_assoc($req)['resourceID'];
+
+
+			// === 3. Génération de l'image de l'emploi du temps ===
+
+			$image_name = $this->_imageET($resourceID, $date);
+
+
+			// === 4. Affichage de l'image ===
+
+			header("Content-type: image/gif");
+			readfile($image_name);
+
+			//ignore_user_abort(true);
+			unlink($image_name); // supprime l'image du serveur
 		}
 	}
 
