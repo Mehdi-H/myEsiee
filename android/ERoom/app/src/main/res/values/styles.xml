@@ -1,8 +1,26 @@
 <resources>
 
-    <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
-        <!-- Customize your theme here. -->
+    <!-- ==================================================================================
+     === Pour les anciennes versions d'Android
+     ================================================================================== -->
+
+    <style name="AppTheme" parent="BaseTheme">
+        <!-- La status bar ne se colore pas sur la plupart des anciennes versions : on décale -->
+        <item name="colorPrimary">@color/primary_dark</item>
+
+    </style>
+
+
+    <!-- ==================================================================================
+     === Pour Android 5 Lollipop (API 21)
+     ================================================================================== -->
+
+    <style name="BaseTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="colorPrimary">@color/primary</item> <!-- Action Bar -->
+        <item name="colorPrimaryDark">@color/primary_dark</item> <!-- Status Bar -->
+        <item name="colorAccent">@color/accent</item> <!-- Couleur d'accent  -->
+        <!-- Couleur de fond de l'appli (marche pas)
+        <item name="windowBackground">@color/windowBackground</item> -->
     </style>
 
 </resources>

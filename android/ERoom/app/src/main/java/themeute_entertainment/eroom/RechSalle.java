@@ -2,6 +2,7 @@ package themeute_entertainment.eroom;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -14,6 +15,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.content.Context;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.text.SpannableString;
 import android.text.Spanned;
 import android.text.style.ImageSpan;
@@ -23,6 +25,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.support.v4.widget.DrawerLayout;
+import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.ImageButton;
 import android.widget.ListAdapter;
@@ -114,6 +117,7 @@ public class RechSalle extends ActionBarActivity
         textView_debug[0] = (TextView) findViewById(R.id.textView_debug);
 
         final ImageButton searchBtn = (ImageButton) findViewById(R.id.imageButton_search);
+        final Button advancedSearch = (Button) findViewById(R.id.btn_advancedSearch);
 
         // ToggleButtons :
         btn_categ[0] = (ToggleButton) findViewById(R.id.imageButton_computer1);
@@ -169,6 +173,43 @@ public class RechSalle extends ActionBarActivity
 
             btn.setOnCheckedChangeListener(changeChecker);
         }
+
+        // ------------------------------------------------------------------------------------
+        // -- Bouton recherche avancée ==> Alert Dialog
+        // ------------------------------------------------------------------------------------
+
+        advancedSearch.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v)
+            {
+                Toast.makeText(context, "Recherche avancée", Toast.LENGTH_SHORT).show();
+
+                // === Création de l'Alert Dialog ===
+
+                // Instantiate an AlertDialog.Builder with its constructor
+                AlertDialog.Builder builder = new AlertDialog.Builder(RechSalle.this);
+
+                // Add the buttons
+                builder.setPositiveButton(R.string.chercher, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        // User clicked OK button
+                        Toast.makeText(context, "Chercher...", Toast.LENGTH_SHORT).show();
+                    }
+                });
+                builder.setNegativeButton("Annuler", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        // User cancelled the dialog
+                        Toast.makeText(context, "Annuler", Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+                // Utiliser le layout custom :
+                builder.setView(R.layout.dialog_advanced_search);
+
+                // Get the AlertDialog from create()
+                AlertDialog dialog = builder.create();
+                dialog.show();
+            }
+        });
 
         // ------------------------------------------------------------------------------------
         // -- Requête HTTP Get
@@ -238,8 +279,6 @@ public class RechSalle extends ActionBarActivity
 
                                 // Et enfin, la disponibilité (depuis le JSON) :
                                 liste_salles_fusionee[i] += liste_salles_json.get(i).get("dispo");
-
-                                System.out.println(liste_salles_fusionee[i]);
                             }
 
                             // --- Peupler la ListView avec la liste des salles obtenue ---
@@ -266,12 +305,6 @@ public class RechSalle extends ActionBarActivity
                 });
             }
         });
-
-        // ------------------------------------------------------------------------------------
-        // -- Récupérer les salles dans la BDD SQLite et les afficher dans la ListView
-        // ------------------------------------------------------------------------------------
-
-
 
         // Initialize Progress Dialog properties
         prgDialog = new ProgressDialog(this);
@@ -522,7 +555,6 @@ public class RechSalle extends ActionBarActivity
         try {
             // Extract JSON array from the response
             JSONArray arr = new JSONArray(response);
-            System.out.println(arr.length());
             // If no of array elements is not zero
             if(arr.length() != 0)
             {
@@ -531,22 +563,6 @@ public class RechSalle extends ActionBarActivity
                 {
                     // Get JSON object
                     JSONObject obj = (JSONObject) arr.get(i);
-
-                    if (table.equals("salle")) {
-                        System.out.println(obj.get("nom"));
-                        System.out.println(obj.get("resourceID"));
-                        System.out.println(obj.get("type"));
-                        System.out.println(obj.get("taille"));
-                        System.out.println(obj.get("projecteur"));
-                        System.out.println(obj.get("tableau"));
-                        System.out.println(obj.get("imprimante"));
-                    } else if (table.equals("prof")) {
-                        System.out.println(obj.get("nom"));
-                        System.out.println(obj.get("resourceID"));
-                        System.out.println(obj.get("bureau"));
-                        System.out.println(obj.get("email"));
-                    }
-
 
                     // DB QueryValues Object to insert into SQLite
                     queryValues = new HashMap<String, String>();

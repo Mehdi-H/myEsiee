@@ -1,88 +1,98 @@
 <!-- A DrawerLayout is intended to be used as the top-level content view using match_parent for both width and height to consume the full space available. -->
 <android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools" android:id="@+id/drawer_layout"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:materialdesign="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/drawer_layout"
     android:layout_width="match_parent" android:layout_height="match_parent"
     tools:context=".RechSalle">
 
     <!-- As the main content view, the view below consumes the entire
          space available using match_parent in both dimensions. -->
-    <RelativeLayout android:id="@+id/container" android:layout_width="match_parent"
+    <LinearLayout android:id="@+id/container"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
         android:layout_height="match_parent" >
 
-        <ToggleButton
-            android:layout_width="@dimen/button_size"
-            android:layout_height="@dimen/button_size"
-            android:padding="0dp"
-            android:id="@+id/imageButton_computer1"
-            android:layout_toLeftOf="@+id/imageButton_computer2"
-            android:background="?android:attr/selectableItemBackground" />
-
-        <ToggleButton
-            android:layout_width="@dimen/button_size"
-            android:layout_height="@dimen/button_size"
-            android:id="@+id/imageButton_computer2"
-            android:layout_toLeftOf="@+id/imageButton_computer3"
-            android:background="?android:attr/selectableItemBackground" />
-
-        <ToggleButton
-            android:layout_width="@dimen/button_size"
-            android:layout_height="@dimen/button_size"
-            android:id="@+id/imageButton_computer3"
-            android:layout_centerHorizontal="true"
-            android:background="?android:attr/selectableItemBackground" />
-
-        <ToggleButton
-            android:layout_width="@dimen/button_size"
-            android:layout_height="@dimen/button_size"
-            android:id="@+id/imageButton_computer4"
-            android:layout_toRightOf="@id/imageButton_computer3"
-            android:background="?android:attr/selectableItemBackground" />
-
-        <ToggleButton
-            android:layout_width="@dimen/button_size"
-            android:layout_height="@dimen/button_size"
-            android:id="@+id/btn_advancedSearch"
-            android:layout_toRightOf="@id/imageButton_computer4"
-            android:textOn="..."
-            android:textOff="..." />
-
-        <TextView
-            android:layout_width="wrap_content"
+        <RelativeLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Salle info"
-            android:gravity="center"
-            android:id="@+id/textView"
-            android:layout_below="@+id/imageButton_computer1"
-            android:layout_alignLeft="@+id/imageButton_computer1"
-            android:layout_toLeftOf="@+id/btn_advancedSearch"
-            android:layout_alignBottom="@+id/imageButton_search"
-            android:background="?android:attr/selectableItemBackground" />
+            android:elevation="8dp"
+            android:background="@color/primary"
+             >
 
-        <ImageButton
-            android:layout_width="@dimen/button_size"
-            android:layout_height="@dimen/button_size"
-            android:id="@+id/imageButton_search"
-            android:layout_below="@+id/imageButton_computer4"
-            android:layout_toRightOf="@+id/textView"
-            android:layout_alignRight="@+id/btn_advancedSearch"
-            android:src="@drawable/ic_action_search" />
+            <ToggleButton
+                android:layout_width="@dimen/button_size"
+                android:layout_height="@dimen/button_size"
+                android:padding="0dp"
+                android:id="@+id/imageButton_computer1"
+                android:layout_toLeftOf="@+id/imageButton_computer2"
+                android:background="?android:attr/selectableItemBackground" />
+
+            <ToggleButton
+                android:layout_width="@dimen/button_size"
+                android:layout_height="@dimen/button_size"
+                android:id="@+id/imageButton_computer2"
+                android:layout_toLeftOf="@+id/imageButton_computer3"
+                android:background="?android:attr/selectableItemBackground" />
+
+            <ToggleButton
+                android:layout_width="@dimen/button_size"
+                android:layout_height="@dimen/button_size"
+                android:id="@+id/imageButton_computer3"
+                android:layout_centerHorizontal="true"
+                android:background="?android:attr/selectableItemBackground" />
+
+            <ToggleButton
+                android:layout_width="@dimen/button_size"
+                android:layout_height="@dimen/button_size"
+                android:id="@+id/imageButton_computer4"
+                android:layout_toRightOf="@+id/imageButton_computer3"
+                android:background="?android:attr/selectableItemBackground" />
+
+            <Button
+                android:layout_width="@dimen/button_size"
+                android:layout_height="@dimen/button_size"
+                android:id="@+id/btn_advancedSearch"
+                android:layout_toRightOf="@+id/imageButton_computer4"
+                android:text="..."
+                android:background="?android:attr/selectableItemBackground" />
+
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="Numéro de salle"
+                android:gravity="center"
+                android:id="@+id/nomSalle"
+                android:inputType="number"
+                android:layout_below="@+id/imageButton_computer1"
+                android:layout_alignLeft="@+id/imageButton_computer1"
+                android:layout_toLeftOf="@+id/btn_advancedSearch" />
+
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="8dp"
+                android:layout_margin="5dp"
+                android:id="@+id/imageButton_search"
+                android:background="@color/accent"
+                android:layout_below="@+id/btn_advancedSearch"
+                android:layout_alignRight="@id/btn_advancedSearch"
+                android:src="@drawable/ic_action_search" />
+
+        </RelativeLayout>
+
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="100dp"
-            android:id="@+id/textView_debug"
-            android:layout_below="@+id/textView"
-            android:layout_centerHorizontal="true" />
+            android:id="@+id/textView_debug" />
 
         <ListView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/listView_salles"
-            android:layout_below="@+id/textView_debug"
-            android:layout_alignLeft="@+id/textView"
-            android:layout_alignRight="@+id/imageButton_search"/>
+            android:id="@+id/listView_salles"/>
 
-    </RelativeLayout>
+    </LinearLayout>
 
     <!-- android:layout_gravity="start" tells DrawerLayout to treat
          this as a sliding drawer on the left side for left-to-right

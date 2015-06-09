@@ -47,7 +47,6 @@ public class RoomArrayAdapter extends ArrayAdapter<String>
 
         TextView nomSalle = (TextView) rowView.findViewById(R.id.nomSalle);
         ImageView iconeType = (ImageView) rowView.findViewById(R.id.icone_type);
-        TextView iconeType_debug = (TextView) rowView.findViewById(R.id.icone_type_debug);
         TextView iconeProjecteur = (TextView) rowView.findViewById(R.id.icone_projecteur);
         TextView iconeTableauBlanc = (TextView) rowView.findViewById(R.id.icone_tableau_blanc);
         TextView iconeTableauNoir = (TextView) rowView.findViewById(R.id.icone_tableau_noir);
@@ -71,7 +70,6 @@ public class RoomArrayAdapter extends ArrayAdapter<String>
         } else if (type.equals("vid")) {
             iconeType.setImageResource(R.drawable.ic_action_search);
         }
-        iconeType_debug.setText(rowValues[1]);
 
         // --- Icônes des caractéristiques ---
 

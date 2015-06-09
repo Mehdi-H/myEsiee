@@ -9,4 +9,8 @@
 
     <!-- Boutons -->
     <dimen name="button_size">70dp</dimen>
+
+    <!-- Margins et paddings -->
+    <dimen name="view_salle_entry_space">10dp</dimen>
+    <dimen name="dialog_search_checkboxes">15dp</dimen>
 </resources>

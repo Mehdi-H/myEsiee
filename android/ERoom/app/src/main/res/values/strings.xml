@@ -14,8 +14,39 @@
     <string name="navigation_drawer_open">Ouvrir le menu de navigation</string>
     <string name="navigation_drawer_close">Fermer le menu de navigation</string>
 
-    <string name="action_example">Example action</string>
+    <!-- Placeholders -->
+    <string name="hint_nomSalle">Numéro de la salle</string>
 
+    <!-- Caractéristiques -->
+    <string name="tableau_blanc">Tableau blanc</string>
+    <string name="tableau_noir">Tableau noir</string>
+    <string name="projecteur">Projecteur</string>
+    <string name="imprimante">Imprimante</string>
+
+    <!-- Boutons -->
+    <string name="triple_dots">...</string>
+    <string name="chercher">Chercher</string>
+
+    <string name="recherche_avancee">Recherche avancée</string>
+    <string-array name="epis">
+        <item>Épi</item>
+        <item>Épi 1</item>
+        <item>Épi 2</item>
+        <item>Épi 3</item>
+        <item>Épi 4</item>
+        <item>Épi 5</item>
+        <item>Épi 6</item>
+    </string-array>
+    <string-array name="etages">
+        <item>Étage</item>
+        <item>Niveau 0</item>
+        <item>Niveau 1</item>
+        <item>Niveau 2</item>
+        <item>Niveau 3</item>
+        <item>Niveau 4</item>
+    </string-array>
+
+    <!-- Options -->
     <string name="action_update_db">Mettre à jour la BDD</string>
     <string name="action_settings">Paramètres</string>
 </resources>
