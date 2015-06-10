@@ -184,9 +184,18 @@
 			);
 			foreach ($criteres_possibles as $critere => $operateur)
 			{
-				if (isset($_GET[$critere])) {
-					$sql_conditions[] = $critere." ".$operateur." '".$_GET[$critere]."'";
+				// Récupérer la valeur du critère en GET ou en POST si elle existe :
+				$val_critere =
+					isset($_GET[$critere]) ? $_GET[$critere] :
+						(isset($_POST[$critere]) ? $_POST[$critere] : false);
+
+				// Critère suivant si celui-ci n'est pas spécifié :
+				if (! $val_critere) {
+					continue;
 				}
+
+				// Prise en compte du critère :
+				$sql_conditions[] = $critere." ".$operateur." '".$val_critere."'";
 			}
 
 			// Construction de la partie "WHERE" de la requête SQL :
@@ -298,7 +307,8 @@
 				);
 			}
 
-			return json_encode($resultats);
+			header("Content-type: application/json");
+			echo(json_encode($resultats));
 		}
 
 		/**
@@ -315,22 +325,31 @@
 			// === 1. Récupération des paramètres (nom et date) ===
 
 			// Nom de la salle :
-			$nom;
-			if (isset($_GET['nom'])) {
-				$nom = $_GET['nom'];
-			} else {
-				return "Erreur : nom ".$type." non spécifié.";
+			$nom =
+				isset($_GET['nom']) ? $_GET['nom'] :
+					(isset($_POST['nom']) ? $_POST['nom'] : false);
+
+			if (! $nom) {
+				echo("Erreur : nom ".$type." non spécifié.");
+				exit;
 			}
 
 			// Date :
 			// (Format : "mm/jj/aaa". Si non spécifiée : la date du jour)
-			$date = isset($_GET['date']) ? strtotime($_GET['date']) : time();
+			$date =
+				isset($_GET['date']) ? strtotime($_GET['date']) :
+					(isset($_POST['date']) ? strtotime($_POST['date']) : time());
 
 
 			// 2. === Récupération du Resource ID de la salle dans la BDD ===
 
-			$req = $this->_mysql_request("SELECT resourceID FROM ".$type." WHERE nom='".$nom."'");
+			$req = $this->_mysql_request("SELECT resourceID FROM ".addslashes($type)." WHERE nom='".addslashes($nom)."'");
 			$resourceID = mysql_fetch_assoc($req)['resourceID'];
+
+			if($resourceID == null) {
+				echo("Erreur: ressource non trouvée dans la BDD.");
+				exit();
+			}
 
 
 			// === 3. Génération de l'image de l'emploi du temps ===

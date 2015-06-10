@@ -3,12 +3,15 @@
 	error_reporting(E_ALL);
 	ini_set('display_errors', 1);
 
+
 	// === Vérifications ===
 
-	if (isset($_GET['func'])) {
-		$function = $_GET['func'];
-	}
-	else {
+	$function =
+		isset($_GET['func']) ? $_GET['func'] :
+			(isset($_POST['func']) ? $_POST['func'] : false);
+
+	if (! $function) {
+		echo("Erreur : pas de fonction spécifiée.<br/>'".$function."'");
 		exit;
 	}
 
@@ -24,7 +27,7 @@
 
 	if (strcmp($function, "rechSalle") == 0)
 	{
-		echo($ade->rechSalle());
+		$ade->rechSalle();
 	}
 	elseif (strcmp($function, "dispoSalle") == 0)
 	{

@@ -33,3 +33,8 @@ UPDATE salle
 UPDATE salle
 	SET resourceID="183"
 	WHERE nom="2101";
+
+# Modifier les types "Salles" en "banal" et "Labo" en "elec" :
+
+UPDATE salle SET type="elec" WHERE type="Labo";
+UPDATE salle SET type="banal" WHERE type="Salles";
