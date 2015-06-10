@@ -4,11 +4,6 @@ import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.Color;
-import android.graphics.PorterDuff;
-import android.graphics.drawable.Drawable;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBar;
 import android.support.v4.app.Fragment;
@@ -28,10 +23,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.ImageButton;
-import android.widget.ListAdapter;
 import android.widget.ListView;
-import android.widget.RadioGroup;
-import android.widget.SimpleAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ToggleButton;
@@ -48,17 +40,9 @@ import org.json.JSONObject;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.security.KeyStore;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
-
-import javax.net.ssl.HttpsURLConnection;
-import javax.net.ssl.SSLContext;
-import javax.net.ssl.TrustManager;
-import javax.net.ssl.X509TrustManager;
 
 
 public class RechSalle extends ActionBarActivity
@@ -79,9 +63,13 @@ public class RechSalle extends ActionBarActivity
     private CharSequence mTitle;
 
     // Liste des ToggleButtons de catégories :
-    private final ToggleButton btn_categ[] = new ToggleButton[4];
+    private final ToggleButton btn_categ[] = new ToggleButton[3];
+    private final String categories[] = new String[3];
 
     private final TextView[] textView_debug = new TextView[1];
+
+    // Critères de recherche :
+    private final HashMap<String,String> criteres = new HashMap<String,String>();
 
     // BDD SQLite :
     DBController controller = new DBController(this);
@@ -120,13 +108,23 @@ public class RechSalle extends ActionBarActivity
         final Button advancedSearch = (Button) findViewById(R.id.btn_advancedSearch);
 
         // ToggleButtons :
-        btn_categ[0] = (ToggleButton) findViewById(R.id.imageButton_computer1);
-        btn_categ[1] = (ToggleButton) findViewById(R.id.imageButton_computer2);
-        btn_categ[2] = (ToggleButton) findViewById(R.id.imageButton_computer3);
-        btn_categ[3] = (ToggleButton) findViewById(R.id.imageButton_computer4);
+        btn_categ[0] = (ToggleButton) findViewById(R.id.categ_it);
+        btn_categ[1] = (ToggleButton) findViewById(R.id.categ_elec);
+        btn_categ[2] = (ToggleButton) findViewById(R.id.categ_banal);
+
+        // Catégories associées :
+        categories[0] = "it";
+        categories[1] = "elec";
+        categories[2] = "banal";
 
         // ListView des salles :
         final ListView listView_salles = (ListView) findViewById(R.id.listView_salles);
+
+        // ------------------------------------------------------------------------------------
+        // -- Initialisation des critères de recherche
+        // ------------------------------------------------------------------------------------
+
+
 
         // ------------------------------------------------------------------------------------
         // -- Comportement des ToggleButton
@@ -141,11 +139,29 @@ public class RechSalle extends ActionBarActivity
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked)
             {
                 if (isChecked) {
-                    for (ToggleButton btn : btn_categ) {
-                        if (buttonView != btn) {
-                            btn.setChecked(false);
+                    for (int i = 0 ; i < btn_categ.length ; i++) {
+                        // Désactiver les autres boutons :
+                        if (buttonView != btn_categ[i]) {
+                            btn_categ[i].setChecked(false);
+                        } else {
+                            // Choisir le type de salle :
+                            criteres.put("type", categories[i]);
+                            Toast.makeText(context, "Catégorie : " + criteres.get("type"), Toast.LENGTH_SHORT).show();
                         }
                     }
+                }
+
+                // Parcourir les boutons pour voir si l'un d'eux est actif :
+                boolean checked = false;
+                for (int i = 0 ; i < btn_categ.length ; i++) {
+                    if (btn_categ[i].isChecked()) {
+                        checked = true;
+                    }
+                }
+                // Désactiver le critère de type si aucun bouton n'est actif :
+                if (!checked) {
+                    Toast.makeText(context, "Catégorie désactivée", Toast.LENGTH_SHORT).show();
+                    criteres.put("type", null);
                 }
             }
         };
