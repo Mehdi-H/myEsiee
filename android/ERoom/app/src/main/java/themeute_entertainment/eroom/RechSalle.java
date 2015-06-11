@@ -1,9 +1,11 @@
 package themeute_entertainment.eroom;
 
 import android.app.Activity;
+import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.support.v4.app.DialogFragment;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBar;
 import android.support.v4.app.Fragment;
@@ -11,6 +13,7 @@ import android.support.v4.app.FragmentManager;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
+import android.support.v7.internal.widget.AdapterViewCompat;
 import android.text.SpannableString;
 import android.text.Spanned;
 import android.text.style.ImageSpan;
@@ -21,9 +24,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.support.v4.widget.DrawerLayout;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.ImageButton;
 import android.widget.ListView;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ToggleButton;
@@ -46,7 +51,8 @@ import java.util.HashMap;
 
 
 public class RechSalle extends ActionBarActivity
-        implements NavigationDrawerFragment.NavigationDrawerCallbacks
+        implements  NavigationDrawerFragment.NavigationDrawerCallbacks,
+                    AdvancedSearchDialog.AdvancedSearchDialogListener
 {
     // ====================================================================================
     // == ATTRIBUTS
@@ -62,6 +68,12 @@ public class RechSalle extends ActionBarActivity
      */
     private CharSequence mTitle;
 
+    // Données :
+    private final String base_url = "https://mvx2.esiee.fr/api/ade.php";
+
+    // ListView des salles :
+    private ListView listView_salles;
+
     // Liste des ToggleButtons de catégories :
     private final ToggleButton btn_categ[] = new ToggleButton[3];
     private final String categories[] = new String[3];
@@ -69,7 +81,7 @@ public class RechSalle extends ActionBarActivity
     private final TextView[] textView_debug = new TextView[1];
 
     // Critères de recherche :
-    private final HashMap<String,String> criteres = new HashMap<String,String>();
+    private HashMap<String,String> criteres = new HashMap<String,String>();
 
     // BDD SQLite :
     DBController controller = new DBController(this);
@@ -77,6 +89,9 @@ public class RechSalle extends ActionBarActivity
     // Progress Dialog Object
     ProgressDialog prgDialog;
     HashMap<String,String> queryValues;
+
+    // Android stuff :
+    private Context context;
 
     // ====================================================================================
     // == onCreate()
@@ -96,7 +111,7 @@ public class RechSalle extends ActionBarActivity
                 R.id.navigation_drawer,
                 (DrawerLayout) findViewById(R.id.drawer_layout));
 
-        final Context context = getApplicationContext();
+        context = getApplicationContext();
 
         // ------------------------------------------------------------------------------------
         // -- VIEWS
@@ -117,8 +132,8 @@ public class RechSalle extends ActionBarActivity
         categories[1] = "elec";
         categories[2] = "banal";
 
-        // ListView des salles :
-        final ListView listView_salles = (ListView) findViewById(R.id.listView_salles);
+        listView_salles = (ListView) findViewById(R.id.listView_salles);
+
 
         // ------------------------------------------------------------------------------------
         // -- Initialisation des critères de recherche
@@ -194,36 +209,13 @@ public class RechSalle extends ActionBarActivity
         // -- Bouton recherche avancée ==> Alert Dialog
         // ------------------------------------------------------------------------------------
 
+        final DialogFragment dialog = new AdvancedSearchDialog();
+
         advancedSearch.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v)
             {
                 Toast.makeText(context, "Recherche avancée", Toast.LENGTH_SHORT).show();
-
-                // === Création de l'Alert Dialog ===
-
-                // Instantiate an AlertDialog.Builder with its constructor
-                AlertDialog.Builder builder = new AlertDialog.Builder(RechSalle.this);
-
-                // Add the buttons
-                builder.setPositiveButton(R.string.chercher, new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                        // User clicked OK button
-                        Toast.makeText(context, "Chercher...", Toast.LENGTH_SHORT).show();
-                    }
-                });
-                builder.setNegativeButton("Annuler", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                        // User cancelled the dialog
-                        Toast.makeText(context, "Annuler", Toast.LENGTH_SHORT).show();
-                    }
-                });
-
-                // Utiliser le layout custom :
-                builder.setView(R.layout.dialog_advanced_search);
-
-                // Get the AlertDialog from create()
-                AlertDialog dialog = builder.create();
-                dialog.show();
+                dialog.show(getSupportFragmentManager(), "AdvancedSearchDialog");
             }
         });
 
@@ -237,88 +229,7 @@ public class RechSalle extends ActionBarActivity
         searchBtn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v)
             {
-                Toast.makeText(context, "Requête...", Toast.LENGTH_SHORT).show();
-                String url = "https://mvx2.esiee.fr/api/ade.php?func=rechSalle";
-
-                // Init :
-                AsyncHttpClient client = new AsyncHttpClient();
-                RequestParams params = new RequestParams();
-
-                /* // Pour accepter les requêtes HTTPS sans certificat :
-                // -- Source : http://stackoverflow.com/a/28222107/2372933
-                try {
-                    KeyStore trustStore = KeyStore.getInstance(KeyStore.getDefaultType());
-                    trustStore.load(null, null);
-                    MySSLSocketFactory sf = new MySSLSocketFactory(trustStore);
-                    sf.setHostnameVerifier(MySSLSocketFactory.ALLOW_ALL_HOSTNAME_VERIFIER);
-                    client.setSSLSocketFactory(sf);
-                }
-                catch (Exception e) {} */
-
-                // Lancer la requête :
-                client.post(url, params, new AsyncHttpResponseHandler() {
-                    @Override
-                    public void onSuccess(String response)
-                    {
-                        textView_debug[0].setText("Response : " + response);
-
-                        // === Construire un tableau de Strings qui contient toutes les infos des salles (nom, dispo et caractéristiques) ===
-
-                        // --- Récupérer les infos du JSON (nom et dispo des salles correspondantes aux critères de recherche) ---
-
-                        ArrayList<HashMap<String,String>> liste_salles_json = jsonToArrayList(response);
-                        if (liste_salles_json.size() != 0)
-                        {
-                            // --- Fusionner les infos des salles de la BDD avec la réponse JSON ---
-
-                            // ArrayList<HashMap<String,String>> liste_salles_fusionee = new ArrayList<HashMap<String,String>>();
-                            String[] liste_salles_fusionee = new String[liste_salles_json.size()];
-
-                            for (int i = 0 ; i < liste_salles_json.size() ; i++)
-                            {
-                                // Retrouver la salle en question dans la BDD :
-                                ArrayList<HashMap<String,String>> liste_salle_bdd = controller.getSalles(liste_salles_json.get(i).get("nom"));
-                                HashMap<String,String> salle_bdd = liste_salle_bdd.get(0);
-
-                                // Récupérer le nom de la salle :
-                                liste_salles_fusionee[i] = liste_salles_json.get(i).get("nom") + ";";
-
-                                // Rajouter les caractéristiques de la BDD dans la String :
-                                liste_salles_fusionee[i] += salle_bdd.get("type") + ";";
-                                liste_salles_fusionee[i] += salle_bdd.get("projecteur") + ";";
-
-                                int tab = Integer.parseInt(salle_bdd.get("tableau"));
-                                liste_salles_fusionee[i] += (tab == 0 || tab == 2) ? "0;" : "1;"; // tableauBlanc
-                                liste_salles_fusionee[i] += (tab == 0 || tab == 1) ? "0;" : "1;"; // tableauNoir
-
-                                liste_salles_fusionee[i] += salle_bdd.get("imprimante") + ";";
-
-                                // Et enfin, la disponibilité (depuis le JSON) :
-                                liste_salles_fusionee[i] += liste_salles_json.get(i).get("dispo");
-                            }
-
-                            // --- Peupler la ListView avec la liste des salles obtenue ---
-
-                            RoomArrayAdapter adapter = new RoomArrayAdapter(
-                                    RechSalle.this,
-                                    liste_salles_fusionee
-                            );
-                            listView_salles.setAdapter(adapter);
-                        }
-                    }
-
-                    // When error occurred
-                    @Override
-                    public void onFailure(int statusCode, Throwable error, String content) {
-                        if (statusCode == 404) {
-                            textView_debug[0].setText(statusCode + " - Requested resource not found : " + content + "\n" + error.toString());
-                        } else if (statusCode == 500) {
-                            textView_debug[0].setText(statusCode + " - Something went wrong at server end : " + content + "\n" + error.toString());
-                        } else {
-                            textView_debug[0].setText(statusCode + " - Unexpected Error occurred ! : " + content + "\n" + error.toString());
-                        }
-                    }
-                });
+                rechSalle();
             }
         });
 
@@ -445,6 +356,146 @@ public class RechSalle extends ActionBarActivity
     // ====================================================================================
     // == CUSTOM METHODS
     // ====================================================================================
+
+    // ------------------------------------------------------------------------------------
+    // -- Recherche Salle
+    // ------------------------------------------------------------------------------------
+
+    public void rechSalle()
+    {
+        Toast.makeText(context, "Requête...", Toast.LENGTH_SHORT).show();
+
+        // === Construction de l'URL de requête ===
+
+        String url = base_url + "?func=rechSalle";
+
+        // Critères :
+        for (HashMap.Entry<String,String> entry : criteres.entrySet())
+        {
+            if (! entry.getValue().equals("0")) {
+                url += "&" + entry.getKey() + "=" + entry.getValue();
+            }
+        }
+
+        Toast.makeText(context, url, Toast.LENGTH_SHORT).show();
+
+
+        // Init :
+        AsyncHttpClient client = new AsyncHttpClient();
+        RequestParams params = new RequestParams();
+
+        // Lancer la requête :
+        client.post(url, params, new AsyncHttpResponseHandler() {
+            @Override
+            public void onSuccess(String response)
+            {
+                textView_debug[0].setText("Response : " + response);
+
+                // === Construire un tableau de Strings qui contient toutes les infos des salles (nom, dispo et caractéristiques) ===
+
+                // --- Récupérer les infos du JSON (nom et dispo des salles correspondantes aux critères de recherche) ---
+
+                ArrayList<HashMap<String,String>> liste_salles_json = jsonToArrayList(response);
+                if (liste_salles_json.size() != 0)
+                {
+                    // --- Fusionner les infos des salles de la BDD avec la réponse JSON ---
+
+                    // ArrayList<HashMap<String,String>> liste_salles_fusionee = new ArrayList<HashMap<String,String>>();
+                    String[] liste_salles_fusionee = new String[liste_salles_json.size()];
+
+                    for (int i = 0 ; i < liste_salles_json.size() ; i++)
+                    {
+                        // Retrouver la salle en question dans la BDD :
+                        ArrayList<HashMap<String,String>> liste_salle_bdd = controller.getSalles(liste_salles_json.get(i).get("nom"));
+                        HashMap<String,String> salle_bdd = liste_salle_bdd.get(0);
+
+                        // Récupérer le nom de la salle :
+                        liste_salles_fusionee[i] = liste_salles_json.get(i).get("nom") + ";";
+
+                        // Rajouter les caractéristiques de la BDD dans la String :
+                        liste_salles_fusionee[i] += salle_bdd.get("type") + ";";
+                        liste_salles_fusionee[i] += salle_bdd.get("projecteur") + ";";
+
+                        int tab = Integer.parseInt(salle_bdd.get("tableau"));
+                        liste_salles_fusionee[i] += (tab == 0 || tab == 2) ? "0;" : "1;"; // tableauBlanc
+                        liste_salles_fusionee[i] += (tab == 0 || tab == 1) ? "0;" : "1;"; // tableauNoir
+
+                        liste_salles_fusionee[i] += salle_bdd.get("imprimante") + ";";
+
+                        // Et enfin, la disponibilité (depuis le JSON) :
+                        liste_salles_fusionee[i] += liste_salles_json.get(i).get("dispo");
+                    }
+
+                    // --- Peupler la ListView avec la liste des salles obtenue ---
+
+                    RoomArrayAdapter adapter = new RoomArrayAdapter(
+                            RechSalle.this,
+                            liste_salles_fusionee
+                    );
+                    listView_salles.setAdapter(adapter);
+                }
+            }
+
+            // When error occurred
+            @Override
+            public void onFailure(int statusCode, Throwable error, String content) {
+                if (statusCode == 404) {
+                    textView_debug[0].setText(statusCode + " - Requested resource not found : " + content + "\n" + error.toString());
+                } else if (statusCode == 500) {
+                    textView_debug[0].setText(statusCode + " - Something went wrong at server end : " + content + "\n" + error.toString());
+                } else {
+                    textView_debug[0].setText(statusCode + " - Unexpected Error occurred ! : " + content + "\n" + error.toString());
+                }
+            }
+        });
+    }
+
+
+    // ------------------------------------------------------------------------------------
+    // -- Interface custom Dialog Fragment
+    // ------------------------------------------------------------------------------------
+
+    // The dialog fragment receives a reference to this Activity through the
+    // Fragment.onAttach() callback, which it uses to call the following methods
+    // defined by the NoticeDialogFragment.NoticeDialogListener interface
+
+    @Override
+    public void onDialogPositiveClick(DialogFragment dialog)
+    {
+        // Récupérer les vues de la Dialog :
+        Dialog dialogView = dialog.getDialog();
+        Spinner spinner_epi = (Spinner) dialogView.findViewById(R.id.epi);
+        Spinner spinner_etage = (Spinner) dialogView.findViewById(R.id.etage);
+        CheckBox chk_tableau_blanc = (CheckBox) dialogView.findViewById(R.id.tableau_blanc);
+        CheckBox chk_tableau_noir = (CheckBox) dialogView.findViewById(R.id.tableau_noir);
+        CheckBox chk_projecteur = (CheckBox) dialogView.findViewById(R.id.projecteur);
+        CheckBox chk_imprimante = (CheckBox) dialogView.findViewById(R.id.imprimante);
+
+        // === Construction des critères ===
+
+        int epi, etage, tableau, projecteur, imprimante;
+
+        boolean blanc = chk_tableau_blanc.isChecked(),
+                noir = chk_tableau_noir.isChecked();
+
+        criteres.put("tableau", blanc ? (noir ? "3" : "2" ) : (noir ? "1" : "0"));
+        criteres.put("projecteur", chk_projecteur.isChecked() ? "1" : "0");
+        criteres.put("imprimante", chk_imprimante.isChecked() ? "1" : "0");
+
+        // Lancement de la requête :
+        rechSalle();
+    }
+
+    @Override
+    public void onDialogNegativeClick(DialogFragment dialog)
+    {
+
+    }
+
+
+    // ------------------------------------------------------------------------------------
+    // -- JSON
+    // ------------------------------------------------------------------------------------
 
     /**
      *
