@@ -23,6 +23,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.support.v4.widget.DrawerLayout;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
@@ -69,7 +70,6 @@ public class RechSalle extends ActionBarActivity
     private CharSequence mTitle;
 
     // Données :
-    private final String base_url = "https://mvx2.esiee.fr/api/ade.php";
 
     // ListView des salles :
     private ListView listView_salles;
@@ -92,6 +92,9 @@ public class RechSalle extends ActionBarActivity
 
     // Android stuff :
     private Context context;
+
+    // Intent :
+    public final static String EXTRA_NOM_SALLE = "themeute_entertainment.eroom.NOM_SALLE";
 
     // ====================================================================================
     // == onCreate()
@@ -227,16 +230,36 @@ public class RechSalle extends ActionBarActivity
 
         // Au clic sur le bouton recherche :
         searchBtn.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v)
-            {
-                rechSalle();
+            public void onClick(View v) {
+                ADE.rechSalle(listView_salles, criteres, controller, context);
             }
         });
+
+        // ------------------------------------------------------------------------------------
+        // -- Progress Dialog
+        // ------------------------------------------------------------------------------------
 
         // Initialize Progress Dialog properties
         prgDialog = new ProgressDialog(this);
         prgDialog.setMessage("Transferring Data from Remote MySQL DB and Syncing SQLite. Please wait...");
         prgDialog.setCancelable(false);
+
+        // ------------------------------------------------------------------------------------
+        // -- Choix d'une salle
+        // ------------------------------------------------------------------------------------
+
+        listView_salles.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id)
+            {
+                TextView nomSalle_view = (TextView) view.findViewById(R.id.nomSalle);
+
+                // Création d'une nouvelle acitvité FicheSalle :
+                Intent intent = new Intent(RechSalle.this, FicheSalle.class);
+                intent.putExtra(EXTRA_NOM_SALLE, nomSalle_view.getText());
+                startActivity(intent);
+            }
+        });
     }
 
     @Override
@@ -358,100 +381,6 @@ public class RechSalle extends ActionBarActivity
     // ====================================================================================
 
     // ------------------------------------------------------------------------------------
-    // -- Recherche Salle
-    // ------------------------------------------------------------------------------------
-
-    public void rechSalle()
-    {
-        Toast.makeText(context, "Requête...", Toast.LENGTH_SHORT).show();
-
-        // === Construction de l'URL de requête ===
-
-        String url = base_url + "?func=rechSalle";
-
-        // Critères :
-        for (HashMap.Entry<String,String> entry : criteres.entrySet())
-        {
-            if (! entry.getValue().equals("0")) {
-                url += "&" + entry.getKey() + "=" + entry.getValue();
-            }
-        }
-
-        Toast.makeText(context, url, Toast.LENGTH_SHORT).show();
-
-
-        // Init :
-        AsyncHttpClient client = new AsyncHttpClient();
-        RequestParams params = new RequestParams();
-
-        // Lancer la requête :
-        client.post(url, params, new AsyncHttpResponseHandler() {
-            @Override
-            public void onSuccess(String response)
-            {
-                textView_debug[0].setText("Response : " + response);
-
-                // === Construire un tableau de Strings qui contient toutes les infos des salles (nom, dispo et caractéristiques) ===
-
-                // --- Récupérer les infos du JSON (nom et dispo des salles correspondantes aux critères de recherche) ---
-
-                ArrayList<HashMap<String,String>> liste_salles_json = jsonToArrayList(response);
-                if (liste_salles_json.size() != 0)
-                {
-                    // --- Fusionner les infos des salles de la BDD avec la réponse JSON ---
-
-                    // ArrayList<HashMap<String,String>> liste_salles_fusionee = new ArrayList<HashMap<String,String>>();
-                    String[] liste_salles_fusionee = new String[liste_salles_json.size()];
-
-                    for (int i = 0 ; i < liste_salles_json.size() ; i++)
-                    {
-                        // Retrouver la salle en question dans la BDD :
-                        ArrayList<HashMap<String,String>> liste_salle_bdd = controller.getSalles(liste_salles_json.get(i).get("nom"));
-                        HashMap<String,String> salle_bdd = liste_salle_bdd.get(0);
-
-                        // Récupérer le nom de la salle :
-                        liste_salles_fusionee[i] = liste_salles_json.get(i).get("nom") + ";";
-
-                        // Rajouter les caractéristiques de la BDD dans la String :
-                        liste_salles_fusionee[i] += salle_bdd.get("type") + ";";
-                        liste_salles_fusionee[i] += salle_bdd.get("projecteur") + ";";
-
-                        int tab = Integer.parseInt(salle_bdd.get("tableau"));
-                        liste_salles_fusionee[i] += (tab == 0 || tab == 2) ? "0;" : "1;"; // tableauBlanc
-                        liste_salles_fusionee[i] += (tab == 0 || tab == 1) ? "0;" : "1;"; // tableauNoir
-
-                        liste_salles_fusionee[i] += salle_bdd.get("imprimante") + ";";
-
-                        // Et enfin, la disponibilité (depuis le JSON) :
-                        liste_salles_fusionee[i] += liste_salles_json.get(i).get("dispo");
-                    }
-
-                    // --- Peupler la ListView avec la liste des salles obtenue ---
-
-                    RoomArrayAdapter adapter = new RoomArrayAdapter(
-                            RechSalle.this,
-                            liste_salles_fusionee
-                    );
-                    listView_salles.setAdapter(adapter);
-                }
-            }
-
-            // When error occurred
-            @Override
-            public void onFailure(int statusCode, Throwable error, String content) {
-                if (statusCode == 404) {
-                    textView_debug[0].setText(statusCode + " - Requested resource not found : " + content + "\n" + error.toString());
-                } else if (statusCode == 500) {
-                    textView_debug[0].setText(statusCode + " - Something went wrong at server end : " + content + "\n" + error.toString());
-                } else {
-                    textView_debug[0].setText(statusCode + " - Unexpected Error occurred ! : " + content + "\n" + error.toString());
-                }
-            }
-        });
-    }
-
-
-    // ------------------------------------------------------------------------------------
     // -- Interface custom Dialog Fragment
     // ------------------------------------------------------------------------------------
 
@@ -483,7 +412,7 @@ public class RechSalle extends ActionBarActivity
         criteres.put("imprimante", chk_imprimante.isChecked() ? "1" : "0");
 
         // Lancement de la requête :
-        rechSalle();
+        ADE.rechSalle(listView_salles, criteres, controller, context);
     }
 
     @Override
@@ -497,53 +426,7 @@ public class RechSalle extends ActionBarActivity
     // -- JSON
     // ------------------------------------------------------------------------------------
 
-    /**
-     *
-     * @param json
-     */
-    public ArrayList<HashMap<String,String>> jsonToArrayList(String json)
-    {
-        ArrayList<HashMap<String,String>> arraylist = new ArrayList<HashMap<String, String>>();
 
-        // Create GSON object
-        Gson gson = new GsonBuilder().create();
-
-        try {
-            // Extract JSON array from the response
-            JSONArray arr = new JSONArray(json);
-
-            // If no of array elements is not zero
-            if(arr.length() != 0)
-            {
-                // Loop through each array element, get JSON object
-                for (int i = 0 ; i < arr.length() ; i++)
-                {
-                    HashMap<String,String> map = new HashMap<String,String>();
-                    // Get JSON object
-                    JSONObject obj = (JSONObject) arr.get(i);
-
-                    String key = obj.keys().next(); // 1 seul élément par objet JSON
-                    map.put("nom", key);
-
-                    // Vérification de la disponibilité :
-                    if (obj.getInt(key) == 0) {
-                        map.put("dispo", "Libre");
-                    } else if (obj.getInt(key) > 0) {
-                        map.put("dispo", obj.get(key).toString() + " min");
-                    } else {
-                        // "-1" : ne pas afficher (mais laisser activé ici pour debug) :
-                        map.put("dispo", "Occupé");
-                    }
-
-                    arraylist.add(map);
-                }
-            }
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-
-        return arraylist;
-    }
 
     // ------------------------------------------------------------------------------------
     // -- Synchronisation MySQL serveur -> SQLite Android

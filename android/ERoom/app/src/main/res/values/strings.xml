@@ -49,4 +49,10 @@
     <!-- Options -->
     <string name="action_update_db">Mettre à jour la BDD</string>
     <string name="action_settings">Paramètres</string>
+
+<!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_fiche_salle">FicheSalle</string>
+
+    <string name="hello_world">Hello world!</string>
 </resources>
