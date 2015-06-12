@@ -363,8 +363,8 @@
 
 			// Date :
 			// (Format : "mm/jj/aaa". Si non spécifiée : la date du jour)
-			$date = $this->_get_param("date", time());
-			$date = strtotime($date);
+			$date = $this->_get_param("date", false);
+			$date = (! $date ? time() : strtotime($date));
 
 			// Dimensions de l'image :
 			$largeur = $this->_get_param("largeur", "500");
