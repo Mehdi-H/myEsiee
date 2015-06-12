@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no"/>
+	<title>MyESIEE - Salle</title>
+
+	<!-- CSS  -->
+	<link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+	<link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+	<link href="css/palette.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+</head>
+
+<body>
+	<div class="navbar-fixed">
+		<nav class="dark-primary-color" role="navigation">
+			<div class="nav-wrapper container"><a id="logo-container" href="#" class="brand-logo">Logo</a>
+				<ul class="right hide-on-med-and-down">
+					<li><a href="index.html" >Salles</a></li>
+					<li><a href="Recherche_Professeur.html">Profs</a></li>
+					<li><a href="notes.html">Notes</a></li>
+					<li><a href="#">Absences</a></li>
+					<li><a href="appreciation.html">Appréciations</a></li>
+					<li><a href="#">Paramètres</a></li>
+					<li><a href="#">Déconnexion</a></li>
+				</ul>
+
+				<ul id="nav-mobile" class="side-nav">
+					<li><a href="index.html">Salles</a></li>
+					<li><a href="Recherche_Professeur.html">Profs</a></li>
+					<li><a href="notes.html">Notes</a></li>
+					<li class="active"><a href="#">Absences</a></li>
+					<li><a href="appreciation.html">Appréciations</a></li>
+					<li><a href="#">Paramètres</a></li>
+					<li><a href="#">Déconnexion</a></li>
+				</ul>
+				<a href="#" data-activates="nav-mobile" class="button-collapse"><i class="mdi-navigation-menu"></i></a>
+			</div>
+		</nav>
+	</div>
+
+	<br>
+	<div class="row z-depth-4 fichesalle">
+		<h4 class="center">
+			5201
+		</h4>
+		<div id="carac_salles">        
+			<ul class="liste_carac">            
+				<li class="valign-wrapper decalage">
+						<i class="small mdi-action-print primary-text-color"></i>
+					<div class="carac primary-text-color">Imprimante</div>
+				</li>
+				<li class="valign-wrapper decalage">
+						<i class="small mdi-hardware-desktop-windows"></i>
+					<div class="carac primary-text-color">Informatique</div>
+				</li>
+				<li class="valign-wrapper decalage">
+						<i class="small mdi-av-videocam"></i>
+					<div class="carac primary-text-color">Rétro-projecteur</div>
+				</li>
+				<li class="valign-wrapper decalage">
+						<i class="small mdi-maps-navigation"></i>
+					<div class="carac primary-text-color">Carte</div>
+				</li>
+			</ul>
+			<div class="center">
+					Date de disponibilité
+			</div>	
+				<input id="date_salle" type="date" class="datepicker primary-text-color center">
+			<div class="center">
+				<img class="responsive-img" src="https://placeholdit.imgix.net/~text?txtsize=47&txt=EDT%20AKI&w=500&h=700">
+			</div>
+		</div>
+	</div>
+
+	<script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+	<script src="js/materialize.js"></script>
+	<script src="js/init.js"></script>
+	<script> $('.datepicker').pickadate({
+    selectMonths: true, // Creates a dropdown to control month
+    selectYears: 15 // Creates a dropdown of 15 years to control year
+});</script>      
+</body>
+</html>

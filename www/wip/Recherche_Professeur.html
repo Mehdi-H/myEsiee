@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no"/>
+	<title>MyESIEE - Recherche de professeur</title>
+
+	<!-- CSS  -->
+	<link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+	<link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>  
+	<link href="css/palette.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+</head>
+
+
+<body>
+	<main>		
+		<div class="navbar-fixed">
+			<nav class="dark-primary-color" role="navigation">
+				<div class="nav-wrapper container"><a id="logo-container" href="#" class="brand-logo">Logo</a>
+					<ul class="right hide-on-med-and-down">
+						<li><a href="index.html" >Salles</a></li>
+						<li class="active"><a href="#">Profs</a></li>
+						<li><a href="notes.html">Notes</a></li>
+						<li><a href="absence.html">Absences</a></li>
+						<li><a href="appreciation.html">Appréciations</a></li>
+						<li><a href="#">Paramètres</a></li>
+						<li><a href="#">Déconnexion</a></li>
+					</ul>
+
+					<ul id="nav-mobile" class="side-nav">
+						<li><a href="index.html" >Salles</a></li>
+						<li class="active"><a href="#">Profs</a></li>
+						<li><a href="notes.html">Notes</a></li>
+						<li><a href="absence.html">Absences</a></li>
+						<li><a href="appreciation.html">Appréciations</a></li>
+						<li><a href="#">Paramètres</a></li>
+						<li><a href="#">Déconnexion</a></li>
+					</ul>
+					<a href="#" data-activates="nav-mobile" class="button-collapse"><i class="mdi-navigation-menu"></i></a>
+				</div>
+			</nav>
+		</div>
+
+		<!-- Recherche d'un professeur--> 
+		<div class="row">
+			<div class="input-field col s6 offset-s3 searchbar">
+				<input id="input_text" type="text">
+				<label for="input_text">Nom du professeur</label>
+			</div>
+		</div>
+		<div class="row z-depth-4 nomprof" id="ficheprof">
+			<h4 class="center">
+				Elia Habib
+			</h4>
+			<span class="valign-wrapper">
+				<i class="valign icone_prof mdi-action-home"></i>Bureau : 3257
+			</span>
+			<span class="valign-wrapper">
+				<i class="valign icone_prof mdi-content-mail"></i>Mail : <a href="#">elia.habib@edu.esiee.fr</a>
+			</span>
+			<div class="center">
+				Disponibilité
+			</div>
+		<input type="date" class="datepicker primary-text-color center">
+			<div class="center">
+				<img class="responsive-img" src="https://placeholdit.imgix.net/~text?txtsize=47&txt=EDT%20AKI&w=500&h=700">
+			</div>
+		</div>
+
+
+	</main>
+	<!--  Scripts-->
+
+	<script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+	<script src="js/materialize.js"></script>
+	<script src="js/init.js"></script>
+	<script>$('.datepicker').pickadate({
+    selectMonths: true,
+    selectYears: 15});</script>
+
+</body>
+</html>
