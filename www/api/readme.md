@@ -51,7 +51,7 @@ Par exemple, si à 14h15, une salle a une disponibilité de 45, cela signifie qu
 
 Cette fonction permet d'obtenir une image au format GIF de l'emploi du temps d'une salle à un jour donné.
 
-### Format de l'URL et date
+### Format de l'URL et paramètres
 
 Une requête peut être de la forme :
 
@@ -61,11 +61,13 @@ Les paramètres `func=dispoSalle` et `nom` sont obligatoires. Le format du nom e
 
 Le paramètre `date` correspond à la date du jour souhaité au format américain "mm/jj/aaaa" (exemple : 15/06/2015 pour le 15 juin 2015). Il est optionnel ; s'il est omis, la date d'aujourd'hui sera utilisée.
 
+Les paramètres `largeur` et `hauteur` correspondent aux dimensions en pixels de l'image à générer.
+
 ## Utilisation de la fonction `dispoProf`
 
 Cette fonction permet d'obtenir une image au format GIF de l'emploi du temps d'un professeur à un jour donné.
 
-### Format de l'URL et date
+### Format de l'URL et paramètres
 
 Une requête peut être de la forme :
 
@@ -74,3 +76,5 @@ Une requête peut être de la forme :
 Les paramètres `func=dispoProf` et `nom` sont obligatoires. Le nom correspond au nom du professeur enregistré dans la BDD (exemple : HABIB E.) et doit être encodé pour les URL (donc HABIB%20E.).
 
 Le paramètre `date` est le même que pour la fonction `dispoSalle`.
+
+Les paramètres `largeur` et `hauteur` correspondent aux dimensions en pixels de l'image à générer.

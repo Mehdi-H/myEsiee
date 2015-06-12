@@ -61,7 +61,7 @@
 		/**
 		 * Lance une requête pour afficher une image de l'emploi du temps pour une ressource et une date donnée.
 		 */
-		private function _imageET($resourceID, $date, $width = 500, $height = 700)
+		private function _imageET($resourceID, $date, $largeur = 500, $hauteur = 700)
 		{
 			// === Mise en forme des paramètres weeks et days à partir de la date ===
 
@@ -75,8 +75,8 @@
 				."?sessionId=".$this->_sessionID
 				."&function=imageET"
 				."&resources=".$resourceID
-				."&width=".$width
-				."&height=".$height
+				."&width=".$largeur
+				."&height=".$hauteur
 				."&weeks=".$weeks
 				."&days=".$days;
 
@@ -145,6 +145,12 @@
 			return $req;
 		}
 
+		private function _get_param($param, $default)
+		{
+			return isset($_GET[$param]) ? $_GET[$param] :
+					(isset($_POST[$param]) ? $_POST[$param] : $default);
+		}
+
 		/////////////////////////////////////////////////////////////////////////////////
 		/// METHODES PUBLIQUES (fonctions de l'API)
 		/////////////////////////////////////////////////////////////////////////////////
@@ -185,12 +191,8 @@
 
 			// --- Récupérer la valeur des critères "epi" et "etage" ---
 
-			$val_epi =
-				isset($_GET["epi"]) ? $_GET["epi"] :
-					(isset($_POST["epi"]) ? $_POST["epi"] : false);
-			$val_etage =
-				isset($_GET["etage"]) ? $_GET["etage"] :
-					(isset($_POST["etage"]) ? $_POST["etage"] : false);
+			$val_epi = $this->_get_param("epi", false);
+			$val_etage = $this->_get_param("etage", false);
 
 			// Construire le modèle du "nom LIKE modele" :
 			if (!! $val_epi || !!$val_etage)
@@ -199,10 +201,10 @@
 				// - si "epi=1" et "etage=2" : "nom LIKE '12%'"
 				// - si "epi=1" : "nom LIKE '1%'"
 				// - si "etage=2" : "nom LIKE '_2%'"
-				$sql_conditions[] = "nom LIKE '".
-					(!! $val_epi ? $val_epi : "_").
-					(!! $val_etage ? $val_etage : "").
-					"%'";
+				$sql_conditions[] = "nom LIKE '"
+					.(!! $val_epi ? $val_epi : "_")
+					.(!! $val_etage ? $val_etage : "")
+					."%'";
 
 				// Annuler le critère possible "nom" :
 				unset($criteres_possibles[0]);
@@ -213,9 +215,7 @@
 			foreach ($criteres_possibles as $critere)
 			{
 				// Récupérer la valeur du critère en GET ou en POST si elle existe :
-				$val_critere =
-					isset($_GET[$critere]) ? $_GET[$critere] :
-						(isset($_POST[$critere]) ? $_POST[$critere] : false);
+				$val_critere = $this->_get_param($critere, false);
 
 				// Critère suivant si celui-ci n'est pas spécifié :
 				if (! $val_critere) {
@@ -354,9 +354,7 @@
 			// === 1. Récupération des paramètres (nom et date) ===
 
 			// Nom de la salle :
-			$nom =
-				isset($_GET['nom']) ? $_GET['nom'] :
-					(isset($_POST['nom']) ? $_POST['nom'] : false);
+			$nom = $this->_get_param("nom", false);
 
 			if (! $nom) {
 				echo("Erreur : nom ".$type." non spécifié.");
@@ -365,9 +363,12 @@
 
 			// Date :
 			// (Format : "mm/jj/aaa". Si non spécifiée : la date du jour)
-			$date =
-				isset($_GET['date']) ? strtotime($_GET['date']) :
-					(isset($_POST['date']) ? strtotime($_POST['date']) : time());
+			$date = $this->_get_param("date", time());
+			$date = strtotime($date);
+
+			// Dimensions de l'image :
+			$largeur = $this->_get_param("largeur", "500");
+			$hauteur = $this->_get_param("hauteur", "700");
 
 
 			// 2. === Récupération du Resource ID de la salle dans la BDD ===
@@ -383,7 +384,7 @@
 
 			// === 3. Génération de l'image de l'emploi du temps ===
 
-			$image_name = $this->_imageET($resourceID, $date);
+			$image_name = $this->_imageET($resourceID, $date, $largeur, $hauteur);
 
 
 			// === 4. Affichage de l'image ===
