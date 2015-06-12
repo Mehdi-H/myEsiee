@@ -179,11 +179,12 @@ public class DBController extends SQLiteOpenHelper
     {
         ArrayList<HashMap<String,String>> liste_profs = new ArrayList<HashMap<String,String>>();
 
-        String selectQuery = "SELECT  * FROM prof";
+        String selectQuery = "SELECT * FROM prof";
 
         // Exécuter la requête :
         SQLiteDatabase database = this.getWritableDatabase();
         Cursor cursor = database.rawQuery(selectQuery, null);
+
         if (cursor.moveToFirst()) {
             do {
                 HashMap<String,String> map = new HashMap<String,String>();
@@ -197,7 +198,27 @@ public class DBController extends SQLiteOpenHelper
             } while (cursor.moveToNext());
         }
 
+        cursor.close();
         database.close();
         return liste_profs;
+    }
+
+    public boolean existsIn(String nom, String table)
+    {
+        String selectQuery = "SELECT nom FROM " + table + " WHERE nom='" + nom + "'";
+
+        SQLiteDatabase database = this.getWritableDatabase();
+        Cursor cursor = database.rawQuery(selectQuery, null);
+
+        boolean exists = false;
+        if (cursor.moveToFirst()) {
+            do {
+                exists = true;
+            } while (cursor.moveToNext());
+        }
+
+        cursor.close();
+        database.close();
+        return exists;
     }
 }

@@ -24,6 +24,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.support.v4.widget.DrawerLayout;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -72,8 +73,9 @@ public class RechSalle extends ActionBarActivity
 
     // Données :
 
-    // ListView des salles :
+    // Views :
     private ListView listView_salles;
+    private AutoCompleteTextView autocomplete_nomSalle;
 
     // Liste des ToggleButtons de catégories :
     private final ToggleButton btn_categ[] = new ToggleButton[3];
@@ -94,6 +96,7 @@ public class RechSalle extends ActionBarActivity
 
     // Intent :
     public final static String EXTRA_NOM_SALLE = "themeute_entertainment.eroom.NOM_SALLE";
+
 
     // ====================================================================================
     // == onCreate()
@@ -139,10 +142,15 @@ public class RechSalle extends ActionBarActivity
         // -- Initialisation de l'AutoComplete nom salle
         // ------------------------------------------------------------------------------------
 
-        AutoCompleteTextView autocomplete_nomSalle = (AutoCompleteTextView) findViewById(R.id.nomSalle);
+        autocomplete_nomSalle = (AutoCompleteTextView) findViewById(R.id.nomSalle);
 
-        // Récupération de tous les noms de salle dans la BDD :
+        // Récupération de tous les noms de salles dans la BDD :
+        final String[] noms_salles = getNomsSalles();
 
+        // Les utiliser comme adapter pour l'AutoComplete :
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,android.R.layout.select_dialog_item, noms_salles);
+        autocomplete_nomSalle.setThreshold(2);
+        autocomplete_nomSalle.setAdapter(adapter);
 
 
         // ------------------------------------------------------------------------------------
@@ -228,8 +236,22 @@ public class RechSalle extends ActionBarActivity
 
         // Au clic sur le bouton recherche :
         searchBtn.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                ADE.rechSalle(listView_salles, criteres, controller, context);
+            public void onClick(View v)
+            {
+                // Regarder si le champ "Nom salle" est rempli :
+                String nomSalle_auto = autocomplete_nomSalle.getText().toString();
+                if (! nomSalle_auto.equals(""))
+                {
+                    // Vérifier que le nom existe dans la BDD :
+                    if (controller.existsIn(nomSalle_auto, "salle")) {
+                        // Aller directement à la fiche salle :
+                        newFicheSalleActivity(nomSalle_auto);
+                    } else {
+                        Toast.makeText(context, "Salle introuvable =(", Toast.LENGTH_SHORT).show();
+                    }
+                } else {
+                    ADE.rechSalle(listView_salles, criteres, controller, context);
+                }
             }
         });
 
@@ -251,11 +273,7 @@ public class RechSalle extends ActionBarActivity
             public void onItemClick(AdapterView<?> parent, View view, int position, long id)
             {
                 TextView nomSalle_view = (TextView) view.findViewById(R.id.nomSalle);
-
-                // Création d'une nouvelle acitvité FicheSalle :
-                Intent intent = new Intent(RechSalle.this, FicheSalle.class);
-                intent.putExtra(EXTRA_NOM_SALLE, nomSalle_view.getText());
-                startActivity(intent);
+                newFicheSalleActivity(nomSalle_view.getText().toString());
             }
         });
     }
@@ -378,6 +396,13 @@ public class RechSalle extends ActionBarActivity
     // == CUSTOM METHODS
     // ====================================================================================
 
+    private void newFicheSalleActivity(String title)
+    {
+        Intent intent = new Intent(RechSalle.this, FicheSalle.class);
+        intent.putExtra(EXTRA_NOM_SALLE, title);
+        startActivity(intent);
+    }
+
     // ------------------------------------------------------------------------------------
     // -- Interface custom Dialog Fragment
     // ------------------------------------------------------------------------------------
@@ -427,9 +452,22 @@ public class RechSalle extends ActionBarActivity
 
 
     // ------------------------------------------------------------------------------------
-    // -- JSON
+    // -- BDD
     // ------------------------------------------------------------------------------------
 
+    private String[] getNomsSalles()
+    {
+        // Retrouver la salle en question dans la BDD :
+        ArrayList<HashMap<String,String>> liste_salle_bdd = controller.getSalles("all");
+
+        String[] noms_salles = new String[liste_salle_bdd.size()];
+
+        for (int i = 0 ; i < liste_salle_bdd.size() ; i++) {
+            noms_salles[i] = liste_salle_bdd.get(i).get("nom");
+        }
+
+        return noms_salles;
+    }
 
 
     // ------------------------------------------------------------------------------------
