@@ -191,19 +191,19 @@
 
 			// --- Récupérer la valeur des critères "epi" et "etage" ---
 
-			$val_epi = $this->_get_param("epi", false);
-			$val_etage = $this->_get_param("etage", false);
+			$val_epi = $this->_get_param("epi", "null");
+			$val_etage = $this->_get_param("etage", "null");
 
 			// Construire le modèle du "nom LIKE modele" :
-			if (!! $val_epi || !!$val_etage)
+			if ($val_epi != "null" || $val_etage != "null")
 			{
 				// Exemples :
 				// - si "epi=1" et "etage=2" : "nom LIKE '12%'"
 				// - si "epi=1" : "nom LIKE '1%'"
 				// - si "etage=2" : "nom LIKE '_2%'"
 				$sql_conditions[] = "nom LIKE '"
-					.(!! $val_epi ? $val_epi : "_")
-					.(!! $val_etage ? $val_etage : "")
+					.($val_epi == "null" ? "_" : $val_epi)
+					.($val_etage == "null" ? "" : $val_etage)
 					."%'";
 
 				// Annuler le critère possible "nom" :
