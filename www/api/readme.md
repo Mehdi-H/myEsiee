@@ -28,12 +28,14 @@ Une requête peut être de la forme :
 Voici la liste des paramètres possibles :
 
 - `func=rechSalle` : pour utiliser la fonction de recherche de salles (seul paramètre obligatoire).
-- `nom` : le nom complet de la salle en BDD, si le nom contient des symboles spéciaux (comme "+", " " ou "!"), celui-ci doit être encodé pour URL (url_encode).
+- `nom` : le nom complet de la salle en BDD, si le nom contient des symboles spéciaux (comme "+", " " ou "!"), celui-ci doit être encodé pour URL (url_encode). Si au moins un des paramètres `epi` ou `etage` est spécifié, le paramètre `nom` ne sera pas pris en compte.
 - `type` : le type de salle recherché.
 - `taille` : le nombre de places dans la salle.
 - `projecteur` : la présence d'un projecteur (0 : non, 1 : oui).
 - `tableau` : la présence de tableau(x) (0 : aucun, 1 : blanc, 2 : noir, 3 : les deux).
 - `imprimante` : la présence d'une imprimante (0 : non, 1 : oui).
+- `epi` : l'épi de la salle (correspond simplement au tout premier chiffre des noms des salles).
+- `etage` : l'étage de la salle (correspond simplement au deuxième chiffre des noms des salles).
 
 ### Format de la disponibilité d'une salle
 

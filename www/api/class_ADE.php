@@ -175,14 +175,42 @@
 
 			// Critères possibles :
 			$criteres_possibles = array(
-				"nom" => "LIKE",
-				"type" => "LIKE",
-				"taille" => "=",
-				"projecteur" => "=",
-				"tableau" => "=",
-				"imprimante" => "="
+				"nom", // nom : index 0, ne pas changer
+				"type",
+				"taille",
+				"projecteur",
+				"tableau",
+				"imprimante"
 			);
-			foreach ($criteres_possibles as $critere => $operateur)
+
+			// --- Récupérer la valeur des critères "epi" et "etage" ---
+
+			$val_epi =
+				isset($_GET["epi"]) ? $_GET["epi"] :
+					(isset($_POST["epi"]) ? $_POST["epi"] : false);
+			$val_etage =
+				isset($_GET["etage"]) ? $_GET["etage"] :
+					(isset($_POST["etage"]) ? $_POST["etage"] : false);
+
+			// Construire le modèle du "nom LIKE modele" :
+			if (!! $val_epi || !!$val_etage)
+			{
+				// Exemples :
+				// - si "epi=1" et "etage=2" : "nom LIKE '12%'"
+				// - si "epi=1" : "nom LIKE '1%'"
+				// - si "etage=2" : "nom LIKE '_2%'"
+				$sql_conditions[] = "nom LIKE '".
+					(!! $val_epi ? $val_epi : "_").
+					(!! $val_etage ? $val_etage : "").
+					"%'";
+
+				// Annuler le critère possible "nom" :
+				unset($criteres_possibles[0]);
+			}
+
+			// --- Parcours de tous les critères possibles ---
+
+			foreach ($criteres_possibles as $critere)
 			{
 				// Récupérer la valeur du critère en GET ou en POST si elle existe :
 				$val_critere =
@@ -195,10 +223,11 @@
 				}
 
 				// Prise en compte du critère :
-				$sql_conditions[] = $critere." ".$operateur." '".$val_critere."'";
+				$sql_conditions[] = $critere."='".$val_critere."'";
 			}
 
-			// Construction de la partie "WHERE" de la requête SQL :
+			// --- Construction de la partie "WHERE" de la requête SQL ---
+
 			$sql_where = "";
 			foreach ($sql_conditions as $index => $condition)
 			{
