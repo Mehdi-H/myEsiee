@@ -191,8 +191,14 @@ public class ADE
         });
     }
 
-    public static void dispoSalle(String nom, String date, final Context context, final ImageView imageView)
+    public static void dispoSalle(String nom, String date, final int width, final Context context, final ImageView imageView)
     {
+        // === Dimensions de l'image à générer ===
+
+        double ratio = 1.5;
+        int height = (int) ((double)width * ratio);
+
+
         // === Construction de l'URL de requête ===
 
         String url = base_url + "?func=dispoSalle";
@@ -201,7 +207,10 @@ public class ADE
         } catch (UnsupportedEncodingException e) {
 
         }
+        url += "&largeur=" + width + "&hauteur=" + height;
         url += date.equals("") ? "" : "&date=" + date;
+
+        Toast.makeText(context, url, Toast.LENGTH_SHORT).show();
 
         // Init :
         AsyncHttpClient client = new AsyncHttpClient();

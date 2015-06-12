@@ -1,28 +1,23 @@
 package themeute_entertainment.eroom;
 
-import android.content.Context;
+import android.app.DatePickerDialog;
+import android.app.Dialog;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.media.Image;
+import android.graphics.Point;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.view.Display;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.ArrayAdapter;
+import android.view.View;
+import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.GridView;
 import android.widget.ImageView;
-import android.widget.TextView;
-import android.widget.Toast;
 
-import org.w3c.dom.Text;
-
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.net.MalformedURLException;
-import java.net.URL;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 
 
@@ -34,6 +29,24 @@ public class FicheSalle extends ActionBarActivity
 
     // BDD SQLite :
     DBController controller = new DBController(this);
+
+    // Date :
+    private DatePicker datePicker;
+    private Calendar calendar;
+    private Button date_btn;
+    private int year, month, day;
+
+    // Views :
+    private ImageView imageET_view;
+
+    // Outils :
+    SimpleDateFormat format_API = new SimpleDateFormat("MM/dd/yyyy"); // format américain pour l'API
+    SimpleDateFormat format_fr = new SimpleDateFormat("dd/MM/yyyy"); // format normal
+
+    // Données :
+    private String nomSalle;
+    private int largeur;
+    String date;
 
 
     // ====================================================================================
@@ -48,15 +61,36 @@ public class FicheSalle extends ActionBarActivity
 
         // Récupérer l'intent qui a démarré l'activité :
         Intent intent = getIntent();
-        String nomSalle = intent.getStringExtra(RechSalle.EXTRA_NOM_SALLE);
+        nomSalle = intent.getStringExtra(RechSalle.EXTRA_NOM_SALLE);
+
+
+        // ------------------------------------------------------------------------------------
+        // -- Views
+        // ------------------------------------------------------------------------------------
+
+        date_btn = (Button) findViewById(R.id.setDate);
+
+
+        // ------------------------------------------------------------------------------------
+        // -- Date
+        // ------------------------------------------------------------------------------------
+
+        // Date d'aujourd'hui :
+        calendar = Calendar.getInstance();
+        year = calendar.get(Calendar.YEAR);
+        month = calendar.get(Calendar.MONTH);
+        day = calendar.get(Calendar.DAY_OF_MONTH);
+
+        // Ecrire la date choisie sur le bouton :
+        showDate(format_fr.format(calendar.getTime()));
 
 
         // ------------------------------------------------------------------------------------
         // -- Nom de la salle
         // ------------------------------------------------------------------------------------
 
-        TextView hello = (TextView) findViewById(R.id.nomSalle);
-        hello.setText(nomSalle);
+        setTitle(nomSalle);
+
 
         // ------------------------------------------------------------------------------------
         // -- Caractéristiques
@@ -95,8 +129,55 @@ public class FicheSalle extends ActionBarActivity
         // -- Récupérer l'image de l'emploi du temps et l'afficher
         // ------------------------------------------------------------------------------------
 
-        ImageView imageET_view = (ImageView) findViewById(R.id.imageET);
-        ADE.dispoSalle(nomSalle, "", this, imageET_view);
+        // Largeur de l'écran :
+        Display display = getWindowManager().getDefaultDisplay();
+        Point size = new Point();
+        display.getSize(size);
+        largeur = (int) ((double)size.x / 1.7);
+
+        imageET_view = (ImageView) findViewById(R.id.imageET);
+        ADE.dispoSalle(nomSalle, "", largeur, this, imageET_view);
+    }
+
+
+    // ====================================================================================
+    // == Date Picker
+    // ====================================================================================
+
+    public void showDatePickerDialog(View v) {
+        showDialog(999);
+    }
+
+    @Override
+    protected Dialog onCreateDialog(int id) {
+        if (id == 999) {
+            return new DatePickerDialog(this, dateListener, year, month, day);
+        }
+        return null;
+    }
+
+    private DatePickerDialog.OnDateSetListener dateListener = new DatePickerDialog.OnDateSetListener()
+    {
+        @Override
+        public void onDateSet(DatePicker arg0, int arg1, int arg2, int arg3)
+        {
+            // === Afficher la date sur le bouton ===
+            // arg1 = year
+            // arg2 = month
+            // arg3 = day
+
+            calendar.set(arg1, arg2, arg3);
+            showDate(format_fr.format(calendar.getTime()));
+
+            // === Générer une nouvelle image pour la nouvelle date ===
+
+            ADE.dispoSalle(nomSalle, format_API.format(calendar.getTime()), largeur, FicheSalle.this, imageET_view);
+        }
+    };
+
+    private void showDate(String date) {
+        // Format : "jj/mm/aaaa"
+        date_btn.setText(date);
     }
 
 
