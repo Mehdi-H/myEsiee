@@ -30,6 +30,7 @@
     <string name="recherche_avancee">Recherche avancée</string>
     <string-array name="epis">
         <item>Épi</item>
+        <item>Hors épi</item>
         <item>Épi 1</item>
         <item>Épi 2</item>
         <item>Épi 3</item>

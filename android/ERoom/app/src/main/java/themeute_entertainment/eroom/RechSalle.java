@@ -24,6 +24,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.support.v4.widget.DrawerLayout;
 import android.widget.AdapterView;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
@@ -78,8 +79,6 @@ public class RechSalle extends ActionBarActivity
     private final ToggleButton btn_categ[] = new ToggleButton[3];
     private final String categories[] = new String[3];
 
-    private final TextView[] textView_debug = new TextView[1];
-
     // Critères de recherche :
     private HashMap<String,String> criteres = new HashMap<String,String>();
 
@@ -120,8 +119,6 @@ public class RechSalle extends ActionBarActivity
         // -- VIEWS
         // ------------------------------------------------------------------------------------
 
-        textView_debug[0] = (TextView) findViewById(R.id.textView_debug);
-
         final ImageButton searchBtn = (ImageButton) findViewById(R.id.imageButton_search);
         final Button advancedSearch = (Button) findViewById(R.id.btn_advancedSearch);
 
@@ -139,8 +136,12 @@ public class RechSalle extends ActionBarActivity
 
 
         // ------------------------------------------------------------------------------------
-        // -- Initialisation des critères de recherche
+        // -- Initialisation de l'AutoComplete nom salle
         // ------------------------------------------------------------------------------------
+
+        AutoCompleteTextView autocomplete_nomSalle = (AutoCompleteTextView) findViewById(R.id.nomSalle);
+
+        // Récupération de tous les noms de salle dans la BDD :
 
 
 
@@ -217,7 +218,6 @@ public class RechSalle extends ActionBarActivity
         advancedSearch.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v)
             {
-                Toast.makeText(context, "Recherche avancée", Toast.LENGTH_SHORT).show();
                 dialog.show(getSupportFragmentManager(), "AdvancedSearchDialog");
             }
         });
@@ -225,8 +225,6 @@ public class RechSalle extends ActionBarActivity
         // ------------------------------------------------------------------------------------
         // -- Requête HTTP Get
         // ------------------------------------------------------------------------------------
-
-        textView_debug[0].setText("Blablabla");
 
         // Au clic sur le bouton recherche :
         searchBtn.setOnClickListener(new View.OnClickListener() {
@@ -241,7 +239,7 @@ public class RechSalle extends ActionBarActivity
 
         // Initialize Progress Dialog properties
         prgDialog = new ProgressDialog(this);
-        prgDialog.setMessage("Transferring Data from Remote MySQL DB and Syncing SQLite. Please wait...");
+        prgDialog.setMessage("Mise à jour de la base de donnée...");
         prgDialog.setCancelable(false);
 
         // ------------------------------------------------------------------------------------
@@ -402,14 +400,20 @@ public class RechSalle extends ActionBarActivity
 
         // === Construction des critères ===
 
-        int epi, etage, tableau, projecteur, imprimante;
+        int tableau, projecteur, imprimante;
+
+        String epi = spinner_epi.getSelectedItem().toString();
+        String etage = spinner_etage.getSelectedItem().toString();
 
         boolean blanc = chk_tableau_blanc.isChecked(),
                 noir = chk_tableau_noir.isChecked();
 
-        criteres.put("tableau", blanc ? (noir ? "3" : "2" ) : (noir ? "1" : "0"));
-        criteres.put("projecteur", chk_projecteur.isChecked() ? "1" : "0");
-        criteres.put("imprimante", chk_imprimante.isChecked() ? "1" : "0");
+        criteres.put("tableau", blanc ? (noir ? "3" : "2" ) : (noir ? "1" : "null"));
+        criteres.put("projecteur", chk_projecteur.isChecked() ? "1" : "null");
+        criteres.put("imprimante", chk_imprimante.isChecked() ? "1" : "null");
+
+        criteres.put("epi", epi.equals("Épi") ? "null" : spinner_epi.getSelectedItemPosition()-1 + "");
+        criteres.put("etage", etage.equals("Étage") ? "null" : spinner_etage.getSelectedItemPosition()-1 + "");
 
         // Lancement de la requête :
         ADE.rechSalle(listView_salles, criteres, controller, context);
@@ -470,7 +474,6 @@ public class RechSalle extends ActionBarActivity
             public void onSuccess(String response) {
                 // Hide ProgressBar
                 prgDialog.hide();
-                textView_debug[0].append("\nResponse : " + response);
                 updateSQLite(response, table);
             }
             // When error occurred

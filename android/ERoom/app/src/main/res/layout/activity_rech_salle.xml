@@ -70,16 +70,20 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
                 android:orientation="horizontal" >
 
-                <EditText
+                <AutoCompleteTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:hint="Numéro de salle"
+                    android:id="@+id/nomSalle"
+                    android:nextFocusUp="@id/nomSalle"
+                    android:nextFocusLeft="@id/nomSalle"
+                    android:hint="@string/hint_nomSalle"
                     android:gravity="center"
                     android:layout_gravity="center_vertical"
                     android:layout_weight="1"
-                    android:id="@+id/nomSalle"
                     android:inputType="number" />
 
                 <ImageButton
@@ -95,12 +99,6 @@
             </LinearLayout>
 
         </LinearLayout>
-
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="100dp"
-            android:id="@+id/textView_debug" />
 
         <ListView
             android:layout_width="wrap_content"

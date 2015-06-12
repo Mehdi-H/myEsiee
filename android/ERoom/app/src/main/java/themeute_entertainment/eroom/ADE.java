@@ -115,7 +115,7 @@ public class ADE
         // Critères :
         for (HashMap.Entry<String,String> entry : criteres.entrySet())
         {
-            if (! entry.getValue().equals("0")) {
+            if (! entry.getValue().equals("null")) {
                 url += "&" + entry.getKey() + "=" + entry.getValue();
             }
         }
