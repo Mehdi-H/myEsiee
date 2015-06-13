@@ -138,6 +138,7 @@
 			mysql_select_db(DB_DATABASE, $db);
 
 			// Exécution :
+			mysql_set_charset("utf8", $db);
 			$req = mysql_query($request)
 				or die('Erreur SQL !<br>'.$request.'<br>'.mysql_errno());
 
@@ -147,8 +148,9 @@
 
 		private function _get_param($param, $default)
 		{
-			return isset($_GET[$param]) ? $_GET[$param] :
+			$value = isset($_GET[$param]) ? $_GET[$param] :
 					(isset($_POST[$param]) ? $_POST[$param] : $default);
+			return $value;
 		}
 
 		/////////////////////////////////////////////////////////////////////////////////
@@ -341,13 +343,13 @@
 		}
 
 		/**
-		 * FONCTION : Disponibilité d'une salle. Affiche une image de l'emploi du temps d'une salle pour une journée donnée. Appelée si "func=dispoSalle" dans l'URL.
+		 * FONCTION : Disponibilité d'une salle ou d'un prof. Affiche une image de l'emploi du temps pour une journée donnée. Appelée si "func=dispoSalle" ou 'func=dispoProf" dans l'URL.
 		 *
 		 * Paramètres possibles de la requête :
-		 *  - "nom" : le nom de la salle.
+		 *  - "nom" : le nom de la salle ou du prof.
 		 *  - "date" : le jour à afficher (au format américain "mm/jj/aaaa"). Optionnel : par défaut, l'emploi du temps du jour-même sera affiché.
 		 *
-		 * @return image L'image de l'emploi du temps pour la salle et le jour sélectionnés
+		 * @return image L'image de l'emploi du temps pour la salle/le prof et le jour sélectionnés
 		 */
 		public function dispo($type = "salle")
 		{
