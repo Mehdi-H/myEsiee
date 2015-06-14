@@ -54,7 +54,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 
-public class RechSalle extends ActionBarActivity
+public class RechSalle extends BaseDrawerActivity
         implements  NavigationDrawerFragment.NavigationDrawerCallbacks,
                     AdvancedSearchDialog.AdvancedSearchDialogListener
 {
@@ -107,15 +107,17 @@ public class RechSalle extends ActionBarActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_rech_salle);
+        this.mNavigationDrawerFragment = super.onCreateDrawer();
 
-        mNavigationDrawerFragment = (NavigationDrawerFragment)
-                getSupportFragmentManager().findFragmentById(R.id.navigation_drawer);
+        /* mNavigationDrawerFragment = (NavigationDrawerFragment)
+                getSupportFragmentManager().findFragmentById(R.id.navigation_drawer); */
+
         mTitle = getTitle();
 
         // Set up the drawer.
-        mNavigationDrawerFragment.setUp(
+        /* mNavigationDrawerFragment.setUp(
                 R.id.navigation_drawer,
-                (DrawerLayout) findViewById(R.id.drawer_layout));
+                (DrawerLayout) findViewById(R.id.drawer_layout)); */
 
         context = getApplicationContext();
 
@@ -132,7 +134,7 @@ public class RechSalle extends ActionBarActivity
 
 
         // ------------------------------------------------------------------------------------
-        // -- Vérificaiton de la version de la BDD
+        // -- Vérification de la version de la BDD
         // ------------------------------------------------------------------------------------
 
         controller.checkForUpdates(prgDialog, settings, context);
@@ -165,7 +167,7 @@ public class RechSalle extends ActionBarActivity
         autocomplete_nomSalle = (AutoCompleteTextView) findViewById(R.id.nomSalle);
 
         // Récupération de tous les noms de salles dans la BDD :
-        final String[] noms_salles = controller.getNomsSalles();
+        final String[] noms_salles = controller.getNoms("salle");
 
         // Les utiliser comme adapter pour l'AutoComplete :
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,android.R.layout.select_dialog_item, noms_salles);
@@ -287,7 +289,7 @@ public class RechSalle extends ActionBarActivity
         });
     }
 
-    @Override
+    /* @Override
     public void onNavigationDrawerItemSelected(int position) {
         // update the main content by replacing fragments
         FragmentManager fragmentManager = getSupportFragmentManager();
@@ -320,14 +322,14 @@ public class RechSalle extends ActionBarActivity
                 mTitle = getString(R.string.title_Disconnect);
                 break;
         }
-    }
+    } */
 
-    public void restoreActionBar() {
+    /* public void restoreActionBar() {
         ActionBar actionBar = getSupportActionBar();
         actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
         actionBar.setDisplayShowTitleEnabled(true);
         actionBar.setTitle(mTitle);
-    }
+    } */
 
 
     @Override

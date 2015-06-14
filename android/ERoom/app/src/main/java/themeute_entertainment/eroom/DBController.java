@@ -1,5 +1,6 @@
 package themeute_entertainment.eroom;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -155,6 +156,17 @@ public class DBController extends SQLiteOpenHelper
     // == DATA QUERY LANGUAGE
     // ====================================================================================
 
+    public ArrayList<HashMap<String, String>> getDataFromTable(final String table, final String nom)
+    {
+        if (table.equals("salle")) {
+            return getSalles(nom);
+        } else if (table.equals("prof")) {
+            return getProfs(nom);
+        } else {
+            return null;
+        }
+    }
+
     /**
      * Obtenir la liste des salles de la BDD SQLite dans un ArrayList.
      * @return
@@ -197,11 +209,16 @@ public class DBController extends SQLiteOpenHelper
      * Obtenir la liste des profs de la BDD SQLite dans un ArrayList.
      * @return
      */
-    public ArrayList<HashMap<String, String>> getProfs()
+    public ArrayList<HashMap<String, String>> getProfs(final String nom)
     {
         ArrayList<HashMap<String,String>> liste_profs = new ArrayList<HashMap<String,String>>();
 
-        String selectQuery = "SELECT * FROM prof";
+        String selectQuery;
+        if (nom.equals("all")) {
+            selectQuery = "SELECT * FROM prof";
+        } else {
+            selectQuery = "SELECT * FROM prof WHERE nom='"+nom+"'";
+        }
 
         // Exécuter la requête :
         SQLiteDatabase database = this.getWritableDatabase();
@@ -301,18 +318,18 @@ public class DBController extends SQLiteOpenHelper
     // -- Gets
     // ====================================================================================
 
-    public String[] getNomsSalles()
+    public String[] getNoms(final String table)
     {
         // Retrouver la salle en question dans la BDD :
-        ArrayList<HashMap<String,String>> liste_salle_bdd = getSalles("all");
+        ArrayList<HashMap<String,String>> liste_bdd = getDataFromTable(table, "all");
 
-        String[] noms_salles = new String[liste_salle_bdd.size()];
+        String[] noms = new String[liste_bdd.size()];
 
-        for (int i = 0 ; i < liste_salle_bdd.size() ; i++) {
-            noms_salles[i] = liste_salle_bdd.get(i).get("nom");
+        for (int i = 0 ; i < liste_bdd.size() ; i++) {
+            noms[i] = liste_bdd.get(i).get("nom");
         }
 
-        return noms_salles;
+        return noms;
     }
 
 
@@ -350,11 +367,13 @@ public class DBController extends SQLiteOpenHelper
 
     public void requestData(AsyncHttpClient client, RequestParams params, final String table, final Context context, final ProgressDialog prgDialog)
     {
+        System.out.println("requestData de " + table);
         client.post("https://mvx2.esiee.fr/mysql_sync/getdata.php?table=" + table, params, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(String response)
             {
                 updateSQLite(response, table, context);
+                System.out.println("requestData de " + table + " terminé");
 
                 // Hide ProgressBar
                 if (prgDialog != null) {
@@ -366,6 +385,8 @@ public class DBController extends SQLiteOpenHelper
             @Override
             public void onFailure(int statusCode, Throwable error, String content)
             {
+                System.out.println("requestData de " + table + " fail !");
+
                 // Hide ProgressBar
                 if (syncedTable[0]) {
                     prgDialog.hide();

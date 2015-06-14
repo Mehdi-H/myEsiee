@@ -191,7 +191,7 @@ public class ADE
         });
     }
 
-    public static void dispoSalle(String nom, String date, final int width, final Context context, final ImageView imageView)
+    public static void dispo(final String Table, final String nom, final String date, final int width, final Context context, final ImageView imageView)
     {
         // === Dimensions de l'image à générer ===
 
@@ -201,7 +201,7 @@ public class ADE
 
         // === Construction de l'URL de requête ===
 
-        String url = base_url + "?func=dispoSalle";
+        String url = base_url + "?func=dispo" + Table;
         try {
             url += "&nom=" + URLEncoder.encode(nom, "UTF-8");
         } catch (UnsupportedEncodingException e) {

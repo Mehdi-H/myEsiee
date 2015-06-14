@@ -44,6 +44,9 @@ public class CaracteristiquesAdapter extends ArrayAdapter<String>
         icones.put("Salle d'élec", R.drawable.ic_action_computer);
         icones.put("Salle de cours", R.drawable.ic_action_computer);
         icones.put("taille", R.drawable.ic_action_computer);
+        // Infos prof :
+        icones.put("bureau", R.drawable.ic_action_computer);
+        icones.put("email", R.drawable.ic_action_computer);
     }
 
 
@@ -61,20 +64,22 @@ public class CaracteristiquesAdapter extends ArrayAdapter<String>
 
         // === Remplir la case courante ===
 
-        // --- Nom de la caractéristique ---
         TextView textView = (TextView) gridView.findViewById(R.id.texte);
+        ImageView imageView = (ImageView) gridView.findViewById(R.id.icone);
 
-        if (caracteristiques[position].startsWith("taille_")) {
-            textView.setText(caracteristiques[position].split("_")[1] + " places");
+        System.out.println(position + " " + caracteristiques[position]);
+
+        if (caracteristiques[position].indexOf("_") != -1)
+        {
+            String nomCaract = caracteristiques[position].split("_")[0];
+            String valCaract = caracteristiques[position].split("_")[1];
+
+            // Cas particuliers de la forme "préfixe_valeur" :
+            textView.setText(valCaract + (nomCaract.equals("taille") ? " places" : ""));
+            imageView.setImageResource(icones.get(nomCaract));
+
         } else {
             textView.setText(caracteristiques[position]);
-        }
-
-        // --- Icône ---
-        ImageView imageView = (ImageView) gridView.findViewById(R.id.icone);
-        if (caracteristiques[position].startsWith("taille_")) {
-            imageView.setImageResource(icones.get("taille"));
-        } else {
             imageView.setImageResource(icones.get(caracteristiques[position]));
         }
 

@@ -2,18 +2,22 @@ package themeute_entertainment.eroom;
 
 import android.app.DatePickerDialog;
 import android.app.Dialog;
-import android.content.Intent;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.Point;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Display;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.GridView;
+import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -21,14 +25,31 @@ import java.util.Calendar;
 import java.util.HashMap;
 
 
-public class FicheSalle extends ActionBarActivity
+public class RechProf extends BaseDrawerActivity
 {
     // ====================================================================================
     // == ATTRIBUTS
     // ====================================================================================
 
+    private NavigationDrawerFragment mNavigationDrawerFragment;
+
+    private CharSequence mTitle;
+
+    // Données :
+    private SharedPreferences settings;
+    private String nomProf;
+    private int largeur;
+    private String date;
+
+    // Views :
+    private AutoCompleteTextView autocomplete_nomSalle;
+    private ImageView imageET_view;
+
     // BDD SQLite :
     DBController controller = new DBController(this);
+
+    // Android stuff :
+    private Context context;
 
     // Date :
     private DatePicker datePicker;
@@ -36,17 +57,9 @@ public class FicheSalle extends ActionBarActivity
     private Button date_btn;
     private int year, month, day;
 
-    // Views :
-    private ImageView imageET_view;
-
     // Outils :
     SimpleDateFormat format_API = new SimpleDateFormat("MM/dd/yyyy"); // format américain pour l'API
     SimpleDateFormat format_fr = new SimpleDateFormat("dd/MM/yyyy"); // format normal
-
-    // Données :
-    private String nomSalle;
-    private int largeur;
-    String date;
 
 
     // ====================================================================================
@@ -57,23 +70,32 @@ public class FicheSalle extends ActionBarActivity
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_fiche_salle);
+        setContentView(R.layout.activity_rech_prof);
+        this.mNavigationDrawerFragment = super.onCreateDrawer();
 
-        // Récupérer l'intent qui a démarré l'activité :
-        Intent intent = getIntent();
-        nomSalle = intent.getStringExtra(RechSalle.EXTRA_NOM_SALLE);
-
+        context = getApplicationContext();
+        settings = getPreferences(MODE_PRIVATE);
 
         // ------------------------------------------------------------------------------------
-        // -- Views
+        // -- Initialisation de l'AutoComplete nom prof
         // ------------------------------------------------------------------------------------
 
-        date_btn = (Button) findViewById(R.id.setDate);
+        autocomplete_nomSalle = (AutoCompleteTextView) findViewById(R.id.nomProf_recherche);
+
+        // Récupération de tous les noms de salles dans la BDD :
+        final String[] noms_profs = controller.getNoms("prof");
+
+        // Les utiliser comme adapter pour l'AutoComplete :
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,android.R.layout.select_dialog_item, noms_profs);
+        autocomplete_nomSalle.setThreshold(1);
+        autocomplete_nomSalle.setAdapter(adapter);
 
 
         // ------------------------------------------------------------------------------------
         // -- Date
         // ------------------------------------------------------------------------------------
+
+        date_btn = (Button) findViewById(R.id.setDate);
 
         // Date d'aujourd'hui :
         calendar = Calendar.getInstance();
@@ -86,43 +108,64 @@ public class FicheSalle extends ActionBarActivity
 
 
         // ------------------------------------------------------------------------------------
-        // -- Nom de la salle
+        // -- La fameuse recherche
         // ------------------------------------------------------------------------------------
 
-        setTitle(nomSalle);
+        ImageButton searchBtn = (ImageButton) findViewById(R.id.imageButton_search);
 
+        searchBtn.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v)
+            {
+                // Regarder si le champ "Nom prof" est rempli :
+                String nomProf_auto = autocomplete_nomSalle.getText().toString();
+                if (!nomProf_auto.equals(""))
+                {
+                    // Vérifier que le nom existe dans la BDD :
+                    if (controller.existsIn(nomProf_auto, "prof")) {
+                        // Aller directement à la fiche salle :
+                        remplirFicheProf(nomProf_auto);
+                    } else {
+                        Toast.makeText(context, "Prof introuvable =(", Toast.LENGTH_SHORT).show();
+                    }
+                } else {
+                    Toast.makeText(context, "Quel prof rechercher ?", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+    }
+
+
+    // ====================================================================================
+    // == CUSTOM METHODS
+    // ====================================================================================
+
+    private void remplirFicheProf(final String nomProf)
+    {
+        this.nomProf = nomProf;
 
         // ------------------------------------------------------------------------------------
-        // -- Caractéristiques
+        // -- Infos
         // ------------------------------------------------------------------------------------
 
-        GridView caracteristiques_view = (GridView) findViewById(R.id.caracteristiques);
-        String caract_string = "";
+        GridView infos_view = (GridView) findViewById(R.id.infosProf);
+        String infos_string = "";
 
-        HashMap<String,String> corresp_types = new HashMap<String,String>();
-        corresp_types.put("it", "Salle info");
-        corresp_types.put("elec", "Salle d'élec");
-        corresp_types.put("banal", "Salle de cours");
+        // === Récupération des infos dans la BDD ===
 
-        // === Récupération des caractéristiques dans la BDD ===
+        // --- Retrouver le prof en question dans la BDD ---
 
-        // --- Retrouver la salle en question dans la BDD ---
-
-        ArrayList<HashMap<String,String>> liste_salle_bdd = controller.getSalles(nomSalle);
-        HashMap<String,String> salle_bdd = liste_salle_bdd.get(0);
+        ArrayList<HashMap<String,String>> liste_profs_bdd = controller.getProfs(nomProf);
+        HashMap<String,String> prof_bdd = liste_profs_bdd.get(0);
 
         // --- Rajouter les caractéristiques de la BDD dans la String ---
 
-        caract_string += corresp_types.get(salle_bdd.get("type")) + ";";
-        caract_string += (salle_bdd.get("projecteur").equals("1") ? "Projecteur;" : "");
-        caract_string += (salle_bdd.get("imprimante").equals("1") ? "Imprimante;" : "");
-        caract_string += (salle_bdd.get("tableau").equals("1") || salle_bdd.get("tableau").equals("3") ? "Tableau blanc;" : "");
-        caract_string += (salle_bdd.get("tableau").equals("2") || salle_bdd.get("tableau").equals("3") ? "Tableau noir;" : "");
-        caract_string += "taille_" + salle_bdd.get("taille");
+        infos_string += (! prof_bdd.get("bureau").equals("null") ? "bureau_" + prof_bdd.get("bureau") + ";" : "");
+        infos_string += (! prof_bdd.get("email").equals("null") ? "email_" + prof_bdd.get("email") : "");
 
         // === Peuplage de la GridView ===
 
-        caracteristiques_view.setAdapter(new CaracteristiquesAdapter(this, caract_string.split(";")));
+        System.out.println(infos_string);
+        infos_view.setAdapter(new CaracteristiquesAdapter(this, infos_string.split(";")));
 
 
         // ------------------------------------------------------------------------------------
@@ -136,7 +179,7 @@ public class FicheSalle extends ActionBarActivity
         largeur = (int) ((double)size.x / 1.7);
 
         imageET_view = (ImageView) findViewById(R.id.imageET);
-        ADE.dispo("Salle", nomSalle, "", largeur, this, imageET_view);
+        ADE.dispo("Prof", nomProf, "", largeur, this, imageET_view);
     }
 
 
@@ -171,7 +214,7 @@ public class FicheSalle extends ActionBarActivity
 
             // === Générer une nouvelle image pour la nouvelle date ===
 
-            ADE.dispo("Salle", nomSalle, format_API.format(calendar.getTime()), largeur, FicheSalle.this, imageET_view);
+            ADE.dispo("Prof", nomProf, format_API.format(calendar.getTime()), largeur, RechProf.this, imageET_view);
         }
     };
 
@@ -182,13 +225,13 @@ public class FicheSalle extends ActionBarActivity
 
 
     // ====================================================================================
-    // == Menu
+    // == MENU
     // ====================================================================================
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_fiche_salle, menu);
+        getMenuInflater().inflate(R.menu.menu_rech_prof, menu);
         return true;
     }
 

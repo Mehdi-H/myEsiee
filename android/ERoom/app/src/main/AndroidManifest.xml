@@ -26,6 +26,14 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="themeute_entertainment.eroom.RechSalle" />
         </activity>
+        <activity
+            android:name=".BaseDrawerActivity"
+            android:label="@string/title_activity_base_drawer" >
+        </activity>
+        <activity
+            android:name=".RechProf"
+            android:label="@string/title_activity_rech_prof" >
+        </activity>
     </application>
 
 </manifest>

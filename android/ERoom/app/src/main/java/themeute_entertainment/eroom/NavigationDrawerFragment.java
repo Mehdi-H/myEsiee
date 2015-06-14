@@ -1,5 +1,6 @@
 package themeute_entertainment.eroom;
 
+import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.app.Activity;
 import android.support.v7.app.ActionBar;
@@ -90,7 +91,7 @@ public class NavigationDrawerFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         mDrawerListView = (ListView) inflater.inflate(
-                R.layout.fragment_navigation_drawer, container, false);
+                R.layout.fragment_base_navigation_drawer, container, false);
         mDrawerListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -108,7 +109,7 @@ public class NavigationDrawerFragment extends Fragment {
                         getString(R.string.title_Absences),
                         getString(R.string.title_Assessments),
                         getString(R.string.title_Settings),
-                        getString(R.string.title_Disconnect),
+                        getString(R.string.title_Disconnect)
                 }));
         mDrawerListView.setItemChecked(mCurrentSelectedPosition, true);
         return mDrawerListView;
@@ -195,14 +196,50 @@ public class NavigationDrawerFragment extends Fragment {
     private void selectItem(int position) {
         mCurrentSelectedPosition = position;
         if (mDrawerListView != null) {
+            System.out.println("mDrawerListView != null");
             mDrawerListView.setItemChecked(position, true);
+
+            // Handle Navigation Options
+            switch (position) {
+                case 0:
+                    switchActivity(RechSalle.class);
+                    break;
+                case 1:
+                    switchActivity(RechProf.class);
+                    break;
+                case 2:
+                    // switchActivity(Notes.class);
+                    break;
+                case 3:
+                    // switchActivity(Absences.class);
+                    break;
+                case 4:
+                    // switchActivity(Apreciations.class);
+                    break;
+                case 5:
+                    // switchActivity(Params.class);
+                    break;
+                case 6:
+                    // switchActivity(Deconnexion.class);
+                    break;
+            }
+
         }
         if (mDrawerLayout != null) {
+            System.out.println("mDrawerLayout != null");
             mDrawerLayout.closeDrawer(mFragmentContainerView);
         }
         if (mCallbacks != null) {
+            System.out.println("mCallbacks != null");
             mCallbacks.onNavigationDrawerItemSelected(position);
         }
+    }
+
+    private void switchActivity(Class activity_class) {
+        Intent intent;
+        intent = new Intent(getActivity(), activity_class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        getActivity().startActivity(intent);
     }
 
     @Override
@@ -251,8 +288,8 @@ public class NavigationDrawerFragment extends Fragment {
             return true;
         }
 
-        if (item.getItemId() == R.id.action_update_db) {
-            Toast.makeText(getActivity(), "Mise à jour de la base de données des salles et des profs...", Toast.LENGTH_SHORT).show();
+        if (item.getItemId() == R.id.action_example) {
+            Toast.makeText(getActivity(), "Example action.", Toast.LENGTH_SHORT).show();
             return true;
         }
 
