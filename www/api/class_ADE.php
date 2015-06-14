@@ -220,7 +220,7 @@
 				$val_critere = $this->_get_param($critere, false);
 
 				// Critère suivant si celui-ci n'est pas spécifié :
-				if (! $val_critere) {
+				if ($val_critere === false) {
 					continue;
 				}
 
@@ -358,7 +358,7 @@
 			// Nom de la salle :
 			$nom = $this->_get_param("nom", false);
 
-			if (! $nom) {
+			if ($nom === false) {
 				echo("Erreur : nom ".$type." non spécifié.");
 				exit;
 			}
@@ -366,7 +366,7 @@
 			// Date :
 			// (Format : "mm/jj/aaa". Si non spécifiée : la date du jour)
 			$date = $this->_get_param("date", false);
-			$date = (! $date ? time() : strtotime($date));
+			$date = ($date === false ? time() : strtotime($date));
 
 			// Dimensions de l'image :
 			$largeur = $this->_get_param("largeur", "500");
