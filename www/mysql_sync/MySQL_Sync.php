@@ -38,6 +38,7 @@
 			// connecting to mysql
 			$this->_db = mysql_connect(DB_HOST, DB_USER, DB_PASSWORD);
 			mysql_select_db(DB_DATABASE, $this->_db);
+			mysql_set_charset("utf8", $this->_db);
 		}
 
 		/**
