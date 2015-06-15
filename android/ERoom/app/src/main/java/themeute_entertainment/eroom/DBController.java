@@ -34,10 +34,12 @@ public class DBController extends SQLiteOpenHelper
     // == ATTRIBUTS
     // ====================================================================================
 
-    private final String base_url = "https://mvx2.esiee.fr/api/";
-    private final String hash_version_url = base_url + "bdd.php?func=getHashVersion";
+    private final String base_url = "https://mvx2.esiee.fr/";
+    private final String hash_version_url = base_url + "api/bdd.php?func=getHashVersion";
+    private final String db_update_url = base_url + "mysql_sync/getdata.php?table=";
 
     private boolean[] syncedTable = new boolean[2];
+    private String[] tablesToSync = new String[2];
 
     // ====================================================================================
     // == CONSTRUCTEUR
@@ -356,8 +358,9 @@ public class DBController extends SQLiteOpenHelper
         // Puis on la rempli :
         syncedTable[0] = false;
         syncedTable[1] = false;
-        requestData(client, params, "salle", context, prgDialog);
-        requestData(client, params, "prof", context, prgDialog);
+        tablesToSync[0] = "salle";
+        tablesToSync[1] = "prof";
+        requestData(client, params, 0, context, prgDialog);
 
         // Et on met à jour la version de la BDD locale :
         SharedPreferences.Editor editor = settings.edit();
@@ -365,32 +368,30 @@ public class DBController extends SQLiteOpenHelper
         editor.apply();
     }
 
-    public void requestData(AsyncHttpClient client, RequestParams params, final String table, final Context context, final ProgressDialog prgDialog)
+    public void requestData(final AsyncHttpClient client, final RequestParams params, final int index, final Context context, final ProgressDialog prgDialog)
     {
-        System.out.println("requestData de " + table);
-        client.post("https://mvx2.esiee.fr/mysql_sync/getdata.php?table=" + table, params, new AsyncHttpResponseHandler() {
+        System.out.println("requestData de " + tablesToSync[index]);
+        client.post(db_update_url + tablesToSync[index], params, new AsyncHttpResponseHandler() {
             @Override
-            public void onSuccess(String response)
-            {
-                updateSQLite(response, table, context);
-                System.out.println("requestData de " + table + " terminé");
+            public void onSuccess(String response) {
+                if (! syncedTable[index]) {
+                    System.out.println("requestData de " + tablesToSync[index] + " en terminance");
+                    updateSQLite(response, tablesToSync[index], context, prgDialog);
+                    System.out.println("requestData de " + tablesToSync[index] + " terminé");
 
-                // Hide ProgressBar
-                if (prgDialog != null) {
-                    prgDialog.hide();
+                    if (index < tablesToSync.length - 1) {
+                        requestData(client, params, index + 1, context, prgDialog);
+                    }
                 }
             }
 
             // When error occurred
             @Override
-            public void onFailure(int statusCode, Throwable error, String content)
-            {
-                System.out.println("requestData de " + table + " fail !");
+            public void onFailure(int statusCode, Throwable error, String content) {
+                System.out.println("requestData de " + tablesToSync[index] + " fail !");
+                Toast.makeText(context, "Echec de la mise à jour :/", Toast.LENGTH_SHORT).show();
 
-                // Hide ProgressBar
-                if (syncedTable[0]) {
-                    prgDialog.hide();
-                }
+                prgDialog.hide();
 
                 if (statusCode == 404) {
                     Toast.makeText(context, "Requested resource not found", Toast.LENGTH_LONG).show();
@@ -408,7 +409,7 @@ public class DBController extends SQLiteOpenHelper
      * Met à jour la BDD SQLite Android
      * @param response
      */
-    public void updateSQLite(String response, String table, Context context)
+    public void updateSQLite(String response, String table, Context context, ProgressDialog prgDialog)
     {
         HashMap<String,String> queryValues;
 
@@ -453,6 +454,7 @@ public class DBController extends SQLiteOpenHelper
                 // Synchro terminée :
                 if (syncedTable[0] && syncedTable[1]) {
                     Toast.makeText(context, "La base de données a été mise à jour", Toast.LENGTH_SHORT).show();
+                    prgDialog.hide();
                     reloadActivity(context);
                 }
             }
