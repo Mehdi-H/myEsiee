@@ -55,7 +55,7 @@
 
             <!-- Fiche prof -->
 
-            <GridView
+            <themeute_entertainment.eroom.AutoHeightGridView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:numColumns="1"
@@ -78,6 +78,7 @@
                 android:layout_marginRight="20dp"
                 android:layout_marginTop="10dp"
                 android:adjustViewBounds="true"
+                android:scaleType="fitCenter"
                 android:id="@+id/imageET"
                 android:layout_gravity="center_horizontal" />
 

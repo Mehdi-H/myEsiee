@@ -12,7 +12,7 @@
         android:layout_height="match_parent"
         tools:context="themeute_entertainment.eroom.FicheSalle">
 
-        <GridView
+        <themeute_entertainment.eroom.AutoHeightGridView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:numColumns="auto_fit"
@@ -35,7 +35,7 @@
             android:layout_marginRight="20dp"
             android:layout_marginTop="10dp"
             android:adjustViewBounds="true"
-            android:scaleType="center"
+            android:scaleType="fitCenter"
             android:id="@+id/imageET"
             android:layout_gravity="center_horizontal" />
     </LinearLayout>

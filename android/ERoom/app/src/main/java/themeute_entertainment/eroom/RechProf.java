@@ -12,6 +12,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
+import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.GridView;
@@ -165,7 +166,8 @@ public class RechProf extends BaseDrawerActivity
         // === Peuplage de la GridView ===
 
         System.out.println(infos_string);
-        infos_view.setAdapter(new CaracteristiquesAdapter(this, infos_string.split(";")));
+        CaracteristiquesAdapter adapter = new CaracteristiquesAdapter(this, infos_string.split(";"));
+        infos_view.setAdapter(adapter);
 
 
         // ------------------------------------------------------------------------------------
