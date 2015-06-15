@@ -9,59 +9,53 @@
 
     <!-- As the main content view, the view below consumes the entire
          space available using match_parent in both dimensions. -->
-    <ScrollView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/scrollView" >
+        android:orientation="vertical"
+        android:id="@+id/container">
 
+        <!-- Barre de recherche -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:id="@+id/container">
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:padding="15dp"
+            android:elevation="8dp"
+            android:orientation="horizontal"
+            android:background="@color/primary" >
 
-            <!-- Barre de recherche -->
-            <LinearLayout
-                android:layout_width="match_parent"
+            <Button
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:focusable="true"
-                android:focusableInTouchMode="true"
-                android:padding="15dp"
-                android:elevation="8dp"
-                android:orientation="horizontal"
-                android:background="@color/primary" >
+                android:layout_weight=".5"
+                android:layout_margin="5dp"
+                android:background="@color/accent"
+                android:textColor="@color/secondary_text"
+                android:id="@+id/currentYear"
+                android:text="@string/currentYear"/>
 
-                <Button
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight=".5"
-                    android:layout_margin="5dp"
-                    android:background="@color/accent"
-                    android:textColor="@color/secondary_text"
-                    android:id="@+id/currentYear"
-                    android:text="@string/currentYear"/>
-
-                <Button
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight=".5"
-                    android:layout_margin="5dp"
-                    android:background="@color/accent"
-                    android:textColor="@color/secondary_text"
-                    android:id="@+id/archives"
-                    android:text="@string/archives"/>
-
-            </LinearLayout>
-
-            <!-- Fiche prof -->
-
-            <ListView
-                android:layout_width="match_parent"
+            <Button
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:id="@+id/notes" />
+                android:layout_weight=".5"
+                android:layout_margin="5dp"
+                android:background="@color/accent"
+                android:textColor="@color/secondary_text"
+                android:id="@+id/archives"
+                android:text="@string/archives"/>
 
         </LinearLayout>
-    </ScrollView>
+
+        <!-- Fiche prof -->
+
+        <ListView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/notes" />
+
+    </LinearLayout>
 
     <!-- android:layout_gravity="start" tells DrawerLayout to treat
              this as a sliding drawer on the left side for left-to-right

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="5dp">
+
+
+    <TextView
+        android:layout_width="55dp"
+        android:layout_height="match_parent"
+        android:text="Fx"
+        android:textSize="35dp"
+        android:textColor="@color/goodGrade_green"
+        android:gravity="center"
+        android:id="@+id/note" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="3dp"
+            android:text="Préparation progressive du projet personnel professionnel"
+            android:textSize="14dp"
+            android:textColor="@color/primary_text"
+            android:gravity="center_vertical"
+            android:id="@+id/labelUnite" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/labelUnite"
+            android:text="P5_3001"
+            android:textStyle="bold"
+            android:textSize="14dp"
+            android:textColor="@color/primary_text"
+            android:gravity="left"
+            android:id="@+id/codeUnite" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="15dp"
+            android:layout_alignParentRight="true"
+            android:layout_below="@id/labelUnite"
+            android:text="2 crédits"
+            android:textStyle="italic"
+            android:textSize="14dp"
+            android:gravity="left"
+            android:id="@+id/credits" />
+
+    </RelativeLayout>
+
+</LinearLayout>

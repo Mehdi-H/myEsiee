@@ -16,11 +16,13 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.List;
 
 
 public class Notes extends BaseDrawerActivity
@@ -77,23 +79,24 @@ public class Notes extends BaseDrawerActivity
         // ------------------------------------------------------------------------------------
 
         Button currentYear_btn = (Button) findViewById(R.id.currentYear);
+        Button archives_btn = (Button) findViewById(R.id.archives);
+        final ListView listView = (ListView) findViewById(R.id.notes);
+
+        // === Pour cette année ===
 
         currentYear_btn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Toast.makeText(context, "Recherche des notes de cette année...", Toast.LENGTH_SHORT).show();
+                Aurion.printNotes(listView, context, login, mdp, false);
             }
         });
 
-
-        // ------------------------------------------------------------------------------------
-        // -- La fameuse recherche (pour les archives)
-        // ------------------------------------------------------------------------------------
-
-        Button archives_btn = (Button) findViewById(R.id.archives);
+        // === Dans les archives ===
 
         archives_btn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Toast.makeText(context, "Recherche des notes dans les archives...", Toast.LENGTH_SHORT).show();
+                Aurion.printNotes(listView, context, login, mdp, true);
             }
         });
     }
