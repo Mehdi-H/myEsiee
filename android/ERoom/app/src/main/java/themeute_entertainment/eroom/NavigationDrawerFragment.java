@@ -208,7 +208,7 @@ public class NavigationDrawerFragment extends Fragment {
                     switchActivity(RechProf.class);
                     break;
                 case 2:
-                    // switchActivity(Notes.class);
+                    switchActivity(Notes.class);
                     break;
                 case 3:
                     // switchActivity(Absences.class);

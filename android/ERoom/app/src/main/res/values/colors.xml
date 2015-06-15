@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="goodGrade_green">#388E3C</color>
+    <color name="badGrade_red">#FF5252</color>
+</resources>

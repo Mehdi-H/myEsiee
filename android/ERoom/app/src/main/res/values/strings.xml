@@ -64,4 +64,11 @@
 
     <string name="action_example">Example action</string>
     <string name="title_activity_rech_prof">Profs</string>
+    <string name="title_activity_notes">Notes</string>
+    <string name="currentYear">Cette année</string>
+    <string name="archives">Archives</string>
+    <string name="connexion">Connexion à Aurion</string>
+    <string name="login">Login</string>
+    <string name="mdp">Mot de passe</string>
+    <string name="edit_aurion_ids">Modifier mes identifiants Aurion</string>
 </resources>

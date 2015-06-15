@@ -27,6 +27,7 @@ import java.util.HashMap;
 
 
 public class RechProf extends BaseDrawerActivity
+    implements NavigationDrawerFragment.NavigationDrawerCallbacks
 {
     // ====================================================================================
     // == ATTRIBUTS
