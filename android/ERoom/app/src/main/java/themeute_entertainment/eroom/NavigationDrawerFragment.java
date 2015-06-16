@@ -211,10 +211,10 @@ public class NavigationDrawerFragment extends Fragment {
                     switchActivity(Notes.class);
                     break;
                 case 3:
-                    // switchActivity(Absences.class);
+                    switchActivity(Absences.class);
                     break;
                 case 4:
-                    // switchActivity(Apreciations.class);
+                    // switchActivity(Appreciations.class);
                     break;
                 case 5:
                     // switchActivity(Params.class);
@@ -239,7 +239,8 @@ public class NavigationDrawerFragment extends Fragment {
         Intent intent;
         intent = new Intent(getActivity(), activity_class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        getActivity().startActivity(intent);
+        getActivity().startActivity(intent); // Démarre la nouvelle activité
+        getActivity().finish(); // Termine l'activité en cours pour qu'elles ne s'accumulent pas
     }
 
     @Override

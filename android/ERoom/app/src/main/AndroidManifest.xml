@@ -38,6 +38,10 @@
             android:name=".Notes"
             android:label="@string/title_activity_notes" >
         </activity>
+        <activity
+            android:name=".Absences"
+            android:label="@string/title_activity_absences" >
+        </activity>
     </application>
 
 </manifest>

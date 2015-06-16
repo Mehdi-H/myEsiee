@@ -71,4 +71,7 @@
     <string name="login">Login</string>
     <string name="mdp">Mot de passe</string>
     <string name="edit_aurion_ids">Modifier mes identifiants Aurion</string>
+    <string name="title_activity_absences">Absences</string>
+    <string name="noData">Aucune donnée à afficher</string>
+    <string name="loading">Chargement en cours ...</string>
 </resources>

@@ -48,7 +48,7 @@ public class NotesAdapter extends ArrayAdapter<Note>
         // --- Récupérer les vues du row-layout ---
 
         TextView note_view = (TextView) rowView.findViewById(R.id.note);
-        TextView labelUnite_view = (TextView) rowView.findViewById(R.id.labelUnite);
+        TextView labelUnite_view = (TextView) rowView.findViewById(R.id.unite);
         TextView codeUnite_view = (TextView) rowView.findViewById(R.id.codeUnite);
         TextView credits_view = (TextView) rowView.findViewById(R.id.credits);
 

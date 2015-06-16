@@ -109,19 +109,10 @@ public class RechSalle extends BaseDrawerActivity
         setContentView(R.layout.activity_rech_salle);
         this.mNavigationDrawerFragment = super.onCreateDrawer();
 
-        /* mNavigationDrawerFragment = (NavigationDrawerFragment)
-                getSupportFragmentManager().findFragmentById(R.id.navigation_drawer); */
-
         mTitle = getTitle();
 
-        // Set up the drawer.
-        /* mNavigationDrawerFragment.setUp(
-                R.id.navigation_drawer,
-                (DrawerLayout) findViewById(R.id.drawer_layout)); */
-
         context = getApplicationContext();
-
-        settings = getPreferences(MODE_PRIVATE);
+        settings = getSharedPreferences("SHARED_PREFS", MODE_PRIVATE);
 
         // ------------------------------------------------------------------------------------
         // -- Init Progress Dialog

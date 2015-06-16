@@ -76,7 +76,7 @@ public class RechProf extends BaseDrawerActivity
         this.mNavigationDrawerFragment = super.onCreateDrawer();
 
         context = getApplicationContext();
-        settings = getPreferences(MODE_PRIVATE);
+        settings = getSharedPreferences("SHARED_PREFS", MODE_PRIVATE);
 
         // ------------------------------------------------------------------------------------
         // -- Initialisation de l'AutoComplete nom prof

@@ -12,12 +12,10 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import org.w3c.dom.Text;
 
-
-public class Notes extends BaseDrawerActivity
+public class Absences extends BaseDrawerActivity
         implements  NavigationDrawerFragment.NavigationDrawerCallbacks,
-                    ConnexionDialog.ConnexionDialogListener
+        ConnexionDialog.ConnexionDialogListener
 {
     // ====================================================================================
     // == ATTRIBUTS
@@ -27,7 +25,7 @@ public class Notes extends BaseDrawerActivity
     private CharSequence mTitle;
 
     private Aurion aurion;
-    private final String func = "grades";
+    private final String func = "absences";
 
     // Données :
     private SharedPreferences settings;
@@ -35,6 +33,8 @@ public class Notes extends BaseDrawerActivity
 
     // Android stuff :
     private Context context;
+
+    // Views :
     private ListView listView;
     private TextView noData_textView;
 
@@ -46,7 +46,7 @@ public class Notes extends BaseDrawerActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_notes);
+        setContentView(R.layout.activity_absences);
         this.mNavigationDrawerFragment = super.onCreateDrawer();
 
         context = getApplicationContext();
@@ -87,7 +87,7 @@ public class Notes extends BaseDrawerActivity
 
 
         // ------------------------------------------------------------------------------------
-        // -- La fameuse recherche (pour l'année en cours)
+        // -- La fameuse recherche
         // ------------------------------------------------------------------------------------
 
         // === Pour cette année ===
@@ -108,6 +108,7 @@ public class Notes extends BaseDrawerActivity
             }
         });
     }
+
 
     // ====================================================================================
     // == Interface Custom Dialog Fragment (Connexion)
@@ -135,7 +136,7 @@ public class Notes extends BaseDrawerActivity
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_notes, menu);
+        getMenuInflater().inflate(R.menu.menu_absences, menu);
         return true;
     }
 
