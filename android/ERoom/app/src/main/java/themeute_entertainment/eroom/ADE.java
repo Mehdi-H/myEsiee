@@ -115,8 +115,12 @@ public class ADE
         // Critères :
         for (HashMap.Entry<String,String> entry : criteres.entrySet())
         {
-            if (! entry.getValue().equals("null")) {
-                url += "&" + entry.getKey() + "=" + entry.getValue();
+            try {
+                if (!entry.getValue().equals("null")) {
+                    url += "&" + entry.getKey() + "=" + entry.getValue();
+                }
+            } catch (NullPointerException e) {
+
             }
         }
 
@@ -158,10 +162,19 @@ public class ADE
                         liste_salles_fusionee[i] += salle_bdd.get("projecteur") + ";";
 
                         int tab = Integer.parseInt(salle_bdd.get("tableau"));
-                        liste_salles_fusionee[i] += (tab == 0 || tab == 2) ? "0;" : "1;"; // tableauBlanc
-                        liste_salles_fusionee[i] += (tab == 0 || tab == 1) ? "0;" : "1;"; // tableauNoir
+                        liste_salles_fusionee[i] += (tab == 1 || tab == 3) ? "1;" : "0;"; // tableauBlanc
+                        liste_salles_fusionee[i] += (tab == 2 || tab == 3) ? "1;" : "0;"; // tableauNoir
 
                         liste_salles_fusionee[i] += salle_bdd.get("imprimante") + ";";
+
+                        int taille = Integer.parseInt(salle_bdd.get("taille"));
+                        if (0 < taille && taille < 30) {
+                            liste_salles_fusionee[i] += "S;";
+                        } else if (taille < 70) {
+                            liste_salles_fusionee[i] += "M;";
+                        } else {
+                            liste_salles_fusionee[i] += "L;";
+                        }
 
                         // Et enfin, la disponibilité (depuis le JSON) :
                         liste_salles_fusionee[i] += liste_salles_json.get(i).get("dispo");

@@ -1,113 +1,89 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:paddingLeft="10dp"
+    android:paddingRight="10dp"
+    android:gravity="center_vertical"
     android:orientation="horizontal" >
 
     <!-- Nom salle -->
 
     <TextView
         android:id="@+id/nomSalle"
-        android:layout_width="wrap_content"
-        android:layout_height="fill_parent"
-        android:text="5201"
-        android:layout_marginBottom="@dimen/view_salle_entry_space"
-        android:layout_marginTop="@dimen/view_salle_entry_space"
-        android:paddingLeft="@dimen/view_salle_entry_space"
-        android:paddingTop="@dimen/view_salle_entry_space"
+        android:layout_width="105dp"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="@dimen/view_salle_entry_space"
+        android:gravity="left"
+        android:text="5201V++"
+        android:textSize="25dp"
         android:textColor="@color/primary_text"
-        android:textSize="20dp"
         android:textStyle="bold" />
+
+    <!-- <View android:layout_width="0dp" android:layout_height="wrap_content"
+        android:layout_weight="1" /> -->
 
     <!-- Icônes -->
 
-    <RelativeLayout
-        android:layout_width="wrap_content"
+    <ImageView
+        android:id="@+id/icone_type"
+        android:layout_width="25dp"
+        android:layout_height="match_parent"
+        android:layout_marginRight="5dp"
+        android:src="@drawable/ic_type_it" />
+
+    <ImageView
+        android:id="@+id/icone_projecteur"
+        android:layout_width="25dp"
+        android:layout_height="match_parent"
+        android:layout_marginRight="5dp"
+        android:src="@drawable/ic_caract_projecteur" />
+
+    <ImageView
+        android:id="@+id/icone_tableau_blanc"
+        android:layout_width="25dp"
+        android:layout_height="match_parent"
+        android:layout_marginRight="5dp"
+        android:src="@drawable/ic_caract_tableau_blanc" />
+
+    <ImageView
+        android:id="@+id/icone_tableau_noir"
+        android:layout_width="25dp"
+        android:layout_height="match_parent"
+        android:layout_marginRight="5dp"
+        android:src="@drawable/ic_caract_tableau_noir" />
+
+    <ImageView
+        android:id="@+id/icone_imprimante"
+        android:layout_width="25dp"
+        android:layout_height="match_parent"
+        android:layout_marginRight="5dp"
+        android:src="@drawable/ic_caract_imprimante" />
+
+    <TextView
+        android:id="@+id/icone_taille"
+        android:layout_width="25dp"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true">
-
-        <ImageView
-            android:id="@+id/icone_type"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/view_salle_entry_space"
-            android:layout_marginBottom="@dimen/view_salle_entry_space"
-            android:src="@drawable/ic_action_computer_accent"
-            android:layout_toEndOf="@id/nomSalle"
-            android:layout_toRightOf="@id/nomSalle" />
-
-        <TextView
-            android:id="@+id/icone_projecteur"
-            android:layout_width="wrap_content"
-            android:layout_height="fill_parent"
-            android:layout_marginBottom="@dimen/view_salle_entry_space"
-            android:layout_marginTop="@dimen/view_salle_entry_space"
-            android:paddingLeft="@dimen/view_salle_entry_space"
-            android:paddingTop="@dimen/view_salle_entry_space"
-            android:textColor="@color/secondary_text"
-            android:textSize="20dp"
-            android:text="1"
-            android:layout_toEndOf="@id/icone_type"
-            android:layout_toRightOf="@id/icone_type" />
-
-        <TextView
-            android:id="@+id/icone_tableau_blanc"
-            android:layout_width="wrap_content"
-            android:layout_height="fill_parent"
-            android:layout_marginBottom="@dimen/view_salle_entry_space"
-            android:layout_marginTop="@dimen/view_salle_entry_space"
-            android:paddingLeft="@dimen/view_salle_entry_space"
-            android:paddingTop="@dimen/view_salle_entry_space"
-            android:textColor="@color/secondary_text"
-            android:textSize="20dp"
-            android:text="2"
-            android:layout_toEndOf="@id/icone_projecteur"
-            android:layout_toRightOf="@id/icone_projecteur" />
-
-        <TextView
-            android:id="@+id/icone_tableau_noir"
-            android:layout_width="wrap_content"
-            android:layout_height="fill_parent"
-            android:layout_marginBottom="@dimen/view_salle_entry_space"
-            android:layout_marginTop="@dimen/view_salle_entry_space"
-            android:paddingLeft="@dimen/view_salle_entry_space"
-            android:paddingTop="@dimen/view_salle_entry_space"
-            android:textColor="@color/secondary_text"
-            android:textSize="20dp"
-            android:text="2"
-            android:layout_toEndOf="@id/icone_tableau_blanc"
-            android:layout_toRightOf="@id/icone_tableau_blanc" />
-
-        <TextView
-            android:id="@+id/icone_imprimante"
-            android:layout_width="wrap_content"
-            android:layout_height="fill_parent"
-            android:layout_marginBottom="@dimen/view_salle_entry_space"
-            android:layout_marginTop="@dimen/view_salle_entry_space"
-            android:paddingLeft="@dimen/view_salle_entry_space"
-            android:paddingTop="@dimen/view_salle_entry_space"
-            android:textColor="@color/secondary_text"
-            android:textSize="20dp"
-            android:text="0"
-            android:layout_toEndOf="@id/icone_tableau_noir"
-            android:layout_toRightOf="@id/icone_tableau_noir" />
-
-    </RelativeLayout>
+        android:gravity="center"
+        android:textColor="@color/primary_text"
+        android:text="M"
+        android:textSize="25dp" />
 
     <!-- Disponibilité -->
+
+    <View android:layout_width="0dp" android:layout_height="wrap_content"
+        android:layout_weight="1" />
 
     <TextView
         android:id="@+id/dispo"
         android:layout_width="wrap_content"
-        android:layout_height="fill_parent"
-        android:layout_marginBottom="@dimen/view_salle_entry_space"
-        android:layout_marginTop="@dimen/view_salle_entry_space"
-        android:paddingRight="@dimen/view_salle_entry_space"
-        android:paddingTop="@dimen/view_salle_entry_space"
-        android:textColor="@color/secondary_text"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp"
+        android:gravity="right"
+        android:textStyle="italic"
+        android:textColor="@color/windowBackground"
         android:textSize="20dp"
-        android:text="30 min"
-        android:layout_alignParentRight="true"/>
+        android:text="30 min"/>
 
-</RelativeLayout>
+</LinearLayout>

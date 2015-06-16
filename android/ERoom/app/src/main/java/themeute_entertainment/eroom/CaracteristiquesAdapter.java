@@ -5,10 +5,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.HashMap;
 
@@ -36,17 +34,16 @@ public class CaracteristiquesAdapter extends ArrayAdapter<String>
         this.caracteristiques = caracteristiques;
 
         // Remplissage de la HashMap d'icônes :
-        icones.put("Projecteur", R.drawable.ic_action_computer);
-        icones.put("Imprimante", R.drawable.ic_action_computer);
-        icones.put("Tableau blanc", R.drawable.ic_action_computer);
-        icones.put("Tableau noir", R.drawable.ic_action_computer);
-        icones.put("Salle info", R.drawable.ic_action_computer);
-        icones.put("Salle d'élec", R.drawable.ic_action_computer);
-        icones.put("Salle de cours", R.drawable.ic_action_computer);
-        icones.put("taille", R.drawable.ic_action_computer);
+        icones.put("Projecteur", R.drawable.ic_caract_projecteur);
+        icones.put("Imprimante", R.drawable.ic_caract_imprimante);
+        icones.put("Tableau blanc", R.drawable.ic_caract_tableau_blanc);
+        icones.put("Tableau noir", R.drawable.ic_caract_tableau_noir);
+        icones.put("Salle info", R.drawable.ic_type_it);
+        icones.put("Salle d'élec", R.drawable.ic_type_elec);
+        icones.put("Salle de cours", R.drawable.ic_type_banal);
         // Infos prof :
-        icones.put("bureau", R.drawable.ic_action_computer);
-        icones.put("email", R.drawable.ic_action_computer);
+        icones.put("bureau", R.drawable.ic_info_bureau);
+        icones.put("email", R.drawable.ic_info_email);
     }
 
 
@@ -75,6 +72,12 @@ public class CaracteristiquesAdapter extends ArrayAdapter<String>
             String valCaract = caracteristiques[position].split("_")[1];
 
             // Cas particuliers de la forme "préfixe_valeur" :
+            if (nomCaract.equals("taille")) {
+                int taille = Integer.parseInt(valCaract);
+                if (0 < taille && taille < 30) {
+                    // à faire
+                }
+            }
             textView.setText(valCaract + (nomCaract.equals("taille") ? " places" : ""));
             imageView.setImageResource(icones.get(nomCaract));
 

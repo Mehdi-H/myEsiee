@@ -6,6 +6,7 @@ import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.drawable.Drawable;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBar;
@@ -210,20 +211,42 @@ public class RechSalle extends BaseDrawerActivity
         {
             // === Utiliser des icônes ===
 
-            // --- Etat Off ---
-            ImageSpan imageSpan = new ImageSpan(this, R.drawable.ic_action_computer);
-            SpannableString content = new SpannableString("X");
-            content.setSpan(imageSpan, 0, 1, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-            btn.setTextOff(content);
+            ImageSpan image_off, image_on;
+            Drawable iconeOff, iconeOn;
 
-            // --- Etat On ---
-            ImageSpan imageSpan2 = new ImageSpan(this, R.drawable.ic_action_computer_accent);
-            SpannableString content2 = new SpannableString("X");
-            content2.setSpan(imageSpan2, 0, 1, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-            btn.setTextOn(content2);
+            switch (btn.getId()) {
+                case R.id.categ_it :
+                    iconeOff = getResources().getDrawable(R.drawable.ic_type_it_white);
+                    iconeOn = getResources().getDrawable(R.drawable.ic_type_it_accent);
+                    break;
+                case R.id.categ_elec :
+                    iconeOff = getResources().getDrawable(R.drawable.ic_type_elec_white);
+                    iconeOn = getResources().getDrawable(R.drawable.ic_type_elec_accent);
+                    break;
+                default : // R.id.categ_banal
+                    iconeOff = getResources().getDrawable(R.drawable.ic_type_banal_white);
+                    iconeOn = getResources().getDrawable(R.drawable.ic_type_banal_accent);
+            }
 
-            // --- Initialisation ---
-            btn.setText(content);
+            // === Etat Off ===
+
+            iconeOff.setBounds(0, 0, 60, 60);
+            image_off = new ImageSpan(iconeOff);
+            SpannableString content_off = new SpannableString("x");
+            content_off.setSpan(image_off, 0, 1, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+            btn.setTextOff(content_off);
+
+            // === Etat On ===
+
+            iconeOn.setBounds(0, 0, 60, 60);
+            image_on = new ImageSpan(iconeOn);
+            SpannableString content_on = new SpannableString("x");
+            content_on.setSpan(image_on, 0, 1, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+            btn.setTextOn(content_on);
+
+            // === Au démarrage ===
+
+            btn.setText(content_off);
 
             // === Ne permettre l'état On qu'à un seul bouton ===
 

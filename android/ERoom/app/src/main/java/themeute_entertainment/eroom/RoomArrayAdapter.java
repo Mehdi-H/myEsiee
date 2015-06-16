@@ -47,43 +47,66 @@ public class RoomArrayAdapter extends ArrayAdapter<String>
 
         TextView nomSalle = (TextView) rowView.findViewById(R.id.nomSalle);
         ImageView iconeType = (ImageView) rowView.findViewById(R.id.icone_type);
-        TextView iconeProjecteur = (TextView) rowView.findViewById(R.id.icone_projecteur);
-        TextView iconeTableauBlanc = (TextView) rowView.findViewById(R.id.icone_tableau_blanc);
-        TextView iconeTableauNoir = (TextView) rowView.findViewById(R.id.icone_tableau_noir);
-        TextView iconeImprimante = (TextView) rowView.findViewById(R.id.icone_imprimante);
+        ImageView iconeProjecteur = (ImageView) rowView.findViewById(R.id.icone_projecteur);
+        ImageView iconeTableauBlanc = (ImageView) rowView.findViewById(R.id.icone_tableau_blanc);
+        ImageView iconeTableauNoir = (ImageView) rowView.findViewById(R.id.icone_tableau_noir);
+        ImageView iconeImprimante = (ImageView) rowView.findViewById(R.id.icone_imprimante);
+        TextView iconeTaille = (TextView) rowView.findViewById(R.id.icone_taille);
         TextView dispo = (TextView) rowView.findViewById(R.id.dispo);
 
         // === Découpage de la String décrivant la ligne à remplir ===
-        // Format : "nomSalle;type;projecteur;tableauBlanc;tableauNoir;imprimante"
+        // Format : "nomSalle;type;projecteur;tableauBlanc;tableauNoir;imprimante;taille;dispo"
 
         String[] rowValues = values[position].split(";");
 
         // === Remplissage de la ligne à partir du tableau de Strings values ===
 
         // Nom salle :
-        nomSalle.setText(rowValues[0]);
+         nomSalle.setText(rowValues[0]);
 
         // Icône du type :
         String type = rowValues[1];
-        if (type.equals("IT")) {
-            iconeType.setImageResource(R.drawable.ic_action_computer_accent);
-        } else if (type.equals("vid")) {
-            iconeType.setImageResource(R.drawable.ic_action_search);
+        if (type.equals("it")) {
+            iconeType.setImageResource(R.drawable.ic_type_it);
+        } else if (type.equals("elec")) {
+            iconeType.setImageResource(R.drawable.ic_type_elec);
+        } else { // banal
+            iconeType.setImageResource(R.drawable.ic_type_banal);
         }
 
         // --- Icônes des caractéristiques ---
 
-        iconeProjecteur.setText(rowValues[2].equals("0") ? "NoProjo" : "Projo");
-        iconeTableauBlanc.setText(rowValues[3].equals("0") ? "NoTabloB" : "TabloB");
-        iconeTableauNoir.setText(rowValues[4].equals("0") ? "NoTabloN" : "TabloN");
-        iconeImprimante.setText(rowValues[5].equals("0") ? "NoPrinto" : "Printo");
+        ImageView[] imageViews = new ImageView[] {
+                iconeProjecteur,
+                iconeTableauBlanc,
+                iconeTableauNoir,
+                iconeImprimante
+        };
+        int[] drawables = new int[] {
+                R.drawable.ic_caract_projecteur,
+                R.drawable.ic_caract_tableau_blanc,
+                R.drawable.ic_caract_tableau_noir,
+                R.drawable.ic_caract_imprimante
+        };
+        for (int i = 0 ; i < imageViews.length ; i++) {
+            int j = i + 2;
+            if (rowValues[j].equals("1")) {
+                imageViews[i].setImageResource(drawables[i]);
+            } else {
+                ViewGroupUtils.removeView(imageViews[i]); // supprime la vue complètement
+                // imageViews[i].setImageDrawable(null); // efface l'image mais garde la place
+            }
+        }
+
+        // --- La taille ---
+
+        iconeTaille.setText(rowValues[6]);
 
         // --- Disponibilité ---
 
-        dispo.setText(rowValues[6]);
+        dispo.setText(rowValues[7]);
 
         return rowView;
     }
-
 
 }
