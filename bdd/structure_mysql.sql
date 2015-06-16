@@ -20,6 +20,14 @@ CREATE TABLE prof (
 	email 				varchar(30) DEFAULT NULL
 );
 
+DROP TABLE IF EXISTS contribution;
+CREATE TABLE contribution (
+	idcontribution		int(11) PRIMARY KEY AUTO_INCREMENT,
+	login				varchar(10) DEFAULT NULL,
+	type_contribution	varchar(30) NOT NULL,
+	date_contribution	datetime NOT NULL,
+	contenu				text NOT NULL
+);
 
 /**
  * Requete pour ajout dans ma bdd locale pour tests.
