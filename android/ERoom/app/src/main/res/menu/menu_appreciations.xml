@@ -1,0 +1,10 @@
+<menu
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="themeute_entertainment.eroom.Appreciations">
+
+    <item android:id="@+id/action_editAurion" android:title="@string/edit_aurion_ids"
+        android:orderInCategory="100" app:showAsAction="never" />
+
+</menu>

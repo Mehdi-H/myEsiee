@@ -99,7 +99,8 @@ public class Aurion
         }
         else
         {
-            // Appreciation[] data = gson.fromJson(response, Appreciation[].class);
+            Appreciations.Appreciation[] data = gson.fromJson(json, Appreciations.Appreciation[].class);
+            peuplerListView(data, new Appreciations().new AppreciationsAdapter(context, data), listView, noData_textView);
         }
 
         SharedPreferences.Editor editor = settings.edit();

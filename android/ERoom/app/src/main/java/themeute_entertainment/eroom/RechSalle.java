@@ -136,7 +136,7 @@ public class RechSalle extends BaseDrawerActivity
         prgDialog.setCancelable(false);
 
         connection = new ConnectivityTools(context, prgDialog);
-        
+
 
         // ------------------------------------------------------------------------------------
         // -- Vérification de la version de la BDD

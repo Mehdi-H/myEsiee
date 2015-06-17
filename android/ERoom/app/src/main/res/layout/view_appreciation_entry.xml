@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="10dp" >
+
+    <TextView
+        android:id="@+id/commentaire"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="3dp"
+        android:text="Résultats convenables."
+        android:textColor="@color/primary_text"
+        android:textSize="15dp" />
+
+    <TextView
+        android:id="@+id/periode"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/windowBackground"
+        android:textStyle="italic"
+        android:text="E3 - Semestre 1" />
+
+    <TextView
+        android:id="@+id/annee"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textStyle="italic"
+        android:textColor="@color/windowBackground"
+        android:text="2014 - 2015" />
+
+</LinearLayout>

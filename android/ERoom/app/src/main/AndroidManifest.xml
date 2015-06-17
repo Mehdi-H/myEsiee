@@ -43,6 +43,10 @@
             android:name=".Absences"
             android:label="@string/title_activity_absences" >
         </activity>
+        <activity
+            android:name=".Appreciations"
+            android:label="@string/title_activity_appreciations" >
+        </activity>
     </application>
 
 </manifest>

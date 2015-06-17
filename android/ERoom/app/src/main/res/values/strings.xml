@@ -74,4 +74,5 @@
     <string name="title_activity_absences">Absences</string>
     <string name="noData">Aucune donnée à afficher</string>
     <string name="loading">Chargement en cours ...</string>
+    <string name="title_activity_appreciations">Appréciations</string>
 </resources>
