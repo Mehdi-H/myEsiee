@@ -224,6 +224,21 @@
 					continue;
 				}
 
+				// Cas particulier de la taille :
+				if ($critere == "taille")
+				{
+					if ($val_critere == "s" || $val_critere == "S") {
+						$sql_conditions[] = "taille>0 AND taille<30";
+					}
+					else if ($val_critere == "m" || $val_critere == "M") {
+						$sql_conditions[] = "taille>29 AND taille<70";
+					}
+					else if ($val_critere == "l" || $val_critere == "L") {
+						$sql_conditions[] = "taille>69";
+					}
+					continue;
+				}
+
 				// Prise en compte du critère :
 				$sql_conditions[] = $critere."='".$val_critere."'";
 			}

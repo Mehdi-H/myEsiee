@@ -30,7 +30,7 @@ Voici la liste des paramètres possibles :
 - `func=rechSalle` : pour utiliser la fonction de recherche de salles (seul paramètre obligatoire).
 - `nom` : le nom complet de la salle en BDD, si le nom contient des symboles spéciaux (comme "+", " " ou "!"), celui-ci doit être encodé pour URL (url_encode). Si au moins un des paramètres `epi` ou `etage` est spécifié, le paramètre `nom` ne sera pas pris en compte.
 - `type` : le type de salle recherché.
-- `taille` : le nombre de places dans la salle.
+- `taille` : Peut prendre les valeurs `S`, `M` ou `L` (majuscule ou minuscule). Correspond à la taille de la salle, respectivement petite, moyenne et grande.
 - `projecteur` : la présence d'un projecteur (0 : non, 1 : oui).
 - `tableau` : la présence de tableau(x) (0 : aucun, 1 : blanc, 2 : noir, 3 : les deux).
 - `imprimante` : la présence d'une imprimante (0 : non, 1 : oui).
