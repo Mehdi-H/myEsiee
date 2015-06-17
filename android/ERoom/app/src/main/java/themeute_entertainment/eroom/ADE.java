@@ -59,7 +59,7 @@ public class ADE
      * leurs disponibilités.
      * @param json
      */
-    private static ArrayList<HashMap<String,String>> sallesJSON_to_ArrayList(String json)
+    private static ArrayList<HashMap<String,String>> sallesJSON_to_ArrayList(String json, Context context)
     {
         ArrayList<HashMap<String,String>> arraylist = new ArrayList<HashMap<String, String>>();
 
@@ -85,12 +85,12 @@ public class ADE
 
                     // Vérification de la disponibilité :
                     if (obj.getInt(key) == 0) {
-                        map.put("dispo", "Libre");
+                        map.put("dispo", context.getResources().getString(R.string.libre));
                     } else if (obj.getInt(key) > 0) {
-                        map.put("dispo", obj.get(key).toString() + " min");
+                        map.put("dispo", obj.get(key).toString() + " " + context.getResources().getString(R.string.minutes_abbr));
                     } else {
                         // "-1" : ne pas afficher (mais laisser activé ici pour debug) :
-                        map.put("dispo", "Occupé");
+                        map.put("dispo", context.getResources().getString(R.string.occupee));
                     }
 
                     arraylist.add(map);
@@ -153,7 +153,7 @@ public class ADE
 
                 // --- Récupérer les infos du JSON (nom et dispo des salles correspondantes aux critères de recherche) ---
 
-                ArrayList<HashMap<String,String>> liste_salles_json = sallesJSON_to_ArrayList(response);
+                ArrayList<HashMap<String,String>> liste_salles_json = sallesJSON_to_ArrayList(response, context);
                 if (liste_salles_json.size() != 0)
                 {
                     // --- Fusionner les infos des salles de la BDD avec la réponse JSON ---

@@ -48,7 +48,9 @@ public class Absences extends BaseDrawerActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_absences);
         this.mNavigationDrawerFragment = super.onCreateDrawer();
+        mNavigationDrawerFragment.setCurrentSelectedPosition(3);
 
+        mTitle = "Absences";
         context = getApplicationContext();
         settings = getSharedPreferences("SHARED_PREFS", MODE_PRIVATE);
         aurion = new Aurion(context);
@@ -94,7 +96,7 @@ public class Absences extends BaseDrawerActivity
 
         currentYear_btn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Toast.makeText(context, "Recherche des notes de cette année...", Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, R.string.fetching_absences, Toast.LENGTH_SHORT).show();
                 aurion.request(func, listView, noData_textView, login, mdp, false);
             }
         });
@@ -103,7 +105,7 @@ public class Absences extends BaseDrawerActivity
 
         archives_btn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Toast.makeText(context, "Recherche des notes dans les archives...", Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, R.string.fetching_absences_old, Toast.LENGTH_SHORT).show();
                 aurion.request(func, listView, noData_textView, login, mdp, true);
             }
         });

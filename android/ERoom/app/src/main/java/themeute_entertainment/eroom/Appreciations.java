@@ -59,7 +59,9 @@ public class Appreciations extends BaseDrawerActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_appreciations);
         this.mNavigationDrawerFragment = super.onCreateDrawer();
+        mNavigationDrawerFragment.setCurrentSelectedPosition(4);
 
+        mTitle = "Appréciations";
         context = getApplicationContext();
         settings = getSharedPreferences("SHARED_PREFS", MODE_PRIVATE);
         aurion = new Aurion(context);
@@ -105,7 +107,7 @@ public class Appreciations extends BaseDrawerActivity
 
         currentYear_btn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Toast.makeText(context, "Recherche des appréciations de cette année...", Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, R.string.fetching_assesments, Toast.LENGTH_SHORT).show();
                 aurion.request(func, listView, noData_textView, login, mdp, false);
             }
         });
@@ -114,7 +116,7 @@ public class Appreciations extends BaseDrawerActivity
 
         archives_btn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Toast.makeText(context, "Recherche des appréciations dans les archives...", Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, R.string.fetching_assesments_old, Toast.LENGTH_SHORT).show();
                 aurion.request(func, listView, noData_textView, login, mdp, true);
             }
         });

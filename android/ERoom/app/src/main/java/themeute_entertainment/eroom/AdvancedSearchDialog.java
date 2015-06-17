@@ -6,9 +6,7 @@ import android.support.v4.app.DialogFragment;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
-import android.support.v7.internal.widget.AdapterViewCompat;
 import android.view.LayoutInflater;
-import android.view.View;
 
 
 public class AdvancedSearchDialog extends DialogFragment
@@ -76,7 +74,7 @@ public class AdvancedSearchDialog extends DialogFragment
                 mListener.onDialogPositiveClick(AdvancedSearchDialog.this);
             }
         });
-        builder.setNegativeButton("Annuler", new DialogInterface.OnClickListener() {
+        builder.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
                 // User cancelled the dialog
                 // Send the negative button event back to the host activity

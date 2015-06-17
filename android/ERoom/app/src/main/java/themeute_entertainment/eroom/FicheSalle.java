@@ -28,7 +28,7 @@ public class FicheSalle extends ActionBarActivity
     // ====================================================================================
 
     // Outils :
-    private DBController controller = new DBController(this);
+    private DBController controller;
     private ADE ade;
 
     // Date :
@@ -48,6 +48,7 @@ public class FicheSalle extends ActionBarActivity
     private String nomSalle;
     private int largeur;
     String date;
+    private String mTitle;
 
 
     // ====================================================================================
@@ -64,7 +65,10 @@ public class FicheSalle extends ActionBarActivity
         Intent intent = getIntent();
         nomSalle = intent.getStringExtra(RechSalle.EXTRA_NOM_SALLE);
 
+        mTitle = "FicheSalle de " + nomSalle;
+
         this.ade = new ADE(this);
+        controller = new DBController(this);
 
         // ------------------------------------------------------------------------------------
         // -- Views
@@ -102,9 +106,9 @@ public class FicheSalle extends ActionBarActivity
         String caract_string = "";
 
         HashMap<String,String> corresp_types = new HashMap<String,String>();
-        corresp_types.put("it", "Salle info");
-        corresp_types.put("elec", "Salle d'élec");
-        corresp_types.put("banal", "Salle de cours");
+        corresp_types.put("it", getResources().getString(R.string.salle_it));
+        corresp_types.put("elec", getResources().getString(R.string.salle_elec));
+        corresp_types.put("banal", getResources().getString(R.string.salle_banal));
 
         // === Récupération des caractéristiques dans la BDD ===
 
@@ -116,10 +120,10 @@ public class FicheSalle extends ActionBarActivity
         // --- Rajouter les caractéristiques de la BDD dans la String ---
 
         caract_string += corresp_types.get(salle_bdd.get("type")) + ";";
-        caract_string += (salle_bdd.get("projecteur").equals("1") ? "Projecteur;" : "");
-        caract_string += (salle_bdd.get("imprimante").equals("1") ? "Imprimante;" : "");
-        caract_string += (salle_bdd.get("tableau").equals("1") || salle_bdd.get("tableau").equals("3") ? "Tableau blanc;" : "");
-        caract_string += (salle_bdd.get("tableau").equals("2") || salle_bdd.get("tableau").equals("3") ? "Tableau noir;" : "");
+        caract_string += (salle_bdd.get("projecteur").equals("1") ? getResources().getString(R.string.projecteur)+";" : "");
+        caract_string += (salle_bdd.get("imprimante").equals("1") ? getResources().getString(R.string.imprimante)+";" : "");
+        caract_string += (salle_bdd.get("tableau").equals("1") || salle_bdd.get("tableau").equals("3") ? getResources().getString(R.string.tableau_blanc)+";" : "");
+        caract_string += (salle_bdd.get("tableau").equals("2") || salle_bdd.get("tableau").equals("3") ? getResources().getString(R.string.tableau_noir)+";" : "");
         caract_string += "taille_" + salle_bdd.get("taille");
 
         // === Peuplage de la GridView ===

@@ -117,6 +117,7 @@ public class RechSalle extends BaseDrawerActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_rech_salle);
         this.mNavigationDrawerFragment = super.onCreateDrawer();
+        mNavigationDrawerFragment.setCurrentSelectedPosition(0);
 
         mTitle = getTitle();
 
@@ -132,7 +133,7 @@ public class RechSalle extends BaseDrawerActivity
 
         // Initialize Progress Dialog properties
         prgDialog = new ProgressDialog(this);
-        prgDialog.setMessage("Mise à jour de la base de donnée...");
+        prgDialog.setMessage(getResources().getString(R.string.db_update));
         prgDialog.setCancelable(false);
 
         connection = new ConnectivityTools(context, prgDialog);
@@ -164,6 +165,11 @@ public class RechSalle extends BaseDrawerActivity
 
         listView_salles = (ListView) findViewById(R.id.listView_salles);
         noData_textView = (TextView) findViewById(R.id.noData_textView);
+
+        final HashMap<String,String> correspondances = new HashMap<String,String>();
+        correspondances.put("it", getResources().getString(R.string.salle_it));
+        correspondances.put("elec", getResources().getString(R.string.salle_elec));
+        correspondances.put("banal", getResources().getString(R.string.salle_banal));
 
 
         // ------------------------------------------------------------------------------------
@@ -201,7 +207,7 @@ public class RechSalle extends BaseDrawerActivity
                         } else {
                             // Choisir le type de salle :
                             criteres.put("type", categories[i]);
-                            Toast.makeText(context, "Catégorie : " + criteres.get("type"), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(context, correspondances.get(criteres.get("type")), Toast.LENGTH_SHORT).show();
                         }
                     }
                 }
@@ -215,7 +221,7 @@ public class RechSalle extends BaseDrawerActivity
                 }
                 // Désactiver le critère de type si aucun bouton n'est actif :
                 if (!checked) {
-                    Toast.makeText(context, "Catégorie désactivée", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context, getResources().getString(R.string.disabled_categ), Toast.LENGTH_SHORT).show();
                     criteres.put("type", null);
                 }
             }
@@ -295,7 +301,7 @@ public class RechSalle extends BaseDrawerActivity
                         // Aller directement à la fiche salle :
                         newFicheSalleActivity(nomSalle_auto);
                     } else {
-                        Toast.makeText(context, "Salle introuvable =(", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context, getResources().getString(R.string.room_not_found), Toast.LENGTH_SHORT).show();
                     }
                 } else {
                     ade.rechSalle(listView_salles, noData_textView, criteres);
@@ -316,48 +322,6 @@ public class RechSalle extends BaseDrawerActivity
             }
         });
     }
-
-    /* @Override
-    public void onNavigationDrawerItemSelected(int position) {
-        // update the main content by replacing fragments
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        fragmentManager.beginTransaction()
-                .replace(R.id.container, PlaceholderFragment.newInstance(position + 1))
-                .commit();
-    }
-
-    public void onSectionAttached(int number) {
-        switch (number) {
-            case 1:
-                mTitle = getString(R.string.title_Rooms);
-                break;
-            case 2:
-                mTitle = getString(R.string.title_Teachers);
-                break;
-            case 3:
-                mTitle = getString(R.string.title_Grades);
-                break;
-            case 4:
-                mTitle = getString(R.string.title_Absences);
-                break;
-            case 5:
-                mTitle = getString(R.string.title_Assessments);
-                break;
-            case 6:
-                mTitle = getString(R.string.title_Settings);
-                break;
-            case 7:
-                mTitle = getString(R.string.title_Disconnect);
-                break;
-        }
-    } */
-
-    /* public void restoreActionBar() {
-        ActionBar actionBar = getSupportActionBar();
-        actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
-        actionBar.setDisplayShowTitleEnabled(true);
-        actionBar.setTitle(mTitle);
-    } */
 
 
     @Override
@@ -466,8 +430,8 @@ public class RechSalle extends BaseDrawerActivity
 
         int tableau, projecteur, imprimante;
 
-        String epi = spinner_epi.getSelectedItem().toString();
-        String etage = spinner_etage.getSelectedItem().toString();
+        int epi = spinner_epi.getSelectedItemPosition();
+        int etage = spinner_etage.getSelectedItemPosition();
 
         boolean blanc = chk_tableau_blanc.isChecked(),
                 noir = chk_tableau_noir.isChecked();
@@ -476,8 +440,8 @@ public class RechSalle extends BaseDrawerActivity
         criteres.put("projecteur", chk_projecteur.isChecked() ? "1" : "null");
         criteres.put("imprimante", chk_imprimante.isChecked() ? "1" : "null");
 
-        criteres.put("epi", epi.equals("Épi") ? "null" : spinner_epi.getSelectedItemPosition()-1 + "");
-        criteres.put("etage", etage.equals("Étage") ? "null" : spinner_etage.getSelectedItemPosition()-1 + "");
+        criteres.put("epi", epi > 0 ? epi-1 + "" : "null");
+        criteres.put("etage", etage > 0 ? etage-1 + "" : "null");
 
         // Lancement de la requête :
         ade.rechSalle(listView_salles, noData_textView, criteres);

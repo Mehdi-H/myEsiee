@@ -51,7 +51,7 @@ public class Aurion
     {
         String lastData = settings.getString(func+"_lastData", "");
         if (!lastData.equals("")) {
-            Toast.makeText(context, "Dernières données affichées", Toast.LENGTH_SHORT).show();
+            Toast.makeText(context, R.string.last_printed_data, Toast.LENGTH_SHORT).show();
             processJSON(lastData, func, listView, noData_textView);
         }
     }
@@ -176,12 +176,12 @@ public class Aurion
         SharedPreferences.Editor editor = settings.edit();
 
         if (login.isEmpty() || mdp.isEmpty()) {
-            Toast.makeText(context, "Vos identifiants Aurion ont été supprimés de l'appareil", Toast.LENGTH_SHORT).show();
+            Toast.makeText(context, R.string.aurion_id_deleted, Toast.LENGTH_LONG).show();
             editor.putString("login", "");
             editor.putString("mdp", "");
             editor.putString(func+"_lastData", "");
         } else {
-            Toast.makeText(context, "Vos identifiants Aurion ont été enregistrés, vous pouvez les modifier dans les options", Toast.LENGTH_LONG).show();
+            Toast.makeText(context, R.string.aurion_id_stored, Toast.LENGTH_LONG).show();
             editor.putString("login", login);
             editor.putString("mdp", mdp);
         }

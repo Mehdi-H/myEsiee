@@ -1,0 +1,102 @@
+<resources>
+    <string name="app_name">MyESIEE</string>
+
+    <!-- Titres de sections (NavDrawer et ActionBar) -->
+    <string name="title_Rooms">Salles</string>
+    <string name="title_Teachers">Profs</string>
+    <string name="title_Grades">Notes</string>
+    <string name="title_Absences">Absences</string>
+    <string name="title_Assessments">Appréciations</string>
+
+    <!-- Description pour le Text2Speech pour l'accessibilité -->
+    <string name="navigation_drawer_open">Ouvrir le menu de navigation</string>
+    <string name="navigation_drawer_close">Fermer le menu de navigation</string>
+
+    <!-- Placeholders -->
+    <string name="hint_nomSalle">Numéro de la salle</string>
+
+    <!-- Caractéristiques -->
+    <string name="tableau_blanc">Tableau blanc</string>
+    <string name="tableau_noir">Tableau noir</string>
+    <string name="projecteur">Projecteur</string>
+    <string name="imprimante">Imprimante</string>
+
+    <!-- Boutons -->
+    <string name="triple_dots">...</string>
+    <string name="chercher">Chercher</string>
+
+    <string name="recherche_avancee">Recherche avancée</string>
+    <string-array name="epis">
+        <item>Épi</item>
+        <item>Hors épi</item>
+        <item>Épi 1</item>
+        <item>Épi 2</item>
+        <item>Épi 3</item>
+        <item>Épi 4</item>
+        <item>Épi 5</item>
+        <item>Épi 6</item>
+    </string-array>
+    <string-array name="etages">
+        <item>Étage</item>
+        <item>Niveau 0</item>
+        <item>Niveau 1</item>
+        <item>Niveau 2</item>
+        <item>Niveau 3</item>
+        <item>Niveau 4</item>
+    </string-array>
+
+    <!-- Options -->
+    <string name="action_update_db">Mettre à jour la BDD</string>
+    <string name="action_settings">Paramètres</string>
+
+    <string name="title_activity_fiche_salle">FicheSalle</string>
+
+    <string name="title_activity_base_drawer">BaseDrawerActivity</string>
+
+    <string name="title_activity_rech_prof">Profs</string>
+    <string name="title_activity_notes">Notes</string>
+    <string name="currentYear">Cette année</string>
+    <string name="archives">Archives</string>
+    <string name="connexion">Connexion à Aurion</string>
+    <string name="login">Login</string>
+    <string name="mdp">Mot de passe</string>
+    <string name="edit_aurion_ids">Modifier mes identifiants Aurion</string>
+    <string name="title_activity_absences">Absences</string>
+    <string name="noData">Aucune donnée à afficher</string>
+    <string name="loading">Chargement en cours ...</string>
+    <string name="title_activity_appreciations">Appréciations</string>
+    <string name="db_update">Mise à jour de la base de données...</string>
+    <string name="salle_it">Salle info</string>
+    <string name="salle_elec">Salle d\'élec</string>
+    <string name="salle_banal">Salle de cours</string>
+    <string name="disabled_categ">Pas de type de salle</string>
+    <string name="room_not_found">Salle introuvable =(</string>
+    <string name="fetching_grades">Recherche des notes de cette année...</string>
+    <string name="fetching_grades_old">Recherche des notes dans les archives...</string>
+    <string name="with">avec</string>
+    <string name="le_date">Le</string>
+    <string name="de_date">de</string>
+    <string name="libre">Libre</string>
+    <string name="minutes_abbr">min</string>
+    <string name="occupee">Occupée</string>
+    <string name="cancel">Annuler</string>
+    <string name="fetching_assesments">Recherche des appréciations de cette année...</string>
+    <string name="fetching_assesments_old">Recherche des appréciations dans les archives...</string>
+    <string name="last_printed_data">Dernières données affichées</string>
+    <string name="aurion_id_deleted">Vos identifiants Aurion ont été supprimés de l\'appareil</string>
+    <string name="aurion_id_stored">Vos identifiants Aurion ont été enregistrés, vous pouvez les modifier dans les options</string>
+    <string name="room_s">Petite salle</string>
+    <string name="room_m">Salle moyenne</string>
+    <string name="room_l">Grande salle</string>
+    <string name="no_connection_warning_db">Pas de connexion internet. La base de données n\'est peut-être pas à jour...</string>
+    <string name="db_update_fail">Echec de la mise à jour :/</string>
+    <string name="db_up_to_date">La base de données a été mise à jour</string>
+    <string name="fetching_absences">Recherche des absences de cette année...</string>
+    <string name="fetching_absences_old">Recherche des absences dans les archives...</string>
+    <string name="no_credit">Pas de crédit</string>
+    <string name="credit_sing">crédit</string>
+    <string name="credits_plural">crédits</string>
+    <string name="prof_not_found">Prof introuvable =(</string>
+    <string name="no_prof_name">Quel prof rechercher ?</string>
+    <string name="hint_nomProf">Nom du professeur</string>
+</resources>

@@ -73,7 +73,7 @@ public class ConnexionDialog extends DialogFragment
                 mListener.onDialogPositiveClick(ConnexionDialog.this);
             }
         });
-        builder.setNegativeButton("Annuler", new DialogInterface.OnClickListener() {
+        builder.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
                 // User cancelled the dialog
                 // Send the negative button event back to the host activity

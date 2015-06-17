@@ -293,7 +293,7 @@ public class DBController extends SQLiteOpenHelper
     public void checkForUpdates(final ProgressDialog prgDialog)
     {
         if (! ConnectivityTools.isNetworkAvailable(context)) {
-            Toast.makeText(context, "Pas de connexion internet\nLa base de données n'est peut-être pas à jour", Toast.LENGTH_LONG).show();
+            Toast.makeText(context, R.string.no_connection_warning_db, Toast.LENGTH_LONG).show();
             return;
         }
 
@@ -358,8 +358,6 @@ public class DBController extends SQLiteOpenHelper
      */
     public void syncSQLiteMySQLDB(String new_hash, ProgressDialog prgDialog, SharedPreferences settings, Context context)
     {
-        System.out.println("Syncing...");
-
         AsyncHttpClient client = new AsyncHttpClient();
         RequestParams params = new RequestParams();
 
@@ -384,14 +382,11 @@ public class DBController extends SQLiteOpenHelper
 
     public void requestData(final AsyncHttpClient client, final RequestParams params, final int index, final Context context, final ProgressDialog prgDialog)
     {
-        System.out.println("requestData de " + tablesToSync[index]);
         client.post(db_update_url + tablesToSync[index], params, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(String response) {
                 if (! syncedTable[index]) {
-                    System.out.println("requestData de " + tablesToSync[index] + " en terminance");
                     updateSQLite(response, tablesToSync[index], context, prgDialog);
-                    System.out.println("requestData de " + tablesToSync[index] + " terminé");
 
                     if (index < tablesToSync.length - 1) {
                         requestData(client, params, index + 1, context, prgDialog);
@@ -402,8 +397,7 @@ public class DBController extends SQLiteOpenHelper
             // When error occurred
             @Override
             public void onFailure(int statusCode, Throwable error, String content) {
-                System.out.println("requestData de " + tablesToSync[index] + " fail !");
-                Toast.makeText(context, "Echec de la mise à jour :/", Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, R.string.db_update_fail, Toast.LENGTH_SHORT).show();
 
                 prgDialog.hide();
 
@@ -467,7 +461,7 @@ public class DBController extends SQLiteOpenHelper
 
                 // Synchro terminée :
                 if (syncedTable[0] && syncedTable[1]) {
-                    Toast.makeText(context, "La base de données a été mise à jour", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context, R.string.db_up_to_date, Toast.LENGTH_SHORT).show();
                     prgDialog.hide();
                     reloadActivity(context);
                 }

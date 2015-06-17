@@ -76,14 +76,14 @@ public class ConnectivityTools
                 // === Connexion ===
 
                 if (prgDialog != null) {
-                    Toast.makeText(context, "Internet connection OK", Toast.LENGTH_SHORT).show();
+                    // Toast.makeText(context, "Internet connection OK", Toast.LENGTH_SHORT).show();
                     controller.checkForUpdates(prgDialog);
                 }
             }
             else
             {
                 // === Pas de connexion ===
-                Toast.makeText(context, "No active connection", Toast.LENGTH_SHORT).show();
+                // Toast.makeText(context, "No active connection", Toast.LENGTH_SHORT).show();
             }
         }
     }

@@ -60,11 +60,11 @@ public class AbsencesAdapter extends ArrayAdapter<Absence>
 
         // --- Ligne 2 : Infos séance ---
         // Format : "[activite] avec [intervenant]"
-        infoSeance_view.setText(absences[position].getActivite() + " avec " + absences[position].getIntervenant());
+        infoSeance_view.setText(absences[position].getActivite() + " " + context.getResources().getString(R.string.with) + " " + absences[position].getIntervenant());
 
         // --- Ligne 3, gauche : Date séance ---
         // Format : "Le [date] de [creneau]"
-        date_view.setText("Le " + absences[position].getDate() + " de " + absences[position].getCreneau());
+        date_view.setText(context.getResources().getString(R.string.le_date) + " " + absences[position].getDate() + " " + context.getResources().getString(R.string.de_date) + " " + absences[position].getCreneau());
 
         // --- Ligne 4, droite : Motif ---
         // Format : "[motif]"

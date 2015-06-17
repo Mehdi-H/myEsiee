@@ -48,6 +48,9 @@ public class Notes extends BaseDrawerActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_notes);
         this.mNavigationDrawerFragment = super.onCreateDrawer();
+        mNavigationDrawerFragment.setCurrentSelectedPosition(1);
+
+        mTitle = "Notes";
 
         context = getApplicationContext();
         settings = getSharedPreferences("SHARED_PREFS", MODE_PRIVATE);
@@ -94,7 +97,7 @@ public class Notes extends BaseDrawerActivity
 
         currentYear_btn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Toast.makeText(context, "Recherche des notes de cette année...", Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, R.string.fetching_grades, Toast.LENGTH_SHORT).show();
                 aurion.request(func, listView, noData_textView, login, mdp, false);
             }
         });
@@ -103,7 +106,7 @@ public class Notes extends BaseDrawerActivity
 
         archives_btn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Toast.makeText(context, "Recherche des notes dans les archives...", Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, R.string.fetching_grades_old, Toast.LENGTH_SHORT).show();
                 aurion.request(func, listView, noData_textView, login, mdp, true);
             }
         });
