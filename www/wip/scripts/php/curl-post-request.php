@@ -3,7 +3,7 @@
  * @Author: Mehdi-H
  * @Date:   2015-06-06 09:59:51
  * @Last Modified by:   Mehdi-H
- * @Last Modified time: 2015-06-09 19:25:56
+ * @Last Modified time: 2015-06-16 16:57:32
  */
 if(isset($_GET['q'])){
 
@@ -26,10 +26,11 @@ if(isset($_GET['q'])){
 		die();
 	}
 
-}else{
-	$p = "notes";
-	$func = "grades";
 }
+// else{
+// 	$p = "notes";
+// 	$func = "grades";
+// }
 
 	$ch = curl_init();
 

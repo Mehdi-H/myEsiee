@@ -2,7 +2,7 @@
 <html lang="en">	
 <head>
 	<meta charset="utf-8">
-	<title>Reveal.js 3 Slide Demo</title>
+	<title>Présentation</title>
 	<link rel="stylesheet" href="css/reveal.min.css">
 	<link rel="stylesheet" href="css/theme/md.css" id="theme">	
 	<!--Add support for earlier versions of Internet Explorer -->
@@ -20,11 +20,60 @@
 			<!-- ALL SLIDES GO HERE -->
 			<!-- Each section element contains an individual slide -->
 			<section>
-				<h1>E-Room</h1>
-				<p>L'application androïd pour trouver des salles libres <br> à ESIEE Paris</p>		
+				<img src="img/logomyesieeflat.png">
+				<p>L'application androïd au coeur de la vie étudiante</p>		
+			</section>
+
+			<section data-background="https://s3.amazonaws.com/hakim-static/reveal-js/image-placeholder.png">
+				<h2>Image Backgrounds</h2>
+				<pre><code>&lt;section data-background="image.png"&gt;</code></pre>
+			</section>
+
+			<section>
+				<section>
+					<h1>ESIEE Paris</h1>
+					<p>Différents lieux pour travailler</p>
+				</section>
+
+				<section>
+					<h2>La rue</h2>
+					<img src="http://placehold.it/500x500">
+				</section>
+
+				<section>
+					<h2>La bibliothèque</h2>
+					<img src="http://placehold.it/500x500">
+				</section>
+
+				<section>
+					<h1>Les salles</h1>
+					<img src="http://placehold.it/500x500">
+				</section>
+			</section>
+
+			<section>
+				<section>
+					<h2>Comment trouver une salle libre?</h2>
+				</section>
+
+				<section>
+					<h2>A pied, <br>de salle en salle</h2>
+					<p>Mais c'est très long</p>
+				</section>
+
+				<section>
+					<h2>ADE campus</h2>
+					<img src="http://placehold.it/500x500">
+				</section>
 			</section>
  
 			<section id="show-a-link">
+				<section>
+					<img src="img/logomyesieeflat.png">
+					<img class="fragment" data-fragment-index="0" src="http://placehold.it/300x500">
+					<img class="fragment" data-fragment-index="1" src="http://placehold.it/300x500">
+				</section>
+
 				<section>
 					<img src="img/desktop/form_salle.png" style="width: 60%;margin-bottom: 144px;">
 					<img src="img/mobile/form_salle.png">
@@ -37,14 +86,18 @@
  
 			<section>
 				<h1>Slide 3</h1>
-				<p>HeyHEy</p>
-				<p>Visytê nou<a href="https://mvx2.esiee.fr/wip/">s</a>
+				<p>
+					<span class="fragment" data-fragment-index="0">Visitez</span>
+					<span class="fragment" data-fragment-index="1">
+						nou<a href="https://mvx2.esiee.fr/wip/">s</a>
+					</span>
+				</p>
 			</section>
  
 			</div>
 	</div>
 	<script src="lib/js/head.min.js"></script>
-	<script src="js/reveal.min.js"></script>
+	<script src="js/reveal.js"></script>
  
 	<script>
 		// Required, even if empty.

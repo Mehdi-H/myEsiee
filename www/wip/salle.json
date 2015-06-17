@@ -1,0 +1,839 @@
+[
+    {
+      "nom": "0112",
+      "resourceID": "737",
+      "type": "banal",
+      "taille": "57",
+      "projecteur": "4",
+      "tableau": "4",
+      "imprimante": "4"
+    },
+    {
+      "nom": "0113",
+      "resourceID": "749",
+      "type": "banal",
+      "taille": "58",
+      "projecteur": "4",
+      "tableau": "4",
+      "imprimante": "4"
+    },
+    {
+      "nom": "0114",
+      "resourceID": "1057",
+      "type": "banal",
+      "taille": "58",
+      "projecteur": "4",
+      "tableau": "4",
+      "imprimante": "4"
+    },
+    {
+      "nom": "0115",
+      "resourceID": "724",
+      "type": "banal",
+      "taille": "58",
+      "projecteur": "4",
+      "tableau": "4",
+      "imprimante": "4"
+    },
+    {
+      "nom": "0162V",
+      "resourceID": "773",
+      "type": "banal",
+      "taille": "58",
+      "projecteur": "4",
+      "tableau": "4",
+      "imprimante": "4"
+    },
+    {
+      "nom": "0163V",
+      "resourceID": "4937",
+      "type": "banal",
+      "taille": "57",
+      "projecteur": "4",
+      "tableau": "4",
+      "imprimante": "4"
+    },
+    {
+      "nom": "0164V",
+      "resourceID": "775",
+      "type": "banal",
+      "taille": "57",
+      "projecteur": "4",
+      "tableau": "4",
+      "imprimante": "4"
+    },
+    {
+      "nom": "0165V",
+      "resourceID": "776",
+      "type": "banal",
+      "taille": "57",
+      "projecteur": "4",
+      "tableau": "4",
+      "imprimante": "4"
+    },
+    {
+      "nom": "1001",
+      "resourceID": "1852",
+      "type": "elec",
+      "taille": "0",
+      "projecteur": "4",
+      "tableau": "4",
+      "imprimante": "4"
+    },
+    {
+      "nom": "1005",
+      "resourceID": "2841",
+      "type": "banal",
+      "taille": "407",
+      "projecteur": "4",
+      "tableau": "4",
+      "imprimante": "4"
+    },
+    {
+      "nom": "1007+",
+      "resourceID": "2842",
+      "type": "banal",
+      "taille": "0",
+      "projecteur": "4",
+      "tableau": "4",
+      "imprimante": "4"
+    },
+    {
+      "nom": "1051",
+      "resourceID": "1858",
+      "type": "banal",
+      "taille": "0",
+      "projecteur": "0",
+      "tableau": "2",
+      "imprimante": "0"
+    },
+    {
+      "nom": "1055",
+      "resourceID": "5321",
+      "type": "elec",
+      "taille": "0",
+      "projecteur": "4",
+      "tableau": "4",
+      "imprimante": "4"
+    },
+    {
+      "nom": "1103",
+      "resourceID": "2276",
+      "type": "banal",
+      "taille": "50",
+      "projecteur": "1",
+      "tableau": "1",
+      "imprimante": "0"
+    },
+    {
+      "nom": "1105",
+      "resourceID": "2272",
+      "type": "banal",
+      "taille": "50",
+      "projecteur": "1",
+      "tableau": "1",
+      "imprimante": "0"
+    },
+    {
+      "nom": "1107V",
+      "resourceID": "2282",
+      "type": "it",
+      "taille": "50",
+      "projecteur": "1",
+      "tableau": "1",
+      "imprimante": "4"
+    },
+    {
+      "nom": "1109V",
+      "resourceID": "2270",
+      "type": "it",
+      "taille": "50",
+      "projecteur": "1",
+      "tableau": "1",
+      "imprimante": "1"
+    },
+    {
+      "nom": "1201+",
+      "resourceID": "2274",
+      "type": "banal",
+      "taille": "100",
+      "projecteur": "1",
+      "tableau": "1",
+      "imprimante": "0"
+    },
+    {
+      "nom": "1205V",
+      "resourceID": "2277",
+      "type": "it",
+      "taille": "50",
+      "projecteur": "1",
+      "tableau": "1",
+      "imprimante": "1"
+    },
+    {
+      "nom": "1207V",
+      "resourceID": "2278",
+      "type": "it",
+      "taille": "50",
+      "projecteur": "1",
+      "tableau": "1",
+      "imprimante": "1"
+    },
+    {
+      "nom": "1209V !!",
+      "resourceID": "2275",
+      "type": "it",
+      "taille": "50",
+      "projecteur": "1",
+      "tableau": "1",
+      "imprimante": "1"
+    },
+    {
+      "nom": "1301+",
+      "resourceID": "2279",
+      "type": "banal",
+      "taille": "50",
+      "projecteur": "4",
+      "tableau": "4",
+      "imprimante": "4"
+    },
+    {
+      "nom": "1305",
+      "resourceID": "705",
+      "type": "banal",
+      "taille": "50",
+      "projecteur": "1",
+      "tableau": "2",
+      "imprimante": "0"
+    },
+    {
+      "nom": "1307",
+      "resourceID": "2281",
+      "type": "banal",
+      "taille": "50",
+      "projecteur": "1",
+      "tableau": "1",
+      "imprimante": "0"
+    },
+    {
+      "nom": "1309",
+      "resourceID": "1908",
+      "type": "banal",
+      "taille": "50",
+      "projecteur": "1",
+      "tableau": "2",
+      "imprimante": "0"
+    },
+    {
+      "nom": "1401",
+      "resourceID": "758",
+      "type": "banal",
+      "taille": "50",
+      "projecteur": "1",
+      "tableau": "2",
+      "imprimante": "0"
+    },
+    {
+      "nom": "1403",
+      "resourceID": "707",
+      "type": "banal",
+      "taille": "50",
+      "projecteur": "1",
+      "tableau": "2",
+      "imprimante": "0"
+    },
+    {
+      "nom": "1405",
+      "resourceID": "708",
+      "type": "banal",
+      "taille": "50",
+      "projecteur": "1",
+      "tableau": "2",
+      "imprimante": "0"
+    },
+    {
+      "nom": "1407",
+      "resourceID": "154",
+      "type": "banal",
+      "taille": "49",
+      "projecteur": "1",
+      "tableau": "2",
+      "imprimante": "0"
+    },
+    {
+      "nom": "1409",
+      "resourceID": "759",
+      "type": "banal",
+      "taille": "50",
+      "projecteur": "1",
+      "tableau": "1",
+      "imprimante": "0"
+    },
+    {
+      "nom": "2101",
+      "resourceID": "183",
+      "type": "banal",
+      "taille": "25",
+      "projecteur": "1",
+      "tableau": "1",
+      "imprimante": "0"
+    },
+    {
+      "nom": "2102",
+      "resourceID": "185",
+      "type": "banal",
+      "taille": "25",
+      "projecteur": "1",
+      "tableau": "1",
+      "imprimante": "0"
+    },
+    {
+      "nom": "2103",
+      "resourceID": "196",
+      "type": "banal",
+      "taille": "25",
+      "projecteur": "1",
+      "tableau": "1",
+      "imprimante": "0"
+    },
+    {
+      "nom": "2104",
+      "resourceID": "4051",
+      "type": "elec",
+      "taille": "25",
+      "projecteur": "1",
+      "tableau": "1",
+      "imprimante": "0"
+    },
+    {
+      "nom": "2105",
+      "resourceID": "2117",
+      "type": "elec",
+      "taille": "48",
+      "projecteur": "1",
+      "tableau": "1",
+      "imprimante": "0"
+    },
+    {
+      "nom": "2107",
+      "resourceID": "4679",
+      "type": "elec",
+      "taille": "25",
+      "projecteur": "1",
+      "tableau": "1",
+      "imprimante": "0"
+    },
+    {
+      "nom": "2108",
+      "resourceID": "772",
+      "type": "banal",
+      "taille": "24",
+      "projecteur": "4",
+      "tableau": "4",
+      "imprimante": "4"
+    },
+    {
+      "nom": "2201+",
+      "resourceID": "2265",
+      "type": "banal",
+      "taille": "49",
+      "projecteur": "1",
+      "tableau": "1",
+      "imprimante": "0"
+    },
+    {
+      "nom": "2205",
+      "resourceID": "712",
+      "type": "banal",
+      "taille": "48",
+      "projecteur": "1",
+      "tableau": "2",
+      "imprimante": "0"
+    },
+    {
+      "nom": "2207",
+      "resourceID": "713",
+      "type": "banal",
+      "taille": "48",
+      "projecteur": "1",
+      "tableau": "2",
+      "imprimante": "0"
+    },
+    {
+      "nom": "2209",
+      "resourceID": "714",
+      "type": "banal",
+      "taille": "50",
+      "projecteur": "1",
+      "tableau": "2",
+      "imprimante": "0"
+    },
+    {
+      "nom": "2305",
+      "resourceID": "780",
+      "type": "elec",
+      "taille": "48",
+      "projecteur": "4",
+      "tableau": "1",
+      "imprimante": "4"
+    },
+    {
+      "nom": "2309-",
+      "resourceID": "4350",
+      "type": "elec",
+      "taille": "50",
+      "projecteur": "4",
+      "tableau": "4",
+      "imprimante": "4"
+    },
+    {
+      "nom": "2401V+",
+      "resourceID": "740",
+      "type": "elec",
+      "taille": "99",
+      "projecteur": "1",
+      "tableau": "1",
+      "imprimante": "0"
+    },
+    {
+      "nom": "2409V",
+      "resourceID": "782",
+      "type": "elec",
+      "taille": "50",
+      "projecteur": "4",
+      "tableau": "4",
+      "imprimante": "4"
+    },
+    {
+      "nom": "3001",
+      "resourceID": "2072",
+      "type": "banal",
+      "taille": "407",
+      "projecteur": "1",
+      "tableau": "2",
+      "imprimante": "0"
+    },
+    {
+      "nom": "3005",
+      "resourceID": "2074",
+      "type": "banal",
+      "taille": "0",
+      "projecteur": "1",
+      "tableau": "2",
+      "imprimante": "0"
+    },
+    {
+      "nom": "3007",
+      "resourceID": "2089",
+      "type": "banal",
+      "taille": "0",
+      "projecteur": "1",
+      "tableau": "2",
+      "imprimante": "0"
+    },
+    {
+      "nom": "3051",
+      "resourceID": "2090",
+      "type": "banal",
+      "taille": "0",
+      "projecteur": "1",
+      "tableau": "2",
+      "imprimante": "0"
+    },
+    {
+      "nom": "3053",
+      "resourceID": "2108",
+      "type": "banal",
+      "taille": "0",
+      "projecteur": "1",
+      "tableau": "2",
+      "imprimante": "0"
+    },
+    {
+      "nom": "3055",
+      "resourceID": "2112",
+      "type": "banal",
+      "taille": "0",
+      "projecteur": "4",
+      "tableau": "4",
+      "imprimante": "4"
+    },
+    {
+      "nom": "3103",
+      "resourceID": "725",
+      "type": "banal",
+      "taille": "48",
+      "projecteur": "1",
+      "tableau": "2",
+      "imprimante": "0"
+    },
+    {
+      "nom": "3105",
+      "resourceID": "726",
+      "type": "banal",
+      "taille": "46",
+      "projecteur": "1",
+      "tableau": "1",
+      "imprimante": "0"
+    },
+    {
+      "nom": "3107",
+      "resourceID": "700",
+      "type": "banal",
+      "taille": "49",
+      "projecteur": "1",
+      "tableau": "1",
+      "imprimante": "0"
+    },
+    {
+      "nom": "3109",
+      "resourceID": "701",
+      "type": "banal",
+      "taille": "50",
+      "projecteur": "1",
+      "tableau": "1",
+      "imprimante": "0"
+    },
+    {
+      "nom": "3201",
+      "resourceID": "715",
+      "type": "banal",
+      "taille": "50",
+      "projecteur": "1",
+      "tableau": "2",
+      "imprimante": "0"
+    },
+    {
+      "nom": "3203",
+      "resourceID": "716",
+      "type": "banal",
+      "taille": "50",
+      "projecteur": "1",
+      "tableau": "2",
+      "imprimante": "0"
+    },
+    {
+      "nom": "3207+",
+      "resourceID": "717",
+      "type": "banal",
+      "taille": "99",
+      "projecteur": "1",
+      "tableau": "2",
+      "imprimante": "0"
+    },
+    {
+      "nom": "3301",
+      "resourceID": "2584",
+      "type": "banal",
+      "taille": "92",
+      "projecteur": "0",
+      "tableau": "2",
+      "imprimante": "0"
+    },
+    {
+      "nom": "3305",
+      "resourceID": "719",
+      "type": "banal",
+      "taille": "48",
+      "projecteur": "0",
+      "tableau": "2",
+      "imprimante": "0"
+    },
+    {
+      "nom": "3307+",
+      "resourceID": "720",
+      "type": "banal",
+      "taille": "99",
+      "projecteur": "1",
+      "tableau": "2",
+      "imprimante": "0"
+    },
+    {
+      "nom": "3401V+",
+      "resourceID": "742",
+      "type": "elec",
+      "taille": "99",
+      "projecteur": "1",
+      "tableau": "1",
+      "imprimante": "0"
+    },
+    {
+      "nom": "3407",
+      "resourceID": "741",
+      "type": "elec",
+      "taille": "96",
+      "projecteur": "0",
+      "tableau": "2",
+      "imprimante": "0"
+    },
+    {
+      "nom": "4003",
+      "resourceID": "731",
+      "type": "elec",
+      "taille": "44",
+      "projecteur": "4",
+      "tableau": "4",
+      "imprimante": "4"
+    },
+    {
+      "nom": "4005",
+      "resourceID": "732",
+      "type": "elec",
+      "taille": "44",
+      "projecteur": "4",
+      "tableau": "4",
+      "imprimante": "4"
+    },
+    {
+      "nom": "4007",
+      "resourceID": "734",
+      "type": "elec",
+      "taille": "172",
+      "projecteur": "4",
+      "tableau": "4",
+      "imprimante": "4"
+    },
+    {
+      "nom": "4105V",
+      "resourceID": "736",
+      "type": "elec",
+      "taille": "164",
+      "projecteur": "4",
+      "tableau": "4",
+      "imprimante": "4"
+    },
+    {
+      "nom": "4109",
+      "resourceID": "735",
+      "type": "elec",
+      "taille": "50",
+      "projecteur": "4",
+      "tableau": "4",
+      "imprimante": "4"
+    },
+    {
+      "nom": "4201+",
+      "resourceID": "721",
+      "type": "banal",
+      "taille": "99",
+      "projecteur": "1",
+      "tableau": "2",
+      "imprimante": "0"
+    },
+    {
+      "nom": "4307+",
+      "resourceID": "722",
+      "type": "banal",
+      "taille": "99",
+      "projecteur": "0",
+      "tableau": "2",
+      "imprimante": "0"
+    },
+    {
+      "nom": "4351",
+      "resourceID": "998",
+      "type": "elec",
+      "taille": "36",
+      "projecteur": "4",
+      "tableau": "4",
+      "imprimante": "4"
+    },
+    {
+      "nom": "4401",
+      "resourceID": "163",
+      "type": "banal",
+      "taille": "470",
+      "projecteur": "1",
+      "tableau": "2",
+      "imprimante": "0"
+    },
+    {
+      "nom": "4403",
+      "resourceID": "167",
+      "type": "banal",
+      "taille": "30",
+      "projecteur": "1",
+      "tableau": "2",
+      "imprimante": "0"
+    },
+    {
+      "nom": "4405-5",
+      "resourceID": "748",
+      "type": "banal",
+      "taille": "200",
+      "projecteur": "4",
+      "tableau": "4",
+      "imprimante": "4"
+    },
+    {
+      "nom": "4451-3",
+      "resourceID": "2781",
+      "type": "banal",
+      "taille": "66",
+      "projecteur": "0",
+      "tableau": "2",
+      "imprimante": "0"
+    },
+    {
+      "nom": "5004",
+      "resourceID": "789",
+      "type": "it",
+      "taille": "46",
+      "projecteur": "0",
+      "tableau": "1",
+      "imprimante": "0"
+    },
+    {
+      "nom": "5006",
+      "resourceID": "790",
+      "type": "it",
+      "taille": "46",
+      "projecteur": "0",
+      "tableau": "1",
+      "imprimante": "0"
+    },
+    {
+      "nom": "5008V+",
+      "resourceID": "786",
+      "type": "it",
+      "taille": "69",
+      "projecteur": "1",
+      "tableau": "1",
+      "imprimante": "0"
+    },
+    {
+      "nom": "5101",
+      "resourceID": "787",
+      "type": "it",
+      "taille": "49",
+      "projecteur": "0",
+      "tableau": "1",
+      "imprimante": "0"
+    },
+    {
+      "nom": "5103",
+      "resourceID": "788",
+      "type": "it",
+      "taille": "49",
+      "projecteur": "0",
+      "tableau": "1",
+      "imprimante": "0"
+    },
+    {
+      "nom": "5105",
+      "resourceID": "727",
+      "type": "it",
+      "taille": "48",
+      "projecteur": "1",
+      "tableau": "1",
+      "imprimante": "0"
+    },
+    {
+      "nom": "5107",
+      "resourceID": "733",
+      "type": "it",
+      "taille": "99",
+      "projecteur": "1",
+      "tableau": "1",
+      "imprimante": "0"
+    },
+    {
+      "nom": "5155",
+      "resourceID": "680",
+      "type": "it",
+      "taille": "71",
+      "projecteur": "1",
+      "tableau": "1",
+      "imprimante": "0"
+    },
+    {
+      "nom": "5201V",
+      "resourceID": "659",
+      "type": "elec",
+      "taille": "99",
+      "projecteur": "1",
+      "tableau": "1",
+      "imprimante": "0"
+    },
+    {
+      "nom": "5207",
+      "resourceID": "665",
+      "type": "it",
+      "taille": "45",
+      "projecteur": "0",
+      "tableau": "4",
+      "imprimante": "0"
+    },
+    {
+      "nom": "5209",
+      "resourceID": "2555",
+      "type": "it",
+      "taille": "50",
+      "projecteur": "0",
+      "tableau": "4",
+      "imprimante": "0"
+    },
+    {
+      "nom": "5301V++",
+      "resourceID": "1295",
+      "type": "elec",
+      "taille": "99",
+      "projecteur": "0",
+      "tableau": "1",
+      "imprimante": "0"
+    },
+    {
+      "nom": "5309V++",
+      "resourceID": "681",
+      "type": "elec",
+      "taille": "50",
+      "projecteur": "1",
+      "tableau": "1",
+      "imprimante": "1"
+    },
+    {
+      "nom": "5401V",
+      "resourceID": "785",
+      "type": "it",
+      "taille": "97",
+      "projecteur": "4",
+      "tableau": "4",
+      "imprimante": "4"
+    },
+    {
+      "nom": "5407",
+      "resourceID": "2556",
+      "type": "it",
+      "taille": "95",
+      "projecteur": "4",
+      "tableau": "4",
+      "imprimante": "4"
+    },
+    {
+      "nom": "6301",
+      "resourceID": "739",
+      "type": "elec",
+      "taille": "26",
+      "projecteur": "4",
+      "tableau": "4",
+      "imprimante": "4"
+    },
+    {
+      "nom": "6401",
+      "resourceID": "743",
+      "type": "elec",
+      "taille": "99",
+      "projecteur": "4",
+      "tableau": "4",
+      "imprimante": "4"
+    },
+    {
+      "nom": "6409V",
+      "resourceID": "738",
+      "type": "elec",
+      "taille": "50",
+      "projecteur": "4",
+      "tableau": "4",
+      "imprimante": "4"
+    }
+]

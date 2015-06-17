@@ -3,7 +3,7 @@
  * @Author: Mehdi-H
  * @Date:   2015-06-09 14:54:39
  * @Last Modified by:   Mehdi-H
- * @Last Modified time: 2015-06-09 15:50:29
+ * @Last Modified time: 2015-06-16 19:03:01
  */
 ?>
 
@@ -19,7 +19,7 @@
 	?>
 	<li class="collection-item avatar taille_ligne">
 		<?php 
-			if ($absenceArray->{'motif'} == 'Retard excusé') {
+			if ($absenceArray->{'motif'} == 'Retard excusé' || $absenceArray->{'motif'} == 'Excusé') {
 				echo('<i class="circle mdi-notification-event-available green"></i>');
 			}else{
 				echo('<i class="circle mdi-notification-event-busy red darken-3"></i>');

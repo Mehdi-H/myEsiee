@@ -12,11 +12,13 @@ if (isset($_POST['query_room'])){
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no"/>
 	<title>MyESIEE - Recherche de salle</title>
+
+	<link rel="icon" type="image/png" href="img/ico_logo.png">
 
 	<!-- CSS  -->
 	<link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
@@ -34,16 +36,16 @@ if (isset($_POST['query_room'])){
 
 		<div class="row center default-primary-color">
 			<!-- Bouton activé : bouton_active-->
-			<a class="btn-flat waves-effect waves-light  margin_top_bouton filtre-type " id="info" title="Salle informatique">
+			<a href="index.php?type=it" class="btn-flat waves-effect waves-light margin_top_bouton filtre-type " id="info" title="Salle informatique">
 				<i class="medium mdi-hardware-desktop-windows primary-text-color">
 				</i>
 			</a>
-			<a class="btn-flat  waves-effect waves-light  margin_top_bouton filtre-type primary-text-color" id="TP" title="Salle de travaux pratiques">
-				<i class="medium mdi-social-school primary-text-color">
+			<a href="index.php?type=banal" class="btn-flat  waves-effect waves-light margin_top_bouton filtre-type primary-text-color" id="TP" title="Salle de cours">
+				<i class="medium mdi-toggle-check-box-outline-blank primary-text-color">
 				</i>
 			</a>
-			<a class="btn-flat waves-effect waves-light  margin_top_bouton filtre-type primary-text-color" id="Laboratoire" title="Laboratoire">
-				<i class="medium mdi-notification-sd-card primary-text-color">
+			<a href="index.php?type=elec" class="btn-flat waves-effect waves-light margin_top_bouton filtre-type primary-text-color" id="Laboratoire" title="Laboratoire d'électronique">
+				<i class="medium mdi-image-flash-on primary-text-color">
 				</i>
 			</a>
 			<a class="btn-flat waves-effect waves-light  margin_top_bouton filtre-type" id="avancee" title="Recherche avancée">
@@ -53,13 +55,33 @@ if (isset($_POST['query_room'])){
 
 
 			<p class="center categorie"><span class="white-text" id="nom_categorie">
-				Liste des salles</span>
+			<?php 
+			$url_api = "https://mvx2.esiee.fr/api/ade.php";
+				switch ($_GET['type']) {
+				    case "banal":
+				        $query = "&type=".$_GET['type'];
+				        $type_salle = "salles de cours";
+				        break;
+				    case "elec":
+				        $query = "&type=".$_GET['type'];
+				        $type_salle = "labos d'élec";
+				        break;
+				    case "it":
+				        $query = "&type=".$_GET['type'];
+				        $type_salle = "salles informatiques";
+				        break;
+				    default:
+				    	$query = "";
+				        $type_salle = "salles libres";
+				}
+			?>
+				Liste des <?php echo($type_salle); ?></span>
 			</p>
 
 			<div id="searchRow" class="row">
 				<form id="form_salle" method="GET" action='fiche.php'>
 					<div class="input-field col s6 offset-s3">
-						<input list="salle_list" name="query_room" id="numero_salle" type="text" class="validate white-text" autocomplete="off" required onkeyup="room_suggest(this);">
+						<input list="salle_list" name="salle" id="numero_salle" type="text" class="validate white-text" autocomplete="off" required onkeyup="room_suggest(this);">
 						<label class="white-text" for="numero_salle">
 							Numéro de salle
 						</label>
@@ -80,8 +102,7 @@ if (isset($_POST['query_room'])){
 				// Connexion à la bdd
 				include('includes/bdd_connect.php');
 
-				$salles = json_decode(file_get_contents('https://mvx2.esiee.fr/api/ade.php?func=rechSalle'),TRUE);
-
+				$salles = json_decode(file_get_contents($url_api.'?func=rechSalle'.$query),TRUE);
 				$stmt = $conn->prepare('SELECT * FROM salle');
 				$stmt->execute();
 				$data = $stmt->fetchAll();
@@ -95,7 +116,7 @@ if (isset($_POST['query_room'])){
 
 						if ($roomState >= 0) {
 						?>
-							<a class="validate collection-item" href="fiche.php?salle=<?php echo(str_replace("+","%2B",$roomNumber)); ?>">
+							<a class="validate collection-item" href="fiche.php?salle=<?php echo(urlencode($roomNumber)); ?>">
 								<ul class="collection valign-wrapper reduc_liste_salle">
 									<li class="tab col s2">
 										<span class="valign right">
@@ -132,9 +153,9 @@ if (isset($_POST['query_room'])){
 								</ul>
 							</a>
 						<?php
-						}
-					}
-				}
+						}  // if ($roomState >= 0)
+					}  // foreach ($room as $roomNumber => $roomState)
+				}  // foreach ($salles as $indexInArray => $room)
 			 ?>
 			</div>
 		</div>
