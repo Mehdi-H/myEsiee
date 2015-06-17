@@ -27,8 +27,9 @@ public class FicheSalle extends ActionBarActivity
     // == ATTRIBUTS
     // ====================================================================================
 
-    // BDD SQLite :
-    DBController controller = new DBController(this);
+    // Outils :
+    private DBController controller = new DBController(this);
+    private ADE ade;
 
     // Date :
     private DatePicker datePicker;
@@ -63,6 +64,7 @@ public class FicheSalle extends ActionBarActivity
         Intent intent = getIntent();
         nomSalle = intent.getStringExtra(RechSalle.EXTRA_NOM_SALLE);
 
+        this.ade = new ADE(this);
 
         // ------------------------------------------------------------------------------------
         // -- Views
@@ -136,7 +138,7 @@ public class FicheSalle extends ActionBarActivity
         largeur = (int) ((double)size.x / 1.7);
 
         imageET_view = (ImageView) findViewById(R.id.imageET);
-        ADE.dispo("Salle", nomSalle, "", largeur, this, imageET_view);
+        ade.dispo("Salle", nomSalle, "", largeur, imageET_view);
     }
 
 
@@ -171,7 +173,7 @@ public class FicheSalle extends ActionBarActivity
 
             // === Générer une nouvelle image pour la nouvelle date ===
 
-            ADE.dispo("Salle", nomSalle, format_API.format(calendar.getTime()), largeur, FicheSalle.this, imageET_view);
+            ade.dispo("Salle", nomSalle, format_API.format(calendar.getTime()), largeur, imageET_view);
         }
     };
 

@@ -63,6 +63,7 @@ public class CaracteristiquesAdapter extends ArrayAdapter<String>
 
         TextView textView = (TextView) gridView.findViewById(R.id.texte);
         ImageView imageView = (ImageView) gridView.findViewById(R.id.icone);
+        TextView iconeTaille = (TextView) gridView.findViewById(R.id.icone_taille);
 
         System.out.println(position + " " + caracteristiques[position]);
 
@@ -72,16 +73,30 @@ public class CaracteristiquesAdapter extends ArrayAdapter<String>
             String valCaract = caracteristiques[position].split("_")[1];
 
             // Cas particuliers de la forme "préfixe_valeur" :
-            if (nomCaract.equals("taille")) {
+            if (nomCaract.equals("taille"))
+            {
+                ViewGroupUtils.removeView(imageView);
                 int taille = Integer.parseInt(valCaract);
                 if (0 < taille && taille < 30) {
-                    // à faire
+                    textView.setText("Petite salle");
+                    iconeTaille.setText("S");
+                } else if (taille < 70) {
+                    textView.setText("Salle moyenne");
+                    iconeTaille.setText("M");
+                } else {
+                    textView.setText("Grande salle");
+                    iconeTaille.setText("L");
                 }
             }
-            textView.setText(valCaract + (nomCaract.equals("taille") ? " places" : ""));
-            imageView.setImageResource(icones.get(nomCaract));
+            else
+            {
+                ViewGroupUtils.removeView(iconeTaille);
+                textView.setText(valCaract + (nomCaract.equals("taille") ? " places" : ""));
+                imageView.setImageResource(icones.get(nomCaract));
+            }
 
         } else {
+            ViewGroupUtils.removeView(iconeTaille);
             textView.setText(caracteristiques[position]);
             imageView.setImageResource(icones.get(caracteristiques[position]));
         }

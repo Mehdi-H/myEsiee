@@ -8,11 +8,24 @@
 
 
     <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_gravity="center"
         android:layout_marginRight="10dp"
-        android:src="@drawable/ic_action_computer_accent"
+        android:src="@drawable/ic_type_it"
         android:id="@+id/icone" />
+
+    <TextView
+        android:id="@+id/icone_taille"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_gravity="center"
+        android:textAlignment="center"
+        android:layout_marginRight="10dp"
+        android:gravity="center"
+        android:textColor="@color/primary_text"
+        android:text="M"
+        android:textSize="25dp" />
 
     <TextView
         android:layout_width="wrap_content"

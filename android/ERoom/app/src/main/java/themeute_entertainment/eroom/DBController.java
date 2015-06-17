@@ -12,6 +12,8 @@ import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
@@ -38,6 +40,9 @@ public class DBController extends SQLiteOpenHelper
     private final String hash_version_url = base_url + "api/bdd.php?func=getHashVersion";
     private final String db_update_url = base_url + "mysql_sync/getdata.php?table=";
 
+    private final Context context;
+    private final SharedPreferences settings;
+
     private boolean[] syncedTable = new boolean[2];
     private String[] tablesToSync = new String[2];
 
@@ -45,8 +50,12 @@ public class DBController extends SQLiteOpenHelper
     // == CONSTRUCTEUR
     // ====================================================================================
 
-    public DBController(Context applicationcontext) {
-        super(applicationcontext, "eroom.db", null, 1);
+    public DBController(Context context)
+    {
+        super(context, "eroom.db", null, 1);
+
+        this.context = context;
+        this.settings = context.getSharedPreferences("SHARED_PREFS", context.MODE_PRIVATE);
     }
 
     // ====================================================================================
@@ -275,14 +284,19 @@ public class DBController extends SQLiteOpenHelper
     public void updateIfNeeded(String local_hash, String online_hash, ProgressDialog prgDialog, SharedPreferences settings, Context context)
     {
         System.out.println("online_hash : " + online_hash);
-        if (! local_hash.equals(online_hash)) {
-            System.out.println("updateing...");
+        if (!local_hash.equals(online_hash)) {
+            System.out.println("updating...");
             syncSQLiteMySQLDB(online_hash, prgDialog, settings, context);
         }
     }
 
-    public void checkForUpdates(final ProgressDialog prgDialog, final SharedPreferences settings, final Context context)
+    public void checkForUpdates(final ProgressDialog prgDialog)
     {
+        if (! ConnectivityTools.isNetworkAvailable(context)) {
+            Toast.makeText(context, "Pas de connexion internet\nLa base de données n'est peut-être pas à jour", Toast.LENGTH_LONG).show();
+            return;
+        }
+
         System.out.println("Checking for updates...");
         // === Récupérer le numéro de version enregistré ===
 

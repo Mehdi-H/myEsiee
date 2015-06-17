@@ -7,6 +7,8 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBar;
@@ -76,8 +78,12 @@ public class RechSalle extends BaseDrawerActivity
     // Données :
     private SharedPreferences settings;
 
+    // ADE :
+    private ADE ade;
+
     // Views :
     private ListView listView_salles;
+    private TextView noData_textView;
     private AutoCompleteTextView autocomplete_nomSalle;
 
     // Liste des ToggleButtons de catégories :
@@ -88,7 +94,9 @@ public class RechSalle extends BaseDrawerActivity
     private HashMap<String,String> criteres = new HashMap<String,String>();
 
     // BDD SQLite :
-    DBController controller = new DBController(this);
+    DBController controller;
+
+    private ConnectivityTools connection;
 
     // Progress Dialog Object
     ProgressDialog prgDialog;
@@ -114,6 +122,9 @@ public class RechSalle extends BaseDrawerActivity
 
         context = getApplicationContext();
         settings = getSharedPreferences("SHARED_PREFS", MODE_PRIVATE);
+        ade = new ADE(context);
+        controller = new DBController(context);
+
 
         // ------------------------------------------------------------------------------------
         // -- Init Progress Dialog
@@ -124,12 +135,14 @@ public class RechSalle extends BaseDrawerActivity
         prgDialog.setMessage("Mise à jour de la base de donnée...");
         prgDialog.setCancelable(false);
 
+        connection = new ConnectivityTools(context, prgDialog);
+        
 
         // ------------------------------------------------------------------------------------
         // -- Vérification de la version de la BDD
         // ------------------------------------------------------------------------------------
 
-        controller.checkForUpdates(prgDialog, settings, context);
+        controller.checkForUpdates(prgDialog);
 
 
         // ------------------------------------------------------------------------------------
@@ -137,7 +150,7 @@ public class RechSalle extends BaseDrawerActivity
         // ------------------------------------------------------------------------------------
 
         final ImageButton searchBtn = (ImageButton) findViewById(R.id.imageButton_search);
-        final Button advancedSearch = (Button) findViewById(R.id.btn_advancedSearch);
+        final ImageButton advancedSearch = (ImageButton) findViewById(R.id.btn_advancedSearch);
 
         // ToggleButtons :
         btn_categ[0] = (ToggleButton) findViewById(R.id.categ_it);
@@ -150,6 +163,7 @@ public class RechSalle extends BaseDrawerActivity
         categories[2] = "banal";
 
         listView_salles = (ListView) findViewById(R.id.listView_salles);
+        noData_textView = (TextView) findViewById(R.id.noData_textView);
 
 
         // ------------------------------------------------------------------------------------
@@ -284,7 +298,7 @@ public class RechSalle extends BaseDrawerActivity
                         Toast.makeText(context, "Salle introuvable =(", Toast.LENGTH_SHORT).show();
                     }
                 } else {
-                    ADE.rechSalle(listView_salles, criteres, controller, context);
+                    ade.rechSalle(listView_salles, noData_textView, criteres);
                 }
             }
         });
@@ -466,7 +480,7 @@ public class RechSalle extends BaseDrawerActivity
         criteres.put("etage", etage.equals("Étage") ? "null" : spinner_etage.getSelectedItemPosition()-1 + "");
 
         // Lancement de la requête :
-        ADE.rechSalle(listView_salles, criteres, controller, context);
+        ade.rechSalle(listView_salles, noData_textView, criteres);
     }
 
     @Override
@@ -474,8 +488,4 @@ public class RechSalle extends BaseDrawerActivity
     {
 
     }
-
-
-
-
 }

@@ -53,17 +53,17 @@
 
                 <View android:layout_width="0dp" android:layout_height="0dp"
                     android:layout_weight="1" />
-
                 <View android:layout_width="0dp" android:layout_height="0dp"
                     android:layout_weight="1" />
 
-                <Button
-                    android:layout_width="@dimen/button_size"
-                    android:layout_height="@dimen/button_size"
+                <ImageButton
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginRight="30dp"
+                    android:scaleType="fitCenter"
                     android:id="@+id/btn_advancedSearch"
-                    android:text="@string/triple_dots"
-                    android:layout_marginRight="10dp"
-                    android:gravity="center"
+                    android:src="@drawable/ic_others_plus_sign_white"
                     android:background="?android:attr/selectableItemBackground" />
             </LinearLayout>
 
@@ -99,6 +99,16 @@
             </LinearLayout>
 
         </LinearLayout>
+
+        <TextView
+            android:id="@+id/noData_textView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:textSize="20dp"
+            android:textColor="@color/windowBackground"
+            android:textStyle="italic"
+            android:text="@string/noData" />
 
         <ListView
             android:layout_width="wrap_content"

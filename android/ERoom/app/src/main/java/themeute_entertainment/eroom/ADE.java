@@ -6,6 +6,7 @@ import android.graphics.BitmapFactory;
 import android.media.Image;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
@@ -27,9 +28,7 @@ import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-/**
- * Created by Byakko on 11/06/2015.
- */
+
 public class ADE
 {
     // ====================================================================================
@@ -37,7 +36,19 @@ public class ADE
     // ====================================================================================
 
     private static final String base_url = "https://mvx2.esiee.fr/api/ade.php";
+    private final Context context;
+    private boolean listView_isOnScreen = false;
+    private DBController controller;
 
+    // ====================================================================================
+    // == Constructeur
+    // ====================================================================================
+
+    public ADE(Context context) {
+        this.context = context;
+        this.controller = new DBController(context);
+        this.listView_isOnScreen = false;
+    }
 
     // ====================================================================================
     // == METHODES PRIVÉES
@@ -101,12 +112,14 @@ public class ADE
      * Fonction de recherche de salles.
      * @param listView      a
      * @param criteres      a
-     * @param controller    a
-     * @param context       a
      */
-    public static void rechSalle(final ListView listView, final HashMap<String,String> criteres, final DBController controller, final Context context)
+    public void rechSalle(final ListView listView, final TextView noData_textView, final HashMap<String,String> criteres)
     {
-        Toast.makeText(context, "Requête...", Toast.LENGTH_SHORT).show();
+        if (listView_isOnScreen) {
+            ViewGroupUtils.replaceView(listView, noData_textView);
+            listView_isOnScreen = false;
+        }
+        noData_textView.setText(context.getResources().getString(R.string.loading));
 
         // === Construction de l'URL de requête ===
 
@@ -180,13 +193,26 @@ public class ADE
                         liste_salles_fusionee[i] += liste_salles_json.get(i).get("dispo");
                     }
 
+
                     // --- Peupler la ListView avec la liste des salles obtenue ---
+
+                    ViewGroupUtils.replaceView(noData_textView, listView);
 
                     RoomArrayAdapter adapter = new RoomArrayAdapter(
                             context,
                             liste_salles_fusionee
                     );
                     listView.setAdapter(adapter);
+
+                    listView_isOnScreen = true;
+                }
+                else
+                {
+                    if (listView_isOnScreen) {
+                        ViewGroupUtils.replaceView(listView, noData_textView);
+                    }
+                    noData_textView.setText(context.getResources().getString(R.string.noData));
+                    listView_isOnScreen = false;
                 }
             }
 
@@ -204,7 +230,7 @@ public class ADE
         });
     }
 
-    public static void dispo(final String Table, final String nom, final String date, final int width, final Context context, final ImageView imageView)
+    public void dispo(final String Table, final String nom, final String date, final int width, final ImageView imageView)
     {
         // === Dimensions de l'image à générer ===
 

@@ -47,8 +47,9 @@ public class RechProf extends BaseDrawerActivity
     private AutoCompleteTextView autocomplete_nomSalle;
     private ImageView imageET_view;
 
-    // BDD SQLite :
-    DBController controller = new DBController(this);
+    // Outils :
+    private DBController controller = new DBController(this);
+    private ADE ade;
 
     // Android stuff :
     private Context context;
@@ -77,6 +78,7 @@ public class RechProf extends BaseDrawerActivity
 
         context = getApplicationContext();
         settings = getSharedPreferences("SHARED_PREFS", MODE_PRIVATE);
+        ade = new ADE(context);
 
         // ------------------------------------------------------------------------------------
         // -- Initialisation de l'AutoComplete nom prof
@@ -182,7 +184,7 @@ public class RechProf extends BaseDrawerActivity
         largeur = (int) ((double)size.x / 1.7);
 
         imageET_view = (ImageView) findViewById(R.id.imageET);
-        ADE.dispo("Prof", nomProf, "", largeur, this, imageET_view);
+        ade.dispo("Prof", nomProf, "", largeur, imageET_view);
     }
 
 
@@ -217,7 +219,7 @@ public class RechProf extends BaseDrawerActivity
 
             // === Générer une nouvelle image pour la nouvelle date ===
 
-            ADE.dispo("Prof", nomProf, format_API.format(calendar.getTime()), largeur, RechProf.this, imageET_view);
+            ade.dispo("Prof", nomProf, format_API.format(calendar.getTime()), largeur, imageET_view);
         }
     };
 
