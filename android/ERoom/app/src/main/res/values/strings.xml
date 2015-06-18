@@ -73,4 +73,5 @@
     <string name="no_connection_warning_contrib">No Internet connection. Be sure to be connected to Internet to send your contribution.</string>
     <string name="contrib_sent">Your contribution has been sent, thank you very much :D</string>
     <string name="title_activity_rech_salle">Rooms</string>
+    <string name="wrongIDs">Connexion to Aurion failed. Are your ID\'s correct?</string>
 </resources>

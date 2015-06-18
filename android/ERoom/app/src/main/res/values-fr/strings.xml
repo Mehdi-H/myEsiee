@@ -87,4 +87,5 @@
     <string name="no_connection_warning_contrib">Pas de connextion internet. Assurez-vous d\'être connecté à internet pour pouvoir contribuer.</string>
     <string name="contrib_sent">Votre contribution a été envoyée, merci beaucoup :D</string>
     <string name="title_activity_rech_salle">Salles</string>
+    <string name="wrongIDs">La connexion à Aurion a échoué. Vos identifiants sont-ils corrects ?</string>
 </resources>

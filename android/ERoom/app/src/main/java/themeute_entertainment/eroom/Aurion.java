@@ -82,10 +82,19 @@ public class Aurion
 
     public void processJSON(final String json, final String func, ListView listView, TextView noData_textView)
     {
+        if (json.startsWith("Connexion echouee")) {
+            if (listView_isOnScreen) {
+                ViewGroupUtils.replaceView(listView, noData_textView);
+            }
+            noData_textView.setText(context.getResources().getString(R.string.wrongIDs));
+            listView_isOnScreen = false;
+
+            return;
+        }
+
         // === Récupérer les données dans un tableau d'objets ===
 
         Gson gson = new Gson();
-        System.out.println(json);
         if (func.equals("grades"))
         {
             Note[] data = gson.fromJson(json, Note[].class);
