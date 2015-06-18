@@ -29,8 +29,9 @@ CREATE TABLE contribution (
 	navigateur			varchar(30) DEFAULT NULL,
 	version_android		varchar(30) DEFAULT NULL,
 	email				varchar(50) DEFAULT NULL,
-	location			varchar(30) DEFAULT NULL,
-	contenu				text NOT NULL
+	location			varchar(80) DEFAULT NULL,
+	contenu				text NOT NULL,
+	statut				varchar(30) DEFAULT 'Nouveau'
 );
 
 /**
