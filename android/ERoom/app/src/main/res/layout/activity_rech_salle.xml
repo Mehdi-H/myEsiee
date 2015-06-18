@@ -26,28 +26,39 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal" >
 
-                <ToggleButton
-                    android:layout_width="@dimen/button_size"
-                    android:layout_height="@dimen/button_size"
-                    android:padding="0dp"
+                <ImageButton
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginRight="30dp"
+                    android:scaleType="fitCenter"
+                    android:padding="10dp"
                     android:id="@+id/categ_it"
+                    android:src="@drawable/ic_type_it_white"
                     android:background="?android:attr/selectableItemBackground" />
 
                 <View android:layout_width="0dp" android:layout_height="0dp"
                     android:layout_weight="1" />
 
-                <ToggleButton
-                    android:layout_width="@dimen/button_size"
-                    android:layout_height="@dimen/button_size"
+                <ImageButton
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginRight="30dp"
+                    android:scaleType="fitCenter"
+                    android:padding="10dp"
+                    android:src="@drawable/ic_type_elec_white"
                     android:id="@+id/categ_elec"
                     android:background="?android:attr/selectableItemBackground" />
 
                 <View android:layout_width="0dp" android:layout_height="0dp"
                     android:layout_weight="1" />
 
-                <ToggleButton
-                    android:layout_width="@dimen/button_size"
-                    android:layout_height="@dimen/button_size"
+                <ImageButton
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginRight="30dp"
+                    android:scaleType="fitCenter"
+                    android:padding="10dp"
+                    android:src="@drawable/ic_type_banal_white"
                     android:id="@+id/categ_banal"
                     android:background="?android:attr/selectableItemBackground" />
 
@@ -57,10 +68,10 @@
                     android:layout_weight="1" />
 
                 <ImageButton
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:layout_marginTop="20dp"
-                    android:layout_marginRight="30dp"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginRight="20dp"
+                    android:padding="10dp"
                     android:scaleType="fitCenter"
                     android:id="@+id/btn_advancedSearch"
                     android:src="@drawable/ic_others_plus_sign_white"

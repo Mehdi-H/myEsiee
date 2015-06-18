@@ -87,8 +87,23 @@ public class RechSalle extends BaseDrawerActivity
     private AutoCompleteTextView autocomplete_nomSalle;
 
     // Liste des ToggleButtons de catégories :
-    private final ToggleButton btn_categ[] = new ToggleButton[3];
-    private final String categories[] = new String[3];
+    private final ImageButton btn_categ[] = new ImageButton[3];
+    private final boolean btn_checked[] = new boolean[3];
+    private final String categories[] = new String[] {
+            "it",
+            "elec",
+            "banal"
+    };
+    private int[] btn_img_accent = new int[] {
+            R.drawable.ic_type_it_accent,
+            R.drawable.ic_type_elec_accent,
+            R.drawable.ic_type_banal_accent
+    };
+    private int[] btn_img_white = new int[] {
+            R.drawable.ic_type_it_white,
+            R.drawable.ic_type_elec_white,
+            R.drawable.ic_type_banal_white
+    };
 
     // Critères de recherche :
     private HashMap<String,String> criteres = new HashMap<String,String>();
@@ -106,6 +121,7 @@ public class RechSalle extends BaseDrawerActivity
 
     // Intent :
     public final static String EXTRA_NOM_SALLE = "themeute_entertainment.eroom.NOM_SALLE";
+
 
 
     // ====================================================================================
@@ -154,14 +170,14 @@ public class RechSalle extends BaseDrawerActivity
         final ImageButton advancedSearch = (ImageButton) findViewById(R.id.btn_advancedSearch);
 
         // ToggleButtons :
-        btn_categ[0] = (ToggleButton) findViewById(R.id.categ_it);
-        btn_categ[1] = (ToggleButton) findViewById(R.id.categ_elec);
-        btn_categ[2] = (ToggleButton) findViewById(R.id.categ_banal);
+        btn_categ[0] = (ImageButton) findViewById(R.id.categ_it);
+        btn_categ[1] = (ImageButton) findViewById(R.id.categ_elec);
+        btn_categ[2] = (ImageButton) findViewById(R.id.categ_banal);
 
-        // Catégories associées :
-        categories[0] = "it";
-        categories[1] = "elec";
-        categories[2] = "banal";
+        // Booléens :
+        for (int i = 0 ; i < btn_checked.length ; i++) {
+            btn_checked[i] = false;
+        }
 
         listView_salles = (ListView) findViewById(R.id.listView_salles);
         noData_textView = (TextView) findViewById(R.id.noData_textView);
@@ -195,82 +211,37 @@ public class RechSalle extends BaseDrawerActivity
          * Lorsqu'un bouton de catégorie est coché, décoche tous les autres.
          * Source : http://stackoverflow.com/questions/6282702/how-to-allow-only-1-android-toggle-button-out-of-3-to-be-on-at-once
          */
-        CompoundButton.OnCheckedChangeListener changeChecker = new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked)
-            {
-                if (isChecked) {
-                    for (int i = 0 ; i < btn_categ.length ; i++) {
-                        // Désactiver les autres boutons :
-                        if (buttonView != btn_categ[i]) {
-                            btn_categ[i].setChecked(false);
-                        } else {
-                            // Choisir le type de salle :
-                            criteres.put("type", categories[i]);
-                            Toast.makeText(context, correspondances.get(criteres.get("type")), Toast.LENGTH_SHORT).show();
+        for (int i = 0 ; i < btn_categ.length ; i++) {
+            final int index = i;
+            btn_categ[i].setOnClickListener(new View.OnClickListener() {
+                public void onClick(View v)
+                {
+                    if (! btn_checked[index])
+                    {
+                        // Le bouton n'était pas déjà check, on l'active et on désactive les autres :
+
+                        for (int j = 0 ; j < btn_categ.length ; j++) {
+                            if (index != j) {
+                                // Désactiver les autres boutons :
+                                uncheck(j);
+                            } else {
+                                // Choisir le type de salle :
+                                check(j);
+                                criteres.put("type", categories[j]);
+                                Toast.makeText(context, correspondances.get(criteres.get("type")), Toast.LENGTH_SHORT).show();
+                            }
                         }
                     }
-                }
+                    else
+                    {
+                        // Le bouton était déjà check, on le désactive :
 
-                // Parcourir les boutons pour voir si l'un d'eux est actif :
-                boolean checked = false;
-                for (int i = 0 ; i < btn_categ.length ; i++) {
-                    if (btn_categ[i].isChecked()) {
-                        checked = true;
+                        uncheck(index);
+                        criteres.put("type", null);
+                        Toast.makeText(context, getResources().getString(R.string.disabled_categ), Toast.LENGTH_SHORT).show();
                     }
                 }
-                // Désactiver le critère de type si aucun bouton n'est actif :
-                if (!checked) {
-                    Toast.makeText(context, getResources().getString(R.string.disabled_categ), Toast.LENGTH_SHORT).show();
-                    criteres.put("type", null);
-                }
-            }
-        };
-
-        for (ToggleButton btn : btn_categ)
-        {
-            // === Utiliser des icônes ===
-
-            ImageSpan image_off, image_on;
-            Drawable iconeOff, iconeOn;
-
-            switch (btn.getId()) {
-                case R.id.categ_it :
-                    iconeOff = getResources().getDrawable(R.drawable.ic_type_it_white);
-                    iconeOn = getResources().getDrawable(R.drawable.ic_type_it_accent);
-                    break;
-                case R.id.categ_elec :
-                    iconeOff = getResources().getDrawable(R.drawable.ic_type_elec_white);
-                    iconeOn = getResources().getDrawable(R.drawable.ic_type_elec_accent);
-                    break;
-                default : // R.id.categ_banal
-                    iconeOff = getResources().getDrawable(R.drawable.ic_type_banal_white);
-                    iconeOn = getResources().getDrawable(R.drawable.ic_type_banal_accent);
-            }
-
-            // === Etat Off ===
-
-            iconeOff.setBounds(0, 0, 60, 60);
-            image_off = new ImageSpan(iconeOff);
-            SpannableString content_off = new SpannableString("x");
-            content_off.setSpan(image_off, 0, 1, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-            btn.setTextOff(content_off);
-
-            // === Etat On ===
-
-            iconeOn.setBounds(0, 0, 60, 60);
-            image_on = new ImageSpan(iconeOn);
-            SpannableString content_on = new SpannableString("x");
-            content_on.setSpan(image_on, 0, 1, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-            btn.setTextOn(content_on);
-
-            // === Au démarrage ===
-
-            btn.setText(content_off);
-
-            // === Ne permettre l'état On qu'à un seul bouton ===
-
-            btn.setOnCheckedChangeListener(changeChecker);
+            });
         }
 
         // ------------------------------------------------------------------------------------
@@ -323,6 +294,17 @@ public class RechSalle extends BaseDrawerActivity
         });
     }
 
+    public void uncheck(final int index)
+    {
+        btn_categ[index].setImageResource(btn_img_white[index]);
+        btn_checked[index] = false;
+    }
+
+    public void check(final int index)
+    {
+        btn_categ[index].setImageResource(btn_img_accent[index]);
+        btn_checked[index] = true;
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
