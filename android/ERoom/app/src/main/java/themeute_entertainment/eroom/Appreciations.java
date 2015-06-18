@@ -48,6 +48,8 @@ public class Appreciations extends BaseDrawerActivity
     // Views :
     private ListView listView;
     private TextView noData_textView;
+    private Button archives_btn;
+    private Button currentYear_btn;
 
 
     // ====================================================================================
@@ -70,8 +72,8 @@ public class Appreciations extends BaseDrawerActivity
         // -- Vues
         // ------------------------------------------------------------------------------------
 
-        Button currentYear_btn = (Button) findViewById(R.id.currentYear);
-        Button archives_btn = (Button) findViewById(R.id.archives);
+        currentYear_btn = (Button) findViewById(R.id.currentYear);
+        archives_btn = (Button) findViewById(R.id.archives);
         listView = (ListView) findViewById(R.id.listView);
         noData_textView = (TextView) findViewById(R.id.noData_textView);
 
@@ -87,21 +89,21 @@ public class Appreciations extends BaseDrawerActivity
 
         // === S'ils ne sont pas enregistrés : pop-up de connexion ===
 
-        if (login.isEmpty() || mdp.isEmpty()) {
+        if (login.equals("") || mdp.equals("")) {
             DialogFragment dialog = new ConnexionDialog();
             dialog.show(getSupportFragmentManager(), "ConnexionDialog");
+        } else {
+            // Réaffichage des dernières données affichées :
+            aurion.loadLastData(func, listView, noData_textView);
         }
 
-        // ------------------------------------------------------------------------------------
-        // -- Réaffichage des dernières données affichées
-        // ------------------------------------------------------------------------------------
-
-        aurion.loadLastData(func, listView, noData_textView);
-
 
         // ------------------------------------------------------------------------------------
-        // -- La fameuse recherche
+        // -- La fameuse recherche (pour l'année en cours)
         // ------------------------------------------------------------------------------------
+
+        currentYear_btn.setEnabled(!(mdp.equals("") || login.equals("")));
+        archives_btn.setEnabled(!(mdp.equals("") || login.equals("")));
 
         // === Pour cette année ===
 
@@ -134,6 +136,8 @@ public class Appreciations extends BaseDrawerActivity
     @Override
     public void onDialogPositiveClick(DialogFragment dialog) {
         aurion.onDialogPositiveClick(dialog, func);
+        currentYear_btn.setEnabled(!(mdp.equals("") || login.equals("")));
+        archives_btn.setEnabled(!(mdp.equals("") || login.equals("")));
     }
 
     @Override

@@ -105,7 +105,7 @@ public class Aurion
 
         SharedPreferences.Editor editor = settings.edit();
         editor.putString(func+"_lastData", json);
-        editor.apply();
+        editor.commit();
     }
 
 
@@ -186,7 +186,7 @@ public class Aurion
             editor.putString("mdp", mdp);
         }
 
-        editor.apply();
+        editor.commit();
     }
 
     public void onDialogNegativeClick(DialogFragment dialog) {}
