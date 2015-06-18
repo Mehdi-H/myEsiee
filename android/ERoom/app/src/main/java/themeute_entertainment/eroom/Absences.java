@@ -37,6 +37,8 @@ public class Absences extends BaseDrawerActivity
     // Views :
     private ListView listView;
     private TextView noData_textView;
+    private Button archives_btn;
+    private Button currentYear_btn;
 
 
     // ====================================================================================
@@ -48,7 +50,9 @@ public class Absences extends BaseDrawerActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_absences);
         this.mNavigationDrawerFragment = super.onCreateDrawer();
+        mNavigationDrawerFragment.setCurrentSelectedPosition(3);
 
+        mTitle = "Absences";
         context = getApplicationContext();
         settings = getSharedPreferences("SHARED_PREFS", MODE_PRIVATE);
         aurion = new Aurion(context);
@@ -57,8 +61,8 @@ public class Absences extends BaseDrawerActivity
         // -- Vues
         // ------------------------------------------------------------------------------------
 
-        Button currentYear_btn = (Button) findViewById(R.id.currentYear);
-        Button archives_btn = (Button) findViewById(R.id.archives);
+        currentYear_btn = (Button) findViewById(R.id.currentYear);
+        archives_btn = (Button) findViewById(R.id.archives);
         listView = (ListView) findViewById(R.id.listView);
         noData_textView = (TextView) findViewById(R.id.noData_textView);
 
@@ -74,27 +78,27 @@ public class Absences extends BaseDrawerActivity
 
         // === S'ils ne sont pas enregistrés : pop-up de connexion ===
 
-        if (login.isEmpty() || mdp.isEmpty()) {
+        if (login.equals("") || mdp.equals("")) {
             DialogFragment dialog = new ConnexionDialog();
             dialog.show(getSupportFragmentManager(), "ConnexionDialog");
+        } else {
+            // Réaffichage des dernières données affichées :
+            aurion.loadLastData(func, listView, noData_textView);
         }
 
-        // ------------------------------------------------------------------------------------
-        // -- Réaffichage des dernières données affichées
-        // ------------------------------------------------------------------------------------
-
-        aurion.loadLastData(func, listView, noData_textView);
-
 
         // ------------------------------------------------------------------------------------
-        // -- La fameuse recherche
+        // -- La fameuse recherche (pour l'année en cours)
         // ------------------------------------------------------------------------------------
+
+        currentYear_btn.setEnabled(!(mdp.equals("") || login.equals("")));
+        archives_btn.setEnabled(!(mdp.equals("") || login.equals("")));
 
         // === Pour cette année ===
 
         currentYear_btn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Toast.makeText(context, "Recherche des notes de cette année...", Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, R.string.fetching_absences, Toast.LENGTH_SHORT).show();
                 aurion.request(func, listView, noData_textView, login, mdp, false);
             }
         });
@@ -103,7 +107,7 @@ public class Absences extends BaseDrawerActivity
 
         archives_btn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Toast.makeText(context, "Recherche des notes dans les archives...", Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, R.string.fetching_absences_old, Toast.LENGTH_SHORT).show();
                 aurion.request(func, listView, noData_textView, login, mdp, true);
             }
         });
@@ -121,6 +125,8 @@ public class Absences extends BaseDrawerActivity
     @Override
     public void onDialogPositiveClick(DialogFragment dialog) {
         aurion.onDialogPositiveClick(dialog, func);
+        currentYear_btn.setEnabled(!(mdp.equals("") || login.equals("")));
+        archives_btn.setEnabled(!(mdp.equals("") || login.equals("")));
     }
 
     @Override

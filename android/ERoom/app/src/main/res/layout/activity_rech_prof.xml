@@ -39,7 +39,7 @@
                     android:nextFocusLeft="@id/nomProf_recherche"
                     android:layout_gravity="center"
                     android:layout_weight="1"
-                    android:hint="Nom du professeur"
+                    android:hint="@string/hint_nomProf"
                     />
 
                 <ImageButton

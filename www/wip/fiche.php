@@ -3,7 +3,7 @@
  * @Author: Mehdi-H
  * @Date:   2015-06-11 13:51:59
  * @Last Modified by:   Mehdi-H
- * @Last Modified time: 2015-06-11 15:21:52
+ * @Last Modified time: 2015-06-16 16:43:24
  */
 
 if(isset($_GET['salle'])){
@@ -49,32 +49,7 @@ if(isset($_GET['salle'])){
 			)[0];
 	?>	
 
-	<div class="navbar-fixed">
-		<nav class="dark-primary-color" role="navigation">
-			<div class="nav-wrapper container"><a id="logo-container" href="#" class="brand-logo">Logo</a>
-				<ul class="right hide-on-med-and-down">
-					<li><a href="index.html" >Salles</a></li>
-					<li><a href="Recherche_Professeur.html">Profs</a></li>
-					<li><a href="notes.html">Notes</a></li>
-					<li><a href="#">Absences</a></li>
-					<li><a href="appreciation.html">Appréciations</a></li>
-					<li><a href="#">Paramètres</a></li>
-					<li><a href="#">Déconnexion</a></li>
-				</ul>
-
-				<ul id="nav-mobile" class="side-nav">
-					<li><a href="index.html">Salles</a></li>
-					<li><a href="Recherche_Professeur.html">Profs</a></li>
-					<li><a href="notes.html">Notes</a></li>
-					<li class="active"><a href="#">Absences</a></li>
-					<li><a href="appreciation.html">Appréciations</a></li>
-					<li><a href="#">Paramètres</a></li>
-					<li><a href="#">Déconnexion</a></li>
-				</ul>
-				<a href="#" data-activates="nav-mobile" class="button-collapse"><i class="mdi-navigation-menu"></i></a>
-			</div>
-		</nav>
-	</div>
+	<?php include('includes/header.php'); ?>
 
 	<br>
 	<div class="row z-depth-4 fichesalle">
@@ -155,9 +130,9 @@ if(isset($_GET['salle'])){
 			</div>
 		</div>
 		<div>	
-				<input id="date_salle" type="date" class="datepicker primary-text-color center">
+				<input placeholder="Choisir une date" id="date_salle" type="date" class="datepicker primary-text-color center">
 			<div class="center">
-				<img class="responsive-img" src="https://mvx2.esiee.fr/api/ade.php?func=dispoSalle&nom=1201%2B">
+				<img id="edt_salle" class="responsive-img" src='https://mvx2.esiee.fr/api/ade.php?func=dispoSalle&nom=<?php echo(str_replace("+","%2B",$data["nom"])); ?>&date=<?php echo(date("m/d/Y")); ?>'>
 			</div>
 		</div>
 	</div>
@@ -167,10 +142,7 @@ if(isset($_GET['salle'])){
 	<script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
 	<script src="js/materialize.js"></script>
 	<script src="js/init.js"></script>
-	<script> $('.datepicker').pickadate({
-    selectMonths: true, // Creates a dropdown to control month
-    selectYears: 15 // Creates a dropdown of 15 years to control year
-});</script> 
+	<script src="scripts/js/date.js"></script>
 
 	<?php 
 		if($show_modal){

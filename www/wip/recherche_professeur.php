@@ -3,7 +3,7 @@
  * @Author: Mehdi-H
  * @Date:   2015-06-12 16:23:04
  * @Last Modified by:   Mehdi-H
- * @Last Modified time: 2015-06-12 19:56:24
+ * @Last Modified time: 2015-06-16 16:42:00
  */
 ?>
 
@@ -23,32 +23,8 @@
 
 <body>
 	<main>		
-		<div class="navbar-fixed">
-			<nav class="dark-primary-color" role="navigation">
-				<div class="nav-wrapper container"><a id="logo-container" href="#" class="brand-logo">Logo</a>
-					<ul class="right hide-on-med-and-down">
-						<li><a href="index.html" >Salles</a></li>
-						<li class="active"><a href="#">Profs</a></li>
-						<li><a href="notes.html">Notes</a></li>
-						<li><a href="absence.html">Absences</a></li>
-						<li><a href="appreciation.html">Appréciations</a></li>
-						<li><a href="#">Paramètres</a></li>
-						<li><a href="#">Déconnexion</a></li>
-					</ul>
-
-					<ul id="nav-mobile" class="side-nav">
-						<li><a href="index.html" >Salles</a></li>
-						<li class="active"><a href="#">Profs</a></li>
-						<li><a href="notes.html">Notes</a></li>
-						<li><a href="absence.html">Absences</a></li>
-						<li><a href="appreciation.html">Appréciations</a></li>
-						<li><a href="#">Paramètres</a></li>
-						<li><a href="#">Déconnexion</a></li>
-					</ul>
-					<a href="#" data-activates="nav-mobile" class="button-collapse"><i class="mdi-navigation-menu"></i></a>
-				</div>
-			</nav>
-		</div>
+		
+		<?php include('includes/header.php'); ?>
 
 		<!-- Recherche d'un professeur--> 
 		<div class="row">
@@ -82,9 +58,9 @@
 			<div class="center">
 				Disponibilité :
 			</div>
-		<input type="date" class="datepicker primary-text-color center" placeholder="<?php echo(date('d/m/y')); ?>">
+		<input id="date_salle" type="date" class="datepicker primary-text-color center" placeholder="<?php echo(date('d/m/y')); ?>">
 			<div class="center">
-				<img class="responsive-img" src="https://mvx2.esiee.fr/api/ade.php?nom=<?php echo($data_prof['nom']);?>&func=dispoProf">
+				<img id="edt_salle" class="responsive-img" src="https://mvx2.esiee.fr/api/ade.php?nom=<?php echo($data_prof['nom']);?>&func=dispoProf&date=<?php echo(date("m/d/Y")); ?>">
 			</div>
 		</div>
 
@@ -102,9 +78,7 @@
 	<!--  Scripts-->
 
 	<?php include_once('includes/scripts_js.php'); ?>
-	<script>$('.datepicker').pickadate({
-    selectMonths: true,
-    selectYears: 15});</script>
+	<script src="scripts/js/date.js"></script>
 
 </body>
 </html>

@@ -80,6 +80,10 @@ public class NavigationDrawerFragment extends Fragment {
         selectItem(mCurrentSelectedPosition);
     }
 
+    public void setCurrentSelectedPosition(int position) {
+        mCurrentSelectedPosition = position;
+    }
+
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
@@ -107,9 +111,7 @@ public class NavigationDrawerFragment extends Fragment {
                         getString(R.string.title_Teachers),
                         getString(R.string.title_Grades),
                         getString(R.string.title_Absences),
-                        getString(R.string.title_Assessments),
-                        getString(R.string.title_Settings),
-                        getString(R.string.title_Disconnect)
+                        getString(R.string.title_Assessments)
                 }));
         mDrawerListView.setItemChecked(mCurrentSelectedPosition, true);
         return mDrawerListView;
@@ -196,7 +198,6 @@ public class NavigationDrawerFragment extends Fragment {
     private void selectItem(int position) {
         mCurrentSelectedPosition = position;
         if (mDrawerListView != null) {
-            System.out.println("mDrawerListView != null");
             mDrawerListView.setItemChecked(position, true);
 
             // Handle Navigation Options
@@ -216,21 +217,13 @@ public class NavigationDrawerFragment extends Fragment {
                 case 4:
                     switchActivity(Appreciations.class);
                     break;
-                case 5:
-                    // switchActivity(Params.class);
-                    break;
-                case 6:
-                    // switchActivity(Deconnexion.class);
-                    break;
             }
 
         }
         if (mDrawerLayout != null) {
-            System.out.println("mDrawerLayout != null");
             mDrawerLayout.closeDrawer(mFragmentContainerView);
         }
         if (mCallbacks != null) {
-            System.out.println("mCallbacks != null");
             mCallbacks.onNavigationDrawerItemSelected(position);
         }
     }
@@ -286,11 +279,6 @@ public class NavigationDrawerFragment extends Fragment {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (mDrawerToggle.onOptionsItemSelected(item)) {
-            return true;
-        }
-
-        if (item.getItemId() == R.id.action_example) {
-            Toast.makeText(getActivity(), "Example action.", Toast.LENGTH_SHORT).show();
             return true;
         }
 

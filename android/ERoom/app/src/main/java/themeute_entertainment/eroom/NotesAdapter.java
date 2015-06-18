@@ -67,11 +67,11 @@ public class NotesAdapter extends ArrayAdapter<Note>
         // Crédits :
         String credits = notes[position].getCredit();
         if (credits.startsWith("non")) {
-            credits = "Pas de crédit";
+            credits = context.getResources().getString(R.string.no_credit);
         } else if (credits.equals("1")) {
-            credits += " crédit";
+            credits += " " + context.getResources().getString(R.string.credit_sing);
         } else {
-            credits += " crédits";
+            credits += " " + context.getResources().getString(R.string.credits_plural);
         }
         credits_view.setText(credits);
 

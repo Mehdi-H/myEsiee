@@ -48,7 +48,7 @@ public class RechProf extends BaseDrawerActivity
     private ImageView imageET_view;
 
     // Outils :
-    private DBController controller = new DBController(this);
+    private DBController controller;
     private ADE ade;
 
     // Android stuff :
@@ -75,10 +75,14 @@ public class RechProf extends BaseDrawerActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_rech_prof);
         this.mNavigationDrawerFragment = super.onCreateDrawer();
+        mNavigationDrawerFragment.setCurrentSelectedPosition(2);
+
+        mTitle = "Recherche Prof";
 
         context = getApplicationContext();
         settings = getSharedPreferences("SHARED_PREFS", MODE_PRIVATE);
         ade = new ADE(context);
+        controller = new DBController(this);
 
         // ------------------------------------------------------------------------------------
         // -- Initialisation de l'AutoComplete nom prof
@@ -129,10 +133,10 @@ public class RechProf extends BaseDrawerActivity
                         // Aller directement à la fiche salle :
                         remplirFicheProf(nomProf_auto);
                     } else {
-                        Toast.makeText(context, "Prof introuvable =(", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context, R.string.prof_not_found, Toast.LENGTH_SHORT).show();
                     }
                 } else {
-                    Toast.makeText(context, "Quel prof rechercher ?", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context, R.string.no_prof_name, Toast.LENGTH_SHORT).show();
                 }
             }
         });
