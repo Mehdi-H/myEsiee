@@ -19,24 +19,6 @@
     <string name="room_m">Medium room</string>
     <string name="room_l">Large room</string>
     <string name="recherche_avancee">Advanced search</string>
-    <string-array name="epis">
-        <item>Wing</item>
-        <item>Out of wings</item>
-        <item>Wing 1</item>
-        <item>Wing 2</item>
-        <item>Wing 3</item>
-        <item>Wing 4</item>
-        <item>Wing 5</item>
-        <item>Wing 6</item>
-    </string-array>
-    <string-array name="etages">
-        <item>Floor</item>
-        <item>Floor 0</item>
-        <item>Floor 1</item>
-        <item>Floor 2</item>
-        <item>Floor 3</item>
-        <item>Floor 4</item>
-    </string-array>
 
     <string name="projecteur">Projector</string>
     <string name="prof_not_found">404 - Teacher not found =(</string>
@@ -85,4 +67,10 @@
     <string name="triple_dots">...</string>
     <string name="with">with</string>
     <string name="hint_nomProf">Teacher name</string>
+    <string name="contribuer">Contribute</string>
+    <string name="hint_email">E-mail (optional)</string>
+    <string name="hint_contribution">Bug? Mistake? Suggestion? Tell us about it!</string>
+    <string name="no_connection_warning_contrib">No Internet connection. Be sure to be connected to Internet to send your contribution.</string>
+    <string name="contrib_sent">Your contribution has been sent, thank you very much :D</string>
+    <string name="title_activity_rech_salle">Rooms</string>
 </resources>

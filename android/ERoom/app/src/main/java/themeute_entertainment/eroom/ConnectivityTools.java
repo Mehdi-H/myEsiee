@@ -21,12 +21,13 @@ public class ConnectivityTools
     private SharedPreferences settings;
     private ProgressDialog prgDialog;
     private DBController controller;
+    private ContributionDialog contribDialog;
 
     // ====================================================================================
     // == CONSTRUCTEUR
     // ====================================================================================
 
-    public ConnectivityTools(Context context, ProgressDialog prgDialog)
+    public ConnectivityTools(Context context, ProgressDialog prgDialog, ContributionDialog contribDialog)
     {
         // Initialisation du Receiver ;
         this.receiver = new ConnectivityReceiver();
@@ -36,6 +37,7 @@ public class ConnectivityTools
         this.settings = context.getSharedPreferences("SHARED_PREFS", context.MODE_PRIVATE);
         this.prgDialog = prgDialog;
         this.controller = new DBController(context);
+        this.contribDialog = contribDialog;
     }
 
     public void close(Context context)
@@ -79,11 +81,19 @@ public class ConnectivityTools
                     // Toast.makeText(context, "Internet connection OK", Toast.LENGTH_SHORT).show();
                     controller.checkForUpdates(prgDialog);
                 }
+
+                if (contribDialog != null) {
+                    contribDialog.setCondition("internet", true);
+                }
             }
             else
             {
                 // === Pas de connexion ===
                 // Toast.makeText(context, "No active connection", Toast.LENGTH_SHORT).show();
+
+                if (contribDialog != null) {
+                    contribDialog.setCondition("internet", false);
+                }
             }
         }
     }

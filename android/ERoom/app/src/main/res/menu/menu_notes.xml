@@ -6,4 +6,9 @@
 
     <item android:id="@+id/action_editAurion" android:title="@string/edit_aurion_ids"
         android:orderInCategory="100" app:showAsAction="never" />
+    <item
+        android:id="@+id/contribution"
+        android:title="@string/contribuer"
+        android:orderInCategory="100"
+        app:showAsAction="never" />
 </menu>

@@ -26,6 +26,8 @@ public class Notes extends BaseDrawerActivity
     private NavigationDrawerFragment mNavigationDrawerFragment;
     private CharSequence mTitle;
 
+    private ContributionDialog contribDialog;
+
     private Aurion aurion;
     private final String func = "grades";
 
@@ -52,7 +54,7 @@ public class Notes extends BaseDrawerActivity
         this.mNavigationDrawerFragment = super.onCreateDrawer();
         mNavigationDrawerFragment.setCurrentSelectedPosition(1);
 
-        mTitle = "Notes";
+        this.setTitle(R.string.title_activity_notes);
 
         context = getApplicationContext();
         settings = getSharedPreferences("SHARED_PREFS", MODE_PRIVATE);
@@ -160,6 +162,10 @@ public class Notes extends BaseDrawerActivity
         if (id == R.id.action_editAurion) {
             DialogFragment dialog = new ConnexionDialog();
             dialog.show(getSupportFragmentManager(), "ConnexionDialog");
+            return true;
+        } else if (id == R.id.contribution) {
+            contribDialog = new ContributionDialog();
+            contribDialog.show(getSupportFragmentManager(), "ContributionDialog");
             return true;
         }
 

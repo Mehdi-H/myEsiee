@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="epis">
+        <item>Épi</item>
+        <item>Hors épi</item>
+        <item>Épi 1</item>
+        <item>Épi 2</item>
+        <item>Épi 3</item>
+        <item>Épi 4</item>
+        <item>Épi 5</item>
+        <item>Épi 6</item>
+    </string-array>
+    <string-array name="etages">
+        <item>Étage</item>
+        <item>Niveau 0</item>
+        <item>Niveau 1</item>
+        <item>Niveau 2</item>
+        <item>Niveau 3</item>
+        <item>Niveau 4</item>
+    </string-array>
+
+    <string-array name="contrib_types">
+        <item>C\'est à quel sujet ?</item>
+        <item>Bug</item>
+        <item>Erreur</item>
+        <item>Suggestion</item>
+        <item>Autre</item>
+    </string-array>
+</resources>

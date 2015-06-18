@@ -31,6 +31,8 @@ public class FicheSalle extends ActionBarActivity
     private DBController controller;
     private ADE ade;
 
+    private ContributionDialog contribDialog;
+
     // Date :
     private DatePicker datePicker;
     private Calendar calendar;
@@ -65,7 +67,8 @@ public class FicheSalle extends ActionBarActivity
         Intent intent = getIntent();
         nomSalle = intent.getStringExtra(RechSalle.EXTRA_NOM_SALLE);
 
-        mTitle = "FicheSalle de " + nomSalle;
+        mTitle = getResources().getString(R.string.title_activity_fiche_salle) + nomSalle;
+        this.setTitle(mTitle);
 
         this.ade = new ADE(this);
         controller = new DBController(this);
@@ -205,8 +208,9 @@ public class FicheSalle extends ActionBarActivity
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (id == R.id.contribution) {
+            contribDialog = new ContributionDialog();
+            contribDialog.show(getSupportFragmentManager(), "ContributionDialog");
             return true;
         }
 

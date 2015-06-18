@@ -26,24 +26,6 @@
     <string name="chercher">Chercher</string>
 
     <string name="recherche_avancee">Recherche avancée</string>
-    <string-array name="epis">
-        <item>Épi</item>
-        <item>Hors épi</item>
-        <item>Épi 1</item>
-        <item>Épi 2</item>
-        <item>Épi 3</item>
-        <item>Épi 4</item>
-        <item>Épi 5</item>
-        <item>Épi 6</item>
-    </string-array>
-    <string-array name="etages">
-        <item>Étage</item>
-        <item>Niveau 0</item>
-        <item>Niveau 1</item>
-        <item>Niveau 2</item>
-        <item>Niveau 3</item>
-        <item>Niveau 4</item>
-    </string-array>
 
     <!-- Options -->
     <string name="action_update_db">Mettre à jour la BDD</string>
@@ -99,4 +81,10 @@
     <string name="prof_not_found">Prof introuvable =(</string>
     <string name="no_prof_name">Quel prof rechercher ?</string>
     <string name="hint_nomProf">Nom du professeur</string>
+    <string name="contribuer">Contribuer</string>
+    <string name="hint_email">E-mail (optionnel)</string>
+    <string name="hint_contribution">Un bug ? Une erreur ? Une suggestion ? Dites-nous tout !</string>
+    <string name="no_connection_warning_contrib">Pas de connextion internet. Assurez-vous d\'être connecté à internet pour pouvoir contribuer.</string>
+    <string name="contrib_sent">Votre contribution a été envoyée, merci beaucoup :D</string>
+    <string name="title_activity_rech_salle">Salles</string>
 </resources>

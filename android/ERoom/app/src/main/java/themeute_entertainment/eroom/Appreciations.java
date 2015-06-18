@@ -35,6 +35,8 @@ public class Appreciations extends BaseDrawerActivity
     private NavigationDrawerFragment mNavigationDrawerFragment;
     private CharSequence mTitle;
 
+    private ContributionDialog contribDialog;
+
     private Aurion aurion;
     private final String func = "appreciations";
 
@@ -63,7 +65,8 @@ public class Appreciations extends BaseDrawerActivity
         this.mNavigationDrawerFragment = super.onCreateDrawer();
         mNavigationDrawerFragment.setCurrentSelectedPosition(4);
 
-        mTitle = "Appréciations";
+        this.setTitle(R.string.title_activity_appreciations);
+
         context = getApplicationContext();
         settings = getSharedPreferences("SHARED_PREFS", MODE_PRIVATE);
         aurion = new Aurion(context);
@@ -168,6 +171,10 @@ public class Appreciations extends BaseDrawerActivity
         if (id == R.id.action_editAurion) {
             DialogFragment dialog = new ConnexionDialog();
             dialog.show(getSupportFragmentManager(), "ConnexionDialog");
+            return true;
+        } else if (id == R.id.contribution) {
+            contribDialog = new ContributionDialog();
+            contribDialog.show(getSupportFragmentManager(), "ContributionDialog");
             return true;
         }
 

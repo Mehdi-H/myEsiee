@@ -75,6 +75,8 @@ public class RechSalle extends BaseDrawerActivity
      */
     private CharSequence mTitle;
 
+    private ContributionDialog contribDialog;
+
     // Données :
     private SharedPreferences settings;
 
@@ -136,6 +138,8 @@ public class RechSalle extends BaseDrawerActivity
         mNavigationDrawerFragment.setCurrentSelectedPosition(0);
 
         mTitle = getTitle();
+        this.setTitle(R.string.title_activity_rech_salle);
+
 
         context = getApplicationContext();
         settings = getSharedPreferences("SHARED_PREFS", MODE_PRIVATE);
@@ -152,7 +156,7 @@ public class RechSalle extends BaseDrawerActivity
         prgDialog.setMessage(getResources().getString(R.string.db_update));
         prgDialog.setCancelable(false);
 
-        connection = new ConnectivityTools(context, prgDialog);
+        connection = new ConnectivityTools(context, prgDialog, null);
 
 
         // ------------------------------------------------------------------------------------
@@ -326,11 +330,12 @@ public class RechSalle extends BaseDrawerActivity
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        } else if (id == R.id.action_update_db) {
+        if (id == R.id.action_update_db) {
             controller.syncSQLiteMySQLDB("manual update", prgDialog, settings, context);
+            return true;
+        } else if (id == R.id.contribution) {
+            contribDialog = new ContributionDialog();
+            contribDialog.show(getSupportFragmentManager(), "ContributionDialog");
             return true;
         }
 

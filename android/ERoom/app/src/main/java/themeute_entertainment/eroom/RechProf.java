@@ -37,6 +37,8 @@ public class RechProf extends BaseDrawerActivity
 
     private CharSequence mTitle;
 
+    private ContributionDialog contribDialog;
+
     // Données :
     private SharedPreferences settings;
     private String nomProf;
@@ -77,7 +79,8 @@ public class RechProf extends BaseDrawerActivity
         this.mNavigationDrawerFragment = super.onCreateDrawer();
         mNavigationDrawerFragment.setCurrentSelectedPosition(2);
 
-        mTitle = "Recherche Prof";
+        mTitle = getResources().getString(R.string.title_activity_rech_prof);
+        this.setTitle(mTitle);
 
         context = getApplicationContext();
         settings = getSharedPreferences("SHARED_PREFS", MODE_PRIVATE);
@@ -132,6 +135,8 @@ public class RechProf extends BaseDrawerActivity
                     if (controller.existsIn(nomProf_auto, "prof")) {
                         // Aller directement à la fiche salle :
                         remplirFicheProf(nomProf_auto);
+                        mTitle = getResources().getString(R.string.title_activity_rech_prof) + " (" + nomProf_auto + ")";
+                        RechProf.this.setTitle(mTitle);
                     } else {
                         Toast.makeText(context, R.string.prof_not_found, Toast.LENGTH_SHORT).show();
                     }
@@ -251,8 +256,9 @@ public class RechProf extends BaseDrawerActivity
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (id == R.id.contribution) {
+            contribDialog = new ContributionDialog();
+            contribDialog.show(getSupportFragmentManager(), "ContributionDialog");
             return true;
         }
 
