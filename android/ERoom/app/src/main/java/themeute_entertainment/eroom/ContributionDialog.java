@@ -197,24 +197,6 @@ public class ContributionDialog extends DialogFragment
 
 
     // ====================================================================================
-    // == onCreateView()
-    // == Est appelé après la méthode setView() de onCreateDialog()
-    // ====================================================================================
-
-    /*@Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
-    {
-        View view = inflater.inflate(R.layout.dialog_contribution, container, false);
-
-        type_view = (Spinner) view.findViewById(R.id.type);
-        email_view = (EditText) view.findViewById(R.id.email);
-        contenu_view = (EditText) view.findViewById(R.id.contenu);
-
-        return view;
-    } */
-
-
-    // ====================================================================================
     // == Modifieurs
     // ====================================================================================
 

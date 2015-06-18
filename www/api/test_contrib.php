@@ -1,5 +1,11 @@
 <?php
 
+	$path = $_SERVER['DOCUMENT_ROOT'] . "/api/test.php";
+
+	include_once $path;
+
+	/*
+
 	$data = print_r($_POST, true);
 
 	require_once '../mysql_sync/config.php';
@@ -16,4 +22,5 @@
 
 	mysql_close($db);
 
+	*/
  ?>

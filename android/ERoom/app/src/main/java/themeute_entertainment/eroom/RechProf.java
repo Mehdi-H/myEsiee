@@ -3,6 +3,7 @@ package themeute_entertainment.eroom;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Point;
 import android.os.Bundle;
@@ -10,6 +11,7 @@ import android.view.Display;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.BaseAdapter;
@@ -160,7 +162,7 @@ public class RechProf extends BaseDrawerActivity
         // -- Infos
         // ------------------------------------------------------------------------------------
 
-        GridView infos_view = (GridView) findViewById(R.id.infosProf);
+        final GridView infos_view = (GridView) findViewById(R.id.infosProf);
         String infos_string = "";
 
         // === Récupération des infos dans la BDD ===
@@ -180,6 +182,28 @@ public class RechProf extends BaseDrawerActivity
         System.out.println(infos_string);
         CaracteristiquesAdapter adapter = new CaracteristiquesAdapter(this, infos_string.split(";"));
         infos_view.setAdapter(adapter);
+
+
+        // ------------------------------------------------------------------------------------
+        // -- Ajouter un listener sur la GridView pour lancer client Mail
+        // ------------------------------------------------------------------------------------
+
+        infos_view.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                if (position == 1) {
+                    String email = infos_view.getAdapter().getItem(position).toString();
+                    email = email.substring(email.indexOf('_')+1);
+
+                    Intent intent = new Intent(Intent.ACTION_SEND);
+                    intent.setType("plain/text");
+                    intent.putExtra(Intent.EXTRA_EMAIL,
+                            new String[]{ email }
+                    );
+                    startActivity(Intent.createChooser(intent, ""));
+                }
+            }
+        });
 
 
         // ------------------------------------------------------------------------------------
