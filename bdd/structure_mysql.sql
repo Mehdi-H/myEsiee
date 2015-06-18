@@ -26,6 +26,10 @@ CREATE TABLE contribution (
 	login				varchar(10) DEFAULT NULL,
 	type_contribution	varchar(30) NOT NULL,
 	date_contribution	datetime NOT NULL,
+	navigateur			varchar(30) DEFAULT NULL,
+	version_android		varchar(30) DEFAULT NULL,
+	email				varchar(50) DEFAULT NULL,
+	location			varchar(30) DEFAULT NULL,
 	contenu				text NOT NULL
 );
 
