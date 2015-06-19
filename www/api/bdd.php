@@ -13,6 +13,12 @@
 	if (! $function) {
 		echo("Erreur : pas de fonction spécifiée.<br/>'".$function."'");
 		exit;
+	} else {
+		// Préparation de la requête :
+		require_once '../mysql_sync/config.php';
+
+		$db = mysql_connect(DB_HOST, DB_USER, DB_PASSWORD);
+		mysql_select_db(DB_DATABASE, $db);
 	}
 
 
@@ -20,14 +26,7 @@
 
 	if (strcmp($function, "getHashVersion") == 0)
 	{
-		require_once '../mysql_sync/config.php';
-
 		$string = "";
-
-		// === Connexion à la BDD ===
-
-		$db = mysql_connect(DB_HOST, DB_USER, DB_PASSWORD);
-		mysql_select_db(DB_DATABASE, $db);
 
 		// === Toutes les salles ===
 
@@ -50,9 +49,23 @@
 			$string .= join($data);
 		}
 
-		mysql_close($db);
-
 		echo(hash("sha256", $string));
 	}
+	elseif (strcmp($function, "getLastUpdate") == 0)
+	{
+		$sql = "SELECT * FROM infos WHERE cle='db_last_update'";
+		$req = mysql_query($sql)
+			or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_errno());
 
+		$last_update = "";
+		while ($data = mysql_fetch_assoc($req))
+		{
+			$last_update = $data['valeur'];
+		}
+
+		echo($last_update);
+	}
+
+
+	mysql_close($db);
  ?>
