@@ -22,12 +22,13 @@ public class ConnectivityTools
     private ProgressDialog prgDialog;
     private DBController controller;
     private ContributionDialog contribDialog;
+    private final About about;
 
     // ====================================================================================
     // == CONSTRUCTEUR
     // ====================================================================================
 
-    public ConnectivityTools(Context context, ProgressDialog prgDialog, ContributionDialog contribDialog)
+    public ConnectivityTools(Context context, ProgressDialog prgDialog, ContributionDialog contribDialog, About about)
     {
         // Initialisation du Receiver ;
         this.receiver = new ConnectivityReceiver();
@@ -38,6 +39,7 @@ public class ConnectivityTools
         this.prgDialog = prgDialog;
         this.controller = new DBController(context);
         this.contribDialog = contribDialog;
+        this.about = about;
     }
 
     public void close(Context context)
@@ -77,11 +79,13 @@ public class ConnectivityTools
             {
                 // === Connexion ===
 
+                // --- Mise à jour auto de la BDD ---
                 if (prgDialog != null) {
                     // Toast.makeText(context, "Internet connection OK", Toast.LENGTH_SHORT).show();
                     controller.checkForUpdates(prgDialog);
                 }
 
+                // --- Vérification de la connectivité avant d'envoyer une contribution ---
                 if (contribDialog != null) {
                     contribDialog.setCondition("internet", true);
                 }
@@ -94,6 +98,11 @@ public class ConnectivityTools
                 if (contribDialog != null) {
                     contribDialog.setCondition("internet", false);
                 }
+            }
+
+            // --- Récupération de la version de la BDD ---
+            if (about != null) {
+                about.printLastDBUpdate();
             }
         }
     }

@@ -72,6 +72,9 @@ public class BaseDrawerActivity extends ActionBarActivity
             case 5:
                 mTitle = getString(R.string.title_Assessments);
                 break;
+            case 6:
+                mTitle = getString(R.string.title_activity_about);
+                break;
         }
     }
 

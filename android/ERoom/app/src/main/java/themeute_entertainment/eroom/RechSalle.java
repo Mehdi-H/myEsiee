@@ -156,7 +156,7 @@ public class RechSalle extends BaseDrawerActivity
         prgDialog.setMessage(getResources().getString(R.string.db_update));
         prgDialog.setCancelable(false);
 
-        connection = new ConnectivityTools(context, prgDialog, null);
+        connection = new ConnectivityTools(context, prgDialog, null, null);
 
 
         // ------------------------------------------------------------------------------------

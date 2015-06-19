@@ -111,7 +111,8 @@ public class NavigationDrawerFragment extends Fragment {
                         getString(R.string.title_Teachers),
                         getString(R.string.title_Grades),
                         getString(R.string.title_Absences),
-                        getString(R.string.title_Assessments)
+                        getString(R.string.title_Assessments),
+                        getString(R.string.title_activity_about)
                 }));
         mDrawerListView.setItemChecked(mCurrentSelectedPosition, true);
         return mDrawerListView;
@@ -216,6 +217,9 @@ public class NavigationDrawerFragment extends Fragment {
                     break;
                 case 4:
                     switchActivity(Appreciations.class);
+                    break;
+                case 5:
+                    switchActivity(About.class);
                     break;
             }
 
