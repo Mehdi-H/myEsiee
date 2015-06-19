@@ -30,6 +30,8 @@
             android:layout_marginBottom="10dp"
             android:id="@+id/type"
             android:entries="@array/contrib_types"
+            android:nextFocusForward="@+id/email"
+            android:nextFocusDown="@+id/email"
             android:layout_gravity="center_horizontal" />
 
         <EditText
@@ -38,7 +40,10 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
             android:hint="@string/hint_email"
-            android:inputType="textEmailAddress" />
+            android:inputType="textEmailAddress"
+            android:nextFocusForward="@+id/contenu"
+            android:nextFocusDown="@+id/contenu"
+            android:nextFocusUp="@+id/type" />
 
         <EditText
             android:layout_width="match_parent"
@@ -48,7 +53,8 @@
             android:ems="10"
             android:hint="@string/hint_contribution"
             android:id="@+id/contenu"
-            android:layout_gravity="center_horizontal" />
+            android:layout_gravity="center_horizontal"
+            android:nextFocusUp="@+id/email" />
 
 
     </LinearLayout>

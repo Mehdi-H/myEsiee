@@ -176,6 +176,26 @@ public class RechSalle extends BaseDrawerActivity
         autocomplete_nomSalle.setThreshold(1);
         autocomplete_nomSalle.setAdapter(adapter);
 
+        // === Valider la recherche à l'appui sur Entrée ===
+
+        autocomplete_nomSalle.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                if (event.getAction() == KeyEvent.ACTION_DOWN) {
+                    switch (keyCode) {
+                        case KeyEvent.KEYCODE_DPAD_CENTER:
+                        case KeyEvent.KEYCODE_ENTER:
+                            lancerRechSalle();
+                            return true;
+                        default:
+                            break;
+                    }
+                }
+
+                return false;
+            }
+        });
+
 
         // ------------------------------------------------------------------------------------
         // -- Comportement des ToggleButton

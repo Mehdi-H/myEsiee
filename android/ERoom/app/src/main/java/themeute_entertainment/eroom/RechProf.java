@@ -94,15 +94,38 @@ public class RechProf extends BaseDrawerActivity
         // -- Initialisation de l'AutoComplete nom prof
         // ------------------------------------------------------------------------------------
 
-        autocomplete_nomSalle = (AutoCompleteTextView) findViewById(R.id.nomProf_recherche);
+        autocomplete_nomProf = (AutoCompleteTextView) findViewById(R.id.nomProf_recherche);
 
         // Récupération de tous les noms de salles dans la BDD :
         final String[] noms_profs = controller.getNoms("prof");
 
         // Les utiliser comme adapter pour l'AutoComplete :
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,android.R.layout.select_dialog_item, noms_profs);
-        autocomplete_nomSalle.setThreshold(1);
-        autocomplete_nomSalle.setAdapter(adapter);
+        autocomplete_nomProf.setThreshold(1);
+        autocomplete_nomProf.setAdapter(adapter);
+
+        // === Valider la recherche à l'appui sur Entrée ===
+
+        autocomplete_nomProf.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event)
+            {
+                if (event.getAction() == KeyEvent.ACTION_DOWN)
+                {
+                    switch (keyCode)
+                    {
+                        case KeyEvent.KEYCODE_DPAD_CENTER:
+                        case KeyEvent.KEYCODE_ENTER:
+                            lancerRechProf();
+                            return true;
+                        default:
+                            break;
+                    }
+                }
+
+                return false;
+            }
+        });
 
 
         // ------------------------------------------------------------------------------------
