@@ -93,4 +93,6 @@
     <string name="db_last_update">Version de la base de données en ligne :</string>
     <string name="title_activity_about">À propos</string>
     <string name="no_connection_warning_about">Pas de connexion internet =(</string>
+    <string name="afficher_occupees">Afficher les salles occupées</string>
+    <string name="doesnt_exist">n\'existe pas dans la BDD interne, essayez de mettre à jour la BDD ou de reporter ce bug</string>
 </resources>

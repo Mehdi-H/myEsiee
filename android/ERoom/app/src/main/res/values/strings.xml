@@ -79,4 +79,6 @@
     <string name="app_update">Application version:</string>
     <string name="db_last_update">Onlien database version:</string>
     <string name="no_connection_warning_about">No Internet connection =(</string>
+    <string name="afficher_occupees" >Display occupied rooms</string>
+    <string name="doesnt_exist">doesn\'t exist in the device\'s DB, please try to update the local DB or to report this bug</string>
 </resources>

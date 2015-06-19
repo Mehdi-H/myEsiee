@@ -85,4 +85,22 @@
 
     </RelativeLayout>
 
+    <Spinner
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/taille"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="10dp"
+        android:entries="@array/tailles" />
+
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/afficher_occupees"
+        android:id="@+id/afficher_occupees"
+        android:layout_gravity="center_horizontal" />
+
+
 </LinearLayout>

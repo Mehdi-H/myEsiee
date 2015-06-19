@@ -12,8 +12,6 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import org.w3c.dom.Text;
-
 
 public class Notes extends BaseDrawerActivity
         implements  NavigationDrawerFragment.NavigationDrawerCallbacks,

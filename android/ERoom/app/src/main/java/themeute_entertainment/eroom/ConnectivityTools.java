@@ -8,7 +8,6 @@ import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
-import android.widget.Toast;
 
 
 public class ConnectivityTools
@@ -81,7 +80,6 @@ public class ConnectivityTools
 
                 // --- Mise à jour auto de la BDD ---
                 if (prgDialog != null) {
-                    // Toast.makeText(context, "Internet connection OK", Toast.LENGTH_SHORT).show();
                     controller.checkForUpdates(prgDialog);
                 }
 
@@ -93,7 +91,6 @@ public class ConnectivityTools
             else
             {
                 // === Pas de connexion ===
-                // Toast.makeText(context, "No active connection", Toast.LENGTH_SHORT).show();
 
                 if (contribDialog != null) {
                     contribDialog.setCondition("internet", false);

@@ -2,4 +2,5 @@
 <resources>
     <color name="goodGrade_green">#388E3C</color>
     <color name="badGrade_red">#FF5252</color>
+    <color name="alert_orange">#F57C00</color>
 </resources>

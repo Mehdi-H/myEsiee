@@ -104,7 +104,24 @@ public class RoomArrayAdapter extends ArrayAdapter<String>
 
         // --- Disponibilité ---
 
-        dispo.setText(rowValues[7]);
+        final String dispo_text = rowValues[7];
+        dispo.setText(dispo_text);
+
+        // Pour "Libre" ou "xxx min" avec xxx > 30 :
+        dispo.setTextColor(context.getResources().getColor(R.color.goodGrade_green));
+
+        if (dispo_text.equals(context.getResources().getString(R.string.occupee))) {
+            // "Occupée" :
+            dispo.setTextColor(context.getResources().getColor(R.color.badGrade_red));
+        } else if (! dispo_text.equals(context.getResources().getString(R.string.libre))) {
+            // "xxx min" :
+            final int duree = Integer.parseInt(dispo_text.substring(0, dispo_text.indexOf(' ')));
+            if (duree <= 30) {
+                // Dispo pendant moins de 30 minutes :
+                dispo.setTextColor(context.getResources().getColor(R.color.alert_orange));
+            }
+        }
+
 
         return rowView;
     }

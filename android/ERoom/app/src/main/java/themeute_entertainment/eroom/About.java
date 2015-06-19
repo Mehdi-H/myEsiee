@@ -3,13 +3,9 @@ package themeute_entertainment.eroom;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
-import android.support.v4.app.DialogFragment;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.Button;
-import android.widget.ListView;
 import android.widget.TextView;
 
 import com.loopj.android.http.AsyncHttpClient;

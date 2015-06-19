@@ -14,6 +14,7 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.GridView;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -118,6 +119,10 @@ public class FicheSalle extends ActionBarActivity
         // --- Retrouver la salle en question dans la BDD ---
 
         ArrayList<HashMap<String,String>> liste_salle_bdd = controller.getSalles(nomSalle);
+        if (liste_salle_bdd.size() == 0) {
+            fail(nomSalle);
+            return;
+        }
         HashMap<String,String> salle_bdd = liste_salle_bdd.get(0);
 
         // --- Rajouter les caractéristiques de la BDD dans la String ---
@@ -146,6 +151,11 @@ public class FicheSalle extends ActionBarActivity
 
         imageET_view = (ImageView) findViewById(R.id.imageET);
         ade.dispo("Salle", nomSalle, "", largeur, imageET_view);
+    }
+
+    public void fail(final String nomSalle)
+    {
+        Toast.makeText(this, nomSalle + " " + getResources().getString(R.string.doesnt_exist), Toast.LENGTH_LONG).show();
     }
 
 

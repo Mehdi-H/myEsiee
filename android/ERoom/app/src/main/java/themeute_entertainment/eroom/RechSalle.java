@@ -3,57 +3,27 @@ package themeute_entertainment.eroom;
 import android.app.Activity;
 import android.app.Dialog;
 import android.app.ProgressDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.drawable.Drawable;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
 import android.support.v4.app.DialogFragment;
-import android.support.v7.app.ActionBarActivity;
-import android.support.v7.app.ActionBar;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
 import android.content.Context;
 import android.os.Bundle;
-import android.support.v7.app.AlertDialog;
-import android.support.v7.internal.widget.AdapterViewCompat;
-import android.text.SpannableString;
-import android.text.Spanned;
-import android.text.style.ImageSpan;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.support.v4.widget.DrawerLayout;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
-import android.widget.Button;
 import android.widget.CheckBox;
-import android.widget.CompoundButton;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.widget.ToggleButton;
-
-import com.loopj.android.http.AsyncHttpClient;
-import com.loopj.android.http.AsyncHttpResponseHandler;
-import com.loopj.android.http.MySSLSocketFactory;
-import com.loopj.android.http.RequestParams;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-
-import java.security.KeyStore;
-import java.util.ArrayList;
 import java.util.HashMap;
 
 
@@ -268,19 +238,7 @@ public class RechSalle extends BaseDrawerActivity
         // Au clic sur le bouton recherche :
         searchBtn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                // Regarder si le champ "Nom salle" est rempli :
-                String nomSalle_auto = autocomplete_nomSalle.getText().toString();
-                if (!nomSalle_auto.equals("")) {
-                    // Vérifier que le nom existe dans la BDD :
-                    if (controller.existsIn(nomSalle_auto, "salle")) {
-                        // Aller directement à la fiche salle :
-                        newFicheSalleActivity(nomSalle_auto);
-                    } else {
-                        Toast.makeText(context, getResources().getString(R.string.room_not_found), Toast.LENGTH_SHORT).show();
-                    }
-                } else {
-                    ade.rechSalle(listView_salles, noData_textView, criteres);
-                }
+                lancerRechSalle();
             }
         });
 
@@ -296,6 +254,24 @@ public class RechSalle extends BaseDrawerActivity
                 newFicheSalleActivity(nomSalle_view.getText().toString());
             }
         });
+    }
+
+    public void lancerRechSalle()
+    {
+        // Regarder si le champ "Nom salle" est rempli :
+        String nomSalle_auto = autocomplete_nomSalle.getText().toString();
+        if (!nomSalle_auto.equals("")) {
+            // Vérifier que le nom existe dans la BDD :
+            if (controller.existsIn(nomSalle_auto, "salle")) {
+                // Aller directement à la fiche salle :
+                newFicheSalleActivity(nomSalle_auto);
+            } else {
+                Toast.makeText(context, getResources().getString(R.string.room_not_found), Toast.LENGTH_SHORT).show();
+            }
+        } else {
+            criteres.put("occupied", "null_noDisplay");
+            ade.rechSalle(listView_salles, noData_textView, criteres);
+        }
     }
 
     public void uncheck(final int index)
@@ -412,6 +388,8 @@ public class RechSalle extends BaseDrawerActivity
         CheckBox chk_tableau_noir = (CheckBox) dialogView.findViewById(R.id.tableau_noir);
         CheckBox chk_projecteur = (CheckBox) dialogView.findViewById(R.id.projecteur);
         CheckBox chk_imprimante = (CheckBox) dialogView.findViewById(R.id.imprimante);
+        Spinner spinner_taille = (Spinner) dialogView.findViewById(R.id.taille);
+        CheckBox chk_occupied = (CheckBox) dialogView.findViewById(R.id.afficher_occupees);
 
         // === Construction des critères ===
 
@@ -419,9 +397,11 @@ public class RechSalle extends BaseDrawerActivity
 
         int epi = spinner_epi.getSelectedItemPosition();
         int etage = spinner_etage.getSelectedItemPosition();
+        int taille_pos = spinner_taille.getSelectedItemPosition();
 
         boolean blanc = chk_tableau_blanc.isChecked(),
-                noir = chk_tableau_noir.isChecked();
+                noir = chk_tableau_noir.isChecked(),
+                occupied = chk_occupied.isChecked();
 
         criteres.put("tableau", blanc ? (noir ? "3" : "2" ) : (noir ? "1" : "null"));
         criteres.put("projecteur", chk_projecteur.isChecked() ? "1" : "null");
@@ -429,6 +409,9 @@ public class RechSalle extends BaseDrawerActivity
 
         criteres.put("epi", epi > 0 ? epi-1 + "" : "null");
         criteres.put("etage", etage > 0 ? etage-1 + "" : "null");
+        criteres.put("taille", taille_pos > 0 ? spinner_taille.getSelectedItem() + "" : "null");
+
+        criteres.put("occupied", occupied ? "null_display" : "null_noDisplay");
 
         // Lancement de la requête :
         ade.rechSalle(listView_salles, noData_textView, criteres);

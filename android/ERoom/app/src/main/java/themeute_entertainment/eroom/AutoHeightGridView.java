@@ -4,9 +4,7 @@ import android.content.Context;
 import android.util.AttributeSet;
 import android.widget.GridView;
 
-/**
- * Created by Byakko on 15/06/2015.
- */
+
 public class AutoHeightGridView  extends GridView {
 
     public AutoHeightGridView(Context context, AttributeSet attrs) {

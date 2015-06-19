@@ -8,15 +8,16 @@ import android.content.SharedPreferences;
 import android.graphics.Point;
 import android.os.Bundle;
 import android.view.Display;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
-import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
+import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -48,7 +49,7 @@ public class RechProf extends BaseDrawerActivity
     private String date;
 
     // Views :
-    private AutoCompleteTextView autocomplete_nomSalle;
+    private AutoCompleteTextView autocomplete_nomProf;
     private ImageView imageET_view;
 
     // Outils :
@@ -129,24 +130,29 @@ public class RechProf extends BaseDrawerActivity
         searchBtn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v)
             {
-                // Regarder si le champ "Nom prof" est rempli :
-                String nomProf_auto = autocomplete_nomSalle.getText().toString();
-                if (!nomProf_auto.equals(""))
-                {
-                    // Vérifier que le nom existe dans la BDD :
-                    if (controller.existsIn(nomProf_auto, "prof")) {
-                        // Aller directement à la fiche salle :
-                        remplirFicheProf(nomProf_auto);
-                        mTitle = getResources().getString(R.string.title_activity_rech_prof) + " (" + nomProf_auto + ")";
-                        RechProf.this.setTitle(mTitle);
-                    } else {
-                        Toast.makeText(context, R.string.prof_not_found, Toast.LENGTH_SHORT).show();
-                    }
-                } else {
-                    Toast.makeText(context, R.string.no_prof_name, Toast.LENGTH_SHORT).show();
-                }
+                lancerRechProf();
             }
         });
+    }
+
+    public void lancerRechProf()
+    {
+        // Regarder si le champ "Nom prof" est rempli :
+        String nomProf_auto = autocomplete_nomProf.getText().toString();
+        if (!nomProf_auto.equals(""))
+        {
+            // Vérifier que le nom existe dans la BDD :
+            if (controller.existsIn(nomProf_auto, "prof")) {
+                // Aller directement à la fiche salle :
+                remplirFicheProf(nomProf_auto);
+                mTitle = getResources().getString(R.string.title_activity_rech_prof) + " (" + nomProf_auto + ")";
+                RechProf.this.setTitle(mTitle);
+            } else {
+                Toast.makeText(context, R.string.prof_not_found, Toast.LENGTH_SHORT).show();
+            }
+        } else {
+            Toast.makeText(context, R.string.no_prof_name, Toast.LENGTH_SHORT).show();
+        }
     }
 
 
