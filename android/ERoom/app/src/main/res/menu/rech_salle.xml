@@ -4,12 +4,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".RechSalle">
 
-    <!-- Màj BDD -->
+    <!-- Màj BDD
     <item
         android:id="@+id/action_update_db"
         android:title="@string/action_update_db"
         android:orderInCategory="100"
-        app:showAsAction="never" />
+        app:showAsAction="never" /> -->
 
     <item
         android:id="@+id/contribution"

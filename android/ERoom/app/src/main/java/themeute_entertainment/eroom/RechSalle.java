@@ -326,10 +326,12 @@ public class RechSalle extends BaseDrawerActivity
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        if (id == R.id.action_update_db) {
+        /* if (id == R.id.action_update_db) {
+            // (Penser à décommenter l'item dans res/menu/rech_salle.xml)
             controller.syncSQLiteMySQLDB("manual update", prgDialog, settings, context);
             return true;
-        } else if (id == R.id.contribution) {
+        } else */
+        if (id == R.id.contribution) {
             contribDialog = new ContributionDialog();
             contribDialog.show(getSupportFragmentManager(), "ContributionDialog");
             return true;

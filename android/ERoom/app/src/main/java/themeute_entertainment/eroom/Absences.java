@@ -128,6 +128,9 @@ public class Absences extends BaseDrawerActivity
     @Override
     public void onDialogPositiveClick(DialogFragment dialog) {
         aurion.onDialogPositiveClick(dialog, func);
+        login = settings.getString("login", "");
+        mdp = settings.getString("mdp", "");
+
         currentYear_btn.setEnabled(!(mdp.equals("") || login.equals("")));
         archives_btn.setEnabled(!(mdp.equals("") || login.equals("")));
     }

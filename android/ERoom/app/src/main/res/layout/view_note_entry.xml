@@ -50,6 +50,7 @@
             android:layout_below="@id/unite"
             android:text="2 crédits"
             android:textStyle="italic"
+            android:textColor="@color/windowBackground"
             android:textSize="14dp"
             android:gravity="left"
             android:id="@+id/credits" />
