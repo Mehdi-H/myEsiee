@@ -162,7 +162,7 @@ public class ADE
                     {
                         // Vérifier que l'on veuille les salles occupées :
                         if (criteres.get("occupied") != null
-                                && criteres.get("occupied").equals("null_notDisplay")
+                                && criteres.get("occupied").equals("null_noDisplay")
                                 && liste_salles_json.get(i).get("dispo").equals(context.getResources().getString(R.string.occupee)))
                         {
                             continue;

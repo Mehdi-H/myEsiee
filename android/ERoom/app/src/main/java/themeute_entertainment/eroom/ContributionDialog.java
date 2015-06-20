@@ -71,6 +71,15 @@ public class ContributionDialog extends DialogFragment
         email_view = (EditText) view.findViewById(R.id.email);
         contenu_view = (EditText) view.findViewById(R.id.contenu);
 
+        // === Préremplir l'adresse e-mail si elle est en mémoire ===
+
+        final SharedPreferences settings = context.getSharedPreferences("SHARED_PREFS", context.MODE_PRIVATE);
+
+        final String pre_email = settings.getString("email", null);
+        if (pre_email != null) {
+            email_view.setText(pre_email);
+        }
+
         // ------------------------------------------------------------------------------------
         // -- Boutons Positive et Negative
         // ------------------------------------------------------------------------------------
@@ -81,7 +90,6 @@ public class ContributionDialog extends DialogFragment
             {
                 // === Récupérer des infos sur le contexte ===
 
-                SharedPreferences settings = context.getSharedPreferences("SHARED_PREFS", context.MODE_PRIVATE);
                 final String login = settings.getString("login", "#none");
                 final String version_android = "API " + android.os.Build.VERSION.SDK_INT + " (Android " + android.os.Build.VERSION.RELEASE + ")";
                 final String location = getActivity().getTitle().toString() + " (LANG : " + Locale.getDefault().getDisplayLanguage() + ")";
@@ -92,12 +100,19 @@ public class ContributionDialog extends DialogFragment
                 final String email = email_view.getText().toString();
                 final String contenu = contenu_view.getText().toString();
 
+                // === Se souvenir de l'adresse e-mail pour le futur ===
+
+                if (!email.isEmpty()) {
+                    SharedPreferences.Editor editor = settings.edit();
+                    editor.putString("email", email);
+                    editor.apply();
+                }
+
                 // === Envoyer la contribution ===
 
                 // Init :
                 AsyncHttpClient client = new AsyncHttpClient();
                 RequestParams params = new RequestParams();
-                client.setTimeout(60000);
 
                 // Paramètres :
                 params.put("login", login);
