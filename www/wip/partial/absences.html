@@ -1,0 +1,56 @@
+<section class="absencesPage">
+
+<div class="row center">
+	
+	<div class="col s8 offset-s1 orderOptions">
+		<input ng-model="absencesOrder" value="motif" name="motif" class="with-gap"  type="radio" id="test1" />
+		<label for="test1">Motif</label>
+
+		<input ng-model="absencesOrder" value="nb_heures" name="nb_heures" class="with-gap" type="radio" id="test2" />
+		<label for="test2">Durée</label>
+
+
+		<input placeholder="Code unité" id="first_name2" type="text" class="validate" style="width:auto;margin-left: 2%;" ng-model="query.code">
+
+		<input ng-model="direction" name="direction" class="with-gap" type="radio" id="test5" />
+		<label for="test5">Asc</label>
+
+		<input ng-model="direction" name="direction" class="with-gap" type="radio" id="test6" value="reverse" />
+		<label for="test6">Desc</label>
+	</div>	
+
+	<div class="col s3 total">
+		 <span class="totalFigure">{{ getTotal() }}h</span>
+		 <br>
+		 <span>d'absences</span>
+	</div>
+
+</div>
+
+<div class="row center" ng-if=' loading '>
+	<div class="preloader-wrapper big active">
+		<div class="spinner-layer spinner-blue-only">
+			<div class="circle-clipper left">
+				<div class="circle"></div>
+			</div><div class="gap-patch">
+			<div class="circle"></div>
+				</div><div class="circle-clipper right">
+			<div class="circle"></div>
+			</div>
+		</div>
+	</div>
+</div>
+	
+<ul class="collection" ng-repeat="a in absences | filter: query | orderBy: absencesOrder:direction">
+	<li class="collection-item avatar taille_ligne">
+		<i class="circle {{ a.motif | absenceColorClass }}"></i>			
+		<span class="title">
+			{{ a.activite +' - '+ a.unite +' - '+ a.code }}
+		</span>
+		<p>
+			{{ a.date +' - '+a.creneau+', '+a.nb_heures+' heures' }}<br>
+			{{ a.intervenant+' - '+a.motif }}
+		</p>
+	</li>
+</ul>
+</section>

@@ -1,0 +1,442 @@
+[
+     {
+          "annee": "2013 - 2014",
+          "compensation": "non renseigné",
+          "credit": "1,5",
+          "libelle": "Bonus Communication",
+          "note": "B",
+          "unite": "COMM"
+     },
+     {
+          "annee": "2013 - 2014",
+          "compensation": "non renseigné",
+          "credit": "2,5",
+          "libelle": "Elective chinois",
+          "note": "A",
+          "unite": "ECH_2001"
+     },
+     {
+          "annee": "2013 - 2014",
+          "compensation": "non renseigné",
+          "credit": "2,5",
+          "libelle": "Elective chinois",
+          "note": "A",
+          "unite": "ECH_2001_S2"
+     },
+     {
+          "annee": "2013 - 2014",
+          "compensation": "non renseigné",
+          "credit": "2,5",
+          "libelle": "Systèmes à base de Microprocesseurs",
+          "note": "D",
+          "unite": "EIG_2004"
+     },
+     {
+          "annee": "2013 - 2014",
+          "compensation": "non renseigné",
+          "credit": "2,5",
+          "libelle": "Pyhton",
+          "note": "A",
+          "unite": "EIG_2010_P3"
+     },
+     {
+          "annee": "2013 - 2014",
+          "compensation": "non renseigné",
+          "credit": "2,5",
+          "libelle": "base de données",
+          "note": "B",
+          "unite": "EIG_2011"
+     },
+     {
+          "annee": "2013 - 2014",
+          "compensation": "non renseigné",
+          "credit": "2,5",
+          "libelle": "Electronique analogique",
+          "note": "D",
+          "unite": "IGE_2001"
+     },
+     {
+          "annee": "2013 - 2014",
+          "compensation": "non renseigné",
+          "credit": "2,5",
+          "libelle": "Traitements numériques matériels",
+          "note": "C",
+          "unite": "IGE_2002"
+     },
+     {
+          "annee": "2013 - 2014",
+          "compensation": "non renseigné",
+          "credit": "2,5",
+          "libelle": "Signaux et systèmes : Etude d'une chaîne d'acqusition de données",
+          "note": "C",
+          "unite": "IGE_2003"
+     },
+     {
+          "annee": "2013 - 2014",
+          "compensation": "non renseigné",
+          "credit": "2,5",
+          "libelle": "Programmation C",
+          "note": "B",
+          "unite": "IGI_2001"
+     },
+     {
+          "annee": "2013 - 2014",
+          "compensation": "non renseigné",
+          "credit": "2,5",
+          "libelle": "Algorithmique 1",
+          "note": "D",
+          "unite": "IGI_2002"
+     },
+     {
+          "annee": "2013 - 2014",
+          "compensation": "non renseigné",
+          "credit": "2,5",
+          "libelle": "Algorithmique 2",
+          "note": "D",
+          "unite": "IGI_2003"
+     },
+     {
+          "annee": "2013 - 2014",
+          "compensation": "non renseigné",
+          "credit": "2,5",
+          "libelle": "English Three",
+          "note": "D",
+          "unite": "LV1_2001"
+     },
+     {
+          "annee": "2013 - 2014",
+          "compensation": "non renseigné",
+          "credit": "2,5",
+          "libelle": "English Four",
+          "note": "C",
+          "unite": "LV1_2002"
+     },
+     {
+          "annee": "2013 - 2014",
+          "compensation": "non renseigné",
+          "credit": "1",
+          "libelle": "Mise en Route",
+          "note": "A",
+          "unite": "MR"
+     },
+     {
+          "annee": "2013 - 2014",
+          "compensation": "non renseigné",
+          "credit": "2,5",
+          "libelle": "Management et fiction",
+          "note": "D",
+          "unite": "MSH_2001"
+     },
+     {
+          "annee": "2013 - 2014",
+          "compensation": "non renseigné",
+          "credit": "2,5",
+          "libelle": "L'actualité économique en questions",
+          "note": "B",
+          "unite": "MSH_2008"
+     },
+     {
+          "annee": "2013 - 2014",
+          "compensation": "non renseigné",
+          "credit": "2,5",
+          "libelle": "Préparation progressive du projet personnel et professionnel",
+          "note": "C",
+          "unite": "P5_2001"
+     },
+     {
+          "annee": "2013 - 2014",
+          "compensation": "non renseigné",
+          "credit": "6,5",
+          "libelle": "Projet",
+          "note": "D",
+          "unite": "PR_2001"
+     },
+     {
+          "annee": "2013 - 2014",
+          "compensation": "non renseigné",
+          "credit": "2,5",
+          "libelle": "Séries",
+          "note": "B",
+          "unite": "SFM_2001"
+     },
+     {
+          "annee": "2013 - 2014",
+          "compensation": "non renseigné",
+          "credit": "2,5",
+          "libelle": "Analyse de Fourier",
+          "note": "C",
+          "unite": "SFM_2002"
+     },
+     {
+          "annee": "2013 - 2014",
+          "compensation": "non renseigné",
+          "credit": "2,5",
+          "libelle": "Fonctions de plusieurs variables",
+          "note": "B",
+          "unite": "SFM_2003"
+     },
+     {
+          "annee": "2013 - 2014",
+          "compensation": "non renseigné",
+          "credit": "2,5",
+          "libelle": "Réduction des endomorphismes",
+          "note": "D",
+          "unite": "SFM_2004"
+     },
+     {
+          "annee": "2013 - 2014",
+          "compensation": "non renseigné",
+          "credit": "2,5",
+          "libelle": "Propagation 1",
+          "note": "E",
+          "unite": "SFP_2001"
+     },
+     {
+          "annee": "2013 - 2014",
+          "compensation": "non renseigné",
+          "credit": "2,5",
+          "libelle": "Propagation 2",
+          "note": "FX",
+          "unite": "SFP_2002"
+     },
+     {
+          "annee": "2013 - 2014",
+          "compensation": "non renseigné",
+          "credit": "non renseigné",
+          "libelle": "Propagation 2",
+          "note": "E",
+          "unite": "SFP_2002_R"
+     },
+     {
+          "annee": "2013 - 2014",
+          "compensation": "non renseigné",
+          "credit": "2,5",
+          "libelle": "Optique ondulatoire 1",
+          "note": "D",
+          "unite": "SFP_2003"
+     },
+     {
+          "annee": "2013 - 2014",
+          "compensation": "non renseigné",
+          "credit": "2,5",
+          "libelle": "Optique ondulatoire 2",
+          "note": "E",
+          "unite": "SFP_2004"
+     },
+     {
+          "annee": "2012 - 2013",
+          "compensation": "non renseigné",
+          "credit": "1",
+          "libelle": "Action de Communication",
+          "note": "E",
+          "unite": "AC"
+     },
+     {
+          "annee": "2012 - 2013",
+          "compensation": "non renseigné",
+          "credit": "2,5",
+          "libelle": "ITW : Introduction aux Technologies du web",
+          "note": "B",
+          "unite": "EIG_1003"
+     },
+     {
+          "annee": "2012 - 2013",
+          "compensation": "non renseigné",
+          "credit": "2,5",
+          "libelle": "Optique Géométrique",
+          "note": "B",
+          "unite": "ESF_1002"
+     },
+     {
+          "annee": "2012 - 2013",
+          "compensation": "non renseigné",
+          "credit": "2,5",
+          "libelle": "Fonctions numériques",
+          "note": "B",
+          "unite": "IGE_1001"
+     },
+     {
+          "annee": "2012 - 2013",
+          "compensation": "non renseigné",
+          "credit": "2,5",
+          "libelle": "Fonctions analogiques",
+          "note": "D",
+          "unite": "IGE_1002"
+     },
+     {
+          "annee": "2012 - 2013",
+          "compensation": "non renseigné",
+          "credit": "2,5",
+          "libelle": "Filtrage analogique et amplificateur faible niveau",
+          "note": "B",
+          "unite": "IGE_1003"
+     },
+     {
+          "annee": "2012 - 2013",
+          "compensation": "non renseigné",
+          "credit": "2,5",
+          "libelle": "Programmation des microprocesseurs 1",
+          "note": "B",
+          "unite": "IGI_1001"
+     },
+     {
+          "annee": "2012 - 2013",
+          "compensation": "non renseigné",
+          "credit": "5",
+          "libelle": "A3P : Apprentissage par Projet de la Programmation",
+          "note": "C",
+          "unite": "IGI_1002"
+     },
+     {
+          "annee": "2012 - 2013",
+          "compensation": "non renseigné",
+          "credit": "2,5",
+          "libelle": "English One",
+          "note": "B",
+          "unite": "LV1_1001"
+     },
+     {
+          "annee": "2012 - 2013",
+          "compensation": "non renseigné",
+          "credit": "2,5",
+          "libelle": "English Two",
+          "note": "A",
+          "unite": "LV1_1002"
+     },
+     {
+          "annee": "2012 - 2013",
+          "compensation": "non renseigné",
+          "credit": "2,5",
+          "libelle": "Histoire des Sciences et des Techniques",
+          "note": "B",
+          "unite": "MSH_1001"
+     },
+     {
+          "annee": "2012 - 2013",
+          "compensation": "non renseigné",
+          "credit": "2,5",
+          "libelle": "Mangement de projet et cartographie des controverses",
+          "note": "E",
+          "unite": "MSH_1002"
+     },
+     {
+          "annee": "2012 - 2013",
+          "compensation": "non renseigné",
+          "credit": "2,5",
+          "libelle": "P^5",
+          "note": "C",
+          "unite": "P5"
+     },
+     {
+          "annee": "2012 - 2013",
+          "compensation": "non renseigné",
+          "credit": "4",
+          "libelle": "Projet Interdisciplinaire",
+          "note": "C",
+          "unite": "PR_1001"
+     },
+     {
+          "annee": "2012 - 2013",
+          "compensation": "non renseigné",
+          "credit": "2,5",
+          "libelle": "Semaine d'Apprentissage Collectif",
+          "note": "E",
+          "unite": "SACE1"
+     },
+     {
+          "annee": "2012 - 2013",
+          "compensation": "non renseigné",
+          "credit": "2,5",
+          "libelle": "Mathématiques EC1-Module 1",
+          "note": "D",
+          "unite": "SFM_1001"
+     },
+     {
+          "annee": "2012 - 2013",
+          "compensation": "non renseigné",
+          "credit": "2,5",
+          "libelle": "Mathématiques EC1-Module 2",
+          "note": "B",
+          "unite": "SFM_1002"
+     },
+     {
+          "annee": "2012 - 2013",
+          "compensation": "non renseigné",
+          "credit": "2,5",
+          "libelle": "Mathématiques EC1-Module 3",
+          "note": "E",
+          "unite": "SFM_1003"
+     },
+     {
+          "annee": "2012 - 2013",
+          "compensation": "non renseigné",
+          "credit": "2,5",
+          "libelle": "Mathématiques EC1-Module 4",
+          "note": "B",
+          "unite": "SFM_1004"
+     },
+     {
+          "annee": "2012 - 2013",
+          "compensation": "non renseigné",
+          "credit": "2,5",
+          "libelle": "Mathématiques EC1-Module 5",
+          "note": "A",
+          "unite": "SFM_1005"
+     },
+     {
+          "annee": "2012 - 2013",
+          "compensation": "non renseigné",
+          "credit": "2,5",
+          "libelle": "Mathématiques EC1-Module 6",
+          "note": "A",
+          "unite": "SFM_1006"
+     },
+     {
+          "annee": "2012 - 2013",
+          "compensation": "non renseigné",
+          "credit": "5",
+          "libelle": "Mécanique du point",
+          "note": "A",
+          "unite": "SFP_1001"
+     },
+     {
+          "annee": "2012 - 2013",
+          "compensation": "non renseigné",
+          "credit": "2,5",
+          "libelle": "Thermodynamique",
+          "note": "B",
+          "unite": "SFP_1002"
+     },
+     {
+          "annee": "2012 - 2013",
+          "compensation": "non renseigné",
+          "credit": "2,5",
+          "libelle": "Outil mathématique",
+          "note": "A",
+          "unite": "SFP_1003_1"
+     },
+     {
+          "annee": "2012 - 2013",
+          "compensation": "non renseigné",
+          "credit": "2,5",
+          "libelle": "Electrostatique",
+          "note": "B",
+          "unite": "SFP_1003_2"
+     },
+     {
+          "annee": "2012 - 2013",
+          "compensation": "non renseigné",
+          "credit": "2,5",
+          "libelle": "Magnétostatique",
+          "note": "E",
+          "unite": "SFP_1003_3"
+     },
+     {
+          "annee": "2012 - 2013",
+          "compensation": "non renseigné",
+          "credit": "1,5",
+          "libelle": "Sport E1",
+          "note": "C",
+          "unite": "SPORT_E1"
+     }
+]

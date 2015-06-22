@@ -1,0 +1,55 @@
+<section class="gradesPage">
+<div class="row center">
+	
+	<div class="col s8 offset-s1 orderOptions">
+		<input ng-model="gradesOrder" value="note" name="note" class="with-gap"  type="radio" id="test1" />
+		<label for="test1">Note</label>
+
+		<input ng-model="gradesOrder" value="libelle" name="libelle" class="with-gap" type="radio" id="test2" />
+		<label for="test2">Libellé</label>
+
+
+		<input placeholder="Libellé" id="first_name2" type="text" class="validate" style="width:auto;margin-left: 2%;" ng-model="query.libelle">
+
+		<input ng-model="direction" name="direction" class="with-gap" type="radio" id="test5" />
+		<label for="test5">Asc</label>
+
+		<input ng-model="direction" name="direction" class="with-gap" type="radio" id="test6" value="reverse" />
+		<label for="test6">Desc</label>
+	</div>	
+
+	<div class="col s3 total">
+		 <span class="totalFigure">{{ getTotal() }}</span>
+		 <br>
+		 <span>crédits</span>
+	</div>
+
+</div>
+
+<div class="row center" ng-if=' loading '>
+	<div class="preloader-wrapper big active">
+		<div class="spinner-layer spinner-blue-only">
+			<div class="circle-clipper left">
+				<div class="circle"></div>
+			</div><div class="gap-patch">
+			<div class="circle"></div>
+				</div><div class="circle-clipper right">
+			<div class="circle"></div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="col s9 offset-s1">
+	<ul class="collection" ng-repeat="n in notes | filter: query | orderBy: gradesOrder:direction">
+		<li class="collection-item avatar taille_ligne">
+			<i class=" white circle {{ n.note | gradeColorClass }} grade">{{ n.note | grade}}</i>
+			<span class="title ">{{ n.libelle }}</span>
+			<p>{{ n.unite }}<br>
+				Crédits : {{ n.credit }}
+			</p>
+		</li>
+	</ul>	
+</div>
+
+</section>

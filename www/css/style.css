@@ -1,0 +1,341 @@
+/* Custom Stylesheet */
+/**
+ * Use this file to override Materialize files so you can update
+ * the core Materialize files in the future
+ *
+ * Made By MaterializeCSS.com
+ */
+
+#deconnexion>a{
+    font-size: 1rem;
+}
+
+.info-prof{
+    margin-left: 10px;
+}
+
+.letter{
+    width: 20px !important;
+    height: 20px !important;
+}
+
+#logo-container{
+    height: 60px;
+    width: 270px;
+}
+
+#logo{
+    vertical-align: middle;
+    width: 100%;
+}
+
+#salle_list{
+    display:none;
+    z-index: 999;
+}
+
+.datepicker{
+    background-color: #1976D2 !important;
+}
+
+.visible{
+    display: inline;
+}
+
+.unvisible{
+    display:none;
+}
+
+.icone_prof{
+    font-size : 2rem;
+}
+.liste_carac{
+    -webkit-column-count: 2; /* Chrome, Safari, Opera */
+    -moz-column-count: 2; /* Firefox */
+    column-count: 2;
+    -webkit-column-width: 100px; /* Chrome, Safari, Opera */
+    -moz-column-width: 100px; /* Firefox */
+    column-width: 100px;
+}
+
+#ficheprof{
+    border-radius: 5px;
+    /*border: solid 2px;*/
+}
+
+ .fichesalle{
+    font-family: "Century Gothic";
+    width : 55%;
+    background-color : #F1F1F1;   
+    border-radius: 5px;
+    /*border: solid 2px;*/
+ }
+.nomprof{
+    font-family: "Century Gothic";
+    width : 30%;
+    background-color : #F1F1F1;
+}
+
+.nav-wrapper{
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.dropdown-content{
+    margin-top: 50px;
+}
+
+html{
+    overflow-x: hidden;
+}
+
+.time{
+    margin-left: 5px !important;
+}
+
+.in-form{
+    margin: 0 auto;
+}
+
+.modal-form{
+    width:30%;
+}
+
+#archives-box{
+    margin-left: 20px !important;
+}
+
+#searchBtn{
+    position: absolute;
+    width: 58px;
+    margin: 0 auto;
+    left: 0;
+    right: 0;
+}
+
+#searchRow{
+    height: 85px;
+}
+
+#searchResults{
+    margin-top: 40px;
+}
+
+.icon-block {
+  padding: 0 15px;
+}
+
+#carac_salles
+{
+	display : inline-block;	
+    vertical-align: top;
+    width : 100%;
+}
+
+
+#carac_salles ul
+{
+    display: inline-block;
+    vertical-align: top;
+    margin-top: 0;
+    padding-left: 20px;
+    width : 100%;
+}
+
+.carac
+{
+	margin-left : 10px;
+}
+
+.searchbar
+{
+	margin-top : 40px;
+}
+
+.login
+{
+	width : 30%;
+    height: 200px;
+    border-radius: 10px;
+}
+
+.bouton_notes
+{
+    margin-top : 40px;
+}
+
+.co_input
+{
+    margin-top : 22px;
+}
+
+body {
+   display: flex;
+   min-height: 100vh;
+   flex-direction: column;
+}
+
+
+
+main {
+   flex: 1 0 auto;
+ }
+
+.grade
+{
+    font-size : 35px !important;
+}
+
+.ligne_bouton
+{
+    height: 80px;
+}
+
+.margin_top_bouton{
+    margin-top : 12px;
+}
+
+.categorie{
+    font-size: 18px;
+}
+
+.background_recherche{
+    background-color: #616161;
+}
+
+
+.bouton_active
+{
+    box-shadow: 0px 0px 10px 2px rgba(255, 252, 252, 0.75);
+}
+
+.margin_top_switch{
+    margin-top : 90px;
+}
+
+.espace_checkbox{
+    margin-left : 20px;
+}
+
+.taille_checkbox{
+    padding-left : 25px !important;
+    padding-right : 5px;
+}
+
+.option_recherche{
+    margin : auto;
+}
+
+.reduc_liste_salle{
+    width : 50%;
+    height : auto;
+}
+
+#z_index_bouton{
+    z-index: 0;
+}
+
+.taille_bouton{
+    width : 170px;
+}
+
+.bouton_formulaire {
+	position: absolute;
+	right:    0;
+	bottom:   0;
+}
+
+#deconnexion>a{
+	font-size: 1 rem !important;
+}
+
+
+@media screen and (max-width: 700px)
+{
+
+#appreciation_btn{
+    margin-right: 18px;
+    margin-top: 10px;
+}
+
+#data-output{
+    width: 100%;
+    left: 0;
+    margin-left: 0;
+}
+
+#logo-container{
+    width: initial;
+}
+
+#logo{
+    width: 100%;
+}
+
+#footer
+{
+    display : none;
+}
+
+.ligne_bouton
+{
+    height: 80px;
+}
+
+.margin_top_bouton{
+    margin-top : 12px;
+}
+
+.taille_ligne
+{
+    height: auto !important;
+}
+
+.background_recherche{
+    background-color: #616161;
+}
+
+.login
+{
+    width : 80%;
+    height: 200px;
+    border-radius: 10px;
+}
+
+.reduc_liste_salle{
+    width : 100%;
+}
+.stop_offset{
+    margin-left : 0% !important;
+}
+
+.taille_bouton{
+    width : 155px;
+}
+
+ .fichesalle{
+    font-family: Roboto;
+    width : 100%;  
+ }
+
+ .nomprof{
+    font-family: Roboto;
+    width : 100%;
+}
+
+.liste_carac{
+    -webkit-column-count: 2; /* Chrome, Safari, Opera */
+    -moz-column-count: 2; /* Firefox */
+    column-count: 2;
+}
+
+.liste_carac{
+    -webkit-column-count: 2; /* Chrome, Safari, Opera */
+    -moz-column-count: 2; /* Firefox */
+    column-count: 2;
+    -webkit-column-width: 100px; /* Chrome, Safari, Opera */
+    -moz-column-width: 100px; /* Firefox */
+    column-width: 100px;
+}
+
+}

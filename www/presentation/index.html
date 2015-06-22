@@ -1,0 +1,375 @@
+<!doctype html>
+<html lang="fr">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>MyESIEE - Présentation revealJS</title>
+
+		<meta name="description" content="Présentation MyESIEE pour la journée des projets 2015">
+		<meta name="author" content="Mehdi Houacine">
+
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/theme/black.css" id="theme">
+
+		<!-- Code syntax highlighting -->
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+	</head>
+
+	<body>
+
+		<div class="reveal">
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+				<section>
+					<img src="img/logomyesieeflat.png">
+					<p>L'application android au coeur de la vie étudiante</p>
+					<img class="jdp" src="img/jdp-transparent.png">		
+				</section>
+
+				<!-- <section data-background="img/jdp-transparent.png" data-background-repeat="repeat" data-background-size="100px">
+				</section> -->
+
+				<!-- <section data-background="http://i3.kym-cdn.com/photos/images/original/000/313/882/cc0.gif" class="present" data-background-image="http://i.giphy.com/90F8aUepslB84.gif" style="top: 263px; display: block;">
+					<h2>... !</h2>
+				</section> -->
+
+				<!-- <section data-background="https://s3.amazonaws.com/hakim-static/reveal-js/image-placeholder.png">
+					<h2>Image Backgrounds</h2>
+					<pre><code>&lt;section data-background="image.png"&gt;</code></pre>
+				</section> -->
+
+			<section>
+				<section id="start">
+					<h1>ESIEE Paris</h1>
+					<p>Différents lieux pour travailler</p>
+				</section>
+
+				<section>
+					<h2>La rue</h2>
+					<img src="img/blancs.jpg">
+				</section>
+
+				<section>
+					<h2>La bibliothèque</h2>
+					<img src="img/bibli.jpg" height="500px">
+				</section>
+
+				<section>
+					<h1>Les salles</h1>
+					<img src="img/salle.jpg" height="500px">
+				</section>
+			</section>
+
+			<section>
+				<section>
+					<h2>Comment trouver une salle libre?</h2>
+				</section>
+
+				<section>
+					<h2>A pied, <br>de salle en salle</h2>
+					<p>Mais c'est très long</p>
+					<img src="img/couloir.jpg">
+				</section>
+
+				<section>
+					<h2>ADE campus</h2>
+					<img src="img/ade.png">
+				</section>
+			</section>
+ 
+			<section id="show-a-link">
+				<section>
+					<img src="img/logomyesieeflat.png">
+					<p>L'application pour trouver des salles à ESIEE Paris</p>
+				</section>
+
+				<section>
+					<h2>Recherche de salles</h2>
+					<img src="img/mobile/responsive/recherche-salles.png" height="550" width="300" >
+					<img src="img/mobile/appli/recherche-salles.png" height="550" width="300" >
+				</section>
+
+				<section>
+					<h2>Recherche avancée</h2>
+					<img src="img/mobile/responsive/recherche-avancee.png" height="550" width="300" >
+					<img src="img/mobile/appli/recherche-avancee.png" height="550" width="300" >
+				</section>			
+
+				<section>
+					<h2>Fiche salle</h2>
+					<img src="img/mobile/responsive/fiche-salle.png" height="550" width="300" >
+					<img src="img/mobile/appli/fiche-salle.png" height="550" width="300" >
+				</section>
+
+				<section>
+					<h2>Calendrier intégré</h2>
+					<img src="img/mobile/responsive/calendrier.png" height="550" width="300" >
+					<img src="img/mobile/appli/calendrier.png" height="550" width="300" >
+					
+				</section>
+
+				<section>
+					<h2>Recherche de professeur</h2>
+					<img src="img/mobile/responsive/recherche-prof.png" height="550" width="300" >
+					<img src="img/mobile/appli/recherche-prof.png" height="550" width="300" >
+					
+				</section>
+
+				<section>
+					<h2>Fiche enseignant</h2>
+					<img src="img/mobile/responsive/fiche-prof.png" height="550" width="300" >
+					<img src="img/mobile/appli/fiche-prof.png" height="550" width="300" >
+				</section>
+			</section>
+
+			<section>
+				<section>
+					<img src="img/logomyesieeflat.png">
+					<p>Des informations importantes en un tour de clic</p>
+				</section>
+
+				<section>
+					<h2>Quelques défauts</h2>
+					<img src="img/mobile/aurion-not-r.png" style="float:left;">
+					<ul style="margin-top: 170px;">
+						<li>
+							URL : <a href="http://aurionprd.esiee.fr">http://aurionprd.esiee.fr</a>
+						</li>
+						<li>Design vieillissant</li>
+						<li>Non responsive</li>
+						<li>Manque d'ergonomie</li>
+						<li>Filtres peu pertinent</li>
+					</ul>
+				</section>
+
+				<section>
+					<img src="img/mobile/responsive/mvx2-aurion.png" height="550" width="300" >
+					<img src="img/mobile/appli/mvx2-aurion.png" height="550" width="300" >
+				</section>
+
+				<section>
+					<img src="img/mobile/responsive/mvx2-aurion-archives.png" height="550" width="300" >
+					<img src="img/mobile/appli/mvx2-aurion-archives.png" height="550" width="300" >
+				</section>
+			</section>
+ 			
+ 			<section>
+ 				<section>
+					<h1>Fonctionnement</h1>
+					<p>Dans les coulisses de l'application</p>
+				</section>
+
+				<section>
+					<h2>L'API ADE</h2>
+					<div style="float: left;">
+						<h2>Paramètres</h2>
+						<ul>
+							<li>
+								URL :<br> <a href="https://mvx2.esiee.fr/api/ade.php">https://mvx2.esiee.fr/api/ade.php</a>
+							</li>
+							<li>
+								Fonctions :<br> rechSalle, dispoSalle, dispoProf
+							</li>
+							<li>
+								Critères :<br> nom, type, taille, projecteur,<br> tableau, imprimante, épi, étage
+							</li>
+						</ul>
+					</div>
+					<div style="float: right;">
+						<h2>Outils</h2>
+						<ul style="list-style-type: none;">
+							<!-- <li>
+								<img src="img/logo/PHP-logo.png" class="list-img">
+								<span class="list-detail">PHP5.6</span>
+							</li> -->
+							<li>
+								<img src="img/logo/PHP-logo.png" class="list-img">
+								<img src="img/logo/Logo-adesoft.png" class="list-img">
+							</li>
+							<li>
+								<img src="img/logo/Logo-xml.png" class="list-img">
+								<span class="list-detail">XML</span>
+							</li>
+							<li>
+								<img src="img/logo/JSON_vector_logo.svg.png" class="list-img">
+								<span class="list-detail">JSON</span>
+							</li>
+						</ul>
+					</div>
+				</section>
+
+				<section>
+					<h2>L'API Aurion</h2>
+					<div style="float: left;">
+						<h2>Paramètres</h2>
+						<ul>
+							<li>
+								URL :<br> <a href="https://mvx2.esiee.fr/api/aurion.php">https://mvx2.esiee.fr/api/aurion.php</a>
+							</li>
+							<li>
+								Fonctions :<br> grades, absences, appreciations
+							</li>
+							<li>
+								Identifiants :<br> login et mot de passe étudiant
+							</li>
+						</ul>
+					</div>
+					<div style="float: right;">
+						<h2>Outils</h2>
+						<ul style="list-style-type: none;">
+							<!-- <li>
+								<img src="img/logo/PHP-logo.png" class="list-img">
+								<span class="list-detail">PHP5.6</span>
+							</li> -->
+							<li>
+								<img src="img/logo/Python-logo-notext.png" class="list-img">
+								<img src="img/logo/Logo-Selenium.png" class="list-img">
+							</li>
+							<li>
+								<img src="img/logo/Logo-phantomjs.png" height="80px" width="85px">
+								<img src="img/logo/javascript_logo.png" class="list-img">
+							</li>
+							<li>
+								<img src="img/logo/PHP-logo.png" class="list-img">
+								<img src="img/logo/JSON_vector_logo.svg.png" class="list-img">
+							</li>
+						</ul>
+					</div>
+				</section>
+
+				<section>
+					<h2>Le serveur MVX2</h2>
+					<img src="img/mvx2.jpg" style="  height: 50%;width: 50%;float: left;">
+					<div style="float: right;">
+						<h2>Hébergement</h2>
+						<ul>
+							<li>API ADE</li>
+							<li>API Aurion</li>
+							<li>Contribution</li>
+							<li>Base de données</li>
+							<li>Site web</li>
+						</ul>
+					</div>
+				</section>
+
+				<section>
+					<img src="img/bdd.png">
+				</section>
+
+				<section>
+					<h2>L'application android</h2>
+					<img src="img/logo_myEsiee.png" style="  height: 40%;width: 40%;float: left;">
+					<div style="float: right;">
+						<h2>Développement</h2>
+						<ul style="list-style-type: none;">
+							<li>
+								<img src="img/logo/Logo-Android_Studio_icon.png" class="list-img">
+								<span class="list-detail">AndroidStudio</span>
+							</li>
+							<li>
+								<img src="img/logo/Logo-java.jpg" class="list-img">
+								<span class="list-detail">Java</span>
+							</li>
+							<li>
+								<img src="img/logo/Logo-xml.png" class="list-img">
+								<span class="list-detail">XML</span>
+							</li>
+						</ul>
+					</div>
+				</section>
+
+				<section>
+					<h2>Le site web</h2>
+					<div style="float: left;">
+						<h2>Front-end</h2>
+						<ul style="list-style-type: none;">
+							<li>
+								<img src="img/logo/HTML5Logo.png" class="list-img">
+								<img src="img/logo/Logo-CSS3.png" class="list-img">
+							</li>
+							<li>
+								<img src="img/logo/javascript_logo.png" class="list-img">
+								<img src="img/logo/jQurery.gif" class="list-img">
+							</li>
+							<li>
+								<img src="img/logo/LogoMaterialize.png" class="list-img">
+								<span class="list-detail">MaterializeCSS</span>
+							</li>
+						</ul>
+					</div>
+					<div style="float: right;">
+						<h2>Back-end</h2>
+						<ul style="list-style-type: none;">
+							<li>
+								<img src="img/logo/PHP-logo.png" class="list-img">
+								<img src="img/logo/Logo-MySQL.svg.png" class="list-img">
+							</li>
+							<li>
+								<img src="img/logo/ajax-logo.png" class="list-img">
+								<span class="list-detail">AJAX</span>
+							</li>
+							<li>
+								<img src="img/logo/angularjs-logo.png" class="list-img">
+								<span class="list-detail">AngularJS</span>
+							</li>
+						</ul>
+					</div>
+				</section>
+ 			</section>
+
+
+			
+			</div>
+
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.js"></script>
+
+		<script>
+
+			// Full list of configuration options available at:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+
+				transition: 'slide', // none/fade/slide/convex/concave/zoom
+
+				// Optional reveal.js plugins
+				dependencies: [
+					{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/highlight/highlight.js', async: true, condition: function() { return !!document.querySelector( 'pre code' ); }, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: 'plugin/zoom-js/zoom.js', async: true },
+					{ src: 'plugin/notes/notes.js', async: true }
+				]
+			});
+
+		</script>
+
+	</body>
+</html>
