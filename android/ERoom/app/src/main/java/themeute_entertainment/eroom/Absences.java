@@ -12,6 +12,8 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.analytics.HitBuilders;
+
 
 public class Absences extends BaseDrawerActivity
         implements  NavigationDrawerFragment.NavigationDrawerCallbacks,
@@ -42,6 +44,8 @@ public class Absences extends BaseDrawerActivity
     private Button archives_btn;
     private Button currentYear_btn;
 
+    // private Analytics analytics;
+
 
     // ====================================================================================
     // == onCreate()
@@ -55,6 +59,14 @@ public class Absences extends BaseDrawerActivity
         mNavigationDrawerFragment.setCurrentSelectedPosition(3);
 
         this.setTitle(R.string.title_activity_absences);
+
+        // Google Analytics :
+        // analytics = new Analytics();
+        Analytics.tracker.send(new HitBuilders.EventBuilder()
+                .setCategory("Activity")
+                .setAction("Visited")
+                .setLabel("onCreate")
+                .build());
 
         context = getApplicationContext();
         settings = getSharedPreferences("SHARED_PREFS", MODE_PRIVATE);
@@ -88,6 +100,12 @@ public class Absences extends BaseDrawerActivity
             // Réaffichage des dernières données affichées :
             aurion.loadLastData(func, listView, noData_textView);
         }
+
+        Analytics.tracker.send(new HitBuilders.EventBuilder()
+                .setCategory("Feature")
+                .setAction("Login")
+                .setLabel(login)
+                .build());
 
 
         // ------------------------------------------------------------------------------------

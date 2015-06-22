@@ -23,6 +23,8 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.google.android.gms.analytics.HitBuilders;
+
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -84,6 +86,13 @@ public class RechProf extends BaseDrawerActivity
 
         mTitle = getResources().getString(R.string.title_activity_rech_prof);
         this.setTitle(mTitle);
+
+        // Google Analytics :
+        Analytics.tracker.send(new HitBuilders.EventBuilder()
+                .setCategory("Activity")
+                .setAction("Visited")
+                .setLabel(getTitle()+":onCreate")
+                .build());
 
         context = getApplicationContext();
         settings = getSharedPreferences("SHARED_PREFS", MODE_PRIVATE);

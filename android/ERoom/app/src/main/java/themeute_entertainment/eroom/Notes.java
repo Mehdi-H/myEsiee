@@ -12,6 +12,8 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.analytics.HitBuilders;
+
 
 public class Notes extends BaseDrawerActivity
         implements  NavigationDrawerFragment.NavigationDrawerCallbacks,
@@ -40,6 +42,8 @@ public class Notes extends BaseDrawerActivity
     private Button archives_btn;
     private Button currentYear_btn;
 
+    // private Analytics analytics;
+
 
     // ====================================================================================
     // == onCreate()
@@ -53,6 +57,14 @@ public class Notes extends BaseDrawerActivity
         mNavigationDrawerFragment.setCurrentSelectedPosition(1);
 
         this.setTitle(R.string.title_activity_notes);
+
+        // Google Analytics :
+        // analytics = new Analytics();
+        Analytics.tracker.send(new HitBuilders.EventBuilder()
+                .setCategory("Activity")
+                .setAction("Visited")
+                .setLabel("onCreate")
+                .build());
 
         context = getApplicationContext();
         settings = getSharedPreferences("SHARED_PREFS", MODE_PRIVATE);
@@ -86,6 +98,12 @@ public class Notes extends BaseDrawerActivity
             // Réaffichage des dernières données affichées :
             aurion.loadLastData(func, listView, noData_textView);
         }
+
+        Analytics.tracker.send(new HitBuilders.EventBuilder()
+                .setCategory("Feature")
+                .setAction("Login")
+                .setLabel(login)
+                .build());
 
 
         // ------------------------------------------------------------------------------------

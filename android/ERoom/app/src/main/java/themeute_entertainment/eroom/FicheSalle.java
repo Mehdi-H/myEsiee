@@ -16,6 +16,8 @@ import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.google.android.gms.analytics.HitBuilders;
+
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -53,6 +55,8 @@ public class FicheSalle extends ActionBarActivity
     String date;
     private String mTitle;
 
+    // private Analytics analytics;
+
 
     // ====================================================================================
     // == onCreate()
@@ -70,6 +74,14 @@ public class FicheSalle extends ActionBarActivity
 
         mTitle = getResources().getString(R.string.title_activity_fiche_salle) + nomSalle;
         this.setTitle(mTitle);
+
+        // Google Analytics :
+        //analytics = new Analytics();
+        Analytics.tracker.send(new HitBuilders.EventBuilder()
+                .setCategory("Activity")
+                .setAction("Visited")
+                .setLabel("onCreate, nomSalle:"+nomSalle)
+                .build());
 
         this.ade = new ADE(this);
         controller = new DBController(this);

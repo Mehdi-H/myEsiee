@@ -15,6 +15,8 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.analytics.HitBuilders;
+
 import java.util.HashMap;
 
 
@@ -50,6 +52,8 @@ public class Appreciations extends BaseDrawerActivity
     private Button archives_btn;
     private Button currentYear_btn;
 
+    // private Analytics analytics;
+
 
     // ====================================================================================
     // == onCreate()
@@ -63,6 +67,14 @@ public class Appreciations extends BaseDrawerActivity
         mNavigationDrawerFragment.setCurrentSelectedPosition(4);
 
         this.setTitle(R.string.title_activity_appreciations);
+
+        // Google Analytics :
+        // analytics = new Analytics();
+        Analytics.tracker.send(new HitBuilders.EventBuilder()
+                .setCategory("Activity")
+                .setAction("Visited")
+                .setLabel("onCreate")
+                .build());
 
         context = getApplicationContext();
         settings = getSharedPreferences("SHARED_PREFS", MODE_PRIVATE);
@@ -96,6 +108,12 @@ public class Appreciations extends BaseDrawerActivity
             // Réaffichage des dernières données affichées :
             aurion.loadLastData(func, listView, noData_textView);
         }
+
+        Analytics.tracker.send(new HitBuilders.EventBuilder()
+                .setCategory("Feature")
+                .setAction("Login")
+                .setLabel(login)
+                .build());
 
 
         // ------------------------------------------------------------------------------------

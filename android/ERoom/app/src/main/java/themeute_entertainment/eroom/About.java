@@ -8,6 +8,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
 
+import com.google.android.gms.analytics.HitBuilders;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
@@ -37,6 +38,8 @@ public class About extends BaseDrawerActivity
     private TextView dateAppli_view, dateDB_view;
     private boolean dateDB_ok = false;
 
+    // private Analytics analytics;
+
 
     // ====================================================================================
     // == onCreate()
@@ -50,6 +53,14 @@ public class About extends BaseDrawerActivity
         mNavigationDrawerFragment.setCurrentSelectedPosition(4);
 
         this.setTitle(R.string.title_activity_about);
+
+        // Google Analytics :
+        // analytics = new Analytics();
+        Analytics.tracker.send(new HitBuilders.EventBuilder()
+                .setCategory("Activity")
+                .setAction("Visited")
+                .setLabel(getTitle()+":onCreate")
+                .build());
 
         context = getApplicationContext();
         settings = getSharedPreferences("SHARED_PREFS", MODE_PRIVATE);

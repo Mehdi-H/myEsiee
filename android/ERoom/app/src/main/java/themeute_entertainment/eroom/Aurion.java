@@ -11,6 +11,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.analytics.HitBuilders;
 import com.google.gson.Gson;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
@@ -161,6 +162,14 @@ public class Aurion
                 }
             }
         });
+
+        // Google Analytics :
+        // Analytics analytics = new Analytics();
+        Analytics.tracker.send(new HitBuilders.EventBuilder()
+                .setCategory("Aurion")
+                .setAction("Requête")
+                .setLabel((archives ? "old_" : "") + func)
+                .build());
     }
 
 

@@ -24,6 +24,9 @@ import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.google.android.gms.analytics.HitBuilders;
+
 import java.util.HashMap;
 
 
@@ -94,6 +97,7 @@ public class RechSalle extends BaseDrawerActivity
     // Intent :
     public final static String EXTRA_NOM_SALLE = "themeute_entertainment.eroom.NOM_SALLE";
 
+    //private Analytics analytics;
 
 
     // ====================================================================================
@@ -110,6 +114,13 @@ public class RechSalle extends BaseDrawerActivity
         mTitle = getTitle();
         this.setTitle(R.string.title_activity_rech_salle);
 
+        // Google Analytics :
+        //analytics = new Analytics();
+        Analytics.tracker.send(new HitBuilders.EventBuilder()
+                .setCategory("Activity")
+                .setAction("Visited")
+                .setLabel(getTitle()+":onCreate")
+                .build());
 
         context = getApplicationContext();
         settings = getSharedPreferences("SHARED_PREFS", MODE_PRIVATE);
@@ -292,6 +303,12 @@ public class RechSalle extends BaseDrawerActivity
             criteres.put("occupied", "null_noDisplay");
             ade.rechSalle(listView_salles, noData_textView, criteres);
         }
+
+        Analytics.tracker.send(new HitBuilders.EventBuilder()
+                .setCategory("Feature")
+                .setAction("Recherche")
+                .setLabel("nomAuto:"+nomSalle_auto+" ; criteres:"+criteres.toString())
+                .build());
     }
 
     public void uncheck(final int index)
