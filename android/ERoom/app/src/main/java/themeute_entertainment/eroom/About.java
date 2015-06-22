@@ -4,6 +4,8 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.text.Html;
+import android.text.method.LinkMovementMethod;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
@@ -12,6 +14,8 @@ import com.google.android.gms.analytics.HitBuilders;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
+
+import org.w3c.dom.Text;
 
 
 public class About extends BaseDrawerActivity
@@ -64,14 +68,19 @@ public class About extends BaseDrawerActivity
 
         context = getApplicationContext();
         settings = getSharedPreferences("SHARED_PREFS", MODE_PRIVATE);
-        connectivity = new ConnectivityTools(context, null, null, this);
+        connectivity = new ConnectivityTools(context, null, null, this, null);
 
         // ------------------------------------------------------------------------------------
         // -- Vues
         // ------------------------------------------------------------------------------------
 
+        TextView about_view = (TextView) findViewById(R.id.about_text);
         dateAppli_view = (TextView) findViewById(R.id.dateAppli_value);
         dateDB_view = (TextView) findViewById(R.id.dateDB_value);
+
+        // Parser le HTML pour que le lien soit cliquable :
+        about_view.setMovementMethod(LinkMovementMethod.getInstance());
+        about_view.setText(Html.fromHtml(getResources().getString(R.string.about_text)));
 
         // ------------------------------------------------------------------------------------
         // -- Récupération et affichage des bonnes dates

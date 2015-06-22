@@ -3,12 +3,16 @@ package themeute_entertainment.eroom;
 import android.app.Activity;
 import android.app.Dialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.content.Context;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
+import android.text.Html;
+import android.text.method.LinkMovementMethod;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -137,15 +141,8 @@ public class RechSalle extends BaseDrawerActivity
         prgDialog.setMessage(getResources().getString(R.string.db_update));
         prgDialog.setCancelable(false);
 
-        connection = new ConnectivityTools(context, prgDialog, null, null);
-
-
-        // ------------------------------------------------------------------------------------
-        // -- Vérification de la version de la BDD
-        // ------------------------------------------------------------------------------------
-
-        controller.checkForUpdates(prgDialog);
-
+        // Vérifiera les màj BDD et broadcasts :
+        connection = new ConnectivityTools(context, prgDialog, null, null, this);
 
         // ------------------------------------------------------------------------------------
         // -- VIEWS
@@ -285,6 +282,25 @@ public class RechSalle extends BaseDrawerActivity
                 newFicheSalleActivity(nomSalle_view.getText().toString());
             }
         });
+    }
+
+    public void showBroadCastDialog(final String msg, final String Type)
+    {
+        View view = View.inflate(this, R.layout.dialog_broadcast, null);
+        TextView text = (TextView) view.findViewById(R.id.text);
+        text.setMovementMethod(LinkMovementMethod.getInstance());
+        text.setText(Html.fromHtml(msg));
+
+        AlertDialog.Builder broadcastBuilder = new AlertDialog.Builder(this);
+        broadcastBuilder.setView(view)
+            .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    settings.edit().putString("broadcast_last" + Type, msg).apply();
+                }
+            });
+        AlertDialog broadcastDialog = broadcastBuilder.create();
+        broadcastDialog.show();
     }
 
     public void lancerRechSalle()

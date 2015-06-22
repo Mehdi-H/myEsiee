@@ -200,7 +200,7 @@ public class ContributionDialog extends DialogFragment
         if (! internet_ok) {
             Toast.makeText(context, R.string.no_connection_warning_contrib, Toast.LENGTH_LONG).show();
         }
-        connectivity = new ConnectivityTools(context, null, this, null);
+        connectivity = new ConnectivityTools(context, null, this, null, null);
 
 
         alertDialog.setCanceledOnTouchOutside(false);

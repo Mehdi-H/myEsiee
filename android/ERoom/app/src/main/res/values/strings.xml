@@ -75,7 +75,7 @@
     <string name="title_activity_rech_salle">Rooms</string>
     <string name="wrongIDs">Connexion to Aurion failed. Are your ID\'s correct?</string>
     <string name="title_activity_about">About</string>
-    <string name="about_text">MyESIEE have been developed in 2015 for a project at ESIEE Paris by 4 3rd-year students:\n\nAPRAHAMIAN Kaïl\nDUPONT Léo\nKUHN Johann\nHOUACINE Mehdi\n\nTo see the Web version of this project, please go to https://mvx2.esiee.fr/.\n\nPlease don\'t hesitate to contact us through the Contribute button ;-)</string>
+    <string name="about_text"><Data><![CDATA[<p>MyESIEE have been developed in 2015 for a project at ESIEE Paris by 4 3rd-year students:</p>APRAHAMIAN Kaïl<br/>DUPONT Léo<br/>KUHN Johann<br/>HOUACINE Mehdi<br/><p>To see the Web version of this project, please go to <a href=\'https://mvx2.esiee.fr/\'>https://mvx2.esiee.fr</a></p><p>Please don\'t hesitate to contact us through the Contribute button ;-)</p>]]></Data></string>
     <string name="app_update">Application version:</string>
     <string name="db_last_update">Onlien database version:</string>
     <string name="no_connection_warning_about">No Internet connection =(</string>

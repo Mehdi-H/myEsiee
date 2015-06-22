@@ -88,7 +88,7 @@
     <string name="contrib_sent">Votre contribution a été envoyée, merci beaucoup :D</string>
     <string name="title_activity_rech_salle">Salles</string>
     <string name="wrongIDs">La connexion à Aurion a échoué. Vos identifiants sont-ils corrects ?</string>
-    <string name="about_text">L\'application MyESIEE a été développée à l\'occasion d\'un projet de 3ème année à ESIEE Paris en 2015 par :\n\nAPRAHAMIAN Kaïl\nDUPONT Léo\nKUHN Johann\nHOUACINE Mehdi\n\nIl existe aussi une version web disponible à l\'adresse https://mvx2.esiee.fr/.\n\nN\'hésitez pas à utiliser le bouton Contribuer pour nous contacter ;-)</string>
+    <string name="about_text"><Data><![CDATA[<p>L\'application MyESIEE a été développée à l\'occasion d\'un projet de 3ème année à ESIEE Paris en 2015 par :</p>APRAHAMIAN Kaïl<br/>DUPONT Léo<br/>KUHN Johann<br/>HOUACINE Mehdi<br/><p>Il existe aussi une version web disponible à l\'adresse <a href=\'https://mvx2.esiee.fr/\'>https://mvx2.esiee.fr</a><p>N\'hésitez pas à utiliser le bouton Contribuer pour nous contacter ;-)</p>]]></Data></string>
     <string name="app_update">Version de l\'application:</string>
     <string name="db_last_update">Version de la base de données en ligne :</string>
     <string name="title_activity_about">À propos</string>

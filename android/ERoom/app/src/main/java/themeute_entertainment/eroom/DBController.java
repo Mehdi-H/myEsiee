@@ -283,25 +283,22 @@ public class DBController extends SQLiteOpenHelper
 
     public void updateIfNeeded(String local_hash, String online_hash, ProgressDialog prgDialog, SharedPreferences settings, Context context)
     {
-        System.out.println("online_hash : " + online_hash);
         if (!local_hash.equals(online_hash)) {
-            System.out.println("updating...");
             syncSQLiteMySQLDB(online_hash, prgDialog, settings, context);
         }
     }
 
     public void checkForUpdates(final ProgressDialog prgDialog)
     {
-        if (! ConnectivityTools.isNetworkAvailable(context)) {
+        /* if (! ConnectivityTools.isNetworkAvailable(context)) {
             Toast.makeText(context, R.string.no_connection_warning_db, Toast.LENGTH_LONG).show();
             return;
-        }
+        } */
 
-        System.out.println("Checking for updates...");
+        System.out.println("DB Update checking......");
         // === Récupérer le numéro de version enregistré ===
 
         final String local_hash = settings.getString("hash_version", "none");
-        System.out.println("local : " + local_hash);
 
         // === Récupérer le numéro de version en ligne ===
 

@@ -31,6 +31,7 @@
             android:layout_below="@+id/header"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:linksClickable="true"
             android:padding="15dp"
             android:gravity="center"
             android:textSize="14dp"
