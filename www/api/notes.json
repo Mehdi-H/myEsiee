@@ -1,0 +1,162 @@
+[    
+     {
+          "annee": "2014 - 2015",
+          "compensation": "non renseigné",
+          "credit": "70",
+          "libelle": "Physique analogique",
+          "note": "F",
+          "unite": "FDP_1001"
+     },
+     {
+          "annee": "2014 - 2015",
+          "compensation": "non renseigné",
+          "credit": "1,5",
+          "libelle": "Actions de communication",
+          "note": "B",
+          "unite": "COM"
+     },
+     {
+          "annee": "2014 - 2015",
+          "compensation": "non renseigné",
+          "credit": "3",
+          "libelle": "Programmation d'applications grahiques",
+          "note": "C",
+          "unite": "IG_3604"
+     },
+     {
+          "annee": "2014 - 2015",
+          "compensation": "non renseigné",
+          "credit": "3",
+          "libelle": "Contrôle des systèmes bouclés",
+          "note": "A",
+          "unite": "IGE_3003"
+     },
+     {
+          "annee": "2014 - 2015",
+          "compensation": "non renseigné",
+          "credit": "3",
+          "libelle": "Conception VHDL de systèmes numériques",
+          "note": "B",
+          "unite": "IGE_3004"
+     },
+     {
+          "annee": "2014 - 2015",
+          "compensation": "non renseigné",
+          "credit": "3",
+          "libelle": "Eléments de traitements du signal",
+          "note": "B",
+          "unite": "IGE_3005"
+     },
+     {
+          "annee": "2014 - 2015",
+          "compensation": "non renseigné",
+          "credit": "3",
+          "libelle": "Systèmes d'exploitation",
+          "note": "D",
+          "unite": "IGI_3004"
+     },
+     {
+          "annee": "2014 - 2015",
+          "compensation": "non renseigné",
+          "credit": "3",
+          "libelle": "Les bases de données relationnelles",
+          "note": "B",
+          "unite": "IT_3002"
+     },
+     {
+          "annee": "2014 - 2015",
+          "compensation": "non renseigné",
+          "credit": "3",
+          "libelle": "Systèmes de télécommunications",
+          "note": "C",
+          "unite": "IT_3003"
+     },
+     {
+          "annee": "2014 - 2015",
+          "compensation": "non renseigné",
+          "credit": "non renseigné",
+          "libelle": "Analyse de données Internet",
+          "note": "A",
+          "unite": "IT_3007"
+     },
+     {
+          "annee": "2014 - 2015",
+          "compensation": "non renseigné",
+          "credit": "2",
+          "libelle": "Presentation skills",
+          "note": "C",
+          "unite": "LV1_3002"
+     },
+     {
+          "annee": "2014 - 2015",
+          "compensation": "non renseigné",
+          "credit": "2",
+          "libelle": "International communication skills ou Language work for the TOEFL",
+          "note": "D",
+          "unite": "LV1_3003"
+     },
+     {
+          "annee": "2014 - 2015",
+          "compensation": "non renseigné",
+          "credit": "4",
+          "libelle": "Management des entreprises",
+          "note": "D",
+          "unite": "MSH_3001"
+     },
+     {
+          "annee": "2014 - 2015",
+          "compensation": "non renseigné",
+          "credit": "3",
+          "libelle": "Management de projet - théories et mise en pratique",
+          "note": "B",
+          "unite": "MSH_3002"
+     },
+     {
+          "annee": "2014 - 2015",
+          "compensation": "non renseigné",
+          "credit": "2",
+          "libelle": "Préparation progressive du projet personnel professionnel",
+          "note": "B",
+          "unite": "P5_3001"
+     },
+     {
+          "annee": "2014 - 2015",
+          "compensation": "non renseigné",
+          "credit": "3",
+          "libelle": "Projet Modélisation",
+          "note": "B",
+          "unite": "PR_3001_M"
+     },
+     {
+          "annee": "2014 - 2015",
+          "compensation": "non renseigné",
+          "credit": "3",
+          "libelle": "Approfondissement en Informatique",
+          "note": "C",
+          "unite": "PR_3602"
+     },
+     {
+          "annee": "2014 - 2015",
+          "compensation": "non renseigné",
+          "credit": "3",
+          "libelle": "Probabilités - statistiques",
+          "note": "B",
+          "unite": "SFM_3003"
+     },
+     {
+          "annee": "2014 - 2015",
+          "compensation": "non renseigné",
+          "credit": "2",
+          "libelle": "Espagnol",
+          "note": "C",
+          "unite": "SP_3201"
+     },
+     {
+          "annee": "2014 - 2015",
+          "compensation": "non renseigné",
+          "credit": "8",
+          "libelle": "Stage",
+          "note": "B",
+          "unite": "STA_TECH_E3E"
+     }
+]
