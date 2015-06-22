@@ -1,6 +1,7 @@
 package themeute_entertainment.eroom;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.widget.ImageView;
@@ -34,6 +35,7 @@ public class ADE
 
     private static final String base_url = "https://mvx2.esiee.fr/api/ade.php";
     private final Context context;
+    private final SharedPreferences settings;
     private boolean listView_isOnScreen = false;
     private DBController controller;
 
@@ -45,6 +47,8 @@ public class ADE
         this.context = context;
         this.controller = new DBController(context);
         this.listView_isOnScreen = false;
+
+        settings = context.getSharedPreferences("SHARED_PREFS", context.MODE_PRIVATE);
     }
 
     // ====================================================================================
@@ -118,6 +122,57 @@ public class ADE
         }
         noData_textView.setText(context.getResources().getString(R.string.loading));
 
+
+        // === Vérifier si on peut re-filtrer les dernières valeurs chargées ===
+
+        /* final long lastRequestDate = Long.parseLong(settings.getString("rechSalle_lastRequestDate", "-1"));
+
+        // Si la dernière requête a eu lieu il y a moins de 60 secondes :
+        if (System.currentTimeMillis() - lastRequestDate < 60000)
+        {
+            // --- Comparaison des critères ---
+
+            // __ Chargement des critères sauvegardés dans une HashMap __
+
+            HashMap<String,String> lastRequestCriteria = new HashMap<String,String>();
+
+            String criteria_str = settings.getString("rechSalle_lastRequestCriteria", "");
+            criteria_str = criteria_str.replace("{", "");
+            criteria_str = criteria_str.replace("}", "");
+
+            System.out.println(criteria_str);
+
+            String[] criteria_pairs = criteria_str.split(", ");
+            for (int i = 0 ; i < criteria_pairs.length ; i++) {
+                String[] keyValue = criteria_pairs[i].split("=");
+                lastRequestCriteria.put(keyValue[0], keyValue[1]);
+            }
+
+            // __ Comparaison des critères sauvegardés et des nouveaux critères __
+
+            boolean isCompatible = true;
+            for (HashMap.Entry<String,String> lastCritere : lastRequestCriteria.entrySet())
+            {
+                String key = lastCritere.getKey();
+                String value = lastCritere.getValue();
+
+                // Si le nouveau critère n'existe pas chez les anciens ou qu'il est différent :
+                if (! key.equals("occupied") && (criteres.get(key) == null || ! criteres.get(key).equals(value))) {
+                    isCompatible = false;
+                    break;
+                }
+            }
+
+            // __ Si les nouveaux critères sont compatibles à un amincissement __
+
+            if (isCompatible) {
+                final String lastRequestResult = settings.getString("rechSalle_lastRequestResult", "");
+                processResponse(lastRequestResult, criteres, listView, noData_textView);
+                return;
+            }
+        }*/
+
+
         // === Construction de l'URL de requête ===
 
         String url = base_url + "?func=rechSalle";
@@ -134,9 +189,6 @@ public class ADE
             }
         }
 
-        // Toast.makeText(context, url, Toast.LENGTH_SHORT).show();
-
-
         // Init :
         AsyncHttpClient client = new AsyncHttpClient();
         RequestParams params = new RequestParams();
@@ -144,83 +196,8 @@ public class ADE
         // Lancer la requête :
         client.post(url, params, new AsyncHttpResponseHandler() {
             @Override
-            public void onSuccess(String response)
-            {
-                // === Construire un tableau de Strings qui contient toutes les infos des salles (nom, dispo et caractéristiques) ===
-
-                // --- Récupérer les infos du JSON (nom et dispo des salles correspondantes aux critères de recherche) ---
-
-                ArrayList<HashMap<String,String>> liste_salles_json = sallesJSON_to_ArrayList(response, context);
-                if (liste_salles_json.size() != 0)
-                {
-                    // --- Fusionner les infos des salles de la BDD avec la réponse JSON ---
-
-                    // ArrayList<HashMap<String,String>> liste_salles_fusionee = new ArrayList<HashMap<String,String>>();
-                    String liste_salles_fusionee = "";
-
-                    for (int i = 0 ; i < liste_salles_json.size() ; i++)
-                    {
-                        // Vérifier que l'on veuille les salles occupées :
-                        if (criteres.get("occupied") != null
-                                && criteres.get("occupied").equals("null_noDisplay")
-                                && liste_salles_json.get(i).get("dispo").equals(context.getResources().getString(R.string.occupee)))
-                        {
-                            continue;
-                        }
-
-                        // Retrouver la salle en question dans la BDD :
-                        ArrayList<HashMap<String,String>> liste_salle_bdd = controller.getSalles(liste_salles_json.get(i).get("nom"));
-                        HashMap<String,String> salle_bdd = liste_salle_bdd.get(0);
-
-                        // Récupérer le nom de la salle :
-                        liste_salles_fusionee += liste_salles_json.get(i).get("nom") + ";";
-
-                        // Rajouter les caractéristiques de la BDD dans la String :
-                        liste_salles_fusionee += salle_bdd.get("type") + ";";
-                        liste_salles_fusionee += salle_bdd.get("projecteur") + ";";
-
-                        int tab = Integer.parseInt(salle_bdd.get("tableau"));
-                        liste_salles_fusionee += (tab == 1 || tab == 3) ? "1;" : "0;"; // tableauBlanc
-                        liste_salles_fusionee += (tab == 2 || tab == 3) ? "1;" : "0;"; // tableauNoir
-
-                        liste_salles_fusionee += salle_bdd.get("imprimante") + ";";
-
-                        int taille = Integer.parseInt(salle_bdd.get("taille"));
-                        if (0 < taille && taille < 30) {
-                            liste_salles_fusionee += "S;";
-                        } else if (taille < 70) {
-                            liste_salles_fusionee += "M;";
-                        } else {
-                            liste_salles_fusionee += "L;";
-                        }
-
-                        // Et enfin, la disponibilité (depuis le JSON) :
-                        liste_salles_fusionee += liste_salles_json.get(i).get("dispo") + "#";
-                    }
-
-                    String[] liste_finale = liste_salles_fusionee.split("#");
-
-
-                    // --- Peupler la ListView avec la liste des salles obtenue ---
-
-                    ViewGroupUtils.replaceView(noData_textView, listView);
-
-                    RoomArrayAdapter adapter = new RoomArrayAdapter(
-                            context,
-                            liste_finale
-                    );
-                    listView.setAdapter(adapter);
-
-                    listView_isOnScreen = true;
-                }
-                else
-                {
-                    if (listView_isOnScreen) {
-                        ViewGroupUtils.replaceView(listView, noData_textView);
-                    }
-                    noData_textView.setText(context.getResources().getString(R.string.noData));
-                    listView_isOnScreen = false;
-                }
+            public void onSuccess(String response) {
+                processResponse(response, criteres, listView, noData_textView);
             }
 
             // When error occurred
@@ -235,6 +212,94 @@ public class ADE
                 }
             }
         });
+    }
+
+    public void processResponse(final String response, final HashMap<String,String> criteres, final ListView listView, final TextView noData_textView)
+    {
+        // === Construire un tableau de Strings qui contient toutes les infos des salles (nom, dispo et caractéristiques) ===
+
+        // --- Récupérer les infos du JSON (nom et dispo des salles correspondantes aux critères de recherche) ---
+
+        ArrayList<HashMap<String,String>> liste_salles_json = sallesJSON_to_ArrayList(response, context);
+        if (liste_salles_json.size() != 0)
+        {
+            // --- Fusionner les infos des salles de la BDD avec la réponse JSON ---
+
+            // ArrayList<HashMap<String,String>> liste_salles_fusionee = new ArrayList<HashMap<String,String>>();
+            String liste_salles_fusionee = "";
+
+            for (int i = 0 ; i < liste_salles_json.size() ; i++)
+            {
+                // Vérifier que l'on veuille les salles occupées :
+                if (criteres.get("occupied") != null
+                        && criteres.get("occupied").equals("null_noDisplay")
+                        && liste_salles_json.get(i).get("dispo").equals(context.getResources().getString(R.string.occupee)))
+                {
+                    continue;
+                }
+
+                // Retrouver la salle en question dans la BDD :
+                ArrayList<HashMap<String,String>> liste_salle_bdd = controller.getSalles(liste_salles_json.get(i).get("nom"));
+                HashMap<String,String> salle_bdd = liste_salle_bdd.get(0);
+
+                // Récupérer le nom de la salle :
+                liste_salles_fusionee += liste_salles_json.get(i).get("nom") + ";";
+
+                // Rajouter les caractéristiques de la BDD dans la String :
+                liste_salles_fusionee += salle_bdd.get("type") + ";";
+                liste_salles_fusionee += salle_bdd.get("projecteur") + ";";
+
+                int tab = Integer.parseInt(salle_bdd.get("tableau"));
+                liste_salles_fusionee += (tab == 1 || tab == 3) ? "1;" : "0;"; // tableauBlanc
+                liste_salles_fusionee += (tab == 2 || tab == 3) ? "1;" : "0;"; // tableauNoir
+
+                liste_salles_fusionee += salle_bdd.get("imprimante") + ";";
+
+                int taille = Integer.parseInt(salle_bdd.get("taille"));
+                if (0 < taille && taille < 30) {
+                    liste_salles_fusionee += "S;";
+                } else if (taille < 70) {
+                    liste_salles_fusionee += "M;";
+                } else {
+                    liste_salles_fusionee += "L;";
+                }
+
+                // Et enfin, la disponibilité (depuis le JSON) :
+                liste_salles_fusionee += liste_salles_json.get(i).get("dispo") + "#";
+            }
+
+            String[] liste_finale = liste_salles_fusionee.split("#");
+
+
+            // --- Peupler la ListView avec la liste des salles obtenue ---
+
+            ViewGroupUtils.replaceView(noData_textView, listView);
+
+            RoomArrayAdapter adapter = new RoomArrayAdapter(
+                    context,
+                    liste_finale
+            );
+            listView.setAdapter(adapter);
+
+            listView_isOnScreen = true;
+
+            // --- Sauvegarde de la dernière requête et des critères utilisés ---
+
+            /* SharedPreferences.Editor editor = settings.edit();
+
+            editor.putString("rechSalle_lastRequestResult", response);
+            editor.putString("rechSalle_lastRequestCriteria", criteres.toString());
+            editor.putString("rechSalle_lastRequestDate", System.currentTimeMillis()+"");
+            editor.apply(); */
+        }
+        else
+        {
+            if (listView_isOnScreen) {
+                ViewGroupUtils.replaceView(listView, noData_textView);
+            }
+            noData_textView.setText(context.getResources().getString(R.string.noData));
+            listView_isOnScreen = false;
+        }
     }
 
     public void dispo(final String Table, final String nom, final String date, final int width, final ImageView imageView)
