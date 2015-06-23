@@ -34,6 +34,12 @@ CREATE TABLE contribution (
 	statut				varchar(30) DEFAULT 'Nouveau'
 );
 
+DROP TABLE IF EXISTS infos;
+CREATE TABLE infos (
+	cle					varchar(80) PRIMARY KEY,
+	valeur				text	DEFAULT NULL
+);
+
 /**
  * Requete pour ajout dans ma bdd locale pour tests.
  */
