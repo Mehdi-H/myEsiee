@@ -458,7 +458,7 @@ public class RechSalle extends BaseDrawerActivity
                 noir = chk_tableau_noir.isChecked(),
                 occupied = chk_occupied.isChecked();
 
-        criteres.put("tableau", blanc ? (noir ? "3" : "2" ) : (noir ? "1" : "null"));
+        criteres.put("tableau", blanc ? (noir ? "3" : "1" ) : (noir ? "2" : "null"));
         criteres.put("projecteur", chk_projecteur.isChecked() ? "1" : "null");
         criteres.put("imprimante", chk_imprimante.isChecked() ? "1" : "null");
 
