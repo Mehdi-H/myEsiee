@@ -118,19 +118,16 @@ public class RechSalle extends BaseDrawerActivity
         mTitle = getTitle();
         this.setTitle(R.string.title_activity_rech_salle);
 
-        // Google Analytics :
-        //analytics = new Analytics();
-        Analytics.tracker.send(new HitBuilders.EventBuilder()
-                .setCategory("Activity")
-                .setAction("Visited")
-                .setLabel(getTitle()+":onCreate")
-                .build());
-
         context = getApplicationContext();
         settings = getSharedPreferences("SHARED_PREFS", MODE_PRIVATE);
         ade = new ADE(context);
         controller = new DBController(context);
 
+        // Google Analytics : vérifier si un login Aurion est enregistré sur la machine (pour stats)
+        Analytics.tracker.send(new HitBuilders.EventBuilder()
+                .setCategory("Login")
+                .setLabel(settings.getString("login", "").isEmpty() ? "non" : "oui")
+                .build());
 
         // ------------------------------------------------------------------------------------
         // -- Init Progress Dialog
@@ -320,9 +317,9 @@ public class RechSalle extends BaseDrawerActivity
             ade.rechSalle(listView_salles, noData_textView, criteres);
         }
 
+        // GA : stats sur les critères les plus utilisés :
         Analytics.tracker.send(new HitBuilders.EventBuilder()
-                .setCategory("Feature")
-                .setAction("Recherche")
+                .setCategory("RechSalle")
                 .setLabel("nomAuto:"+nomSalle_auto+" ; criteres:"+criteres.toString())
                 .build());
     }

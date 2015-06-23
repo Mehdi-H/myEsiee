@@ -90,9 +90,9 @@ public class ContributionDialog extends DialogFragment
             {
                 // === Récupérer des infos sur le contexte ===
 
-                final String login = settings.getString("login", "#none");
-                final String version_android = "API " + android.os.Build.VERSION.SDK_INT + " (Android " + android.os.Build.VERSION.RELEASE + ")";
-                final String location = getActivity().getTitle().toString() + " (LANG : " + Locale.getDefault().getDisplayLanguage() + ")";
+                final String login = settings.getString("login", "");
+                final String version_android = "API " + android.os.Build.VERSION.SDK_INT + " (v. " + android.os.Build.VERSION.RELEASE + ")";
+                final String location = "[" + Locale.getDefault().getLanguage() + "] " + getActivity().getTitle().toString();
 
                 // === Récupérer les infos du formulaire ===
 
@@ -115,7 +115,7 @@ public class ContributionDialog extends DialogFragment
                 RequestParams params = new RequestParams();
 
                 // Paramètres :
-                params.put("login", login);
+                params.put("login", (login != null && !login.isEmpty() ? "1" : "0"));
                 params.put("type_contrib", type);
                 params.put("version_android", version_android);
                 params.put("email", email);

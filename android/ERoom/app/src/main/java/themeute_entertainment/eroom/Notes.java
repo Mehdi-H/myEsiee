@@ -58,14 +58,6 @@ public class Notes extends BaseDrawerActivity
 
         this.setTitle(R.string.title_activity_notes);
 
-        // Google Analytics :
-        // analytics = new Analytics();
-        Analytics.tracker.send(new HitBuilders.EventBuilder()
-                .setCategory("Activity")
-                .setAction("Visited")
-                .setLabel("onCreate")
-                .build());
-
         context = getApplicationContext();
         settings = getSharedPreferences("SHARED_PREFS", MODE_PRIVATE);
         aurion = new Aurion(context);
@@ -98,12 +90,6 @@ public class Notes extends BaseDrawerActivity
             // Réaffichage des dernières données affichées :
             aurion.loadLastData(func, listView, noData_textView);
         }
-
-        Analytics.tracker.send(new HitBuilders.EventBuilder()
-                .setCategory("Feature")
-                .setAction("Login")
-                .setLabel(login)
-                .build());
 
 
         // ------------------------------------------------------------------------------------

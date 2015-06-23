@@ -75,12 +75,10 @@ public class FicheSalle extends ActionBarActivity
         mTitle = getResources().getString(R.string.title_activity_fiche_salle) + nomSalle;
         this.setTitle(mTitle);
 
-        // Google Analytics :
-        //analytics = new Analytics();
+        // Google Analytics : stats sur les salles les plus affichées :
         Analytics.tracker.send(new HitBuilders.EventBuilder()
-                .setCategory("Activity")
-                .setAction("Visited")
-                .setLabel("onCreate, nomSalle:"+nomSalle)
+                .setCategory("FicheSalle")
+                .setLabel("nomSalle:"+nomSalle)
                 .build());
 
         this.ade = new ADE(this);

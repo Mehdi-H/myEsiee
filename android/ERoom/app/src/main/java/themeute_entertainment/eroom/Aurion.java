@@ -163,11 +163,9 @@ public class Aurion
             }
         });
 
-        // Google Analytics :
-        // Analytics analytics = new Analytics();
+        // Google Analytics : stats sur les infos les plus recherchées :
         Analytics.tracker.send(new HitBuilders.EventBuilder()
-                .setCategory("Aurion")
-                .setAction("Requête")
+                .setCategory("Aurion requêtes")
                 .setLabel((archives ? "old_" : "") + func)
                 .build());
     }

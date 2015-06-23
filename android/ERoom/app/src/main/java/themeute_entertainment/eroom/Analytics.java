@@ -16,7 +16,6 @@ public class Analytics extends Application
     {
         analytics = GoogleAnalytics.getInstance(this);
         analytics.setLocalDispatchPeriod(5);
-        analytics.getLogger().setLogLevel(Logger.LogLevel.VERBOSE);
 
         tracker = analytics.newTracker(R.xml.analytics_config);
         tracker.enableExceptionReporting(true);

@@ -58,14 +58,6 @@ public class About extends BaseDrawerActivity
 
         this.setTitle(R.string.title_activity_about);
 
-        // Google Analytics :
-        // analytics = new Analytics();
-        Analytics.tracker.send(new HitBuilders.EventBuilder()
-                .setCategory("Activity")
-                .setAction("Visited")
-                .setLabel(getTitle()+":onCreate")
-                .build());
-
         context = getApplicationContext();
         settings = getSharedPreferences("SHARED_PREFS", MODE_PRIVATE);
         connectivity = new ConnectivityTools(context, null, null, this, null);
